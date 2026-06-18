@@ -1,0 +1,173 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+
+const SITE = 'https://healthcalculation.com';
+const canonical = `${SITE}/guides/how-to-calculate-macros`;
+
+const schemaArticle = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'How to Calculate Your Macros for Weight Loss or Muscle Gain',
+  description: 'Step-by-step guide to calculating protein, carbs, and fat targets based on your TDEE and goal. Includes macro ratio tables and common mistakes to avoid.',
+  url: canonical,
+  datePublished: '2025-06-01',
+  dateModified: '2025-06-18',
+  author: { '@type': 'Organization', name: 'HealthCalculation.com' },
+  publisher: { '@type': 'Organization', name: 'HealthCalculation.com', url: SITE },
+};
+
+const schemaFaq = [
+  {
+    q: 'What are macros in nutrition?',
+    a: 'Macros (macronutrients) are the three main nutrients that provide calories: protein (4 kcal/g), carbohydrates (4 kcal/g), and fat (9 kcal/g). Tracking macros means setting specific gram targets for each nutrient each day, not just total calories. This approach lets you control body composition — preserving muscle while losing fat, or gaining muscle while minimizing fat gain.',
+  },
+  {
+    q: 'What is the best macro ratio for weight loss?',
+    a: 'For fat loss, a high-protein approach works best to preserve muscle mass. A common evidence-based split is 40% protein, 35% carbs, 25% fat. For a 1,500 kcal diet: 150g protein, 131g carbs, 42g fat. Protein is the most important variable — aim for at least 1.6g per kg of body weight (0.73g/lb) regardless of the overall ratio.',
+  },
+  {
+    q: 'What is the best macro ratio for muscle gain?',
+    a: 'For muscle building (bulking), a moderate-protein, higher-carb approach supports training performance. A typical split is 30% protein, 45% carbs, 25% fat. Carbohydrates fuel intense training and support recovery. Protein needs are the same as for fat loss: 1.6–2.2g per kg body weight. Total calorie surplus of 200–300 kcal above TDEE is recommended for lean gains.',
+  },
+  {
+    q: 'How many grams of protein should I eat per day?',
+    a: 'The International Society of Sports Nutrition (ISSN) recommends 1.4–2.0 g of protein per kg of body weight per day for active individuals, with 1.6–2.2 g/kg for those seeking to maximize muscle growth or preserve muscle during a caloric deficit. For a 75 kg (165 lb) person, this is 120–165 g per day. Spreading intake across 3–5 meals of 25–40g each optimizes muscle protein synthesis.',
+  },
+  {
+    q: 'Do I need to count macros to lose weight?',
+    a: 'No — a caloric deficit is the primary driver of weight loss, and many people achieve this without tracking macros. However, macro tracking becomes valuable if you want to: preserve muscle while losing fat, improve athletic performance, break through a weight loss plateau, or gain lean mass without excessive fat. Even tracking just protein intake has significant benefits for body composition.',
+  },
+];
+---
+
+<ToolLayout
+  title="How to Calculate Your Macros — Ratios for Weight Loss & Muscle Gain"
+  description="Step-by-step macro calculation guide: protein, carbs, and fat targets by TDEE and goal. Includes ratio tables for cutting, bulking, and maintenance."
+  canonical={canonical}
+  schemaApp={schemaArticle}
+  schemaFaq={schemaFaq}
+  pageIcon="&#129367;"
+  heroTitle="How to Calculate Your Macros"
+>
+
+<article class="guide-article">
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="/">Home</a><span>&#8250;</span><a href="/guides">Guides</a><span>&#8250;</span><span>How to Calculate Macros</span>
+</nav>
+
+<p class="guide-intro">Counting calories gets you into the right energy range. Tracking macros lets you control <em>what happens to your body</em> within that range — whether you preserve muscle while cutting, build lean mass while bulking, or simply feel better and perform better. This guide walks you through the calculation from TDEE to daily gram targets.</p>
+
+<h2>Step 1 — Find Your TDEE</h2>
+<p>Your <strong>Total Daily Energy Expenditure (TDEE)</strong> is the number of calories you burn per day including activity. All macro calculations start here. Use the Mifflin-St Jeor equation with an activity multiplier:</p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>Activity Level</th><th>Multiplier</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Sedentary</td><td>× 1.2</td><td>Desk job, little to no exercise</td></tr>
+    <tr><td>Lightly active</td><td>× 1.375</td><td>Light exercise 1–3 days/week</td></tr>
+    <tr><td>Moderately active</td><td>× 1.55</td><td>Moderate exercise 3–5 days/week</td></tr>
+    <tr><td>Very active</td><td>× 1.725</td><td>Hard exercise 6–7 days/week</td></tr>
+    <tr><td>Extra active</td><td>× 1.9</td><td>Physical job + hard training daily</td></tr>
+  </tbody>
+</table>
+
+<h2>Step 2 — Set Your Calorie Target by Goal</h2>
+<p>Adjust TDEE based on your goal. These are evidence-based ranges that balance results with sustainability:</p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>Goal</th><th>Calorie Adjustment</th><th>Expected Rate</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Aggressive fat loss</td><td>TDEE − 500 kcal</td><td>~0.5 kg / week</td></tr>
+    <tr><td>Moderate fat loss</td><td>TDEE − 300 kcal</td><td>~0.3 kg / week</td></tr>
+    <tr><td>Maintenance / recomp</td><td>TDEE ± 0</td><td>Fat loss + muscle gain (slow)</td></tr>
+    <tr><td>Lean bulk</td><td>TDEE + 200 kcal</td><td>~0.2 kg / week muscle</td></tr>
+    <tr><td>Moderate bulk</td><td>TDEE + 400 kcal</td><td>~0.3–0.4 kg / week</td></tr>
+  </tbody>
+</table>
+
+<h2>Step 3 — Choose Your Macro Ratio</h2>
+<p>Macro ratios are expressed as percentages of total calories. These are the most commonly used evidence-based splits:</p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>Goal</th><th>Protein</th><th>Carbs</th><th>Fat</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Fat loss (cutting)</td><td>40%</td><td>35%</td><td>25%</td></tr>
+    <tr><td>Maintenance</td><td>30%</td><td>40%</td><td>30%</td></tr>
+    <tr><td>Muscle gain (bulking)</td><td>30%</td><td>45%</td><td>25%</td></tr>
+    <tr><td>Low-carb / keto</td><td>30%</td><td>10%</td><td>60%</td></tr>
+    <tr><td>Endurance athlete</td><td>20%</td><td>55%</td><td>25%</td></tr>
+  </tbody>
+</table>
+
+<h2>Step 4 — Convert to Grams</h2>
+<p>Each macronutrient has a fixed calorie density. Use these to convert from calories to grams:</p>
+<ul>
+  <li><strong>Protein:</strong> 4 kcal per gram → divide protein calories by 4</li>
+  <li><strong>Carbohydrates:</strong> 4 kcal per gram → divide carb calories by 4</li>
+  <li><strong>Fat:</strong> 9 kcal per gram → divide fat calories by 9</li>
+</ul>
+
+<p><strong>Example:</strong> TDEE 2,200 kcal, cutting goal (−300 kcal = 1,900 kcal), 40/35/25 split:</p>
+<ul>
+  <li>Protein: 1,900 × 0.40 ÷ 4 = <strong>190 g</strong></li>
+  <li>Carbs: 1,900 × 0.35 ÷ 4 = <strong>166 g</strong></li>
+  <li>Fat: 1,900 × 0.25 ÷ 9 = <strong>53 g</strong></li>
+</ul>
+
+<h2>Macro Targets at Common Calorie Levels</h2>
+<p>Quick-reference table using a 40/35/25 split (cutting) at popular calorie targets:</p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>Daily Calories</th><th>Protein (g)</th><th>Carbs (g)</th><th>Fat (g)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1,400 kcal</td><td>140</td><td>123</td><td>39</td></tr>
+    <tr><td>1,600 kcal</td><td>160</td><td>140</td><td>44</td></tr>
+    <tr><td>1,800 kcal</td><td>180</td><td>158</td><td>50</td></tr>
+    <tr><td>2,000 kcal</td><td>200</td><td>175</td><td>56</td></tr>
+    <tr><td>2,200 kcal</td><td>220</td><td>193</td><td>61</td></tr>
+    <tr><td>2,500 kcal</td><td>250</td><td>219</td><td>69</td></tr>
+  </tbody>
+</table>
+
+<h2>The Most Important Macro: Protein</h2>
+<p>If you only track one macro, make it protein. Research consistently shows that adequate protein intake:</p>
+<ul>
+  <li>Preserves lean muscle mass during a caloric deficit</li>
+  <li>Has the highest thermic effect of food (20–30% of calories burned in digestion)</li>
+  <li>Increases satiety more than carbs or fat, reducing total calorie intake</li>
+  <li>Supports muscle protein synthesis when combined with resistance training</li>
+</ul>
+<p>The ISSN recommends <strong>1.6–2.2 g per kg of body weight</strong> for active individuals. Set protein first, then fill remaining calories with carbs and fat to your preference.</p>
+
+<h2>Common Macro Mistakes</h2>
+<ul>
+  <li><strong>Setting protein too low</strong> — the most common error; results in muscle loss during cutting</li>
+  <li><strong>Ignoring calorie total</strong> — clean macros at the wrong calorie level will not produce results</li>
+  <li><strong>Cutting carbs to near-zero</strong> without a specific reason — impairs training performance and recovery</li>
+  <li><strong>Not adjusting as weight changes</strong> — recalculate every 4–6 weeks as body weight and TDEE shift</li>
+  <li><strong>Tracking nutrition apps inaccurately</strong> — use a food scale; volume estimates are often 20–30% off</li>
+</ul>
+
+<!-- Guide CTA -->
+<div class="guide-cta-box" style="margin-top:32px">
+  <div class="gcta-icon">&#129367;</div>
+  <div class="gcta-body">
+    <div class="gcta-label">Free Tool</div>
+    <a href="/macro-calculator" class="gcta-title">Macro Calculator</a>
+    <p class="gcta-desc">Enter your stats and goal to instantly get your daily protein, carb, and fat targets in grams. Powered by the Mifflin-St Jeor TDEE formula.</p>
+  </div>
+  <a href="/macro-calculator" class="gcta-btn">Calculate now &rarr;</a>
+</div>
+
+</article>
+
+</ToolLayout>
