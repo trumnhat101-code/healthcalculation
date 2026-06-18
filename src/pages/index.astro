@@ -28,7 +28,7 @@ const tools = [
     title: 'Sleep Calculator',
     desc: 'Find the best bedtimes or wake-up times based on 90-minute sleep cycles.',
     icon: '🌙',
-    kw: 'Mattress affiliate',
+    kw: 'Science-backed',
   },
 ];
 
@@ -57,7 +57,7 @@ const siteSchema = {
     .wrap { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
 
     /* Header */
-    .site-header { background: #fff; border-bottom: 1px solid #e5e7eb; position: sticky; top: 0; z-index: 100; }
+    .site-header { background: #fff; border-bottom: 1px solid #e5e7eb; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 0 #e5e7eb; }
     .site-header .wrap { display: flex; align-items: center; height: 58px; gap: 10px; }
     .logo { font-weight: 800; color: #16a34a; font-size: 16px; text-decoration: none; flex-shrink: 0; display: flex; align-items: center; gap: 7px; }
     .logo-mark { width: 28px; height: 28px; background: #16a34a; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; color: #fff; }
@@ -89,18 +89,17 @@ const siteSchema = {
       transition: box-shadow .18s, border-color .18s, transform .18s;
     }
     .tool-card:hover { box-shadow: 0 6px 24px rgba(22,163,74,.14); border-color: #86efac; transform: translateY(-2px); }
-    .tool-icon { font-size: 28px; }
+    .tool-icon  { font-size: 28px; }
     .tool-title { font-size: 16px; font-weight: 700; color: #1f2937; }
     .tool-desc  { font-size: 13px; color: #6b7280; flex: 1; }
-    .tool-kw    { font-size: 11px; font-weight: 600; color: #16a34a; background: #f0fdf4; padding: 3px 8px; border-radius: 4px; align-self: flex-start; }
     .tool-arrow { font-size: 18px; color: #16a34a; align-self: flex-end; }
 
     /* Why section */
     .why-section { background: #fff; padding: 40px 0; border-top: 1px solid #e5e7eb; }
     .why-section h2 { font-size: 22px; font-weight: 800; margin-bottom: 20px; text-align: center; }
     .why-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
-    .why-card { text-align: center; padding: 16px; }
-    .why-icon { font-size: 28px; margin-bottom: 8px; }
+    .why-card  { text-align: center; padding: 16px; }
+    .why-icon  { font-size: 28px; margin-bottom: 8px; }
     .why-title { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
     .why-desc  { font-size: 13px; color: #6b7280; }
 
@@ -109,7 +108,7 @@ const siteSchema = {
     .site-footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; font-size: 13px; color: #6b7280; }
     .site-footer a { color: #6b7280; text-decoration: none; }
     .site-footer a:hover { color: #16a34a; }
-    .footer-links { display: flex; gap: 16px; }
+    .footer-links { display: flex; gap: 16px; flex-wrap: wrap; }
   </style>
 </head>
 <body>
@@ -132,7 +131,7 @@ const siteSchema = {
 
 <section class="hero">
   <div class="wrap">
-    <h1>Free Health & Fitness Calculators</h1>
+    <h1>Free Health &amp; Fitness Calculators</h1>
     <p>Accurate tools for calories, BMI, macros, sleep — and more. Built on clinically validated formulas.</p>
   </div>
 </section>
@@ -141,7 +140,7 @@ const siteSchema = {
   <div class="wrap">
     <h2>All Calculators</h2>
     <div class="tools-grid">
-      {tools.map(({ href, title, desc, icon, kw }) => (
+      {tools.map(({ href, title, desc, icon }) => (
         <a href={href} class="tool-card">
           <div class="tool-icon">{icon}</div>
           <div class="tool-title">{title}</div>
@@ -157,6 +156,40 @@ const siteSchema = {
   <div class="wrap">
     <h2>Why Use HealthCalculation?</h2>
     <div class="why-grid">
-      <div class="why-card"><div class="why-icon">🔬</div><div class="why-title">Clinically Validated</div><div class="why-desc">Mifflin-St Jeor, WHO BMI standards, AASM sleep guidelines</div></div>
-      <div class="why-card"><div class="why-icon">⚡</div><div class="why-title">Instant Results</div><div class="why-desc">Client-side calculations — no sign-up, no waiting</div></div>
-      <div class="why-card"><div class="why-icon">📱</div><div class="why-title">Mobile-Friendly</div><div class="why-desc">Works perfectly on any device, any s
+      <div class="why-card">
+        <div class="why-icon">🔬</div>
+        <div class="why-title">Clinically Validated</div>
+        <div class="why-desc">Mifflin-St Jeor, WHO BMI standards, AASM sleep guidelines</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">⚡</div>
+        <div class="why-title">Instant Results</div>
+        <div class="why-desc">Client-side calculations — no sign-up, no waiting</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📱</div>
+        <div class="why-title">Mobile-Friendly</div>
+        <div class="why-desc">Works perfectly on any device, any screen size</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">&#128274;</div>
+        <div class="why-title">Privacy First</div>
+        <div class="why-desc">No data stored — all calculations stay in your browser</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>&copy; 2025 HealthCalculation.com — For informational purposes only. Not medical advice.</p>
+    <div class="footer-links">
+      <a href="/about">About</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/disclaimer">Disclaimer</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

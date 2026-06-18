@@ -236,4 +236,73 @@ const heroTitle   = title.split(' —')[0];
     .site-footer {
       background: #fff;
       border-top: 1px solid var(--bd);
-      padding: 2
+      padding: 24px 0;
+    }
+    .ftr-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--mut);
+    }
+    .ftr-brand { font-weight: 700; color: var(--tx); }
+    .ftr-links { display: flex; gap: 16px; flex-wrap: wrap; }
+    .ftr-links a { color: var(--mut); text-decoration: none; }
+    .ftr-links a:hover { color: var(--ac); }
+
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap hdr-inner">
+    <a class="logo" href="/">
+      <span class="logo-mark" aria-hidden="true">H</span>
+      HealthCalculation
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      {nav.map(({ href, label }) => (
+        <a href={href} aria-current={currentPath === href ? 'page' : undefined}>{label}</a>
+      ))}
+    </nav>
+  </div>
+</header>
+
+{!isHome && (
+  <div class="page-hero" aria-hidden="true">
+    <div class="wrap">
+      <div class="ph-inner">
+        <span class="ph-icon">{pageIcon}</span>
+        <div>
+          <p class="ph-eyebrow">Free Calculator</p>
+          <p class="ph-title">{heroTitle}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
+<main>
+  <div class="wrap">
+    <slot />
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap ftr-inner">
+    <div>
+      <p class="ftr-brand">HealthCalculation.com</p>
+      <p>&copy; {new Date().getFullYear()} HealthCalculation.com &mdash; For informational purposes only. Not medical advice.</p>
+    </div>
+    <nav class="ftr-links" aria-label="Footer navigation">
+      <a href="/about">About</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/disclaimer">Disclaimer</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
