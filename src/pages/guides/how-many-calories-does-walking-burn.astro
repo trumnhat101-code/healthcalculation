@@ -1,0 +1,189 @@
+\
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+
+const SITE = 'https://healthcalculation.com';
+const canonical = `${SITE}/guides/how-many-calories-does-walking-burn`;
+
+const schemaArticle = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'How Many Calories Does Walking Burn?',
+  description: 'Calories burned walking by speed, weight, and duration. Includes calorie tables, the MET formula, and tips to burn more on every walk.',
+  url: canonical,
+  datePublished: '2025-06-01',
+  dateModified: '2025-06-18',
+  author: { '@type': 'Organization', name: 'HealthCalculation.com' },
+  publisher: { '@type': 'Organization', name: 'HealthCalculation.com', url: SITE },
+};
+
+const schemaFaq = [
+  {
+    q: 'How many calories does a 30-minute walk burn?',
+    a: 'A 155 lb (70 kg) person walking at a moderate pace (3.5 mph) burns approximately 150 calories in 30 minutes. A lighter person (130 lb / 59 kg) burns around 126 calories, while a heavier person (185 lb / 84 kg) burns roughly 179 calories for the same walk. Speed and incline significantly affect the total.',
+  },
+  {
+    q: 'Does walking speed affect calories burned?',
+    a: 'Yes, significantly. Walking faster increases the MET (Metabolic Equivalent of Task) value, which directly raises calorie burn. Brisk walking at 4.5 mph burns roughly 47% more calories per minute than slow walking at 2.5 mph. Above ~5 mph, running becomes more efficient and walking mechanics change.',
+  },
+  {
+    q: 'Does walking uphill burn more calories?',
+    a: 'Yes. Walking on a 5% incline increases calorie burn by approximately 30–40% compared to flat walking at the same speed. A 10% incline can nearly double the calorie expenditure of flat walking. Incline walking is one of the most effective ways to increase intensity without joint impact.',
+  },
+  {
+    q: 'How accurate are step-counting calorie estimates?',
+    a: 'Step-based estimates (e.g., 100 calories per 2,000 steps) are rough approximations. Accuracy depends heavily on stride length, walking speed, body weight, and terrain. The MET-based formula used here accounts for body weight and speed, making it more accurate than step count alone — typically within 10–20% of actual expenditure.',
+  },
+  {
+    q: 'Does walking burn belly fat?',
+    a: 'Walking burns calories from a mix of fat and carbohydrates. At low-to-moderate intensities (like most walking), fat is the primary fuel source. However, spot reduction of belly fat is not possible — fat loss occurs proportionally across the body. Consistent daily walking combined with a caloric deficit will reduce overall body fat including abdominal fat over time.',
+  },
+];
+---
+
+<ToolLayout
+  title="How Many Calories Does Walking Burn? [Tables by Weight & Speed]"
+  description="Calories burned walking calculator tables by weight, speed, and duration. Includes the MET formula, incline effects, and tips to burn more on every walk."
+  canonical={canonical}
+  schemaApp={schemaArticle}
+  schemaFaq={schemaFaq}
+  pageIcon="&#128694;"
+  heroTitle="How Many Calories Does Walking Burn?"
+>
+
+<article class="guide-article">
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="/">Home</a><span>›</span><a href="/guides">Guides</a><span>›</span><span>Calories Walking</span>
+</nav>
+
+<p class="guide-intro">Walking is the most accessible form of exercise — no equipment, no gym, no learning curve. But how many calories does it actually burn? The answer depends on your <strong>body weight</strong>, <strong>walking speed</strong>, and <strong>duration</strong>. This guide breaks it all down with calorie tables, the science behind the formula, and practical tips to get more from every walk.</p>
+
+<h2>Calories Burned Walking: Quick Reference Table</h2>
+<p>Calories burned per 30 minutes at a <strong>moderate pace (3.5 mph / 5.6 km/h)</strong> on flat ground:</p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>Body Weight</th><th>30 min</th><th>45 min</th><th>60 min</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>120 lbs (54 kg)</td><td>116 kcal</td><td>174 kcal</td><td>232 kcal</td></tr>
+    <tr><td>140 lbs (64 kg)</td><td>136 kcal</td><td>204 kcal</td><td>272 kcal</td></tr>
+    <tr><td>155 lbs (70 kg)</td><td>150 kcal</td><td>226 kcal</td><td>301 kcal</td></tr>
+    <tr><td>170 lbs (77 kg)</td><td>165 kcal</td><td>248 kcal</td><td>330 kcal</td></tr>
+    <tr><td>185 lbs (84 kg)</td><td>179 kcal</td><td>269 kcal</td><td>358 kcal</td></tr>
+    <tr><td>200 lbs (91 kg)</td><td>194 kcal</td><td>291 kcal</td><td>388 kcal</td></tr>
+    <tr><td>220 lbs (100 kg)</td><td>215 kcal</td><td>322 kcal</td><td>430 kcal</td></tr>
+    <tr><td>250 lbs (113 kg)</td><td>244 kcal</td><td>366 kcal</td><td>488 kcal</td></tr>
+  </tbody>
+</table>
+
+<h2>How Walking Speed Changes Calorie Burn</h2>
+<p>Speed is the single biggest lever you can pull. The table below shows calories burned per hour for a <strong>155 lb (70 kg)</strong> person at different walking speeds:</p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>Speed</th><th>Pace</th><th>MET</th><th>Calories / Hour</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>2.0 mph (very slow)</td><td>30 min/mile</td><td>2.5</td><td>175 kcal</td></tr>
+    <tr><td>2.5 mph (slow)</td><td>24 min/mile</td><td>2.8</td><td>196 kcal</td></tr>
+    <tr><td>3.0 mph (easy)</td><td>20 min/mile</td><td>3.5</td><td>245 kcal</td></tr>
+    <tr><td>3.5 mph (moderate)</td><td>17 min/mile</td><td>4.3</td><td>301 kcal</td></tr>
+    <tr><td>4.0 mph (brisk)</td><td>15 min/mile</td><td>5.0</td><td>350 kcal</td></tr>
+    <tr><td>4.5 mph (very brisk)</td><td>13 min/mile</td><td>6.3</td><td>441 kcal</td></tr>
+    <tr><td>5.0 mph (race walk)</td><td>12 min/mile</td><td>8.3</td><td>581 kcal</td></tr>
+  </tbody>
+</table>
+
+<p>MET values from the <em>Compendium of Physical Activities</em> (Ainsworth et al., 2011).</p>
+
+<h2>The Formula: How Calories Are Calculated</h2>
+<p>All walking calorie estimates are based on the <strong>MET (Metabolic Equivalent of Task)</strong> method, the standard used in exercise science research:</p>
+
+<div class="formula-box">
+  <strong>Calories Burned = MET &times; Body Weight (kg) &times; Time (hours)</strong>
+</div>
+
+<p><strong>Example:</strong> A 170 lb (77 kg) person walks briskly at 4.0 mph for 45 minutes:</p>
+<ul>
+  <li>MET for 4.0 mph walking = 5.0</li>
+  <li>Weight in kg = 77 kg</li>
+  <li>Time in hours = 45 &divide; 60 = 0.75 hr</li>
+  <li>Calories = 5.0 &times; 77 &times; 0.75 = <strong>289 kcal</strong></li>
+</ul>
+
+<p>This formula calculates <em>gross</em> calorie expenditure — meaning it includes the calories your body would burn at rest during the same period. Net calorie burn (above resting) is typically 10–15% lower.</p>
+
+<h2>Does Incline Make a Big Difference?</h2>
+<p>Yes — dramatically. Incline walking is one of the most effective ways to increase calorie burn without increasing joint stress from running. Here is how incline affects a <strong>155 lb (70 kg)</strong> person walking at 3.5 mph for 30 minutes:</p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>Incline</th><th>Approx. Calories (30 min)</th><th>vs. Flat</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>0% (flat)</td><td>150 kcal</td><td>—</td></tr>
+    <tr><td>2%</td><td>168 kcal</td><td>+12%</td></tr>
+    <tr><td>5%</td><td>197 kcal</td><td>+31%</td></tr>
+    <tr><td>8%</td><td>228 kcal</td><td>+52%</td></tr>
+    <tr><td>10%</td><td>253 kcal</td><td>+69%</td></tr>
+    <tr><td>15%</td><td>310 kcal</td><td>+107%</td></tr>
+  </tbody>
+</table>
+
+<h2>How Many Steps to Burn 100 Calories Walking?</h2>
+<p>The popular rule "2,000 steps = 100 calories" is a rough average. In reality, it depends on your body weight and stride length. A more accurate estimate:</p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>Body Weight</th><th>Steps to Burn 100 kcal</th><th>Approx. Miles</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>130 lbs (59 kg)</td><td>~2,600 steps</td><td>~1.3 miles</td></tr>
+    <tr><td>155 lbs (70 kg)</td><td>~2,200 steps</td><td>~1.1 miles</td></tr>
+    <tr><td>185 lbs (84 kg)</td><td>~1,800 steps</td><td>~0.9 miles</td></tr>
+    <tr><td>220 lbs (100 kg)</td><td>~1,500 steps</td><td>~0.75 miles</td></tr>
+  </tbody>
+</table>
+
+<h2>5 Ways to Burn More Calories on Every Walk</h2>
+<ol>
+  <li><strong>Increase your pace.</strong> Going from a 20-minute mile to a 15-minute mile nearly doubles your MET value. Even small speed increases compound over a full walk.</li>
+  <li><strong>Add incline.</strong> Walking on a treadmill at 8–10% incline at 3.5 mph burns more calories than jogging on a flat surface at 5 mph for most people.</li>
+  <li><strong>Use your arms actively.</strong> Pumping your arms while walking increases oxygen consumption by 5–10% and engages your upper body.</li>
+  <li><strong>Walk on softer surfaces.</strong> Sand, grass, or gravel require more muscular effort than concrete or treadmills, increasing energy expenditure by 20–50%.</li>
+  <li><strong>Add a weighted vest.</strong> A vest equal to 5–10% of body weight increases calorie burn proportionally without the impact forces of carrying a backpack.</li>
+</ol>
+
+<h2>Walking vs. Running: Which Burns More Calories?</h2>
+<p>Running burns more calories per minute, but the relationship per mile is closer than most people think. For a <strong>155 lb (70 kg)</strong> person covering <strong>1 mile</strong>:</p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>Activity</th><th>Time (1 mile)</th><th>Calories (1 mile)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Walking (3.5 mph)</td><td>~17 min</td><td>~85 kcal</td></tr>
+    <tr><td>Brisk walking (4.5 mph)</td><td>~13 min</td><td>~95 kcal</td></tr>
+    <tr><td>Running (6 mph)</td><td>~10 min</td><td>~117 kcal</td></tr>
+    <tr><td>Running (8 mph)</td><td>~7.5 min</td><td>~135 kcal</td></tr>
+  </tbody>
+</table>
+
+<p>The key takeaway: running burns about 30–40% more calories per mile, but walking is far easier to sustain daily. For most people, a longer daily walk accumulates more total weekly calorie expenditure than occasional running.</p>
+
+<!-- Guide CTA -->
+<div class="guide-cta-box" style="margin-top:32px">
+  <div class="gcta-icon">&#128293;</div>
+  <div class="gcta-body">
+    <div class="gcta-label">Free Tool</div>
+    <a href="/calories-burned-calculator" class="gcta-title">Calories Burned Calculator</a>
+    <p class="gcta-desc">Calculate exact calories burned for 40+ activities — walking, running, cycling, swimming, HIIT, and more — by your weight and duration.</p>
+  </div>
+  <a href="/calories-burned-calculator" class="gcta-btn">Use calculator &rarr;</a>
+</div>
+
+</article>
+
+</ToolLayout>
