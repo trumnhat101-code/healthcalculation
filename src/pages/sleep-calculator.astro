@@ -278,18 +278,10 @@ document.getElementById('calcBed')!.addEventListener('click', () => {
 </script>
 
 <style>
-  .field-label { display: block; font-size: 12px; font-weight: 700; color: #6b7280; margin-bottom: 5px; text-transform: uppercase; letter-spacing: .4px; }
-  .seg-group { display: flex; gap: 8px; flex-wrap: wrap; }
-  .seg-opt { flex: 1; min-width: 140px; }
-  .seg-opt input { display: none; }
-  .seg-opt span { display: block; text-align: center; padding: 8px 12px; border: 1.5px solid #e5e7eb; border-radius: 8px; font-size: 14px; cursor: pointer; color: #374151; transition: all .15s; }
-  .seg-opt input:checked + span { border-color: #16a34a; color: #16a34a; background: #f0fdf4; font-weight: 700; }
 
   .time-input-row { display: flex; gap: 12px; align-items: center; margin-top: 6px; flex-wrap: wrap; }
   input[type="time"] { padding: 10px 14px; border: 1.5px solid #e5e7eb; border-radius: 9px; font-size: 20px; font-weight: 700; color: #1f2937; outline: none; background: #fff; cursor: pointer; }
   input[type="time"]:focus { border-color: #16a34a; }
-  .btn-calc { width: 100%; margin-top: 14px; padding: 13px; background: #16a34a; color: #fff; font-size: 15px; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; transition: background .15s; }
-  .btn-calc:hover { background: #15803d; }
 
   /* Sleep results */
   #sleepResults { margin-top: 20px; padding-top: 18px; border-top: 1px solid #e5e7eb; }
@@ -326,10 +318,4 @@ document.getElementById('calcBed')!.addEventListener('click', () => {
   .cv-seg.deep  { background: #7c3aed; }
   .cv-seg.rem   { background: #0891b2; }
   .cv-note { font-size: 11px; color: #9ca3af; margin-top: 8px; margin-bottom: 0; text-align: center; }
-  /* iOS: prevent auto-zoom on input focus */
-  @media (max-width: 768px) {
-    input[type="number"], input[type="text"], select {
-      font-size: 16px !important;
-    }
-  }
 </style>

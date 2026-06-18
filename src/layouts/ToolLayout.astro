@@ -281,7 +281,90 @@ const heroTitle   = title.split(' —')[0];
     .ftr-links a { color: var(--mut); text-decoration: none; }
     .ftr-links a:hover { color: var(--ac); }
 
-  </style>
+
+    /* ══════════════════════════════════════════════════
+       Shared Form Styles — apply to all tool pages
+       ══════════════════════════════════════════════════ */
+
+    /* Grids */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+    @media (max-width: 560px) { .grid-2 { grid-template-columns: 1fr; } }
+    @media (max-width: 560px) { .grid-3 { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 520px) { .grid-3 { grid-template-columns: 1fr; } }
+
+    /* Field */
+    .field-group { position: relative; }
+    .field-label {
+      display: block; font-size: 12px; font-weight: 700;
+      color: var(--mut); margin-bottom: 5px;
+      text-transform: uppercase; letter-spacing: .4px;
+    }
+    input[type="number"],
+    input[type="text"],
+    input[type="time"],
+    select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1.5px solid var(--bd);
+      border-radius: 9px;
+      font-size: 15px;
+      outline: none;
+      background: #fff;
+      color: var(--tx);
+      transition: border-color .15s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    input[type="number"]:focus,
+    input[type="text"]:focus,
+    input[type="time"]:focus,
+    select:focus { border-color: var(--ac); box-shadow: 0 0 0 3px rgba(22,163,74,.1); }
+
+    /* Prevent iOS Safari auto-zoom (requires font-size >= 16px) */
+    @media (max-width: 768px) {
+      input[type="number"],
+      input[type="text"],
+      input[type="time"],
+      select { font-size: 16px !important; }
+    }
+
+    /* Unit label + prevent text overlap */
+    .field-unit { position: absolute; right: 12px; bottom: 11px; font-size: 12px; color: #9ca3af; pointer-events: none; }
+    .field-group:has(.field-unit) input { padding-right: 40px; }
+
+    /* ft/in row */
+    .ft-in { display: flex; align-items: center; gap: 6px; }
+    .ft-in input { flex: 1; padding-right: 12px !important; }
+    .field-sep { font-size: 13px; color: #9ca3af; flex-shrink: 0; }
+
+    /* Segmented controls */
+    .seg-group { display: flex; gap: 8px; flex-wrap: wrap; }
+    .seg-opt { flex: 1; min-width: 120px; }
+    .seg-opt input { display: none; }
+    .seg-opt span {
+      display: block; text-align: center;
+      padding: 8px 12px; border: 1.5px solid var(--bd);
+      border-radius: 8px; font-size: 14px; cursor: pointer;
+      color: #374151; transition: all .15s; user-select: none;
+    }
+    .seg-opt input:checked + span {
+      border-color: var(--ac); color: var(--ac);
+      background: #f0fdf4; font-weight: 700;
+    }
+
+    /* Submit button */
+    .btn-calc {
+      width: 100%; margin-top: 18px; padding: 13px;
+      background: var(--ac); color: #fff;
+      font-size: 16px; font-weight: 700;
+      border: none; border-radius: 10px;
+      cursor: pointer; transition: background .15s;
+      touch-action: manipulation;
+    }
+    .btn-calc:hover { background: var(--ac-dark); }
+
+    </style>
 </head>
 <body>
 

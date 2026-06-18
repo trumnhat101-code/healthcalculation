@@ -323,25 +323,12 @@ form.addEventListener('submit', (e) => {
 </script>
 
 <style>
-  /* ── Form styles ── */
   .grid-3 {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 14px;
   }
-  @media (max-width: 560px) { .grid-3 { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 520px) { .grid-3 { grid-template-columns: 1fr; } }
 
-  .field-group { position: relative; }
-  .field-label {
-    display: block;
-    font-size: 12px;
-    font-weight: 700;
-    color: #6b7280;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-    letter-spacing: .4px;
-  }
   input[type="number"], select {
     width: 100%;
     padding: 10px 12px;
@@ -353,22 +340,12 @@ form.addEventListener('submit', (e) => {
     color: #1f2937;
     transition: border-color .15s;
   }
-  input[type="number"]:focus, select:focus { border-color: #16a34a; }
-  .field-unit {
-    position: absolute;
-    right: 12px;
-    bottom: 11px;
-    font-size: 12px;
-    color: #9ca3af;
-    pointer-events: none;
-  }
   .ft-in {
     display: flex;
     align-items: center;
     gap: 6px;
   }
   .ft-in input { width: 60px; flex: 1; }
-  .field-sep { font-size: 13px; color: #9ca3af; }
   .hide-metric { display: none; }
 
   /* Segment radio */
@@ -381,7 +358,6 @@ form.addEventListener('submit', (e) => {
     flex: 1;
     min-width: 90px;
   }
-  .seg-opt input { display: none; }
   .seg-opt span {
     display: block;
     text-align: center;
@@ -413,7 +389,6 @@ form.addEventListener('submit', (e) => {
     cursor: pointer;
     transition: background .15s;
   }
-  .btn-calc:hover { background: #15803d; }
 
   /* Results */
   .results { margin-top: 20px; padding-top: 18px; border-top: 1px solid #e5e7eb; }
@@ -455,11 +430,5 @@ form.addEventListener('submit', (e) => {
     color: #374151;
     margin: 12px 0 20px;
     line-height: 1.8;
-  }
-  /* iOS: prevent auto-zoom on input focus */
-  @media (max-width: 768px) {
-    input[type="number"], input[type="text"], select {
-      font-size: 16px !important;
-    }
   }
 </style>

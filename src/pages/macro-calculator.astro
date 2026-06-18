@@ -297,25 +297,7 @@ form.addEventListener('submit', e => {
 </script>
 
 <style>
-  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
-  @media (max-width: 620px) { .grid-3 { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 520px) { .grid-3 { grid-template-columns: 1fr; } }
 
-  .field-group { position: relative; }
-  .field-label { display: block; font-size: 12px; font-weight: 700; color: #6b7280; margin-bottom: 5px; text-transform: uppercase; letter-spacing: .4px; }
-  input[type="number"], select { width: 100%; padding: 10px 12px; border: 1.5px solid #e5e7eb; border-radius: 9px; font-size: 15px; outline: none; background: #fff; color: #1f2937; transition: border-color .15s; }
-  input[type="number"]:focus, select:focus { border-color: #16a34a; }
-  .field-unit { position: absolute; right: 12px; bottom: 11px; font-size: 12px; color: #9ca3af; pointer-events: none; }
-  .ft-in { display: flex; align-items: center; gap: 6px; }
-  .ft-in input { flex: 1; }
-  .field-sep { font-size: 13px; color: #9ca3af; }
-  .seg-group { display: flex; gap: 8px; }
-  .seg-opt { flex: 1; }
-  .seg-opt input { display: none; }
-  .seg-opt span { display: block; text-align: center; padding: 8px 12px; border: 1.5px solid #e5e7eb; border-radius: 8px; font-size: 14px; cursor: pointer; color: #374151; transition: all .15s; }
-  .seg-opt input:checked + span { border-color: #16a34a; color: #16a34a; background: #f0fdf4; font-weight: 700; }
-  .btn-calc { width: 100%; margin-top: 18px; padding: 13px; background: #16a34a; color: #fff; font-size: 16px; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; transition: background .15s; }
-  .btn-calc:hover { background: #15803d; }
 
   /* Results */
   #macroResults { margin-top: 20px; padding-top: 18px; border-top: 1px solid #e5e7eb; }
@@ -338,10 +320,4 @@ form.addEventListener('submit', e => {
   .mt-row { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; padding: 10px 14px; border-bottom: 1px solid #e5e7eb; }
   .mt-row:last-child { border-bottom: none; }
   .mt-row.header { background: #f9fafb; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .4px; color: #6b7280; }
-  /* iOS: prevent auto-zoom on input focus */
-  @media (max-width: 768px) {
-    input[type="number"], input[type="text"], select {
-      font-size: 16px !important;
-    }
-  }
 </style>
