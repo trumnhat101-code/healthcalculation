@@ -1,0 +1,140 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+
+const SITE = 'https://healthcalculation.com';
+const canonical = `${SITE}/guides/what-is-my-ideal-weight`;
+
+const schemaArticle = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'What Is My Ideal Weight? 4 Formulas Compared',
+  description: 'The four most widely used ideal weight formulas — Devine, Robinson, Miller, and Hamwi — compared by height and sex, with limitations and practical guidance.',
+  url: canonical,
+  datePublished: '2025-06-01',
+  dateModified: '2025-06-18',
+  author: { '@type': 'Organization', name: 'HealthCalculation.com' },
+  publisher: { '@type': 'Organization', name: 'HealthCalculation.com', url: SITE },
+};
+
+const schemaFaq = [
+  {
+    q: 'What is the most accurate ideal weight formula?',
+    a: 'No single formula is universally accurate because "ideal weight" depends on body composition, bone density, muscle mass, age, and sex — factors these formulas do not measure. The Devine formula (1974) is the most widely used clinically, particularly for medication dosing. Robinson (1983) and Miller (1983) were developed to refine Devine. For practical health purposes, a body fat percentage measurement is more meaningful than any weight-based formula.',
+  },
+  {
+    q: 'How is ideal body weight calculated?',
+    a: 'The four main formulas all use height as the primary input, with a sex adjustment. The Devine formula for men is: IBW = 50 kg + 2.3 kg per inch over 5 feet. For women: IBW = 45.5 kg + 2.3 kg per inch over 5 feet. Robinson adjusts the per-inch increment slightly, Miller reduces it further, and Hamwi uses a different base weight. All produce slightly different results for the same individual.',
+  },
+  {
+    q: 'Is ideal body weight the same as a healthy weight?',
+    a: 'Not necessarily. Ideal body weight (IBW) formulas were originally developed for clinical applications like drug dosing — not as fitness or aesthetic targets. A "healthy weight" is better defined by the WHO BMI range (18.5–24.9), waist circumference, and body fat percentage. Muscular athletes may exceed IBW while being metabolically healthy. Thin individuals may be within IBW but have unhealthy body fat levels.',
+  },
+  {
+    q: 'What is the Devine formula for ideal body weight?',
+    a: 'The Devine formula (1974): For men: IBW = 50 kg + 2.3 kg × (height in inches − 60). For women: IBW = 45.5 kg + 2.3 kg × (height in inches − 60). For example, a 5'10" man has IBW = 50 + 2.3 × 10 = 73 kg (161 lb). This formula is widely used in medicine for calculating drug doses in obese patients.',
+  },
+  {
+    q: 'Do ideal weight formulas account for age?',
+    a: 'No — standard IBW formulas (Devine, Robinson, Miller, Hamwi) do not adjust for age. However, research shows that slightly higher BMI values (up to 27) are associated with lower mortality in adults over 65. Older adults typically lose muscle mass (sarcopenia) and may appear light on the scale while carrying excess fat. For this reason, IBW formulas are less clinically useful for elderly populations.',
+  },
+];
+---
+
+<ToolLayout
+  title="What Is My Ideal Weight? 4 Formulas Compared by Height"
+  description="The Devine, Robinson, Miller, and Hamwi ideal weight formulas compared side by side — with tables by height and sex, limitations, and what the research says."
+  canonical={canonical}
+  schemaApp={schemaArticle}
+  schemaFaq={schemaFaq}
+  pageIcon="&#9878;"
+  heroTitle="What Is My Ideal Weight?"
+>
+
+<article class="guide-article">
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="/">Home</a><span>&#8250;</span><a href="/guides">Guides</a><span>&#8250;</span><span>Ideal Weight</span>
+</nav>
+
+<p class="guide-intro">"Ideal body weight" is one of the most searched health questions — but the answer depends on which formula you use, and all four major formulas give slightly different results. This guide explains each formula, shows you the numbers by height and sex, and explains the important limitations of weight-based targets.</p>
+
+<h2>The 4 Main Ideal Weight Formulas</h2>
+<p>All four formulas below use <strong>height</strong> and <strong>sex</strong> as inputs. They were developed between 1964 and 1983, primarily for clinical use in medication dosing:</p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>Formula</th><th>Year</th><th>Men (base + per inch)</th><th>Women (base + per inch)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Devine</strong></td><td>1974</td><td>50 kg + 2.3 kg/in</td><td>45.5 kg + 2.3 kg/in</td></tr>
+    <tr><td><strong>Robinson</strong></td><td>1983</td><td>52 kg + 1.9 kg/in</td><td>49 kg + 1.7 kg/in</td></tr>
+    <tr><td><strong>Miller</strong></td><td>1983</td><td>56.2 kg + 1.41 kg/in</td><td>53.1 kg + 1.36 kg/in</td></tr>
+    <tr><td><strong>Hamwi</strong></td><td>1964</td><td>48 kg + 2.7 kg/in</td><td>45.4 kg + 2.3 kg/in</td></tr>
+  </tbody>
+</table>
+<p style="font-size:13px;color:#6b7280;margin-top:8px">All formulas apply per inch above 5 feet (60 inches / 152 cm).</p>
+
+<h2>Ideal Weight by Height — Men</h2>
+<table class="data-table">
+  <thead>
+    <tr><th>Height</th><th>Devine</th><th>Robinson</th><th>Miller</th><th>Hamwi</th><th>Average</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>5'4" (163 cm)</td><td>59 kg / 130 lb</td><td>59 kg / 130 lb</td><td>62 kg / 137 lb</td><td>59 kg / 130 lb</td><td>60 kg / 132 lb</td></tr>
+    <tr><td>5'6" (168 cm)</td><td>63 kg / 139 lb</td><td>62 kg / 137 lb</td><td>65 kg / 143 lb</td><td>64 kg / 141 lb</td><td>64 kg / 140 lb</td></tr>
+    <tr><td>5'8" (173 cm)</td><td>68 kg / 150 lb</td><td>66 kg / 145 lb</td><td>68 kg / 150 lb</td><td>69 kg / 152 lb</td><td>68 kg / 149 lb</td></tr>
+    <tr><td>5'10" (178 cm)</td><td>73 kg / 161 lb</td><td>70 kg / 154 lb</td><td>71 kg / 156 lb</td><td>75 kg / 165 lb</td><td>72 kg / 159 lb</td></tr>
+    <tr><td>6'0" (183 cm)</td><td>78 kg / 172 lb</td><td>74 kg / 163 lb</td><td>74 kg / 163 lb</td><td>80 kg / 176 lb</td><td>76 kg / 168 lb</td></tr>
+    <tr><td>6'2" (188 cm)</td><td>83 kg / 183 lb</td><td>78 kg / 172 lb</td><td>77 kg / 170 lb</td><td>86 kg / 190 lb</td><td>81 kg / 179 lb</td></tr>
+  </tbody>
+</table>
+
+<h2>Ideal Weight by Height — Women</h2>
+<table class="data-table">
+  <thead>
+    <tr><th>Height</th><th>Devine</th><th>Robinson</th><th>Miller</th><th>Hamwi</th><th>Average</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>5'0" (152 cm)</td><td>46 kg / 101 lb</td><td>49 kg / 108 lb</td><td>53 kg / 117 lb</td><td>45 kg / 100 lb</td><td>48 kg / 106 lb</td></tr>
+    <tr><td>5'2" (157 cm)</td><td>50 kg / 110 lb</td><td>52 kg / 115 lb</td><td>56 kg / 123 lb</td><td>50 kg / 110 lb</td><td>52 kg / 114 lb</td></tr>
+    <tr><td>5'4" (163 cm)</td><td>55 kg / 121 lb</td><td>56 kg / 123 lb</td><td>59 kg / 130 lb</td><td>55 kg / 121 lb</td><td>56 kg / 124 lb</td></tr>
+    <tr><td>5'6" (168 cm)</td><td>59 kg / 130 lb</td><td>59 kg / 130 lb</td><td>62 kg / 137 lb</td><td>60 kg / 132 lb</td><td>60 kg / 132 lb</td></tr>
+    <tr><td>5'8" (173 cm)</td><td>64 kg / 141 lb</td><td>63 kg / 139 lb</td><td>65 kg / 143 lb</td><td>66 kg / 145 lb</td><td>64 kg / 142 lb</td></tr>
+    <tr><td>5'10" (178 cm)</td><td>68 kg / 150 lb</td><td>66 kg / 146 lb</td><td>68 kg / 150 lb</td><td>71 kg / 157 lb</td><td>68 kg / 151 lb</td></tr>
+  </tbody>
+</table>
+
+<h2>Why the Formulas Disagree</h2>
+<p>The spread between formulas can be 5–10 kg for the same person. This reflects genuine disagreement among researchers about what "ideal" means and how to model it. Key reasons for divergence:</p>
+<ul>
+  <li><strong>Different base weights</strong> — Hamwi uses 48 kg for men at 5', Miller uses 56.2 kg</li>
+  <li><strong>Different per-inch increments</strong> — Devine adds 2.3 kg/inch, Miller only 1.41 kg/inch</li>
+  <li><strong>Different reference populations</strong> — each was derived from different actuarial or clinical datasets</li>
+  <li><strong>No adjustment for body composition</strong> — a muscular 6'0" man and a sedentary 6'0" man get the same IBW</li>
+</ul>
+
+<h2>Limitations of Ideal Body Weight</h2>
+<p>IBW formulas were designed for <strong>clinical pharmacology</strong> — specifically to calculate drug doses for obese patients where actual body weight would cause overdosing. They were never intended as personal fitness targets or aesthetics goals. Key limitations:</p>
+<ul>
+  <li>Do not account for <strong>muscle mass</strong> — athletes often exceed IBW by 10–20%</li>
+  <li>Do not adjust for <strong>age</strong> — older adults naturally lose muscle, so IBW may be unrealistically low</li>
+  <li>Do not account for <strong>frame size</strong> (small, medium, large bone structure)</li>
+  <li>Derived from predominantly <strong>white European</strong> populations — less validated for other ethnicities</li>
+  <li>Produce results <strong>below WHO healthy BMI range</strong> for many tall individuals</li>
+</ul>
+<p>For a more complete picture, combine IBW with <strong>body fat percentage</strong> and <strong>waist circumference</strong> measurements.</p>
+
+<!-- Guide CTA -->
+<div class="guide-cta-box" style="margin-top:32px">
+  <div class="gcta-icon">&#9878;</div>
+  <div class="gcta-body">
+    <div class="gcta-label">Free Tool</div>
+    <a href="/ideal-weight-calculator" class="gcta-title">Ideal Weight Calculator</a>
+    <p class="gcta-desc">Calculate your ideal weight using all four formulas simultaneously — Devine, Robinson, Miller, and Hamwi. Shows results in both kg and lbs with your corresponding BMI.</p>
+  </div>
+  <a href="/ideal-weight-calculator" class="gcta-btn">Calculate now &rarr;</a>
+</div>
+
+</article>
+
+</ToolLayout>
