@@ -134,6 +134,14 @@ const categories = {
       </div>
     </div>
 
+    <div class="field-group" style="margin-top:14px">
+      <label class="field-label" for="bf-weight">Body Weight <span style="font-weight:400;font-size:11px;color:#9ca3af">(optional — for Lean/Fat Mass)</span></label>
+      <div class="field-group">
+        <input type="number" id="bf-weight" value="" min="50" max="660" step="0.5" placeholder="e.g. 185" />
+        <span class="field-unit" id="bf-weight-unit">lbs</span>
+      </div>
+    </div>
+
     <button class="btn-calc" type="submit">Calculate Body Fat %</button>
   </form>
 
@@ -147,6 +155,27 @@ const categories = {
     <div class="bf-scale" id="bf-scale" style="margin-top:20px">
       <p style="font-size:13px;font-weight:700;color:var(--mut);margin-bottom:8px;text-transform:uppercase;letter-spacing:.4px">ACE Body Fat Categories</p>
       <div id="bf-scale-bars"></div>
+    </div>
+    <!-- LBM / Fat Mass chips (shown only when weight entered) -->
+    <div class="bf-composition" id="bf-composition" style="display:none; margin-top:16px">
+      <p style="font-size:12px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">Body Composition Breakdown</p>
+      <div class="bf-comp-chips">
+        <div class="bf-chip">
+          <span class="bfc-label">Lean Body Mass</span>
+          <span class="bfc-val" id="bf-lbm">—</span>
+          <span class="bfc-unit" id="bf-lbm-unit">lbs</span>
+        </div>
+        <div class="bf-chip">
+          <span class="bfc-label">Fat Mass</span>
+          <span class="bfc-val" id="bf-fatmass">—</span>
+          <span class="bfc-unit" id="bf-fatmass-unit">lbs</span>
+        </div>
+        <div class="bf-chip">
+          <span class="bfc-label">Ideal Fat Mass</span>
+          <span class="bfc-val" id="bf-idealfat">—</span>
+          <span class="bfc-hint">at 15% &#9794; / 22% &#9792;</span>
+        </div>
+      </div>
     </div>
     <p style="font-size:12px;color:#9ca3af;margin-top:10px">Estimated using the U.S. Navy tape measure method. Accuracy ~3–4% vs. DEXA. Not a substitute for medical evaluation.</p>
   </div>
@@ -224,6 +253,18 @@ const categories = {
   .cat-range { min-width: 60px; color: #9ca3af; }
   .cat-row.active .cat-label { color: var(--ac); }
   .cat-row.active .cat-range { color: var(--ac); font-weight: 700; }
+
+  .bf-comp-chips { display: flex; gap: 10px; flex-wrap: wrap; }
+  .bf-chip {
+    flex: 1; min-width: 110px;
+    background: #f9fafb; border: 1px solid #e5e7eb;
+    border-radius: 10px; padding: 10px 14px;
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .bfc-label { font-size: 10px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: .4px; }
+  .bfc-val   { font-size: 20px; font-weight: 800; color: var(--ac); line-height: 1.2; }
+  .bfc-unit  { font-size: 11px; color: #9ca3af; }
+  .bfc-hint  { font-size: 10px; color: #9ca3af; }
 </style>
 
 
@@ -281,6 +322,32 @@ bfForm.addEventListener('submit', (e) => {
   (document.getElementById('bf-pct') as HTMLElement).textContent = pct.toFixed(1) + '%';
   (document.getElementById('bf-cat') as HTMLElement).textContent = catLabel;
 
+  // Lean Body Mass & Fat Mass (if weight provided)
+  const weightRaw = parseFloat((document.getElementById('bf-weight') as HTMLInputElement).value);
+  const compDiv = document.getElementById('bf-composition') as HTMLElement;
+  if (weightRaw && weightRaw > 0) {
+    const isImp = unit === 'imperial';
+    const weightKg = isImp ? weightRaw * 0.453592 : weightRaw;
+    const fatKg  = weightKg * (pct / 100);
+    const lbmKg  = weightKg - fatKg;
+    const idealPct = sex === 'male' ? 0.15 : 0.22;
+    const idealFatKg = weightKg * idealPct;
+    if (isImp) {
+      (document.getElementById('bf-lbm') as HTMLElement).textContent      = (lbmKg * 2.20462).toFixed(1);
+      (document.getElementById('bf-fatmass') as HTMLElement).textContent  = (fatKg * 2.20462).toFixed(1);
+      (document.getElementById('bf-idealfat') as HTMLElement).textContent = (idealFatKg * 2.20462).toFixed(1);
+      document.querySelectorAll<HTMLElement>('.bfc-unit').forEach(el => el.textContent = 'lbs');
+    } else {
+      (document.getElementById('bf-lbm') as HTMLElement).textContent      = lbmKg.toFixed(1);
+      (document.getElementById('bf-fatmass') as HTMLElement).textContent  = fatKg.toFixed(1);
+      (document.getElementById('bf-idealfat') as HTMLElement).textContent = idealFatKg.toFixed(1);
+      document.querySelectorAll<HTMLElement>('.bfc-unit').forEach(el => el.textContent = 'kg');
+    }
+    compDiv.style.display = 'block';
+  } else {
+    compDiv.style.display = 'none';
+  }
+
   const maxRange = sex === 'male' ? 45 : 50;
   const bars = cats.map(c => {
     const active = pct >= c.min && pct <= c.max;
@@ -299,7 +366,7 @@ bfForm.addEventListener('submit', (e) => {
 function updateUnits(): void {
   const unit = (document.querySelector('input[name="bfunit"]:checked') as HTMLInputElement).value;
   const lbl  = unit === 'imperial' ? 'in' : 'cm';
-  ['bf-height-unit','bf-neck-unit','bf-waist-unit','bf-hip-unit'].forEach(id => {
+  ['bf-height-unit','bf-neck-unit','bf-waist-unit','bf-hip-unit','bf-weight-unit'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.textContent = lbl;
   });

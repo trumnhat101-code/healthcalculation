@@ -116,7 +116,7 @@ const schemaFaq = [
     </div>
     <table class="result-table" style="margin-top:16px">
       <thead>
-        <tr><th>Formula</th><th>lbs</th><th>kg</th></tr>
+        <tr><th>Formula</th><th>lbs</th><th>kg</th><th>BMI</th></tr>
       </thead>
       <tbody id="iw-table-body"></tbody>
     </table>
@@ -235,9 +235,12 @@ iwForm.addEventListener('submit', (e) => {
     minKg.toFixed(1) + ' – ' + maxKg.toFixed(1) + ' kg';
 
   const tbody = document.getElementById('iw-table-body') as HTMLElement;
+  // height in meters for BMI calculation
+  const hMeters = (h * 2.54) / 100;
   tbody.innerHTML = formulas.map(f => {
     const lbs = (f.kg * 2.20462).toFixed(1);
-    return `<tr><td>${f.name}</td><td>${lbs} lbs</td><td>${f.kg.toFixed(1)} kg</td></tr>`;
+    const bmi = (f.kg / (hMeters * hMeters)).toFixed(1);
+    return `<tr><td>${f.name}</td><td>${lbs} lbs</td><td>${f.kg.toFixed(1)} kg</td><td>${bmi}</td></tr>`;
   }).join('');
 
   (document.getElementById('iw-results') as HTMLElement).style.display = 'block';

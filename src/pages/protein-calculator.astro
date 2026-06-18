@@ -1,0 +1,334 @@
+---
+import ToolLayout from '../layouts/ToolLayout.astro';
+
+const SITE = 'https://healthcalculation.com';
+const canonical = `${SITE}/protein-calculator`;
+
+const schemaApp = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Daily Protein Intake Calculator',
+  url: canonical,
+  description: 'Calculate how much protein you need per day based on your weight, goal, and activity level. Results in grams, g/kg, and per-meal breakdown.',
+  applicationCategory: 'HealthApplication',
+  operatingSystem: 'Any',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+};
+
+const schemaFaq = [
+  {
+    q: 'How much protein do I need per day?',
+    a: 'The Recommended Dietary Allowance (RDA) for sedentary adults is 0.8 g per kg of body weight per day — a minimum to prevent deficiency, not an optimal amount. For active individuals, research supports 1.6–2.2 g/kg/day for muscle building and retention. This calculator adjusts recommendations based on your goal and activity level.',
+  },
+  {
+    q: 'Does protein timing matter?',
+    a: 'Yes, to a degree. Studies suggest distributing protein evenly across 3–5 meals (roughly 20–40 g per meal) maximizes muscle protein synthesis compared to eating most protein in one sitting. A post-workout meal with 20–40 g of protein within 2 hours is beneficial, though the total daily amount matters more than timing for most people.',
+  },
+  {
+    q: 'Can eating too much protein be harmful?',
+    a: 'For healthy adults, high protein intakes (up to 3.5 g/kg/day) have not been shown to cause kidney damage or bone loss. The main risks are indirect: high-protein diets can displace fiber, fruits, and vegetables. People with pre-existing kidney disease should follow medically supervised protein limits.',
+  },
+  {
+    q: 'What are the best protein sources?',
+    a: 'Complete proteins (containing all essential amino acids) include: chicken breast, turkey, eggs, Greek yogurt, cottage cheese, salmon, tuna, beef, and whey/casein protein powder. Plant-based complete sources include soy, quinoa, and edamame. Combining legumes with grains (e.g., rice and beans) also provides all essential amino acids.',
+  },
+  {
+    q: 'Should I use body weight or lean body mass for protein calculations?',
+    a: 'For most people, using total body weight is practical and accurate enough. For individuals with obesity (BMI over 30), calculating protein based on lean body mass or goal body weight avoids overestimating needs. This calculator uses total body weight but shows g/kg so you can adjust if needed.',
+  },
+];
+---
+
+<ToolLayout
+  title="Protein Calculator — How Much Protein Do You Need Per Day?"
+  description="Calculate your daily protein intake based on weight, activity level, and goal. Get results in grams per day, g/kg body weight, and per-meal targets."
+  canonical={canonical}
+  schemaApp={schemaApp}
+  schemaFaq={schemaFaq}
+  pageIcon="&#129372;"
+  heroTitle="Protein Calculator"
+>
+
+<div class="tool-card">
+  <h1 class="tool-title">Daily Protein Calculator</h1>
+  <p class="tool-subtitle">Based on ISSN &amp; Academy of Nutrition guidelines</p>
+
+  <form id="pr-form" novalidate>
+
+    <div class="field-group" style="margin-bottom:16px">
+      <span class="field-label">Unit system</span>
+      <div class="seg-group">
+        <label class="seg-opt">
+          <input type="radio" name="prunit" value="imperial" checked />
+          <span>Imperial (lbs)</span>
+        </label>
+        <label class="seg-opt">
+          <input type="radio" name="prunit" value="metric" />
+          <span>Metric (kg)</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="field-group">
+        <label class="field-label" for="pr-weight">Body weight</label>
+        <div class="field-group">
+          <input type="number" id="pr-weight" value="165" min="50" max="660" step="0.5" />
+          <span class="field-unit" id="pr-weight-unit">lbs</span>
+        </div>
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="pr-meals">Meals per day</label>
+        <div class="field-group">
+          <input type="number" id="pr-meals" value="3" min="1" max="8" step="1" />
+          <span class="field-unit">meals</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="field-group" style="margin-top:14px">
+      <span class="field-label">Activity level</span>
+      <div class="seg-group seg-wrap">
+        <label class="seg-opt">
+          <input type="radio" name="practivity" value="sedentary" checked />
+          <span>Sedentary</span>
+        </label>
+        <label class="seg-opt">
+          <input type="radio" name="practivity" value="light" />
+          <span>Light</span>
+        </label>
+        <label class="seg-opt">
+          <input type="radio" name="practivity" value="moderate" />
+          <span>Moderate</span>
+        </label>
+        <label class="seg-opt">
+          <input type="radio" name="practivity" value="active" />
+          <span>Very Active</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="field-group" style="margin-top:14px">
+      <span class="field-label">Goal</span>
+      <div class="seg-group seg-wrap">
+        <label class="seg-opt">
+          <input type="radio" name="prgoal" value="maintain" checked />
+          <span>Maintain</span>
+        </label>
+        <label class="seg-opt">
+          <input type="radio" name="prgoal" value="lose" />
+          <span>Lose Weight</span>
+        </label>
+        <label class="seg-opt">
+          <input type="radio" name="prgoal" value="build" />
+          <span>Build Muscle</span>
+        </label>
+        <label class="seg-opt">
+          <input type="radio" name="prgoal" value="athlete" />
+          <span>Athlete</span>
+        </label>
+      </div>
+    </div>
+
+    <button class="btn-calc" type="submit">Calculate Protein Needs</button>
+  </form>
+
+  <div id="pr-results" style="display:none; margin-top:24px">
+    <div class="pr-main-card">
+      <p class="pr-main-label">Daily Protein Target</p>
+      <p class="pr-main-val" id="pr-grams">—</p>
+      <p class="pr-main-sub" id="pr-range">—</p>
+    </div>
+
+    <div class="pr-chips" style="margin-top:14px">
+      <div class="pr-chip">
+        <span class="prc-label">Per kg body weight</span>
+        <span class="prc-val" id="pr-per-kg">—</span>
+        <span class="prc-unit">g/kg</span>
+      </div>
+      <div class="pr-chip">
+        <span class="prc-label">Per lb body weight</span>
+        <span class="prc-val" id="pr-per-lb">—</span>
+        <span class="prc-unit">g/lb</span>
+      </div>
+      <div class="pr-chip">
+        <span class="prc-label">Per meal</span>
+        <span class="prc-val" id="pr-per-meal">—</span>
+        <span class="prc-unit" id="pr-meal-unit">g / meal</span>
+      </div>
+    </div>
+
+    <div class="pr-goal-band" id="pr-goal-band" style="margin-top:14px">
+      <p class="pr-goal-text" id="pr-goal-text">—</p>
+    </div>
+
+    <p style="font-size:12px;color:#9ca3af;margin-top:12px">Recommendations based on ISSN Position Stand (2017) and Academy of Nutrition and Dietetics guidelines. Not a substitute for medical nutrition therapy.</p>
+  </div>
+</div>
+
+<!-- How it works -->
+<section class="content-section">
+  <h2>How Protein Requirements Are Calculated</h2>
+  <p>Protein needs scale with body weight and are modified by activity level and goal. This calculator uses evidence-based multipliers from the International Society of Sports Nutrition (ISSN) and the Academy of Nutrition and Dietetics:</p>
+  <div class="formula-box">
+    Sedentary adult (RDA minimum): 0.8 g/kg body weight<br>
+    Light activity / weight maintenance: 1.0&ndash;1.2 g/kg<br>
+    Moderate activity / fat loss: 1.2&ndash;1.6 g/kg<br>
+    Muscle building (resistance training): 1.6&ndash;2.2 g/kg<br>
+    Endurance / competitive athletes: 1.6&ndash;2.4 g/kg<br><br>
+    Daily target = body weight (kg) &times; multiplier (mid-range)
+  </div>
+  <p>The result shown is the midpoint of the recommended range for your inputs. The full range is displayed beneath the main number so you can adjust based on personal response and food preferences.</p>
+</section>
+
+<!-- Who Should Use -->
+<section class="content-section">
+  <h2>Who Should Use This Calculator?</h2>
+  <p>This calculator is designed for healthy adults who want to optimize protein intake for their specific goal — whether that is weight loss while preserving muscle, building lean mass, or supporting athletic performance. It is particularly useful for people starting a high-protein diet, those transitioning to plant-based eating who want to verify adequacy, and athletes fine-tuning macronutrient targets. People with kidney disease, liver disease, or other conditions affecting protein metabolism should use medically supervised protein targets rather than general population guidelines.</p>
+</section>
+
+<!-- Tips -->
+<section class="content-section">
+  <h2>Tips for Hitting Your Protein Target</h2>
+  <p>Distribute protein across all meals rather than loading it into one — research shows that spreading 20–40 g per meal maximizes muscle protein synthesis throughout the day. Track protein for at least two weeks using a food diary app to understand where your current diet stands before making changes. Prioritize whole food sources (eggs, chicken, Greek yogurt, legumes, fish) over protein supplements, which should fill gaps rather than replace meals. If using protein powder, unflavored whey or pea protein are versatile and mix easily into oatmeal, smoothies, or sauces.</p>
+</section>
+
+<!-- FAQ -->
+<section class="content-section">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-list">
+    {schemaFaq.map(({ q, a }) => (
+      <details class="faq-item">
+        <summary>{q}</summary>
+        <div class="faq-body"><p>{a}</p></div>
+      </details>
+    ))}
+  </div>
+</section>
+
+<!-- Related -->
+<section class="content-section">
+  <h2>Related Calculators</h2>
+  <div class="related-grid">
+    <a href="/macro-calculator" class="related-link">&#9881; Macro Calculator</a>
+    <a href="/calorie-tdee-calculator" class="related-link">&#128293; Calorie &amp; TDEE</a>
+    <a href="/water-intake-calculator" class="related-link">&#128167; Water Intake</a>
+    <a href="/body-fat-calculator" class="related-link">&#37; Body Fat %</a>
+  </div>
+</section>
+
+<style>
+  .tool-title    { font-size: 22px; font-weight: 800; margin-bottom: 4px; }
+  .tool-subtitle { font-size: 14px; color: var(--mut); margin-bottom: 20px; }
+
+  .seg-wrap { flex-wrap: wrap; }
+
+  .pr-main-card {
+    background: linear-gradient(135deg, #fdf4ff, #fae8ff);
+    border: 2px solid #d8b4fe;
+    border-radius: 14px; padding: 20px; text-align: center;
+  }
+  .pr-main-label { font-size: 13px; font-weight: 700; color: #7e22ce; text-transform: uppercase; letter-spacing: .4px; margin-bottom: 6px; }
+  .pr-main-val   { font-size: 48px; font-weight: 900; color: #7c3aed; line-height: 1; }
+  .pr-main-sub   { font-size: 14px; color: #6b7280; margin-top: 4px; }
+
+  .pr-chips { display: flex; gap: 10px; flex-wrap: wrap; }
+  .pr-chip {
+    flex: 1; min-width: 100px;
+    background: #f9fafb; border: 1px solid #e5e7eb;
+    border-radius: 10px; padding: 10px 14px;
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .prc-label { font-size: 10px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: .4px; }
+  .prc-val   { font-size: 22px; font-weight: 800; color: #7c3aed; line-height: 1.2; }
+  .prc-unit  { font-size: 11px; color: #9ca3af; }
+
+  .pr-goal-band {
+    background: #faf5ff; border: 1px solid #e9d5ff;
+    border-radius: 10px; padding: 12px 16px;
+  }
+  .pr-goal-text { font-size: 13px; color: #6b21a8; margin: 0; }
+</style>
+
+
+</ToolLayout>
+
+<script>
+// Protein multipliers [min, mid, max] in g/kg
+const MULTIPLIERS: Record<string, Record<string, [number, number, number]>> = {
+  sedentary: {
+    maintain: [0.8,  0.9,  1.0],
+    lose:     [1.2,  1.4,  1.6],
+    build:    [1.4,  1.7,  2.0],
+    athlete:  [1.4,  1.7,  2.0],
+  },
+  light: {
+    maintain: [1.0,  1.1,  1.2],
+    lose:     [1.2,  1.5,  1.8],
+    build:    [1.6,  1.9,  2.2],
+    athlete:  [1.6,  1.9,  2.2],
+  },
+  moderate: {
+    maintain: [1.0,  1.2,  1.4],
+    lose:     [1.4,  1.7,  2.0],
+    build:    [1.6,  2.0,  2.2],
+    athlete:  [1.8,  2.1,  2.4],
+  },
+  active: {
+    maintain: [1.2,  1.4,  1.6],
+    lose:     [1.6,  1.9,  2.2],
+    build:    [1.8,  2.1,  2.4],
+    athlete:  [1.8,  2.2,  2.6],
+  },
+};
+
+const GOAL_LABELS: Record<string, string> = {
+  maintain: 'Maintenance: prioritize complete protein sources at each meal to preserve lean mass.',
+  lose:     'Weight Loss: higher protein (1.4–2.0 g/kg) protects muscle tissue during a calorie deficit.',
+  build:    'Muscle Building: aim for the upper range (1.8–2.2 g/kg) paired with progressive resistance training.',
+  athlete:  'Athletic Performance: endurance and strength athletes benefit from 1.8–2.4 g/kg to support recovery.',
+};
+
+const prForm = document.getElementById('pr-form') as HTMLFormElement;
+
+prForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const unit     = (document.querySelector('input[name="prunit"]:checked')     as HTMLInputElement).value;
+  const activity = (document.querySelector('input[name="practivity"]:checked') as HTMLInputElement).value;
+  const goal     = (document.querySelector('input[name="prgoal"]:checked')     as HTMLInputElement).value;
+  const rawWt    = parseFloat((document.getElementById('pr-weight') as HTMLInputElement).value) || 0;
+  const meals    = Math.max(1, parseFloat((document.getElementById('pr-meals') as HTMLInputElement).value) || 3);
+
+  const weightKg = unit === 'metric' ? rawWt : rawWt * 0.453592;
+  if (weightKg < 20 || weightKg > 300) return;
+
+  const [lo, mid, hi] = MULTIPLIERS[activity][goal];
+  const totalG  = Math.round(weightKg * mid);
+  const loG     = Math.round(weightKg * lo);
+  const hiG     = Math.round(weightKg * hi);
+  const perMeal = Math.round(totalG / meals);
+
+  (document.getElementById('pr-grams') as HTMLElement).textContent    = totalG + ' g';
+  (document.getElementById('pr-range') as HTMLElement).textContent    = `Recommended range: ${loG}–${hiG} g/day`;
+  (document.getElementById('pr-per-kg') as HTMLElement).textContent   = mid.toFixed(1);
+  (document.getElementById('pr-per-lb') as HTMLElement).textContent   = (mid / 2.20462).toFixed(2);
+  (document.getElementById('pr-per-meal') as HTMLElement).textContent = String(perMeal);
+  (document.getElementById('pr-meal-unit') as HTMLElement).textContent = `g / meal (${meals} meals)`;
+  (document.getElementById('pr-goal-text') as HTMLElement).textContent = GOAL_LABELS[goal];
+
+  (document.getElementById('pr-results') as HTMLElement).style.display = 'block';
+});
+
+// unit toggle
+document.querySelectorAll<HTMLInputElement>('input[name="prunit"]').forEach(r => {
+  r.addEventListener('change', () => {
+    const lbl = r.value === 'imperial' ? 'lbs' : 'kg';
+    const unit = document.getElementById('pr-weight-unit');
+    if (unit) unit.textContent = lbl;
+    const wt = document.getElementById('pr-weight') as HTMLInputElement;
+    if (r.value === 'imperial') { wt.value = '165'; wt.min = '50';  wt.max = '660'; }
+    else                        { wt.value = '75';  wt.min = '20';  wt.max = '300'; }
+  });
+});
+</script>

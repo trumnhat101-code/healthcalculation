@@ -130,6 +130,24 @@ const schemaApp = {
               <span>Obese<br/>≥30</span>
             </div>
           </div>
+          <!-- Extra metrics -->
+          <div class="bmi-extras" id="bmiExtras">
+            <div class="bmi-extra-chip">
+              <span class="bex-label">BMI Prime</span>
+              <span class="bex-val" id="bmiPrime">—</span>
+              <span class="bex-hint">ratio to 25</span>
+            </div>
+            <div class="bmi-extra-chip">
+              <span class="bex-label">Healthy Weight Range</span>
+              <span class="bex-val" id="bmiHealthyRange">—</span>
+              <span class="bex-hint" id="bmiHealthyUnit">for your height</span>
+            </div>
+            <div class="bmi-extra-chip">
+              <span class="bex-label">Ponderal Index</span>
+              <span class="bex-val" id="bmiPI">—</span>
+              <span class="bex-hint">kg/m³</span>
+            </div>
+          </div>
           <Disclaimer short={true} />
         </div>
       </div>
@@ -272,6 +290,28 @@ form.addEventListener('submit', e => {
   badge.style.borderColor = cat.color + '60';
   (document.getElementById('scaleMarker') as HTMLElement).style.left = cat.pct + '%';
 
+  // BMI Prime = BMI / 25
+  const bmiPrime = bmi / 25;
+  (document.getElementById('bmiPrime') as HTMLElement).textContent = bmiPrime.toFixed(2);
+
+  // Healthy weight range (BMI 18.5–24.9) for this height
+  const minKg = 18.5 * hm * hm;
+  const maxKg = 24.9 * hm * hm;
+  const isUS2 = (document.querySelector('input[name="units"]:checked') as HTMLInputElement).value === 'us';
+  if (isUS2) {
+    const minLbs = (minKg * 2.20462).toFixed(1);
+    const maxLbs = (maxKg * 2.20462).toFixed(1);
+    (document.getElementById('bmiHealthyRange') as HTMLElement).textContent = minLbs + ' – ' + maxLbs + ' lbs';
+    (document.getElementById('bmiHealthyUnit') as HTMLElement).textContent = 'healthy range for your height';
+  } else {
+    (document.getElementById('bmiHealthyRange') as HTMLElement).textContent = minKg.toFixed(1) + ' – ' + maxKg.toFixed(1) + ' kg';
+    (document.getElementById('bmiHealthyUnit') as HTMLElement).textContent = 'healthy range for your height';
+  }
+
+  // Ponderal Index = weight(kg) / height(m)^3
+  const pi = weightKg / (hm * hm * hm);
+  (document.getElementById('bmiPI') as HTMLElement).textContent = pi.toFixed(1);
+
   results.hidden = false;
   affSec.hidden  = false;
   results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -301,4 +341,15 @@ form.addEventListener('submit', e => {
   .formula-box { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px; font-size: 14px; margin-bottom: 12px; }
   .formula-box p { margin-bottom: 6px; }
   .formula-box p:last-child { margin-bottom: 0; }
+
+  .bmi-extras { display: flex; gap: 10px; flex-wrap: wrap; margin: 14px 0 10px; }
+  .bmi-extra-chip {
+    flex: 1; min-width: 120px;
+    background: #f9fafb; border: 1px solid #e5e7eb;
+    border-radius: 10px; padding: 10px 14px;
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .bex-label { font-size: 10px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: .4px; }
+  .bex-val   { font-size: 20px; font-weight: 800; color: #16a34a; line-height: 1.2; }
+  .bex-hint  { font-size: 10px; color: #9ca3af; }
 </style>
