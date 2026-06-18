@@ -1,0 +1,143 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+
+const SITE = 'https://healthcalculation.com';
+const canonical = `${SITE}/guides/how-to-use-one-rep-max`;
+
+const schemaArticle = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'How to Use Your One Rep Max to Build Strength',
+  description: 'What your 1RM means, how to calculate training weights by percentage, and how to program strength, hypertrophy, and endurance using rep max zones.',
+  url: canonical,
+  datePublished: '2025-06-01',
+  dateModified: '2025-06-18',
+  author: { '@type': 'Organization', name: 'HealthCalculation.com' },
+  publisher: { '@type': 'Organization', name: 'HealthCalculation.com', url: SITE },
+};
+
+const schemaFaq = [
+  {
+    q: 'What is a one rep max (1RM)?',
+    a: 'A one rep max (1RM) is the maximum weight you can lift for exactly one complete repetition with proper form on a given exercise. It is the standard measure of absolute strength in powerlifting, weightlifting, and strength training. Your 1RM is used to calculate training loads as percentages — for example, training at 75% of 1RM for sets of 8 reps.',
+  },
+  {
+    q: 'What is a good one rep max for bench press, squat, and deadlift?',
+    a: 'Strength standards vary by body weight and training experience. For untrained adult men, a reasonable benchmark is a bench press 1RM equal to body weight, squat 1RM at 1.25x body weight, and deadlift 1RM at 1.5x body weight. For intermediate lifters (2+ years): bench 1.25x, squat 1.75x, deadlift 2.0x body weight. Elite powerlifters often exceed 2x body weight on bench and 3x on squat and deadlift.',
+  },
+  {
+    q: 'Which 1RM formula is most accurate?',
+    a: 'Research shows the Epley and Brzycki formulas are the most accurate across most rep ranges. Epley (1RM = weight x (1 + reps/30)) is the most widely used. Brzycki performs better at lower rep counts (1-5 reps). The Lander formula was designed specifically for the bench press. All formulas become less accurate above 10 reps — for best results, use submaximal sets of 3-5 reps to estimate your 1RM.',
+  },
+  {
+    q: 'How do I train using percentages of my 1RM?',
+    a: 'Different percentage ranges target different training adaptations: 90-100% of 1RM (1-3 reps) develops maximum strength. 75-85% (6-10 reps) is the hypertrophy zone for muscle size. 60-75% (12-20 reps) builds muscular endurance. A standard strength program might use 3-5 sets at 80-85% 1RM three times per week on main lifts, cycling intensity over a 4-week block.',
+  },
+  {
+    q: 'Is it safe to test your actual one rep max?',
+    a: 'Testing your true 1RM carries injury risk, particularly for beginners. A safer approach for most people is to use a submaximal test: lift a challenging weight for 3-5 reps with good form, then plug the numbers into a 1RM formula. This gives a reliable estimate without maximal loading. If you do test a true 1RM, always use spotters, warm up thoroughly, and avoid failure on your first attempt.',
+  },
+];
+---
+
+<ToolLayout
+  title="How to Use Your One Rep Max to Build Strength [% Tables]"
+  description="What your 1RM means, the 4 main estimation formulas compared, and how to program training weights using percentage zones for strength, size, and endurance."
+  canonical={canonical}
+  schemaApp={schemaArticle}
+  schemaFaq={schemaFaq}
+  pageIcon="&#127947;"
+  heroTitle="How to Use Your One Rep Max to Build Strength"
+>
+
+<article class="guide-article">
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="/">Home</a><span>&#8250;</span><a href="/guides">Guides</a><span>&#8250;</span><span>One Rep Max Guide</span>
+</nav>
+
+<p class="guide-intro">Your one rep max (1RM) is more than a bragging right — it is the foundation of intelligent strength programming. Once you know your 1RM, you can calculate the exact weight to use for any set and rep target, track long-term progress objectively, and structure periodization blocks that keep you improving.</p>
+
+<h2>The 4 Most Used 1RM Estimation Formulas</h2>
+<p>You do not need to test your true 1RM to use it. Lift a challenging weight for 3–10 reps, then plug the numbers into any of these formulas:</p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>Formula</th><th>Equation</th><th>Best For</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Epley</strong> (1985)</td><td>1RM = w × (1 + r ÷ 30)</td><td>General use — most widely cited</td></tr>
+    <tr><td><strong>Brzycki</strong> (1993)</td><td>1RM = w ÷ (1.0278 − 0.0278 × r)</td><td>More accurate at low rep counts (1–5)</td></tr>
+    <tr><td><strong>Lander</strong> (1985)</td><td>1RM = 100w ÷ (101.3 − 2.67 × r)</td><td>Designed for bench press</td></tr>
+    <tr><td><strong>Lombardi</strong> (1989)</td><td>1RM = w × r^0.10</td><td>Higher rep ranges (8–12)</td></tr>
+  </tbody>
+</table>
+<p style="font-size:13px;color:#6b7280;margin-top:8px">w = weight lifted, r = number of reps completed. Average all four for the most robust estimate.</p>
+
+<h2>Training Percentage Zones</h2>
+<p>Once you have your 1RM, use these percentages to calculate the right weight for each training goal:</p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>Zone</th><th>% of 1RM</th><th>Reps per Set</th><th>Primary Adaptation</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Max Strength</td><td>93–100%</td><td>1–2</td><td>Neural efficiency, absolute strength</td></tr>
+    <tr><td>Strength</td><td>85–92%</td><td>2–4</td><td>Strength with some hypertrophy</td></tr>
+    <tr><td>Strength-Size</td><td>77–84%</td><td>5–8</td><td>Balanced strength and muscle growth</td></tr>
+    <tr><td>Hypertrophy</td><td>67–76%</td><td>8–12</td><td>Muscle size (primary hypertrophy zone)</td></tr>
+    <tr><td>Endurance</td><td>50–66%</td><td>15–25</td><td>Muscular endurance, metabolic conditioning</td></tr>
+  </tbody>
+</table>
+
+<h2>Example: Training Weights from a 100 kg 1RM</h2>
+<p>If your squat 1RM is 100 kg, here are your training weights across the zones:</p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>Goal</th><th>% 1RM</th><th>Weight (kg)</th><th>Target Reps</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Peaking / max effort</td><td>95%</td><td>95 kg</td><td>1–2</td></tr>
+    <tr><td>Heavy strength work</td><td>87%</td><td>87 kg</td><td>3–4</td></tr>
+    <tr><td>Main strength block</td><td>80%</td><td>80 kg</td><td>5–6</td></tr>
+    <tr><td>Hypertrophy block</td><td>72%</td><td>72 kg</td><td>8–10</td></tr>
+    <tr><td>Volume / deload</td><td>60%</td><td>60 kg</td><td>15–20</td></tr>
+  </tbody>
+</table>
+
+<h2>Strength Standards by Body Weight</h2>
+<p>How does your 1RM compare? These are commonly used relative strength benchmarks (1RM as a multiple of body weight) from strength and conditioning research:</p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>Level</th><th>Bench Press</th><th>Squat</th><th>Deadlift</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Beginner (men)</td><td>0.5× BW</td><td>0.75× BW</td><td>1.0× BW</td></tr>
+    <tr><td>Novice (men)</td><td>0.75× BW</td><td>1.25× BW</td><td>1.5× BW</td></tr>
+    <tr><td>Intermediate (men)</td><td>1.25× BW</td><td>1.75× BW</td><td>2.0× BW</td></tr>
+    <tr><td>Advanced (men)</td><td>1.5× BW</td><td>2.25× BW</td><td>2.5× BW</td></tr>
+    <tr><td>Beginner (women)</td><td>0.35× BW</td><td>0.5× BW</td><td>0.75× BW</td></tr>
+    <tr><td>Intermediate (women)</td><td>0.75× BW</td><td>1.25× BW</td><td>1.5× BW</td></tr>
+    <tr><td>Advanced (women)</td><td>1.0× BW</td><td>1.75× BW</td><td>2.0× BW</td></tr>
+  </tbody>
+</table>
+
+<h2>How to Progress Your 1RM Over Time</h2>
+<p>Linear progression works well for beginners: add 2.5 kg per session on upper body lifts and 5 kg on lower body. Once progress stalls, switch to weekly or block periodization — cycle intensity across 3–4 week blocks (accumulation, intensification, realization/peak). Track your estimated 1RM monthly using a consistent submaximal test protocol to measure long-term progress without the injury risk of true max testing.</p>
+
+<!-- Guide CTA -->
+<div class="guide-cta-box" style="margin-top:32px">
+  <div class="gcta-icon">&#127947;</div>
+  <div class="gcta-body">
+    <div class="gcta-label">Free Tool</div>
+    <a href="/one-rep-max-calculator" class="gcta-title">One Rep Max Calculator</a>
+    <p class="gcta-desc">Enter any weight and rep count to instantly estimate your 1RM using all four formulas. Includes a full training percentage table from 50% to 100%.</p>
+  </div>
+  <a href="/one-rep-max-calculator" class="gcta-btn">Calculate now &rarr;</a>
+</div>
+
+</article>
+
+</ToolLayout>
