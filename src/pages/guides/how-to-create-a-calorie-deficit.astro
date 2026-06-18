@@ -1,0 +1,171 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+const SITE = 'https://healthcalculation.com';
+const canonical = `${SITE}/guides/how-to-create-a-calorie-deficit`;
+
+const schemaArticle = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "How to Create a Calorie Deficit for Weight Loss",
+  description: "A step-by-step guide to calculating and sustaining a calorie deficit — deficit sizes, safety limits, common mistakes, and how to adjust when progress stalls.",
+  url: canonical,
+  datePublished: "2026-06-18",
+  dateModified: "2026-06-18",
+  author: { "@type": "Organization", name: "HealthCalculation" },
+  publisher: { "@type": "Organization", name: "HealthCalculation", url: SITE },
+};
+
+const faq = [
+  {
+    q: "How many calories is a good deficit for weight loss?",
+    a: "A deficit of 500 calories per day is the most widely recommended starting point. It targets approximately 1 lb of fat loss per week, which is achievable without severe hunger or muscle loss for most adults. Smaller deficits (250 cal/day) work well for those close to their goal weight or who want to minimize muscle loss.",
+  },
+  {
+    q: "Is a 1,000 calorie deficit too much?",
+    a: "A 1,000 calorie deficit (targeting 2 lbs/week) is the upper limit recommended for most adults. Beyond this, the risk of muscle loss, nutritional deficiencies, and metabolic adaptation increases significantly. It is not appropriate for anyone who would be eating below 1,200 calories/day (women) or 1,500 calories/day (men).",
+  },
+  {
+    q: "Why am I not losing weight in a calorie deficit?",
+    a: "The most common reasons are: (1) underestimating calories eaten — studies show people underreport intake by 20-50%; (2) overestimating activity level in TDEE calculation; (3) water retention masking fat loss temporarily; (4) metabolic adaptation after a prolonged deficit. Track food accurately for 2 weeks and compare actual weight trend before adjusting.",
+  },
+  {
+    q: "How long should I stay in a calorie deficit?",
+    a: "There is no set limit, but planned diet breaks — 1-2 weeks at maintenance calories every 8-12 weeks — help reset hunger hormones (leptin) and reduce metabolic adaptation. Continuous deficits longer than 12-16 weeks without breaks tend to produce diminishing returns and increase muscle loss risk.",
+  },
+  {
+    q: "Do I need to count calories to lose weight?",
+    a: "Not strictly. But you do need to create a deficit somehow — whether by tracking calories explicitly, following portion guidelines, eliminating specific high-calorie foods, or using meal plans. Research shows that awareness of calorie intake, even approximate, significantly improves weight loss outcomes compared to not tracking at all.",
+  },
+];
+---
+
+<ToolLayout
+  title="How to Create a Calorie Deficit for Weight Loss"
+  description="Step-by-step guide to calculating and sustaining a calorie deficit. Learn safe deficit sizes, minimum calorie floors, how to adjust when progress stalls, and common mistakes."
+  canonical={canonical}
+  pageIcon="&#9986;"
+  heroTitle="How to Create a Calorie Deficit"
+>
+
+<div style="max-width:780px;margin:0 auto">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a><span>&#8250;</span>
+    <a href="/guides">Guides</a><span>&#8250;</span>
+    <span>How to Create a Calorie Deficit</span>
+  </nav>
+
+  <h1 style="font-size:28px;font-weight:900;margin-bottom:8px">How to Create a Calorie Deficit for Weight Loss</h1>
+  <p style="font-size:16px;color:var(--mut);margin-bottom:28px">
+    A calorie deficit is the only proven mechanism for fat loss. This guide explains how to calculate yours, how big it should be, and how to keep it working over time.
+  </p>
+
+  <h2>What Is a Calorie Deficit?</h2>
+  <p>
+    A calorie deficit occurs when you consume fewer calories than your body burns in a day. Your body responds by drawing on stored energy — primarily body fat — to make up the difference. One pound of body fat stores approximately <strong>3,500 calories</strong>, so a sustained daily deficit of 500 calories produces roughly 1 lb of fat loss per week.
+  </p>
+  <p>
+    The key number to know is your <strong>TDEE</strong> (Total Daily Energy Expenditure) — the total calories you burn each day including all activity. A calorie deficit is always calculated relative to TDEE, not BMR.
+  </p>
+
+  <h2>Step-by-Step: Calculate Your Calorie Deficit</h2>
+  <ol style="margin:10px 0 0 20px;line-height:2">
+    <li><strong>Find your TDEE</strong> — use the Mifflin-St Jeor formula multiplied by your activity factor (1.2–1.9)</li>
+    <li><strong>Choose your deficit size</strong> — see the table below</li>
+    <li><strong>Check the minimum floor</strong> — never go below 1,200 cal/day (women) or 1,500 cal/day (men)</li>
+    <li><strong>Track for 2 weeks</strong> — compare actual weight change to expected (0.5–1 lb/week for a 250–500 cal deficit)</li>
+    <li><strong>Recalculate every 10–15 lbs</strong> — as weight drops, TDEE decreases, so the same food intake produces a smaller deficit</li>
+  </ol>
+
+  <h2>Calorie Deficit Size Guide</h2>
+  <div style="overflow-x:auto;margin:16px 0">
+    <table style="width:100%;border-collapse:collapse;font-size:14px">
+      <thead>
+        <tr style="background:#f0fdf4">
+          <th style="padding:10px 14px;text-align:left;border-bottom:2px solid #bbf7d0;color:#16a34a">Deficit</th>
+          <th style="padding:10px 14px;text-align:left;border-bottom:2px solid #bbf7d0;color:#16a34a">Fat Loss/Week</th>
+          <th style="padding:10px 14px;text-align:left;border-bottom:2px solid #bbf7d0;color:#16a34a">Best For</th>
+          <th style="padding:10px 14px;text-align:left;border-bottom:2px solid #bbf7d0;color:#16a34a">Risk Level</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:9px 14px;border-bottom:1px solid #e5e7eb;font-weight:700">250 cal/day</td>
+          <td style="padding:9px 14px;border-bottom:1px solid #e5e7eb">~0.5 lb</td>
+          <td style="padding:9px 14px;border-bottom:1px solid #e5e7eb">Athletes, near goal weight, muscle preservation</td>
+          <td style="padding:9px 14px;border-bottom:1px solid #e5e7eb;color:#16a34a">Low</td>
+        </tr>
+        <tr style="background:#f9fafb">
+          <td style="padding:9px 14px;border-bottom:1px solid #e5e7eb;font-weight:700">500 cal/day</td>
+          <td style="padding:9px 14px;border-bottom:1px solid #e5e7eb">~1 lb</td>
+          <td style="padding:9px 14px;border-bottom:1px solid #e5e7eb">Most adults — best balance of progress and sustainability</td>
+          <td style="padding:9px 14px;border-bottom:1px solid #e5e7eb;color:#16a34a">Low–Moderate</td>
+        </tr>
+        <tr>
+          <td style="padding:9px 14px;border-bottom:1px solid #e5e7eb;font-weight:700">750 cal/day</td>
+          <td style="padding:9px 14px;border-bottom:1px solid #e5e7eb">~1.5 lbs</td>
+          <td style="padding:9px 14px;border-bottom:1px solid #e5e7eb">Those with significant weight to lose and adequate TDEE</td>
+          <td style="padding:9px 14px;border-bottom:1px solid #e5e7eb;color:#f59e0b">Moderate</td>
+        </tr>
+        <tr style="background:#f9fafb">
+          <td style="padding:9px 14px;font-weight:700">1,000 cal/day</td>
+          <td style="padding:9px 14px">~2 lbs</td>
+          <td style="padding:9px 14px">Upper safe limit — only if calorie floor is maintained</td>
+          <td style="padding:9px 14px;color:#ef4444">High</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Minimum Safe Calorie Floors</h2>
+  <p>
+    No matter how large your TDEE is, going below these thresholds increases the risk of muscle catabolism, micronutrient deficiency, gallstone formation, and hormonal disruption:
+  </p>
+  <div class="formula-box">
+    <p><strong>Women:</strong> Do not go below 1,200 calories per day</p>
+    <p><strong>Men:</strong> Do not go below 1,500 calories per day</p>
+    <p style="margin-top:8px;font-size:13px;color:#6b7280">These thresholds apply to most healthy adults. Consult a healthcare provider before pursuing very low calorie diets.</p>
+  </div>
+
+  <h2>Why Deficits Stop Working (and How to Fix It)</h2>
+  <p>
+    Most people hit a weight loss plateau within 4–12 weeks. The main reasons:
+  </p>
+  <ul style="margin:10px 0 0 20px;line-height:1.9">
+    <li><strong>Lower TDEE:</strong> A lighter body burns fewer calories. Recalculate your TDEE after every 10–15 lbs lost.</li>
+    <li><strong>Calorie creep:</strong> Portion sizes expand gradually without notice. Re-weigh and measure food every few weeks.</li>
+    <li><strong>Adaptive thermogenesis:</strong> Prolonged restriction can lower BMR by 10–20%. A 1–2 week diet break at maintenance calories can partially reverse this.</li>
+    <li><strong>Water retention:</strong> Increased carb intake, stress, or hormonal cycles can mask fat loss on the scale for 1–2 weeks. Look at 2-week weight trends, not daily readings.</li>
+  </ul>
+
+  <h2>Frequently Asked Questions</h2>
+  {faq.map(({ q, a }) => (
+    <details class="faq-item">
+      <summary>{q}</summary>
+      <p set:html={a} />
+    </details>
+  ))}
+
+  <!-- Tool CTA -->
+  <div class="guide-cta-box" style="margin-top:32px">
+    <div class="gcta-icon">&#9986;</div>
+    <div class="gcta-body">
+      <div class="gcta-label">Free Tool</div>
+      <a href="/calorie-deficit-calculator" class="gcta-title">Calorie Deficit Calculator</a>
+      <p class="gcta-desc">Enter your stats to find your TDEE and exact daily calorie targets for losing 0.5, 1, or 2 lbs per week. Add a goal weight to see a time estimate.</p>
+    </div>
+    <a href="/calorie-deficit-calculator" class="gcta-btn">Calculate my deficit &rarr;</a>
+  </div>
+
+  <!-- Related Guides -->
+  <section class="content-section">
+    <h2>Related Guides</h2>
+    <div class="related-grid">
+      <a href="/guides/how-to-calculate-tdee" class="related-link">&#128293; How to Calculate Your TDEE</a>
+      <a href="/guides/how-to-calculate-macros" class="related-link">&#129367; How to Calculate Your Macros</a>
+      <a href="/guides/what-is-basal-metabolic-rate" class="related-link">&#128200; What Is Basal Metabolic Rate?</a>
+    </div>
+  </section>
+
+</div>
+
+</ToolLayout>

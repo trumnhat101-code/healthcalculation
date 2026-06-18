@@ -1,0 +1,191 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+const SITE = 'https://healthcalculation.com';
+const canonical = `${SITE}/guides/what-is-basal-metabolic-rate`;
+
+const schemaArticle = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "What Is Basal Metabolic Rate (BMR)? A Complete Guide",
+  description: "Learn what BMR is, how it is calculated, the difference between BMR and TDEE, and how to use your BMR to set accurate calorie goals.",
+  url: canonical,
+  datePublished: "2026-06-18",
+  dateModified: "2026-06-18",
+  author: { "@type": "Organization", name: "HealthCalculation" },
+  publisher: { "@type": "Organization", name: "HealthCalculation", url: SITE },
+};
+
+const faq = [
+  {
+    q: "What does BMR stand for?",
+    a: "BMR stands for Basal Metabolic Rate. It is the number of calories your body burns at complete rest — lying still, fasted, in a thermoneutral environment — just to sustain vital functions like breathing, circulation, cell repair, and organ function.",
+  },
+  {
+    q: "Is BMR the same as RMR?",
+    a: "Not exactly. BMR (Basal Metabolic Rate) is measured under strict conditions — fasted, rested, and in a controlled temperature. RMR (Resting Metabolic Rate) is measured under less strict conditions and is typically 10-20% higher than BMR. In practice, most online calculators estimate RMR but label it BMR. For weight management purposes, the difference is minor.",
+  },
+  {
+    q: "What is a normal BMR for a woman?",
+    a: "For adult women, BMR typically ranges from 1,200 to 1,600 calories per day, depending on age, height, and weight. A 30-year-old woman at 140 lbs and 5ft 5in would have a Mifflin-St Jeor BMR of approximately 1,390 calories. BMR decreases with age and increases with body mass.",
+  },
+  {
+    q: "What is a normal BMR for a man?",
+    a: "For adult men, BMR typically ranges from 1,500 to 2,100 calories per day. A 30-year-old man at 175 lbs and 5ft 10in would have a Mifflin-St Jeor BMR of approximately 1,840 calories. Men have higher BMRs than women of the same weight primarily due to greater lean muscle mass.",
+  },
+  {
+    q: "Can I increase my BMR?",
+    a: "Yes — the most effective way is to build lean muscle mass through resistance training. Muscle tissue burns roughly 3 times more calories at rest than fat tissue. Eating adequate protein (0.7-1g per lb of body weight) supports muscle retention. Avoiding extreme calorie restriction also prevents metabolic adaptation, which reduces BMR.",
+  },
+];
+---
+
+<ToolLayout
+  title="What Is Basal Metabolic Rate (BMR)? — Complete Guide"
+  description="Learn what BMR is, how the Mifflin-St Jeor and Harris-Benedict formulas work, how BMR differs from TDEE, and how to use your BMR to set accurate calorie goals."
+  canonical={canonical}
+  pageIcon="&#128200;"
+  heroTitle="What Is Basal Metabolic Rate (BMR)?"
+>
+
+<div style="max-width:780px;margin:0 auto">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a><span>&#8250;</span>
+    <a href="/guides">Guides</a><span>&#8250;</span>
+    <span>What Is BMR?</span>
+  </nav>
+
+  <h1 style="font-size:28px;font-weight:900;margin-bottom:8px">What Is Basal Metabolic Rate (BMR)?</h1>
+  <p style="font-size:16px;color:var(--mut);margin-bottom:28px">
+    A complete guide to BMR — what it measures, how it is calculated, how it differs from TDEE, and how to use it to set your daily calorie target.
+  </p>
+
+  <h2>BMR Definition</h2>
+  <p>
+    <strong>Basal Metabolic Rate (BMR)</strong> is the number of calories your body burns at complete rest to sustain essential life functions — breathing, circulation, cell production, temperature regulation, and organ function. It represents your body's minimum energy requirement with no activity, no digestion, and in a stable temperature environment.
+  </p>
+  <p>
+    For most adults, BMR accounts for <strong>60–75% of total daily calorie expenditure</strong>, making it the largest single component of your energy needs. Understanding your BMR is the first step toward setting accurate calorie targets for weight loss, maintenance, or muscle gain.
+  </p>
+
+  <h2>BMR vs TDEE: Key Difference</h2>
+  <p>BMR and TDEE are often confused. Here is the distinction:</p>
+  <div style="overflow-x:auto;margin:16px 0">
+    <table style="width:100%;border-collapse:collapse;font-size:14px">
+      <thead>
+        <tr style="background:#f0fdf4">
+          <th style="padding:10px 14px;text-align:left;border-bottom:2px solid #bbf7d0;color:#16a34a">Metric</th>
+          <th style="padding:10px 14px;text-align:left;border-bottom:2px solid #bbf7d0;color:#16a34a">What It Measures</th>
+          <th style="padding:10px 14px;text-align:left;border-bottom:2px solid #bbf7d0;color:#16a34a">Use For</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:10px 14px;border-bottom:1px solid #e5e7eb;font-weight:700">BMR</td>
+          <td style="padding:10px 14px;border-bottom:1px solid #e5e7eb">Calories at complete rest</td>
+          <td style="padding:10px 14px;border-bottom:1px solid #e5e7eb">Baseline reference</td>
+        </tr>
+        <tr style="background:#f9fafb">
+          <td style="padding:10px 14px;border-bottom:1px solid #e5e7eb;font-weight:700">TDEE</td>
+          <td style="padding:10px 14px;border-bottom:1px solid #e5e7eb">BMR x activity multiplier</td>
+          <td style="padding:10px 14px;border-bottom:1px solid #e5e7eb">Setting daily calorie goal</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    <strong>Do not eat at your BMR.</strong> BMR includes no allowance for any activity — even walking to the kitchen. Most people's TDEE is 1.4–1.9x their BMR. Using BMR as your calorie target creates an unsustainable deficit that risks muscle loss and metabolic adaptation.
+  </p>
+
+  <h2>The Two Main BMR Formulas</h2>
+
+  <h3 style="font-size:17px;margin:20px 0 8px">1. Mifflin-St Jeor (Recommended)</h3>
+  <p>Published in 1990, validated as the most accurate formula for the general population by the Academy of Nutrition and Dietetics. Predicts BMR within 10% for approximately 82% of people.</p>
+  <div class="formula-box">
+    <p><strong>Men:</strong> BMR = (10 &times; kg) + (6.25 &times; cm) &minus; (5 &times; age) + 5</p>
+    <p><strong>Women:</strong> BMR = (10 &times; kg) + (6.25 &times; cm) &minus; (5 &times; age) &minus; 161</p>
+  </div>
+
+  <h3 style="font-size:17px;margin:20px 0 8px">2. Revised Harris-Benedict (1984)</h3>
+  <p>The original Harris-Benedict (1919) was revised in 1984 by Roza and Shizgal. Slightly less accurate than Mifflin-St Jeor on average but widely referenced in clinical literature.</p>
+  <div class="formula-box">
+    <p><strong>Men:</strong> BMR = (13.397 &times; kg) + (4.799 &times; cm) &minus; (5.677 &times; age) + 88.362</p>
+    <p><strong>Women:</strong> BMR = (9.247 &times; kg) + (3.098 &times; cm) &minus; (4.330 &times; age) + 447.593</p>
+  </div>
+
+  <h2>BMR Reference Ranges by Age and Sex</h2>
+  <p>The table below shows approximate Mifflin-St Jeor BMR values for average height and weight by age group (US averages: men 5ft 9in / 197 lbs; women 5ft 4in / 170 lbs).</p>
+  <div style="overflow-x:auto;margin:16px 0">
+    <table style="width:100%;border-collapse:collapse;font-size:14px">
+      <thead>
+        <tr style="background:#f0fdf4">
+          <th style="padding:10px 14px;text-align:left;border-bottom:2px solid #bbf7d0;color:#16a34a">Age Group</th>
+          <th style="padding:10px 14px;text-align:center;border-bottom:2px solid #bbf7d0;color:#16a34a">Men (cal/day)</th>
+          <th style="padding:10px 14px;text-align:center;border-bottom:2px solid #bbf7d0;color:#16a34a">Women (cal/day)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:9px 14px;border-bottom:1px solid #e5e7eb">18–25</td><td style="padding:9px 14px;border-bottom:1px solid #e5e7eb;text-align:center">1,950–2,050</td><td style="padding:9px 14px;border-bottom:1px solid #e5e7eb;text-align:center">1,500–1,600</td></tr>
+        <tr style="background:#f9fafb"><td style="padding:9px 14px;border-bottom:1px solid #e5e7eb">26–35</td><td style="padding:9px 14px;border-bottom:1px solid #e5e7eb;text-align:center">1,850–1,950</td><td style="padding:9px 14px;border-bottom:1px solid #e5e7eb;text-align:center">1,430–1,530</td></tr>
+        <tr><td style="padding:9px 14px;border-bottom:1px solid #e5e7eb">36–45</td><td style="padding:9px 14px;border-bottom:1px solid #e5e7eb;text-align:center">1,750–1,850</td><td style="padding:9px 14px;border-bottom:1px solid #e5e7eb;text-align:center">1,360–1,460</td></tr>
+        <tr style="background:#f9fafb"><td style="padding:9px 14px;border-bottom:1px solid #e5e7eb">46–55</td><td style="padding:9px 14px;border-bottom:1px solid #e5e7eb;text-align:center">1,650–1,750</td><td style="padding:9px 14px;border-bottom:1px solid #e5e7eb;text-align:center">1,290–1,390</td></tr>
+        <tr><td style="padding:9px 14px;border-bottom:1px solid #e5e7eb">56–65</td><td style="padding:9px 14px;border-bottom:1px solid #e5e7eb;text-align:center">1,550–1,650</td><td style="padding:9px 14px;border-bottom:1px solid #e5e7eb;text-align:center">1,220–1,320</td></tr>
+        <tr style="background:#f9fafb"><td style="padding:9px 14px">65+</td><td style="padding:9px 14px;text-align:center">1,450–1,550</td><td style="padding:9px 14px;text-align:center">1,150–1,250</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>What Affects BMR?</h2>
+  <p><strong>Body composition</strong> is the biggest variable not captured by standard formulas. Muscle tissue burns ~13 kcal/kg/day at rest vs ~4.5 kcal/kg/day for fat tissue. Two people of identical weight but different body compositions can have BMRs that differ by 200–400 calories.</p>
+  <p>Other factors that raise or lower BMR:</p>
+  <ul style="margin:10px 0 0 20px;line-height:1.9">
+    <li><strong>Age:</strong> BMR drops ~1–2% per decade after age 20 as muscle mass declines</li>
+    <li><strong>Sex:</strong> Men have higher BMR due to greater muscle mass on average</li>
+    <li><strong>Thyroid function:</strong> Hypothyroidism lowers BMR; hyperthyroidism raises it</li>
+    <li><strong>Calorie restriction:</strong> Prolonged deficits reduce BMR by up to 15–20% (adaptive thermogenesis)</li>
+    <li><strong>Pregnancy:</strong> BMR increases by 15–20% in the third trimester</li>
+    <li><strong>Fever:</strong> BMR rises ~7% per 1°C increase in body temperature</li>
+  </ul>
+
+  <h2>How to Use Your BMR</h2>
+  <p>
+    BMR is a reference point, not a calorie goal. The correct workflow is:
+  </p>
+  <ol style="margin:10px 0 0 20px;line-height:1.9">
+    <li>Calculate your BMR using the Mifflin-St Jeor formula</li>
+    <li>Multiply by your activity factor to get TDEE (1.2–1.9 depending on activity level)</li>
+    <li>Subtract 300–500 calories from TDEE to lose 0.5–1 lb per week</li>
+    <li>Recalculate every 10–15 lbs of weight change</li>
+  </ol>
+
+  <h2>Frequently Asked Questions</h2>
+  {faq.map(({ q, a }) => (
+    <details class="faq-item">
+      <summary>{q}</summary>
+      <p set:html={a} />
+    </details>
+  ))}
+
+  <!-- Tool CTA -->
+  <div class="guide-cta-box" style="margin-top:32px">
+    <div class="gcta-icon">&#128200;</div>
+    <div class="gcta-body">
+      <div class="gcta-label">Free Tool</div>
+      <a href="/bmr-calculator" class="gcta-title">BMR Calculator — Mifflin-St Jeor + Harris-Benedict</a>
+      <p class="gcta-desc">Calculate your exact BMR using both formulas, then see your TDEE at every activity level in one table.</p>
+    </div>
+    <a href="/bmr-calculator" class="gcta-btn">Calculate BMR &rarr;</a>
+  </div>
+
+  <!-- Related Guides -->
+  <section class="content-section">
+    <h2>Related Guides</h2>
+    <div class="related-grid">
+      <a href="/guides/how-to-calculate-tdee" class="related-link">&#128293; How to Calculate Your TDEE</a>
+      <a href="/guides/how-to-calculate-macros" class="related-link">&#129367; How to Calculate Your Macros</a>
+      <a href="/guides/healthy-body-fat-percentage" class="related-link">&#128198; Healthy Body Fat Percentage</a>
+    </div>
+  </section>
+
+</div>
+
+</ToolLayout>
