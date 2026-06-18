@@ -1,0 +1,245 @@
+---
+import ToolLayout from '../layouts/ToolLayout.astro';
+
+const SITE = 'https://healthcalculation.com';
+const canonical = `${SITE}/one-rep-max-calculator`;
+
+const schemaApp = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'One Rep Max Calculator',
+  url: canonical,
+  description: 'Calculate your one-rep max (1RM) for any lift using 4 validated formulas. Includes a full percentage table for programming your training.',
+  applicationCategory: 'HealthApplication',
+  operatingSystem: 'Any',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+};
+
+const schemaFaq = [
+  {
+    q: 'What is a one rep max (1RM)?',
+    a: 'Your one rep max (1RM) is the maximum amount of weight you can lift for a single repetition with proper form. It is the standard measure of absolute strength and the foundation for percentage-based training programming. Most strength programs prescribe loads as a percentage of 1RM (e.g., 3 sets of 5 at 80% 1RM).',
+  },
+  {
+    q: 'Which 1RM formula is most accurate?',
+    a: 'No single formula is universally most accurate — accuracy varies by individual and rep range. The Epley formula (weight x (1 + reps/30)) performs well across most rep ranges. The Brzycki formula is slightly more accurate for heavy sets (1–6 reps). For best results, use multiple formulas and take the average, which is what this calculator displays.',
+  },
+  {
+    q: 'How many reps should I do to estimate my 1RM?',
+    a: 'Use a weight you can lift for 2–10 reps with good form. Estimates become less accurate above 10 reps because fatigue and muscular endurance play a larger role relative to pure strength. For the most accurate estimate, use 3–5 rep sets at a near-maximal effort.',
+  },
+  {
+    q: 'Should I actually attempt my calculated 1RM?',
+    a: 'Not necessarily, especially if you are new to lifting. The calculated 1RM is an estimate for programming purposes. Attempting a true 1RM requires specific warm-up protocols and ideally a spotter. Many athletes never test their true 1RM and instead base programming entirely on calculated estimates.',
+  },
+  {
+    q: 'How do I use my 1RM to program training?',
+    a: 'Most strength programs use percentages of your 1RM: 90–100% for max strength (1–3 reps), 75–90% for strength-hypertrophy (4–6 reps), 65–75% for hypertrophy (8–12 reps), and 50–65% for muscular endurance (15+ reps). The percentage table in this calculator gives you the exact weights for each training zone.',
+  },
+];
+---
+
+<ToolLayout
+  title="One Rep Max Calculator — 1RM Calculator for Any Lift"
+  description="Calculate your one rep max (1RM) from any weight and rep count. Uses 4 formulas (Epley, Brzycki, Lander, Lombardi) and generates a full training percentage table."
+  canonical={canonical}
+  schemaApp={schemaApp}
+  schemaFaq={schemaFaq}
+  pageIcon="&#127947;"
+  heroTitle="One Rep Max Calculator"
+>
+
+<div class="tool-card">
+  <h1 class="tool-title">One Rep Max (1RM) Calculator</h1>
+  <p class="tool-subtitle">Enter the weight you lifted and how many reps you completed</p>
+
+  <form id="orm-form" novalidate>
+
+    <div class="field-group" style="margin-bottom:16px">
+      <span class="field-label">Unit system</span>
+      <div class="seg-group">
+        <label class="seg-opt">
+          <input type="radio" name="ormunit" value="lbs" checked />
+          <span>Pounds (lbs)</span>
+        </label>
+        <label class="seg-opt">
+          <input type="radio" name="ormunit" value="kg" />
+          <span>Kilograms (kg)</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="field-group">
+        <label class="field-label" for="orm-weight">Weight lifted</label>
+        <div style="display:flex;gap:8px;align-items:center">
+          <input type="number" id="orm-weight" value="185" min="1" max="2000" step="0.5" />
+          <span class="field-unit" id="orm-unit-label">lbs</span>
+        </div>
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="orm-reps">Reps completed</label>
+        <div style="display:flex;gap:8px;align-items:center">
+          <input type="number" id="orm-reps" value="5" min="1" max="30" step="1" />
+          <span class="field-unit">reps</span>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" id="orm-calc" class="btn-calc">Calculate 1RM</button>
+  </form>
+
+  <div id="orm-results" style="display:none">
+    <div class="results-grid">
+      <div class="result-chip result-chip--primary">
+        <span class="rc-label">Estimated 1RM</span>
+        <span class="rc-val" id="orm-avg">—</span>
+        <span class="rc-unit" id="orm-avg-unit">lbs</span>
+      </div>
+      <div class="result-chip">
+        <span class="rc-label">Epley</span>
+        <span class="rc-val" id="orm-epley">—</span>
+        <span class="rc-unit" id="orm-epley-unit">lbs</span>
+      </div>
+      <div class="result-chip">
+        <span class="rc-label">Brzycki</span>
+        <span class="rc-val" id="orm-brzycki">—</span>
+        <span class="rc-unit" id="orm-brzycki-unit">lbs</span>
+      </div>
+      <div class="result-chip">
+        <span class="rc-label">Lander</span>
+        <span class="rc-val" id="orm-lander">—</span>
+        <span class="rc-unit" id="orm-lander-unit">lbs</span>
+      </div>
+    </div>
+
+    <h3 style="font-size:15px;font-weight:700;margin:24px 0 12px">Training Percentage Table</h3>
+    <div class="orm-table-wrap">
+      <table class="orm-pct-table" id="orm-pct-table">
+        <thead>
+          <tr>
+            <th>% 1RM</th>
+            <th>Weight</th>
+            <th>Rep Range</th>
+            <th>Training Zone</th>
+          </tr>
+        </thead>
+        <tbody id="orm-pct-body"></tbody>
+      </table>
+    </div>
+
+    <p class="result-note">Estimated 1RM = average of Epley, Brzycki, and Lander formulas. Best accuracy with 2–10 rep sets.</p>
+  </div>
+</div>
+
+<style is:inline>
+.orm-table-wrap { overflow-x: auto; margin-top: 4px; }
+.orm-pct-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.orm-pct-table th { background: #f0fdf4; color: #16a34a; font-weight: 700; padding: 9px 12px; text-align: left; border-bottom: 2px solid #bbf7d0; white-space: nowrap; }
+.orm-pct-table td { padding: 8px 12px; border-bottom: 1px solid #e5e7eb; }
+.orm-pct-table tr:last-child td { border-bottom: none; }
+.orm-pct-table tr.zone-highlight td { background: #f0fdf4; font-weight: 600; }
+</style>
+
+<script>
+const PCT_ROWS = [
+  { pct: 100, reps: '1',    zone: 'Absolute strength' },
+  { pct: 95,  reps: '2',    zone: 'Max strength' },
+  { pct: 90,  reps: '3',    zone: 'Max strength' },
+  { pct: 85,  reps: '4–5',  zone: 'Strength' },
+  { pct: 80,  reps: '5–6',  zone: 'Strength' },
+  { pct: 75,  reps: '7–8',  zone: 'Strength–Hypertrophy' },
+  { pct: 70,  reps: '9–10', zone: 'Hypertrophy', highlight: true },
+  { pct: 65,  reps: '11–12',zone: 'Hypertrophy', highlight: true },
+  { pct: 60,  reps: '13–15',zone: 'Hypertrophy–Endurance' },
+  { pct: 55,  reps: '16–20',zone: 'Muscular endurance' },
+  { pct: 50,  reps: '20+',  zone: 'Endurance' },
+];
+
+const unitRadios = document.querySelectorAll('input[name="ormunit"]');
+unitRadios.forEach(r => {
+  r.addEventListener('change', () => {
+    const unit = (r as HTMLInputElement).value;
+    document.getElementById('orm-unit-label')!.textContent = unit;
+    ['orm-avg-unit','orm-epley-unit','orm-brzycki-unit','orm-lander-unit'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = unit;
+    });
+  });
+});
+
+document.getElementById('orm-calc')!.addEventListener('click', () => {
+  const w    = parseFloat((document.getElementById('orm-weight') as HTMLInputElement).value);
+  const r    = parseFloat((document.getElementById('orm-reps')   as HTMLInputElement).value);
+  const unit = (document.querySelector('input[name="ormunit"]:checked') as HTMLInputElement).value;
+
+  if (isNaN(w) || isNaN(r) || w <= 0 || r < 1) return;
+
+  // Formulas
+  const epley   = r === 1 ? w : Math.round(w * (1 + r / 30));
+  const brzycki = r === 1 ? w : Math.round(w / (1.0278 - 0.0278 * r));
+  const lander  = r === 1 ? w : Math.round((100 * w) / (101.3 - 2.67123 * r));
+  const avg     = Math.round((epley + brzycki + lander) / 3);
+
+  document.getElementById('orm-avg')!.textContent     = String(avg);
+  document.getElementById('orm-epley')!.textContent   = String(epley);
+  document.getElementById('orm-brzycki')!.textContent = String(brzycki);
+  document.getElementById('orm-lander')!.textContent  = String(lander);
+  ['orm-avg-unit','orm-epley-unit','orm-brzycki-unit','orm-lander-unit'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = unit;
+  });
+
+  // Percentage table
+  const tbody = document.getElementById('orm-pct-body')!;
+  tbody.innerHTML = '';
+  PCT_ROWS.forEach(row => {
+    const weight = Math.round(avg * row.pct / 100);
+    const tr = document.createElement('tr');
+    if (row.highlight) tr.className = 'zone-highlight';
+    tr.innerHTML = `<td>${row.pct}%</td><td><strong>${weight} ${unit}</strong></td><td>${row.reps} reps</td><td>${row.zone}</td>`;
+    tbody.appendChild(tr);
+  });
+
+  document.getElementById('orm-results')!.style.display = 'block';
+  document.getElementById('orm-results')!.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+});
+</script>
+
+<div class="content-section">
+  <h2>The 4 One Rep Max Formulas</h2>
+  <p>This calculator uses four scientifically validated formulas and displays the average as your estimated 1RM. Here is how each formula works:</p>
+
+  <table class="data-table">
+    <thead><tr><th>Formula</th><th>Equation</th><th>Best For</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Epley (1985)</strong></td><td>w &times; (1 + r/30)</td><td>General use, all rep ranges</td></tr>
+      <tr><td><strong>Brzycki (1993)</strong></td><td>w / (1.0278 &minus; 0.0278 &times; r)</td><td>Heavy sets, 1–10 reps</td></tr>
+      <tr><td><strong>Lander (1985)</strong></td><td>(100 &times; w) / (101.3 &minus; 2.67 &times; r)</td><td>Moderate rep ranges</td></tr>
+      <tr><td><strong>Lombardi (1989)</strong></td><td>w &times; r<sup>0.10</sup></td><td>Higher rep sets, 6–12 reps</td></tr>
+    </tbody>
+  </table>
+  <p><em>w = weight lifted, r = reps completed</em></p>
+
+  <h2>How to Use Your 1RM for Training</h2>
+  <p>Once you know your estimated 1RM, you can prescribe training loads as percentages. This is the foundation of periodized strength programming used by powerlifters, Olympic weightlifters, and strength coaches worldwide.</p>
+
+  <table class="data-table">
+    <thead><tr><th>Training Goal</th><th>% of 1RM</th><th>Rep Range</th><th>Sets</th></tr></thead>
+    <tbody>
+      <tr><td>Max Strength</td><td>90–100%</td><td>1–3</td><td>3–5</td></tr>
+      <tr><td>Strength</td><td>80–90%</td><td>3–5</td><td>3–5</td></tr>
+      <tr><td>Strength–Hypertrophy</td><td>70–80%</td><td>6–8</td><td>3–4</td></tr>
+      <tr><td>Hypertrophy</td><td>60–75%</td><td>8–12</td><td>3–4</td></tr>
+      <tr><td>Muscular Endurance</td><td>50–65%</td><td>12–20+</td><td>2–3</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Lifts This Calculator Works For</h2>
+  <p>You can use any lift as input — the math is the same regardless of exercise. Common uses include: <strong>bench press</strong>, <strong>squat</strong>, <strong>deadlift</strong>, <strong>overhead press</strong>, <strong>barbell row</strong>, <strong>Romanian deadlift</strong>, and any machine or dumbbell movement where you can track a consistent load.</p>
+
+  <h2>Accuracy and Limitations</h2>
+  <p>Formula-based 1RM estimates are most accurate in the 2–10 rep range. Above 10 reps, muscular endurance plays an increasingly large role, making the estimate less reliable. Individual factors like fiber type distribution and lifting efficiency also affect accuracy. Treat your calculated 1RM as a programming tool — not a guaranteed performance number.</p>
+</div>
+
+</ToolLayout>
