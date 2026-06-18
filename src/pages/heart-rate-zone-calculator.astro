@@ -1,0 +1,241 @@
+---
+import ToolLayout from '../layouts/ToolLayout.astro';
+
+const SITE = 'https://healthcalculation.com';
+const canonical = `${SITE}/heart-rate-zone-calculator`;
+
+const schemaApp = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Heart Rate Zone Calculator',
+  url: canonical,
+  description: 'Calculate your 5 heart rate training zones based on age or a measured maximum heart rate. Know exactly how hard to push for fat burn, aerobic, and peak performance.',
+  applicationCategory: 'HealthApplication',
+  operatingSystem: 'Any',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+};
+
+const schemaFaq = [
+  {
+    q: 'What is a heart rate training zone?',
+    a: 'A heart rate zone is a range of beats per minute (BPM) that corresponds to a specific exercise intensity and physiological effect. Zone 1 is light activity (recovery); Zone 2 builds aerobic base and fat metabolism; Zone 3 is aerobic endurance; Zone 4 develops lactate threshold and speed; Zone 5 is maximal effort for short bursts. Training in the right zone for your goal makes workouts more effective.',
+  },
+  {
+    q: 'How do I find my maximum heart rate (MHR)?',
+    a: 'The most accurate method is a supervised maximal exercise test. The most common estimate is 220 minus your age (Fox formula). A more refined formula is 208 - (0.7 x age) (Tanaka formula), which is used by this calculator and tends to be more accurate for older adults. You can also estimate MHR by running hard up a steep hill for 3 minutes, noting the highest BPM reached.',
+  },
+  {
+    q: 'What is Zone 2 training and why is it popular?',
+    a: 'Zone 2 (roughly 60–70% of MHR) is a conversational-pace effort where your body primarily burns fat for fuel and builds mitochondrial density. It forms the aerobic base for endurance performance and is associated with cardiovascular health benefits. Many elite athletes spend 70–80% of total training volume in Zone 2, with the remainder at higher intensities.',
+  },
+  {
+    q: 'Is it dangerous to train in Zone 5?',
+    a: 'Zone 5 training (90–100% MHR) is safe for healthy adults when built up gradually and kept brief (30 seconds to 2 minutes per interval). It should be used sparingly — typically 1–2 sessions per week — and not attempted by people with cardiovascular conditions without medical clearance. Begin Zone 5 work only after building an aerobic base with several weeks of Zone 2 training.',
+  },
+  {
+    q: 'Should I use the Karvonen (heart rate reserve) method instead?',
+    a: 'The Karvonen method incorporates your resting heart rate into the calculation, making zones more individual. This calculator uses percentage-of-MHR (simpler and most widely used). If you know your resting HR and want higher precision, apply Karvonen: Target HR = RHR + (intensity% x (MHR - RHR)). Both methods give similar results for most people.',
+  },
+];
+---
+
+<ToolLayout
+  title="Heart Rate Zone Calculator — 5-Zone Training Intensity Chart"
+  description="Find your 5 heart rate training zones by age or measured max HR. Includes Zone 2 fat burn, aerobic, and VO2 max zones with BPM ranges."
+  canonical={canonical}
+  schemaApp={schemaApp}
+  schemaFaq={schemaFaq}
+  pageIcon="&#128147;"
+  heroTitle="Heart Rate Zone Calculator"
+>
+
+<div class="tool-card">
+  <h1 class="tool-title">Heart Rate Zone Calculator</h1>
+  <p class="tool-subtitle">5-zone training system &mdash; Tanaka MHR formula</p>
+
+  <form id="hr-form" novalidate>
+
+    <div class="field-group" style="margin-bottom:16px">
+      <span class="field-label">Max heart rate method</span>
+      <div class="seg-group">
+        <label class="seg-opt">
+          <input type="radio" name="hrmethod" value="age" checked />
+          <span>Calculate by age</span>
+        </label>
+        <label class="seg-opt">
+          <input type="radio" name="hrmethod" value="known" />
+          <span>I know my MHR</span>
+        </label>
+      </div>
+    </div>
+
+    <div id="hr-age-row">
+      <div class="field-group">
+        <label class="field-label" for="hr-age">Age</label>
+        <div class="field-group">
+          <input type="number" id="hr-age" value="30" min="10" max="100" step="1" />
+          <span class="field-unit">yrs</span>
+        </div>
+      </div>
+    </div>
+    <div id="hr-known-row" style="display:none">
+      <div class="field-group">
+        <label class="field-label" for="hr-mhr">Your Max Heart Rate</label>
+        <div class="field-group">
+          <input type="number" id="hr-mhr" value="190" min="100" max="230" step="1" />
+          <span class="field-unit">BPM</span>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-calc" type="submit">Calculate Heart Rate Zones</button>
+  </form>
+
+  <div id="hr-results" style="display:none; margin-top:24px">
+    <div class="hr-mhr-card">
+      <span class="hr-mhr-label">Estimated Max HR</span>
+      <span class="hr-mhr-val" id="hr-mhr-display">—</span>
+      <span class="hr-mhr-bpm">BPM</span>
+    </div>
+    <div id="hr-zones" style="margin-top:16px"></div>
+    <p style="font-size:12px;color:#9ca3af;margin-top:10px">Based on Tanaka formula (208 &minus; 0.7 &times; age). Zones are estimated; a measured MHR gives more accurate zones. Not a substitute for medical advice.</p>
+  </div>
+</div>
+
+<!-- How it works -->
+<section class="content-section">
+  <h2>The 5-Zone Heart Rate System</h2>
+  <p>Training zones divide exercise intensity into five bands based on a percentage of your maximum heart rate (MHR). Each zone produces different physiological adaptations:</p>
+  <div class="formula-box">
+    Zone 1 — Recovery:      50&ndash;60% MHR &mdash; Active recovery, light movement<br>
+    Zone 2 — Aerobic Base:  60&ndash;70% MHR &mdash; Fat burning, aerobic conditioning<br>
+    Zone 3 — Aerobic:       70&ndash;80% MHR &mdash; Cardiovascular endurance<br>
+    Zone 4 — Threshold:     80&ndash;90% MHR &mdash; Lactate threshold, race pace<br>
+    Zone 5 — VO2 Max:       90&ndash;100% MHR &mdash; Peak power, short intervals<br><br>
+    MHR estimate (Tanaka): 208 &minus; (0.7 &times; age)
+  </div>
+  <p>The Tanaka formula is more accurate than the classic "220 - age" formula, particularly for people over 40. For the most precise zones, have your MHR tested in a supervised setting and enter the measured value directly.</p>
+</section>
+
+<!-- Who Should Use -->
+<section class="content-section">
+  <h2>Who Should Use This Calculator?</h2>
+  <p>This calculator is suited for runners, cyclists, swimmers, and gym-goers who want to train more intelligently using heart rate data. It is especially valuable for endurance athletes building an aerobic base, HIIT trainees who want to quantify effort levels, and anyone who purchased a heart rate monitor and wants to use it effectively. People with cardiovascular conditions, arrhythmias, or those recovering from cardiac events should consult a cardiologist before using heart rate-based training guidelines.</p>
+</section>
+
+<!-- Tips -->
+<section class="content-section">
+  <h2>Tips for Accurate Heart Rate Training</h2>
+  <p>A chest-strap heart rate monitor is significantly more accurate than wrist-based optical HR sensors during exercise — especially in Zones 4 and 5 where wrist sensors commonly lag or under-read. Warm up for at least 10 minutes before targeting a specific zone, as heart rate takes time to equilibrate to exercise intensity. Zone 2 training should feel conversational — if you cannot speak in full sentences, you have drifted into Zone 3. For Zone 5 intervals, track actual BPM rather than perceived effort, as fatigue can distort perception of intensity.</p>
+</section>
+
+<!-- FAQ -->
+<section class="content-section">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-list">
+    {schemaFaq.map(({ q, a }) => (
+      <details class="faq-item">
+        <summary>{q}</summary>
+        <div class="faq-body"><p>{a}</p></div>
+      </details>
+    ))}
+  </div>
+</section>
+
+<!-- Related -->
+<section class="content-section">
+  <h2>Related Calculators</h2>
+  <div class="related-grid">
+    <a href="/calorie-tdee-calculator" class="related-link">&#128293; Calorie &amp; TDEE</a>
+    <a href="/water-intake-calculator" class="related-link">&#128167; Water Intake</a>
+    <a href="/bmi-calculator" class="related-link">&#9878; BMI Calculator</a>
+    <a href="/sleep-calculator" class="related-link">&#127769; Sleep Calculator</a>
+  </div>
+</section>
+
+<style>
+  .tool-title    { font-size: 22px; font-weight: 800; margin-bottom: 4px; }
+  .tool-subtitle { font-size: 14px; color: var(--mut); margin-bottom: 20px; }
+
+  .hr-mhr-card {
+    display: flex; align-items: baseline; gap: 8px;
+    background: linear-gradient(135deg, #fff1f2, #ffe4e6);
+    border: 2px solid #fca5a5;
+    border-radius: 14px; padding: 16px 20px;
+  }
+  .hr-mhr-label { font-size: 13px; font-weight: 700; color: #991b1b; }
+  .hr-mhr-val   { font-size: 40px; font-weight: 900; color: #dc2626; line-height: 1; }
+  .hr-mhr-bpm   { font-size: 16px; color: #6b7280; }
+
+  .zone-row {
+    display: flex; align-items: center; gap: 10px;
+    background: #fff; border: 1px solid var(--bd);
+    border-radius: 10px; padding: 12px 16px; margin-bottom: 8px;
+  }
+  .zone-num    { width: 28px; height: 28px; border-radius: 50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px; color:#fff; flex-shrink:0; }
+  .zone-info   { flex: 1; }
+  .zone-name   { font-weight: 700; font-size: 14px; }
+  .zone-desc   { font-size: 11px; color: var(--mut); }
+  .zone-bpm    { font-size: 14px; font-weight: 700; color: var(--tx); white-space: nowrap; }
+  .zone-pct    { font-size: 11px; color: var(--mut); text-align: right; white-space: nowrap; }
+</style>
+
+
+</ToolLayout>
+
+<script>
+const ZONES = [
+  { num: 1, name: 'Recovery',      desc: 'Light activity, active recovery',         pctLo: 50, pctHi: 60, color: '#60a5fa' },
+  { num: 2, name: 'Aerobic Base',  desc: 'Fat burning, aerobic conditioning',        pctLo: 60, pctHi: 70, color: '#34d399' },
+  { num: 3, name: 'Aerobic',       desc: 'Cardiovascular endurance',                 pctLo: 70, pctHi: 80, color: '#facc15' },
+  { num: 4, name: 'Threshold',     desc: 'Lactate threshold, race pace',             pctLo: 80, pctHi: 90, color: '#fb923c' },
+  { num: 5, name: 'VO₂ Max',  desc: 'Peak power, short intervals',              pctLo: 90, pctHi: 100, color: '#f87171' },
+];
+
+const hrForm = document.getElementById('hr-form') as HTMLFormElement;
+
+hrForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const method = (document.querySelector('input[name="hrmethod"]:checked') as HTMLInputElement).value;
+  let mhr: number;
+
+  if (method === 'age') {
+    const age = parseFloat((document.getElementById('hr-age') as HTMLInputElement).value) || 0;
+    if (age < 10 || age > 100) return;
+    mhr = Math.round(208 - 0.7 * age);
+  } else {
+    mhr = parseFloat((document.getElementById('hr-mhr') as HTMLInputElement).value) || 0;
+    if (mhr < 100 || mhr > 230) return;
+  }
+
+  (document.getElementById('hr-mhr-display') as HTMLElement).textContent = String(mhr);
+
+  const zonesHtml = ZONES.map(z => {
+    const lo = Math.round(z.pctLo / 100 * mhr);
+    const hi = Math.round(z.pctHi / 100 * mhr);
+    return `<div class="zone-row">
+      <div class="zone-num" style="background:${z.color}">${z.num}</div>
+      <div class="zone-info">
+        <div class="zone-name">${z.name}</div>
+        <div class="zone-desc">${z.desc}</div>
+      </div>
+      <div>
+        <div class="zone-bpm">${lo}&ndash;${hi} BPM</div>
+        <div class="zone-pct">${z.pctLo}&ndash;${z.pctHi}% MHR</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  (document.getElementById('hr-zones') as HTMLElement).innerHTML = zonesHtml;
+  (document.getElementById('hr-results') as HTMLElement).style.display = 'block';
+});
+
+// method toggle
+document.querySelectorAll<HTMLInputElement>('input[name="hrmethod"]').forEach(r => {
+  r.addEventListener('change', () => {
+    const byAge = r.value === 'age';
+    (document.getElementById('hr-age-row') as HTMLElement).style.display   = byAge ? '' : 'none';
+    (document.getElementById('hr-known-row') as HTMLElement).style.display = byAge ? 'none' : '';
+  });
+});
+</script>

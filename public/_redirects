@@ -8,3 +8,7 @@
 /macros      /macro-calculator         301
 /macro       /macro-calculator         301
 /sleep       /sleep-calculator         301
+/water-intake   /water-intake-calculator   301
+/water          /water-intake-calculator   301
+/heart-rate     /heart-rate-zone-calculator 301
+/hr-zones       /heart-rate-zone-calculator 301

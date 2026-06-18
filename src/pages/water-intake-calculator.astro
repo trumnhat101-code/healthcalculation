@@ -1,0 +1,251 @@
+---
+import ToolLayout from '../layouts/ToolLayout.astro';
+
+const SITE = 'https://healthcalculation.com';
+const canonical = `${SITE}/water-intake-calculator`;
+
+const schemaApp = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Daily Water Intake Calculator',
+  url: canonical,
+  description: 'Calculate how much water you should drink per day based on your weight, activity level, and climate.',
+  applicationCategory: 'HealthApplication',
+  operatingSystem: 'Any',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+};
+
+const schemaFaq = [
+  {
+    q: 'How much water should I drink per day?',
+    a: 'The National Academies of Sciences recommends about 3.7 liters (125 oz) total water per day for men and 2.7 liters (91 oz) for women from all beverages and food combined. This calculator provides a personalized estimate based on your weight and activity level. About 20% of daily water intake typically comes from food, so the drinking target is lower than the total.',
+  },
+  {
+    q: 'Does the 8 glasses a day rule have scientific backing?',
+    a: 'The "8x8" rule (eight 8-oz glasses per day) is a rough heuristic with limited scientific evidence. Individual needs vary significantly based on body size, activity, climate, and diet. Larger, more active people need considerably more than 64 oz. The personalized calculation in this tool is more accurate than a one-size-fits-all guideline.',
+  },
+  {
+    q: 'Does coffee count toward my daily water intake?',
+    a: 'Yes. Despite the mild diuretic effect of caffeine, research shows that caffeinated beverages like coffee and tea still contribute net fluid to your daily intake. The diuretic effect is minimal when consumed in moderate amounts (up to 400 mg caffeine per day). However, plain water remains the best primary source.',
+  },
+  {
+    q: 'How does exercise affect water needs?',
+    a: 'Moderate exercise (30–60 minutes) typically increases daily water needs by 0.5–1 liter. Intense or prolonged exercise in hot conditions can require 1–2 additional liters per hour of activity. This calculator adds 350 ml (about 12 oz) per 30 minutes of exercise as a baseline estimate.',
+  },
+  {
+    q: 'What are signs of dehydration?',
+    a: 'Early signs include thirst, dark yellow urine, dry mouth, and mild fatigue. Moderate dehydration adds headache, reduced concentration, and decreased exercise performance. Urine color is a reliable practical indicator: pale yellow suggests good hydration, dark amber signals you need more water.',
+  },
+];
+---
+
+<ToolLayout
+  title="Daily Water Intake Calculator — How Much Water Should You Drink?"
+  description="Calculate your personalized daily water intake based on weight, activity level, and climate. Get results in cups, ounces, and liters."
+  canonical={canonical}
+  schemaApp={schemaApp}
+  schemaFaq={schemaFaq}
+  pageIcon="&#128167;"
+  heroTitle="Water Intake Calculator"
+>
+
+<div class="tool-card">
+  <h1 class="tool-title">Daily Water Intake Calculator</h1>
+  <p class="tool-subtitle">Personalized hydration target based on weight &amp; activity</p>
+
+  <form id="wi-form" novalidate>
+
+    <div class="field-group" style="margin-bottom:16px">
+      <span class="field-label">Unit system</span>
+      <div class="seg-group">
+        <label class="seg-opt">
+          <input type="radio" name="wiunit" value="imperial" checked />
+          <span>Imperial (lbs)</span>
+        </label>
+        <label class="seg-opt">
+          <input type="radio" name="wiunit" value="metric" />
+          <span>Metric (kg)</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="field-group">
+        <label class="field-label" for="wi-weight">Body weight</label>
+        <div class="field-group">
+          <input type="number" id="wi-weight" value="154" min="44" max="660" step="0.5" />
+          <span class="field-unit" id="wi-weight-unit">lbs</span>
+        </div>
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="wi-exercise">Exercise (min/day)</label>
+        <div class="field-group">
+          <input type="number" id="wi-exercise" value="30" min="0" max="300" step="5" />
+          <span class="field-unit">min</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="field-group" style="margin-top:14px">
+      <span class="field-label">Climate</span>
+      <div class="seg-group">
+        <label class="seg-opt">
+          <input type="radio" name="wiclimate" value="temperate" checked />
+          <span>Temperate</span>
+        </label>
+        <label class="seg-opt">
+          <input type="radio" name="wiclimate" value="hot" />
+          <span>Hot / Humid</span>
+        </label>
+        <label class="seg-opt">
+          <input type="radio" name="wiclimate" value="cold" />
+          <span>Cold / Dry</span>
+        </label>
+      </div>
+    </div>
+
+    <button class="btn-calc" type="submit">Calculate Water Intake</button>
+  </form>
+
+  <div id="wi-results" style="display:none; margin-top:24px">
+    <div class="wi-result-card">
+      <p class="wi-result-label">Daily Water Target</p>
+      <p class="wi-result-liters" id="wi-liters">—</p>
+      <p class="wi-result-alt" id="wi-alt">—</p>
+    </div>
+    <div class="wi-breakdown" id="wi-breakdown" style="margin-top:16px"></div>
+    <p style="font-size:12px;color:#9ca3af;margin-top:10px">Estimates based on the 0.5 oz per lb guideline plus activity and climate adjustments. Needs vary individually — consult a physician for medical conditions affecting fluid balance.</p>
+  </div>
+</div>
+
+<!-- How it works -->
+<section class="content-section">
+  <h2>How the Water Intake Calculation Works</h2>
+  <p>This calculator uses a three-part formula to estimate your daily hydration needs:</p>
+  <div class="formula-box">
+    Base intake = Body weight (lbs) &times; 0.5 oz<br><br>
+    Exercise add-on = (exercise minutes / 30) &times; 12 oz<br><br>
+    Climate modifier: hot/humid +20%, cold/dry &minus;10%<br><br>
+    Total = (Base + Exercise) &times; Climate modifier
+  </div>
+  <p>The 0.5 oz per pound baseline is a widely cited clinical heuristic. The exercise add-on accounts for sweat loss at a moderate intensity, and the climate modifier reflects higher fluid losses in heat and humidity. Results are displayed in liters, fluid ounces, and 8-oz cups for practical use.</p>
+</section>
+
+<!-- Who Should Use -->
+<section class="content-section">
+  <h2>Who Should Use This Calculator?</h2>
+  <p>This calculator is useful for healthy adults who want a personalized hydration target beyond the generic "8 glasses a day" rule. It is particularly helpful for athletes adjusting intake around training, people working outdoors in hot climates, those starting a weight-loss program where adequate hydration supports metabolism, and anyone recovering from illness-related dehydration. It is not appropriate for people with kidney disease, heart failure, or other conditions that require medically supervised fluid restriction — consult your physician for fluid targets in those cases.</p>
+</section>
+
+<!-- Tips -->
+<section class="content-section">
+  <h2>Tips for Staying Hydrated</h2>
+  <p>Spread your water intake throughout the day rather than drinking large amounts at once — aim for 1–2 cups per hour while awake. Keep a water bottle visible at your desk as a passive reminder. Drink a glass before each meal to build a routine. Monitor urine color: pale straw-yellow indicates good hydration; dark yellow or amber means drink more. Increase intake immediately when exercising, sweating, or in hot weather — thirst is already a sign of early dehydration.</p>
+</section>
+
+<!-- FAQ -->
+<section class="content-section">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-list">
+    {schemaFaq.map(({ q, a }) => (
+      <details class="faq-item">
+        <summary>{q}</summary>
+        <div class="faq-body"><p>{a}</p></div>
+      </details>
+    ))}
+  </div>
+</section>
+
+<!-- Related -->
+<section class="content-section">
+  <h2>Related Calculators</h2>
+  <div class="related-grid">
+    <a href="/calorie-tdee-calculator" class="related-link">&#128293; Calorie &amp; TDEE</a>
+    <a href="/macro-calculator" class="related-link">&#9881; Macro Calculator</a>
+    <a href="/bmi-calculator" class="related-link">&#9878; BMI Calculator</a>
+    <a href="/heart-rate-zone-calculator" class="related-link">&#128147; Heart Rate Zones</a>
+  </div>
+</section>
+
+<style>
+  .tool-title    { font-size: 22px; font-weight: 800; margin-bottom: 4px; }
+  .tool-subtitle { font-size: 14px; color: var(--mut); margin-bottom: 20px; }
+
+  .wi-result-card {
+    background: linear-gradient(135deg, #eff6ff, #e0f2fe);
+    border: 2px solid #93c5fd;
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+  }
+  .wi-result-label  { font-size: 13px; font-weight: 700; color: #1d4ed8; text-transform: uppercase; letter-spacing: .4px; margin-bottom: 6px; }
+  .wi-result-liters { font-size: 42px; font-weight: 900; color: #2563eb; line-height: 1.1; }
+  .wi-result-alt    { font-size: 16px; color: #6b7280; margin-top: 4px; }
+
+  .wi-breakdown { display: flex; gap: 10px; flex-wrap: wrap; }
+  .wi-chip {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 12px 16px;
+    flex: 1; min-width: 100px;
+    text-align: center;
+  }
+  .wi-chip-val   { font-size: 20px; font-weight: 800; color: #2563eb; }
+  .wi-chip-label { font-size: 11px; color: #9ca3af; margin-top: 2px; }
+</style>
+
+
+</ToolLayout>
+
+<script>
+const wiForm = document.getElementById('wi-form') as HTMLFormElement;
+
+wiForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const unit     = (document.querySelector('input[name="wiunit"]:checked')    as HTMLInputElement).value;
+  const climate  = (document.querySelector('input[name="wiclimate"]:checked') as HTMLInputElement).value;
+  const rawWt    = parseFloat((document.getElementById('wi-weight')   as HTMLInputElement).value) || 0;
+  const exMins   = parseFloat((document.getElementById('wi-exercise') as HTMLInputElement).value) || 0;
+
+  // convert to lbs
+  const weightLbs = unit === 'metric' ? rawWt * 2.20462 : rawWt;
+  if (weightLbs < 44 || weightLbs > 660) return;
+
+  const baseOz    = weightLbs * 0.5;
+  const exOz      = (exMins / 30) * 12;
+  const climateMult = climate === 'hot' ? 1.2 : climate === 'cold' ? 0.9 : 1.0;
+  const totalOz   = (baseOz + exOz) * climateMult;
+  const totalL    = totalOz * 0.0295735;
+  const cups      = totalOz / 8;
+
+  (document.getElementById('wi-liters') as HTMLElement).textContent = totalL.toFixed(1) + ' L';
+  (document.getElementById('wi-alt') as HTMLElement).textContent =
+    Math.round(totalOz) + ' fl oz  ·  ' + cups.toFixed(1) + ' cups (8 oz)';
+
+  const breakdown = document.getElementById('wi-breakdown') as HTMLElement;
+  breakdown.innerHTML = [
+    { val: totalL.toFixed(2) + ' L',       label: 'Liters' },
+    { val: Math.round(totalOz) + ' oz',    label: 'Fluid Ounces' },
+    { val: cups.toFixed(1),                label: '8-oz Cups' },
+    { val: Math.ceil(cups / 8) + 'x 500ml',label: '500 ml Bottles' },
+  ].map(c =>
+    `<div class="wi-chip"><div class="wi-chip-val">${c.val}</div><div class="wi-chip-label">${c.label}</div></div>`
+  ).join('');
+
+  (document.getElementById('wi-results') as HTMLElement).style.display = 'block';
+});
+
+// unit toggle
+document.querySelectorAll<HTMLInputElement>('input[name="wiunit"]').forEach(r => {
+  r.addEventListener('change', () => {
+    const lbl  = r.value === 'imperial' ? 'lbs' : 'kg';
+    const unit = document.getElementById('wi-weight-unit');
+    if (unit) unit.textContent = lbl;
+    const wt = document.getElementById('wi-weight') as HTMLInputElement;
+    if (r.value === 'imperial') { wt.value = '154'; wt.min = '44';  wt.max = '660'; }
+    else                        { wt.value = '70';  wt.min = '20';  wt.max = '300'; }
+  });
+});
+</script>

@@ -1,30 +1,31 @@
 ---
 /**
- * AffiliateCTA.astro — CTA affiliate đặt ngay sau kết quả tool
- * Props:
- *   items — mảng { href, label, sub, badge? }
- *   heading — tiêu đề trên CTA box (optional)
+ * AffiliateCTA.astro
+ * Auto-hides when all hrefs are still placeholders (#AFFILIATE-*).
  */
 export interface CTAItem {
   href: string;
   label: string;
   sub: string;
-  badge?: string;   // vd: "Top Pick", "Best Value"
+  badge?: string;
 }
 export interface Props {
   items: CTAItem[];
   heading?: string;
 }
 const { items, heading = 'Recommended for You' } = Astro.props;
+const liveItems = items.filter(i => !i.href.startsWith('#AFFILIATE-'));
+const hasLive   = liveItems.length > 0;
 ---
 
+{hasLive && (
 <aside class="aff-cta" aria-label="Affiliate recommendations">
   <p class="aff-heading">{heading}</p>
   <div class="aff-items">
-    {items.map(({ href, label, sub, badge }) => (
+    {liveItems.map(({ href, label, sub, badge }) => (
       <a
         href={href}
-        rel="sponsored nofollow"
+        rel="sponsored nofollow noopener"
         target="_blank"
         class="aff-item"
         aria-label={label}
@@ -34,7 +35,7 @@ const { items, heading = 'Recommended for You' } = Astro.props;
           <span class="aff-sub">{sub}</span>
         </div>
         {badge && <span class="aff-badge">{badge}</span>}
-        <span class="aff-arrow">→</span>
+        <span class="aff-arrow">&#8594;</span>
       </a>
     ))}
   </div>
@@ -42,57 +43,29 @@ const { items, heading = 'Recommended for You' } = Astro.props;
     <em>Advertiser disclosure: We may earn a commission at no extra cost to you.</em>
   </p>
 </aside>
+)}
 
 <style>
   .aff-cta {
-    background: linear-gradient(135deg, #f0fdf4, #e0f2fe);
+    background: linear-gradient(135deg,#f0fdf4,#e0f2fe);
     border: 1px solid #86efac;
     border-radius: 14px;
     padding: 18px 20px;
     margin: 20px 0;
   }
-  .aff-heading {
-    font-size: 13px;
-    font-weight: 700;
-    color: #15803d;
-    margin-bottom: 12px;
-    text-transform: uppercase;
-    letter-spacing: .5px;
-  }
-  .aff-items { display: flex; flex-direction: column; gap: 10px; }
+  .aff-heading { font-size:13px; font-weight:700; color:#15803d; margin-bottom:12px; text-transform:uppercase; letter-spacing:.5px; }
+  .aff-items { display:flex; flex-direction:column; gap:10px; }
   .aff-item {
-    display: flex;
-    align-items: center;
-    background: #fff;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    padding: 13px 16px;
-    text-decoration: none;
-    color: #1f2937;
-    gap: 12px;
-    transition: box-shadow .15s, border-color .15s;
+    display:flex; align-items:center; background:#fff;
+    border:1px solid #e2e8f0; border-radius:10px;
+    padding:13px 16px; text-decoration:none; color:#1f2937;
+    gap:12px; transition:box-shadow .15s,border-color .15s;
   }
-  .aff-item:hover {
-    box-shadow: 0 2px 12px rgba(22,163,74,.15);
-    border-color: #86efac;
-  }
-  .aff-text { flex: 1; display: flex; flex-direction: column; gap: 2px; }
-  .aff-label { font-weight: 700; font-size: 14px; }
-  .aff-sub   { font-size: 12px; color: #6b7280; }
-  .aff-badge {
-    background: #fef9c3;
-    color: #854d0e;
-    font-size: 10px;
-    font-weight: 700;
-    border-radius: 4px;
-    padding: 2px 7px;
-    white-space: nowrap;
-  }
-  .aff-arrow { color: #16a34a; font-size: 16px; font-weight: 700; }
-  .aff-disclosure {
-    font-size: 10px;
-    color: #9ca3af;
-    margin-top: 10px;
-    margin-bottom: 0;
-  }
+  .aff-item:hover { box-shadow:0 2px 12px rgba(22,163,74,.15); border-color:#86efac; }
+  .aff-text { flex:1; display:flex; flex-direction:column; gap:2px; }
+  .aff-label { font-weight:700; font-size:14px; }
+  .aff-sub   { font-size:12px; color:#6b7280; }
+  .aff-badge { background:#fef9c3; color:#854d0e; font-size:10px; font-weight:700; border-radius:4px; padding:2px 7px; white-space:nowrap; }
+  .aff-arrow { color:#16a34a; font-size:16px; font-weight:700; }
+  .aff-disclosure { font-size:10px; color:#9ca3af; margin-top:10px; margin-bottom:0; }
 </style>

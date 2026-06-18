@@ -142,6 +142,18 @@ const schemaFaq = [
 </section>
 
 <!-- FAQ -->
+<!-- Who Should Use -->
+<section class="content-section">
+  <h2>Who Should Use This Calculator?</h2>
+  <p>This calculator is most useful for adults who want a clinical reference point for their height and sex. It is commonly used by healthcare providers for medication dosing guidelines (the Devine formula in particular), by individuals setting an initial weight-loss target, and as a sanity check against scale-only goals. It is less relevant for competitive bodybuilders or strength athletes whose muscle mass intentionally pushes body weight above typical formula ranges.</p>
+</section>
+
+<!-- Tips for Accuracy -->
+<section class="content-section">
+  <h2>Tips for Accurate Results</h2>
+  <p>Treat the result as a range, not a fixed target — the four formulas often span 10–15 lbs, and your optimal weight within that range depends on body composition. Measure height accurately: remove shoes, stand straight against a wall, and use a flat book on top of your head to mark the wall. Recheck your height if you haven't measured it since your twenties, as height can decrease with age due to spinal compression.</p>
+</section>
+
 <section class="content-section">
   <h2>Frequently Asked Questions</h2>
   <div class="faq-list">
@@ -234,9 +246,4 @@ iwForm.addEventListener('submit', (e) => {
 // Toggle height inputs on unit change
 document.querySelectorAll<HTMLInputElement>('input[name="unit"]').forEach(r => {
   r.addEventListener('change', () => {
-    const imp = r.value === 'imperial';
-    (document.getElementById('height-imperial') as HTMLElement).style.display = imp ? '' : 'none';
-    (document.getElementById('height-metric')   as HTMLElement).style.display = imp ? 'none' : '';
-  });
-});
-</script>
+  

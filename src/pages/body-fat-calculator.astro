@@ -165,6 +165,18 @@ const categories = {
 </section>
 
 <!-- FAQ -->
+<!-- Who Should Use -->
+<section class="content-section">
+  <h2>Who Should Use This Calculator?</h2>
+  <p>This calculator works best for adults who want to track body composition changes over time without specialized equipment. It is commonly used by gym-goers monitoring fat loss during a cut, coaches tracking client progress, and individuals preparing for fitness assessments. It is less suited for very lean athletes (under 8% for men, under 16% for women), where the Navy method's accuracy decreases, and a DEXA scan or skinfold caliper test is more reliable.</p>
+</section>
+
+<!-- Tips for Accuracy -->
+<section class="content-section">
+  <h2>Tips for Accurate Results</h2>
+  <p>Take all measurements in the morning before eating or exercising, when your body is in a neutral, un-pumped state. Use a flexible fabric or fiberglass tape measure, not a metal one. Measure each site twice and average the readings. Keep the tape parallel to the floor and snug — not tight enough to compress the skin. Consistency in technique matters more than absolute accuracy; same-method comparisons over time are what reveal real progress.</p>
+</section>
+
 <section class="content-section">
   <h2>Frequently Asked Questions</h2>
   <div class="faq-list">
@@ -299,12 +311,4 @@ document.querySelectorAll<HTMLInputElement>('input[name="bfunit"]').forEach(r =>
 
 // Sex toggle
 function updateSex(): void {
-  const sex   = (document.querySelector('input[name="bfsex"]:checked') as HTMLInputElement).value;
-  const wHint = document.getElementById('bf-waist-hint');
-  if (wHint) wHint.textContent = sex === 'male' ? '(at navel)' : '(narrowest)';
-  const hipGrp = document.getElementById('hip-group');
-  if (hipGrp) hipGrp.style.opacity = sex === 'female' ? '1' : '0.35';
-}
-document.querySelectorAll<HTMLInputElement>('input[name="bfsex"]').forEach(r => r.addEventListener('change', updateSex));
-updateSex();
-</script>
+  const sex

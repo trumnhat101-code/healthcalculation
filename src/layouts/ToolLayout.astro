@@ -9,9 +9,12 @@ export interface Props {
   schemaApp?: Record<string, unknown>;
   schemaFaq?: Array<{ q: string; a: string }>;
   color?: string;
+  pageIcon?: string;
+  heroTitle?: string;
 }
 
-const { title, description, canonical, schemaApp, schemaFaq } = Astro.props;
+const { title, description, canonical, schemaApp, schemaFaq,
+        pageIcon: pagePropIcon, heroTitle: pagePropHeroTitle } = Astro.props;
 
 const faqSchema = schemaFaq?.length
   ? {
@@ -32,6 +35,8 @@ const nav = [
   { href: '/ideal-weight-calculator',  label: 'Ideal Weight' },
   { href: '/body-fat-calculator',      label: 'Body Fat' },
   { href: '/sleep-calculator',         label: 'Sleep' },
+  { href: '/water-intake-calculator',   label: 'Water Intake' },
+  { href: '/heart-rate-zone-calculator', label: 'Heart Rate' },
   { href: '/about',                    label: 'About' },
 ];
 
@@ -42,6 +47,8 @@ const iconMap: Record<string, string> = {
   '/bmi-calculator':          '⚖️',
   '/macro-calculator':        '🥗',
   '/sleep-calculator':        '🌙',
+  '/water-intake-calculator':   '&#128167;',
+  '/heart-rate-zone-calculator': '&#128147;',
   '/about':                   'ℹ️',
   '/privacy':                 '🔒',
   '/disclaimer':              '⚕️',
@@ -49,8 +56,18 @@ const iconMap: Record<string, string> = {
 
 const currentPath = new URL(canonical).pathname;
 const isHome      = currentPath === '/';
-const pageIcon    = iconMap[currentPath] ?? '⚕️';
-const heroTitle   = title.split(' —')[0];
+const pageIcon    = pagePropIcon ?? iconMap[currentPath] ?? '⚕️';
+const heroTitle   = pagePropHeroTitle ?? title.split(' —')[0];
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://healthcalculation.com/' },
+    { '@type': 'ListItem', position: 2, name: heroTitle, item: canonical },
+  ],
+};
+const ogImage = 'https://healthcalculation.com/og-default.png';
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -67,10 +84,16 @@ const heroTitle   = title.split(' —')[0];
   <meta property="og:description" content={description} />
   <meta property="og:url"         content={canonical} />
   <meta property="og:type"        content="website" />
+  <meta property="og:image"       content={ogImage} />
+  <meta name="twitter:card"       content="summary_large_image" />
+  <meta name="twitter:title"      content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image"      content={ogImage} />
 
   <!-- JSON-LD schemas -->
-  {schemaApp  && <script type="application/ld+json" set:html={JSON.stringify(schemaApp)} />}
-  {faqSchema  && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
+  {schemaApp        && <script type="application/ld+json" set:html={JSON.stringify(schemaApp)} />}
+  {faqSchema        && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
+  {!isHome          && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />}
 
   <!-- AdSense — uncomment when approved
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXX" crossorigin="anonymous"></script>
