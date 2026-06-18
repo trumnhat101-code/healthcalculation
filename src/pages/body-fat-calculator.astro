@@ -311,4 +311,12 @@ document.querySelectorAll<HTMLInputElement>('input[name="bfunit"]').forEach(r =>
 
 // Sex toggle
 function updateSex(): void {
-  const sex
+  const sex   = (document.querySelector('input[name="bfsex"]:checked') as HTMLInputElement).value;
+  const wHint = document.getElementById('bf-waist-hint');
+  if (wHint) wHint.textContent = sex === 'male' ? '(at navel)' : '(narrowest)';
+  const hipGrp = document.getElementById('hip-group');
+  if (hipGrp) hipGrp.style.opacity = sex === 'female' ? '1' : '0.35';
+}
+document.querySelectorAll<HTMLInputElement>('input[name="bfsex"]').forEach(r => r.addEventListener('change', updateSex));
+updateSex();
+</script>
