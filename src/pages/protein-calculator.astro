@@ -331,17 +331,6 @@ prForm.addEventListener('submit', (e) => {
   (document.getElementById('pr-goal-text') as HTMLElement).textContent = GOAL_LABELS[goal];
 
   (document.getElementById('pr-results') as HTMLElement).style.display = 'block';
-});
-
-// unit toggle
-document.querySelectorAll<HTMLInputElement>('input[name="prunit"]').forEach(r => {
-  r.addEventListener('change', () => {
-    const lbl = r.value === 'imperial' ? 'lbs' : 'kg';
-    const unit = document.getElementById('pr-weight-unit');
-    if (unit) unit.textContent = lbl;
-    const wt = document.getElementById('pr-weight') as HTMLInputElement;
-    if (r.value === 'imperial') { wt.value = '165'; wt.min = '50';  wt.max = '660'; }
-    else                        { wt.value = '75';  wt.min = '20';  wt.max = '300'; }
-  });
+  (document.getElementById('pr-results') as HTMLElement).scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 });
 </script>

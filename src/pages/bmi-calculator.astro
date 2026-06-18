@@ -353,16 +353,12 @@ form.addEventListener('submit', e => {
 
   .formula-box { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px; font-size: 14px; margin-bottom: 12px; }
   .formula-box p { margin-bottom: 6px; }
-  .formula-box p:last-child { margin-bottom: 0; }
+  .formula-box code { background: #e5e7eb; border-radius: 4px; padding: 1px 5px; font-size: 13px; font-family: monospace; }
 
-  .bmi-extras { display: flex; gap: 10px; flex-wrap: wrap; margin: 14px 0 10px; }
-  .bmi-extra-chip {
-    flex: 1; min-width: 120px;
-    background: #f9fafb; border: 1px solid #e5e7eb;
-    border-radius: 10px; padding: 10px 14px;
-    display: flex; flex-direction: column; gap: 2px;
-  }
-  .bex-label { font-size: 10px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: .4px; }
-  .bex-val   { font-size: 20px; font-weight: 800; color: #16a34a; line-height: 1.2; }
-  .bex-hint  { font-size: 10px; color: #9ca3af; }
+  /* BMI extras chips */
+  .bmi-extras { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+  .bmi-extra-chip { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 10px 14px; min-width: 140px; flex: 1; }
+  .bex-label { font-size: 11px; font-weight: 700; text-transform: uppercase; color: #15803d; letter-spacing: .04em; display: block; margin-bottom: 3px; }
+  .bex-val   { font-size: 18px; font-weight: 800; color: #1f2937; display: block; }
+  .bex-hint  { font-size: 11px; color: #6b7280; display: block; margin-top: 2px; }
 </style>
