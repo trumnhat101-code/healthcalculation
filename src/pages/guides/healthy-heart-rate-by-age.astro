@@ -1,0 +1,150 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+
+const SITE = 'https://healthcalculation.com';
+const canonical = `${SITE}/guides/healthy-heart-rate-by-age`;
+
+const schemaArticle = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'What Is a Healthy Heart Rate by Age?',
+  description: 'Normal resting heart rate ranges by age, target heart rate zones for exercise, and what high or low heart rate means for your health.',
+  url: canonical,
+  datePublished: '2025-06-01',
+  dateModified: '2025-06-18',
+  author: { '@type': 'Organization', name: 'HealthCalculation.com' },
+  publisher: { '@type': 'Organization', name: 'HealthCalculation.com', url: SITE },
+};
+
+const schemaFaq = [
+  {
+    q: 'What is a normal resting heart rate for adults?',
+    a: 'A normal resting heart rate for adults is 60–100 beats per minute (bpm), according to the American Heart Association. Athletes and highly fit individuals often have resting heart rates of 40–60 bpm due to increased cardiac efficiency. Consistently above 100 bpm (tachycardia) or below 60 bpm (bradycardia) in non-athletes warrants medical evaluation.',
+  },
+  {
+    q: 'How do I calculate my maximum heart rate?',
+    a: 'The most widely used formula is the Tanaka formula: Max HR = 208 − (0.7 × age). This is more accurate than the older "220 minus age" formula, particularly for older adults. For example, a 40-year-old has an estimated max HR of 208 − (0.7 × 40) = 180 bpm. Your actual max HR can be measured during a graded exercise test.',
+  },
+  {
+    q: 'What heart rate zone should I train in to burn fat?',
+    a: 'The fat-burning zone is typically Zone 2: 60–70% of your maximum heart rate. At this intensity, your body relies primarily on fat oxidation for fuel. For a 35-year-old with a max HR of ~184 bpm, Zone 2 is approximately 110–129 bpm. However, total calorie burn (not fat percentage) determines weight loss — higher intensity zones burn more total calories even if the fat percentage is lower.',
+  },
+  {
+    q: 'Is a resting heart rate of 50 bpm normal?',
+    a: 'Yes, in most cases. A resting heart rate of 50 bpm is common in physically fit adults and endurance athletes. Regular aerobic exercise strengthens the heart muscle, allowing it to pump more blood per beat (higher stroke volume), which means it needs fewer beats per minute at rest. This is generally a positive sign of cardiovascular fitness.',
+  },
+  {
+    q: 'What causes a high resting heart rate?',
+    a: 'Common causes of an elevated resting heart rate (above 100 bpm) include dehydration, stress or anxiety, caffeine or stimulant use, fever or infection, anemia, thyroid disorders, poor cardiovascular fitness, and certain medications. Persistent tachycardia not explained by lifestyle factors should be evaluated by a physician.',
+  },
+];
+---
+
+<ToolLayout
+  title="Healthy Heart Rate by Age — Resting Rate & Training Zones"
+  description="Normal resting heart rate ranges by age, max heart rate formulas, and target heart rate zones for fat burn, cardio, and peak performance."
+  canonical={canonical}
+  schemaApp={schemaArticle}
+  schemaFaq={schemaFaq}
+  pageIcon="&#128147;"
+  heroTitle="What Is a Healthy Heart Rate by Age?"
+>
+
+<article class="guide-article">
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="/">Home</a><span>&#8250;</span><a href="/guides">Guides</a><span>&#8250;</span><span>Healthy Heart Rate</span>
+</nav>
+
+<p class="guide-intro">Your heart rate is one of the most immediate windows into your cardiovascular health. Whether you are checking your resting heart rate in the morning, training in a specific heart rate zone, or monitoring your fitness progress, knowing what numbers are normal — and what they mean — is essential.</p>
+
+<h2>Normal Resting Heart Rate by Age</h2>
+<p>Resting heart rate (RHR) is measured after sitting quietly for at least 5 minutes. The <strong>American Heart Association (AHA)</strong> defines a normal adult RHR as <strong>60–100 bpm</strong>. It typically decreases with age in fit individuals due to improved cardiac efficiency:</p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>Age Group</th><th>Normal RHR Range</th><th>Athlete Range</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Children (6–15)</td><td>70–100 bpm</td><td>—</td></tr>
+    <tr><td>Adults (18–25)</td><td>62–73 bpm</td><td>49–55 bpm</td></tr>
+    <tr><td>Adults (26–35)</td><td>62–73 bpm</td><td>49–54 bpm</td></tr>
+    <tr><td>Adults (36–45)</td><td>63–75 bpm</td><td>50–56 bpm</td></tr>
+    <tr><td>Adults (46–55)</td><td>63–76 bpm</td><td>50–57 bpm</td></tr>
+    <tr><td>Adults (56–65)</td><td>62–75 bpm</td><td>51–56 bpm</td></tr>
+    <tr><td>Adults (65+)</td><td>60–73 bpm</td><td>50–55 bpm</td></tr>
+  </tbody>
+</table>
+
+<h2>Maximum Heart Rate by Age</h2>
+<p>Maximum heart rate (HRmax) declines with age. The <strong>Tanaka formula</strong> — validated in a 2001 meta-analysis of 351 studies — is more accurate than the older "220 − age" formula, especially for adults over 40:</p>
+
+<p style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:10px;padding:14px 18px;font-family:monospace;font-size:15px;margin:16px 0">
+  HRmax = 208 − (0.7 × age)
+</p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>Age</th><th>Est. Max HR (Tanaka)</th><th>Est. Max HR (220−age)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>20</td><td>194 bpm</td><td>200 bpm</td></tr>
+    <tr><td>25</td><td>190 bpm</td><td>195 bpm</td></tr>
+    <tr><td>30</td><td>187 bpm</td><td>190 bpm</td></tr>
+    <tr><td>35</td><td>184 bpm</td><td>185 bpm</td></tr>
+    <tr><td>40</td><td>180 bpm</td><td>180 bpm</td></tr>
+    <tr><td>45</td><td>177 bpm</td><td>175 bpm</td></tr>
+    <tr><td>50</td><td>173 bpm</td><td>170 bpm</td></tr>
+    <tr><td>55</td><td>170 bpm</td><td>165 bpm</td></tr>
+    <tr><td>60</td><td>166 bpm</td><td>160 bpm</td></tr>
+    <tr><td>65</td><td>163 bpm</td><td>155 bpm</td></tr>
+  </tbody>
+</table>
+
+<h2>Target Heart Rate Zones for Exercise</h2>
+<p>Training zones are calculated as a percentage of your HRmax. The <strong>5-zone model</strong> used by most exercise physiologists and coaches:</p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>Zone</th><th>% of HRmax</th><th>Effort</th><th>Primary Benefit</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Zone 1 — Recovery</td><td>50–60%</td><td>Very easy</td><td>Active recovery, warm-up</td></tr>
+    <tr><td>Zone 2 — Fat Burn</td><td>60–70%</td><td>Light / conversational</td><td>Fat oxidation, aerobic base</td></tr>
+    <tr><td>Zone 3 — Aerobic</td><td>70–80%</td><td>Moderate</td><td>Cardiovascular endurance</td></tr>
+    <tr><td>Zone 4 — Threshold</td><td>80–90%</td><td>Hard</td><td>Lactate threshold, speed</td></tr>
+    <tr><td>Zone 5 — Max</td><td>90–100%</td><td>Maximum effort</td><td>Peak power, VO2 max</td></tr>
+  </tbody>
+</table>
+
+<h2>Resting Heart Rate and Cardiovascular Fitness</h2>
+<p>Lower resting heart rate is a reliable marker of cardiovascular fitness. A 2018 study in the <em>European Heart Journal</em> (n=800,000) found that a resting HR above 80 bpm was associated with significantly elevated risk of cardiovascular mortality compared to 45–60 bpm. Each 10 bpm increase in resting HR was associated with a 16% increase in all-cause mortality risk in men and 12% in women.</p>
+<p>Regular aerobic exercise — particularly sustained Zone 2 training — is the most effective way to lower resting heart rate over time. Even 150 minutes per week of moderate-intensity cardio can reduce RHR by 5–10 bpm within 8–12 weeks.</p>
+
+<h2>When to Be Concerned</h2>
+<p>Seek medical evaluation if you experience:</p>
+<ul>
+  <li>Resting HR consistently above 100 bpm (tachycardia) without obvious cause</li>
+  <li>Resting HR consistently below 60 bpm with symptoms of dizziness, fatigue, or fainting (bradycardia in non-athletes)</li>
+  <li>Irregular pulse or palpitations — skipped, racing, or fluttering beats</li>
+  <li>Heart rate that does not return to near-normal within 5 minutes of stopping moderate exercise</li>
+</ul>
+<p>A single elevated reading is rarely cause for alarm. Trend matters more than any single measurement — track your resting HR over days or weeks for a meaningful picture.</p>
+
+<h2>How to Measure Your Resting Heart Rate</h2>
+<p>For the most accurate reading: measure first thing in the morning before getting out of bed. Place two fingers (index and middle) on your wrist (radial artery) or neck (carotid artery). Count beats for 60 seconds, or count for 30 seconds and multiply by 2. Repeat 3 days in a row and average the results.</p>
+
+<!-- Guide CTA -->
+<div class="guide-cta-box" style="margin-top:32px">
+  <div class="gcta-icon">&#128147;</div>
+  <div class="gcta-body">
+    <div class="gcta-label">Free Tool</div>
+    <a href="/heart-rate-zone-calculator" class="gcta-title">Heart Rate Zone Calculator</a>
+    <p class="gcta-desc">Enter your age or measured max heart rate to instantly calculate all 5 training zones in bpm. Uses the Tanaka formula.</p>
+  </div>
+  <a href="/heart-rate-zone-calculator" class="gcta-btn">Calculate now &rarr;</a>
+</div>
+
+</article>
+
+</ToolLayout>
