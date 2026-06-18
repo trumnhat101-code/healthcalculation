@@ -36,6 +36,8 @@ const nav = [
 ];
 
 const iconMap: Record<string, string> = {
+  '/ideal-weight-calculator': '&#9878;',
+  '/body-fat-calculator':     '&#37;',
   '/calorie-tdee-calculator': '🔥',
   '/bmi-calculator':          '⚖️',
   '/macro-calculator':        '🥗',
@@ -485,7 +487,7 @@ const heroTitle   = title.split(' —')[0];
   <div class="page-hero" aria-hidden="true">
     <div class="wrap">
       <div class="ph-inner">
-        <span class="ph-icon">{pageIcon}</span>
+        <span class="ph-icon" set:html={pageIcon} />
         <div>
           <p class="ph-eyebrow">Free Calculator</p>
           <p class="ph-title">{heroTitle}</p>

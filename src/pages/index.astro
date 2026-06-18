@@ -165,7 +165,7 @@ const siteSchema = {
     <div class="tools-grid">
       {tools.map(({ href, title, desc, icon }) => (
         <a href={href} class="tool-card">
-          <div class="tool-icon">{icon}</div>
+          <div class="tool-icon" set:html={icon} />
           <div class="tool-title">{title}</div>
           <div class="tool-desc">{desc}</div>
           <span class="tool-arrow">→</span>
