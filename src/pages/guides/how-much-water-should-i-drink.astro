@@ -1,0 +1,166 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+
+const SITE = 'https://healthcalculation.com';
+const canonical = `${SITE}/guides/how-much-water-should-i-drink`;
+
+const schemaArticle = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'How Much Water Should I Drink Per Day?',
+  description: 'Science-backed daily water intake recommendations by weight, activity level, and climate — plus signs of dehydration and tips to drink more.',
+  url: canonical,
+  datePublished: '2025-06-01',
+  dateModified: '2025-06-18',
+  author: { '@type': 'Organization', name: 'HealthCalculation.com' },
+  publisher: { '@type': 'Organization', name: 'HealthCalculation.com', url: SITE },
+};
+
+const schemaFaq = [
+  {
+    q: 'How much water should I drink per day?',
+    a: 'The National Academies of Sciences recommends 3.7 liters (125 oz) of total water per day for men and 2.7 liters (91 oz) for women — from all beverages and food combined. Pure water intake targets are roughly 2.5–3.5 L/day for men and 2.0–2.5 L/day for women, adjusted for body weight, activity, and climate.',
+  },
+  {
+    q: 'Is the "8 glasses of water a day" rule accurate?',
+    a: 'The "8×8" rule (eight 8-oz glasses = 64 oz/day) is a convenient guideline but is not based on strong scientific evidence. Individual needs vary significantly by body weight, activity level, climate, and diet. Larger or more active individuals need considerably more than 64 oz, while smaller or sedentary individuals may need less.',
+  },
+  {
+    q: 'Does coffee and tea count toward daily water intake?',
+    a: 'Yes. Despite mild diuretic properties, caffeinated beverages like coffee and tea contribute net positive fluid when consumed in normal amounts (up to 3–4 cups per day). Research shows they do not cause net fluid loss in habitual consumers. The National Academies count all beverages — including coffee, tea, juice, and milk — toward total daily water intake.',
+  },
+  {
+    q: 'How do I know if I am drinking enough water?',
+    a: 'Urine color is the most practical indicator. Pale yellow (like lemonade) indicates adequate hydration. Dark yellow or amber signals dehydration. Clear urine may indicate over-hydration. Other signs of adequate hydration include urinating every 2–4 hours and rarely feeling thirsty. Persistent dark urine, dry mouth, fatigue, and headaches are signs to increase intake.',
+  },
+  {
+    q: 'Should I drink more water when exercising?',
+    a: 'Yes. The American College of Sports Medicine recommends drinking 400–600 mL (14–20 oz) of water 2 hours before exercise, sipping 150–250 mL (5–8 oz) every 15–20 minutes during exercise, and rehydrating after with 450–675 mL (16–24 oz) per pound of body weight lost through sweat. In hot or humid conditions, needs increase further.',
+  },
+];
+---
+
+<ToolLayout
+  title="How Much Water Should I Drink Per Day? [By Weight & Activity]"
+  description="Daily water intake recommendations by body weight, activity level, and climate. Includes hydration tables, urine color guide, and signs of dehydration."
+  canonical={canonical}
+  schemaApp={schemaArticle}
+  schemaFaq={schemaFaq}
+  pageIcon="&#128167;"
+  heroTitle="How Much Water Should I Drink Per Day?"
+>
+
+<article class="guide-article">
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="/">Home</a><span>&#8250;</span><a href="/guides">Guides</a><span>&#8250;</span><span>Daily Water Intake</span>
+</nav>
+
+<p class="guide-intro">Water is essential for every cell, organ, and system in the body — yet most adults are chronically underhydrated without realizing it. How much you need depends on your <strong>body weight</strong>, <strong>activity level</strong>, and <strong>climate</strong>. This guide breaks down the science and gives you practical targets.</p>
+
+<h2>Official Daily Water Intake Recommendations</h2>
+<p>The <strong>National Academies of Sciences, Engineering, and Medicine (NASEM)</strong> sets the most widely cited targets for total daily water intake from all sources (beverages + food):</p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>Group</th><th>Total Water (All Sources)</th><th>From Beverages Only</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Adult men (19+)</td><td>3.7 L (125 oz)</td><td>~3.0 L (101 oz)</td></tr>
+    <tr><td>Adult women (19+)</td><td>2.7 L (91 oz)</td><td>~2.2 L (74 oz)</td></tr>
+    <tr><td>Pregnant women</td><td>3.0 L (101 oz)</td><td>~2.3 L (78 oz)</td></tr>
+    <tr><td>Breastfeeding women</td><td>3.8 L (128 oz)</td><td>~3.1 L (105 oz)</td></tr>
+  </tbody>
+</table>
+
+<p>Note: about 20% of daily water intake typically comes from food (fruits, vegetables, soups). The beverage-only targets above reflect this.</p>
+
+<h2>Water Intake by Body Weight</h2>
+<p>A practical formula used by many registered dietitians: <strong>35 mL per kg of body weight per day</strong> (or ~0.5 oz per pound). This scales intake to body size:</p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>Body Weight</th><th>Daily Target (mL)</th><th>Daily Target (oz)</th><th>Approx. Glasses (8 oz)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>50 kg (110 lb)</td><td>1,750 mL</td><td>59 oz</td><td>~7 glasses</td></tr>
+    <tr><td>60 kg (132 lb)</td><td>2,100 mL</td><td>71 oz</td><td>~9 glasses</td></tr>
+    <tr><td>70 kg (154 lb)</td><td>2,450 mL</td><td>83 oz</td><td>~10 glasses</td></tr>
+    <tr><td>80 kg (176 lb)</td><td>2,800 mL</td><td>95 oz</td><td>~12 glasses</td></tr>
+    <tr><td>90 kg (198 lb)</td><td>3,150 mL</td><td>107 oz</td><td>~13 glasses</td></tr>
+    <tr><td>100 kg (220 lb)</td><td>3,500 mL</td><td>118 oz</td><td>~15 glasses</td></tr>
+  </tbody>
+</table>
+
+<h2>Activity Level Adjustments</h2>
+<p>Exercise significantly increases fluid loss through sweat. Add the following to your baseline target:</p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>Activity Level</th><th>Additional Water Needed</th><th>Notes</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Sedentary (desk job)</td><td>+0 mL</td><td>Use baseline weight-based target</td></tr>
+    <tr><td>Lightly active (30 min/day)</td><td>+350–500 mL</td><td>~1–2 extra glasses</td></tr>
+    <tr><td>Moderately active (60 min/day)</td><td>+500–750 mL</td><td>~2–3 extra glasses</td></tr>
+    <tr><td>Very active (90+ min/day)</td><td>+750–1,000 mL</td><td>~3–4 extra glasses</td></tr>
+    <tr><td>Endurance athlete (2+ hrs)</td><td>+1,000–2,000 mL</td><td>Electrolytes also needed</td></tr>
+  </tbody>
+</table>
+
+<h2>Climate Adjustments</h2>
+<p>Hot or humid environments increase sweat rate even at rest. If you live in or travel to a warm climate, add 500–1,000 mL (17–34 oz) per day above your baseline. High altitude (above 2,500 m / 8,200 ft) also increases fluid loss through faster breathing.</p>
+
+<h2>Urine Color — The Easiest Hydration Check</h2>
+<p>You don't need to count every milliliter. Your urine color is the most practical real-time indicator:</p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>Urine Color</th><th>Hydration Status</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Clear / colorless</td><td>Over-hydrated</td><td>Reduce intake slightly</td></tr>
+    <tr><td>Pale yellow (lemonade)</td><td>Well hydrated ✅</td><td>Maintain current intake</td></tr>
+    <tr><td>Yellow</td><td>Adequate</td><td>Drink a glass soon</td></tr>
+    <tr><td>Dark yellow / amber</td><td>Dehydrated</td><td>Drink water now</td></tr>
+    <tr><td>Brown / orange</td><td>Severely dehydrated</td><td>Hydrate urgently; see a doctor if persistent</td></tr>
+  </tbody>
+</table>
+
+<h2>Signs of Dehydration</h2>
+<p>Even mild dehydration (1–2% of body weight) impairs cognitive performance, mood, and physical endurance. Common signs include:</p>
+<ul>
+  <li>Dark urine or infrequent urination (fewer than 4 times per day)</li>
+  <li>Dry mouth, lips, or skin</li>
+  <li>Headache or difficulty concentrating</li>
+  <li>Fatigue or low energy not explained by sleep</li>
+  <li>Feeling thirsty — <em>thirst is already a late signal of dehydration</em></li>
+  <li>Muscle cramps during or after exercise</li>
+</ul>
+
+<h2>Does Coffee Count?</h2>
+<p>Yes — despite being a mild diuretic, caffeinated beverages <strong>contribute net fluid</strong> in habitual consumers. A 2014 study in PLOS ONE found that moderate coffee consumption (3–4 cups/day) was equivalent to water for hydration status. The same applies to tea. You do not need to "subtract" coffee from your daily water target.</p>
+
+<h2>5 Practical Tips to Drink More Water</h2>
+<ul>
+  <li><strong>Drink a glass before every meal</strong> — 3 built-in reminders per day, and it may reduce appetite.</li>
+  <li><strong>Use a marked water bottle</strong> — visual progress cues significantly increase intake.</li>
+  <li><strong>Set hourly reminders</strong> — especially if you work at a desk and tend to forget.</li>
+  <li><strong>Eat water-rich foods</strong> — cucumber (96% water), watermelon (92%), strawberries (91%), and soups all count.</li>
+  <li><strong>Drink before you feel thirsty</strong> — thirst appears after you are already 1–2% dehydrated.</li>
+</ul>
+
+<!-- Guide CTA -->
+<div class="guide-cta-box" style="margin-top:32px">
+  <div class="gcta-icon">&#128167;</div>
+  <div class="gcta-body">
+    <div class="gcta-label">Free Tool</div>
+    <a href="/water-intake-calculator" class="gcta-title">Water Intake Calculator</a>
+    <p class="gcta-desc">Get your personalized daily hydration target based on your weight, activity level, and climate. Takes 30 seconds.</p>
+  </div>
+  <a href="/water-intake-calculator" class="gcta-btn">Calculate now &rarr;</a>
+</div>
+
+</article>
+
+</ToolLayout>
