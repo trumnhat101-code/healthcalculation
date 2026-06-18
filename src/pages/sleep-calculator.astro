@@ -1,0 +1,329 @@
+---
+import ToolLayout from '../layouts/ToolLayout.astro';
+import AdSlot from '../components/AdSlot.astro';
+import AffiliateCTA from '../components/AffiliateCTA.astro';
+import Disclaimer from '../components/Disclaimer.astro';
+import Faq from '../components/Faq.astro';
+import RelatedTools from '../components/RelatedTools.astro';
+
+const SITE = 'https://healthcalculation.com';
+
+const faq = [
+  {
+    q: 'How long is one sleep cycle?',
+    a: 'The average sleep cycle lasts about 90 minutes and consists of four stages: NREM stages 1, 2, 3 (deep sleep), and REM sleep. Most adults need 5–6 complete cycles per night (7.5–9 hours) to feel fully rested.',
+  },
+  {
+    q: 'Why do I feel groggy when I sleep 8 hours?',
+    a: 'Waking up in the middle of a deep sleep stage (NREM 3) causes "sleep inertia" — the groggy, disoriented feeling. Timing your alarm to fall at the end of a 90-minute cycle means you wake during light sleep and feel more alert.',
+  },
+  {
+    q: 'How many hours of sleep do adults need?',
+    a: 'The CDC and American Academy of Sleep Medicine recommend 7–9 hours per night for adults 18–60. Teens need 8–10 hours. Consistently sleeping fewer than 7 hours is linked to increased risk of obesity, heart disease, and impaired cognitive function.',
+  },
+  {
+    q: 'Does a mattress affect sleep quality?',
+    a: 'Yes. Research shows that a medium-firm mattress significantly reduces back pain and improves sleep quality compared to a worn or unsuitable mattress. Replacing an old mattress can meaningfully improve both sleep duration and subjective sleep quality.',
+  },
+  {
+    q: 'What is the best time to go to bed?',
+    a: 'Working backwards from your required wake-up time in 90-minute intervals (plus 15 minutes to fall asleep) gives your optimal bedtime. For example, to wake at 7:00 AM, aim to fall asleep by 11:45 PM (5 cycles) or 10:15 PM (6 cycles).',
+  },
+];
+
+const affiliates = [
+  {
+    href: '#AFFILIATE-SAATVA',
+    label: 'Saatva',
+    sub: 'Luxury innerspring mattress · Free white-glove delivery',
+    badge: 'Best Quality',
+  },
+  {
+    href: '#AFFILIATE-NECTAR',
+    label: 'Nectar Sleep',
+    sub: 'Memory foam mattress · 365-night trial + Forever warranty',
+    badge: 'Best Value',
+  },
+  {
+    href: '#AFFILIATE-HELIX',
+    label: 'Helix Sleep',
+    sub: 'Personalized mattress · Matched to your sleep style',
+  },
+];
+
+const related = [
+  { href: '/calorie-tdee-calculator', label: 'Calorie Calculator', desc: 'Sleep affects metabolism' },
+  { href: '/bmi-calculator',          label: 'BMI Calculator',     desc: 'Track your health metrics' },
+  { href: '/macro-calculator',        label: 'Macro Calculator',   desc: 'Fuel your recovery right' },
+];
+
+const schemaApp = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Sleep Calculator',
+  applicationCategory: 'HealthApplication',
+  operatingSystem: 'Web',
+  url: `${SITE}/sleep-calculator`,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  description: 'Free sleep calculator. Find the best times to sleep or wake up based on 90-minute sleep cycles.',
+};
+---
+
+<ToolLayout
+  title="Sleep Calculator — Best Bedtime & Wake-Up Times (Free)"
+  description="Find the best time to go to sleep or wake up based on 90-minute sleep cycles. Wake up refreshed, not groggy. Free sleep cycle calculator."
+  canonical={`${SITE}/sleep-calculator`}
+  schemaApp={schemaApp}
+  schemaFaq={faq}
+>
+
+  <div class="page-layout">
+    <div class="main-col">
+
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span>›</span><span>Sleep Calculator</span>
+      </nav>
+
+      <h1>Sleep Calculator</h1>
+      <p class="lead">
+        Wake up feeling refreshed by timing your sleep to <strong>complete 90-minute cycles</strong>.
+        Calculate when to go to bed — or what time to set your alarm.
+      </p>
+
+      <div class="card">
+        <!-- Mode toggle -->
+        <div class="field-group" style="margin-bottom:20px">
+          <label class="field-label">I want to…</label>
+          <div class="seg-group">
+            <label class="seg-opt"><input type="radio" name="mode" value="wakeup" checked /><span>Wake up at a set time</span></label>
+            <label class="seg-opt"><input type="radio" name="mode" value="bedtime" /><span>Go to bed now</span></label>
+          </div>
+        </div>
+
+        <!-- Wake-up mode -->
+        <div id="wakeupSection">
+          <label class="field-label" for="wakeTime">I want to wake up at</label>
+          <div class="time-input-row">
+            <input type="time" id="wakeTime" name="wakeTime" value="07:00" />
+            <button type="button" class="btn-calc" id="calcWake" style="width:auto;padding:10px 22px">
+              Calculate Bedtimes →
+            </button>
+          </div>
+        </div>
+
+        <!-- Bedtime mode -->
+        <div id="bedtimeSection" style="display:none">
+          <p class="field-label">If you fall asleep in 15 minutes…</p>
+          <button type="button" class="btn-calc" id="calcBed" style="margin-top:8px">
+            Calculate Wake-Up Times →
+          </button>
+        </div>
+
+        <!-- Results -->
+        <div id="sleepResults" hidden>
+          <div class="sleep-res-header" id="sleepResHeader"></div>
+          <div class="sleep-times" id="sleepTimes"></div>
+          <p class="sleep-tip" id="sleepTip"></p>
+          <Disclaimer short={true} />
+        </div>
+      </div>
+
+      <div id="sleepAff" hidden>
+        <AffiliateCTA
+          heading="Better Sleep Starts with the Right Mattress"
+          items={affiliates}
+        />
+      </div>
+
+      <AdSlot label="In-content" />
+
+      <h2>How Sleep Cycles Work</h2>
+      <p>
+        Sleep isn't a single state — your brain cycles through stages roughly every 90 minutes.
+        Each full cycle includes light sleep (NREM 1 & 2), deep restorative sleep (NREM 3), and
+        REM sleep (when dreaming and memory consolidation happen).
+      </p>
+      <p>
+        Most adults need <strong>5–6 complete cycles</strong> per night. Waking during deep sleep
+        (NREM 3) produces sleep inertia — the heavy, groggy feeling you get when an alarm yanks
+        you out of deep sleep. Waking at the <em>end</em> of a cycle, during light sleep, feels
+        natural and alert.
+      </p>
+
+      <div class="cycle-visual" aria-label="Sleep cycle diagram">
+        <div class="cv-row">
+          <span class="cv-label">Light Sleep</span>
+          <div class="cv-bars">
+            {[1,2,3,4,5].map(i => (
+              <div class="cv-seg light">Cycle {i}<br/><small>~20 min</small></div>
+            ))}
+          </div>
+        </div>
+        <div class="cv-row">
+          <span class="cv-label">Deep Sleep</span>
+          <div class="cv-bars">
+            {[1,2,3,4,5].map(i => (
+              <div class="cv-seg deep">~30 min</div>
+            ))}
+          </div>
+        </div>
+        <div class="cv-row">
+          <span class="cv-label">REM Sleep</span>
+          <div class="cv-bars">
+            {[1,2,3,4,5].map(i => (
+              <div class="cv-seg rem">~40 min</div>
+            ))}
+          </div>
+        </div>
+        <p class="cv-note">Each column = 1 full 90-min cycle · 5–6 cycles = 7.5–9 hours</p>
+      </div>
+
+      <Faq items={faq} />
+      <RelatedTools items={related} />
+      <Disclaimer />
+    </div>
+
+    <aside class="sidebar">
+      <AdSlot label="Sidebar" format="rectangle" />
+      <div class="card" style="font-size:13px;color:#374151;margin-top:0">
+        <p style="font-weight:700;margin-bottom:8px">Sleep Tips</p>
+        <p>🌙 Keep a consistent bedtime ± 30 min</p>
+        <p>📱 Avoid screens 60 min before bed</p>
+        <p>🌡️ Cool room (65–68°F) helps deep sleep</p>
+        <p style="margin-bottom:0">☕ No caffeine after 2pm</p>
+      </div>
+    </aside>
+  </div>
+
+</ToolLayout>
+
+<script>
+const sleepResults = document.getElementById('sleepResults') as HTMLDivElement;
+const affSec       = document.getElementById('sleepAff') as HTMLDivElement;
+const FALL_ASLEEP  = 15; // minutes to fall asleep
+
+function formatTime(date: Date): string {
+  let h = date.getHours(), m = date.getMinutes();
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  h = h % 12 || 12;
+  return `${h}:${String(m).padStart(2, '0')} ${ampm}`;
+}
+
+function addMinutes(date: Date, mins: number): Date {
+  return new Date(date.getTime() + mins * 60000);
+}
+
+function showResults(
+  header: string,
+  times: Array<{ time: Date; cycles: number }>,
+  tip: string
+) {
+  (document.getElementById('sleepResHeader') as HTMLElement).textContent = header;
+  const timesEl = document.getElementById('sleepTimes') as HTMLElement;
+  timesEl.innerHTML = times.map(({ time, cycles }) => `
+    <div class="sleep-time-card ${cycles === 6 || cycles === 5 ? 'best' : ''}">
+      <div class="st-time">${formatTime(time)}</div>
+      <div class="st-cycles">${cycles} cycles · ${cycles * 1.5}h sleep</div>
+      ${cycles === 6 ? '<span class="st-badge">Ideal</span>' : cycles === 5 ? '<span class="st-badge muted">Good</span>' : ''}
+    </div>`
+  ).join('');
+  (document.getElementById('sleepTip') as HTMLElement).textContent = tip;
+  sleepResults.hidden = false;
+  affSec.hidden = false;
+  sleepResults.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// Mode toggle
+document.querySelectorAll<HTMLInputElement>('input[name="mode"]').forEach(r => {
+  r.addEventListener('change', () => {
+    const isWake = r.value === 'wakeup';
+    (document.getElementById('wakeupSection')  as HTMLElement).style.display = isWake ? 'block' : 'none';
+    (document.getElementById('bedtimeSection') as HTMLElement).style.display = isWake ? 'none' : 'block';
+    sleepResults.hidden = true;
+    affSec.hidden = true;
+  });
+});
+
+// Wake-up mode
+document.getElementById('calcWake')!.addEventListener('click', () => {
+  const val = (document.getElementById('wakeTime') as HTMLInputElement).value;
+  if (!val) return;
+  const [hh, mm] = val.split(':').map(Number);
+  const wakeDate = new Date(); wakeDate.setHours(hh, mm, 0, 0);
+  const bedtimes = [6, 5, 4].map(cycles => ({
+    time: addMinutes(wakeDate, -(cycles * 90 + FALL_ASLEEP)),
+    cycles,
+  }));
+  showResults(
+    `To wake up at ${formatTime(wakeDate)}, try falling asleep at:`,
+    bedtimes,
+    '⏰ Times include 15 min to fall asleep. Aim for 5–6 full cycles.'
+  );
+});
+
+// Bedtime now mode
+document.getElementById('calcBed')!.addEventListener('click', () => {
+  const now = new Date();
+  const sleepStart = addMinutes(now, FALL_ASLEEP);
+  const wakeTimes = [6, 5, 4, 3].map(cycles => ({
+    time: addMinutes(sleepStart, cycles * 90),
+    cycles,
+  }));
+  showResults(
+    `If you fall asleep at ${formatTime(sleepStart)}, wake up at:`,
+    wakeTimes,
+    '💤 Waking after 5–6 cycles (7.5–9 hours) is optimal for most adults.'
+  );
+});
+</script>
+
+<style>
+  .field-label { display: block; font-size: 12px; font-weight: 700; color: #6b7280; margin-bottom: 5px; text-transform: uppercase; letter-spacing: .4px; }
+  .seg-group { display: flex; gap: 8px; flex-wrap: wrap; }
+  .seg-opt { flex: 1; min-width: 140px; }
+  .seg-opt input { display: none; }
+  .seg-opt span { display: block; text-align: center; padding: 8px 12px; border: 1.5px solid #e5e7eb; border-radius: 8px; font-size: 14px; cursor: pointer; color: #374151; transition: all .15s; }
+  .seg-opt input:checked + span { border-color: #16a34a; color: #16a34a; background: #f0fdf4; font-weight: 700; }
+
+  .time-input-row { display: flex; gap: 12px; align-items: center; margin-top: 6px; flex-wrap: wrap; }
+  input[type="time"] { padding: 10px 14px; border: 1.5px solid #e5e7eb; border-radius: 9px; font-size: 20px; font-weight: 700; color: #1f2937; outline: none; background: #fff; cursor: pointer; }
+  input[type="time"]:focus { border-color: #16a34a; }
+  .btn-calc { width: 100%; margin-top: 14px; padding: 13px; background: #16a34a; color: #fff; font-size: 15px; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; transition: background .15s; }
+  .btn-calc:hover { background: #15803d; }
+
+  /* Sleep results */
+  #sleepResults { margin-top: 20px; padding-top: 18px; border-top: 1px solid #e5e7eb; }
+  .sleep-res-header { font-size: 14px; color: #6b7280; margin-bottom: 12px; }
+  .sleep-times { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; }
+  .sleep-time-card {
+    position: relative;
+    background: #f9fafb;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 14px 20px;
+    text-align: center;
+    min-width: 120px;
+    flex: 1;
+  }
+  .sleep-time-card.best { background: #e7f7ec; border-color: #86efac; }
+  .st-time   { font-size: 22px; font-weight: 800; color: #1f2937; }
+  .st-cycles { font-size: 12px; color: #6b7280; margin-top: 3px; }
+  .st-badge  {
+    position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+    background: #16a34a; color: #fff; font-size: 10px; font-weight: 700;
+    border-radius: 4px; padding: 2px 8px; white-space: nowrap;
+  }
+  .st-badge.muted { background: #6b7280; }
+  .sleep-tip { font-size: 13px; color: #6b7280; margin-top: 8px; margin-bottom: 0; }
+
+  /* Cycle visual */
+  .cycle-visual { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px; margin: 16px 0 24px; }
+  .cv-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .cv-label { font-size: 11px; font-weight: 700; color: #6b7280; width: 72px; text-align: right; flex-shrink: 0; }
+  .cv-bars { display: flex; gap: 4px; flex: 1; }
+  .cv-seg { flex: 1; border-radius: 4px; padding: 6px 4px; font-size: 9px; text-align: center; color: #fff; font-weight: 600; }
+  .cv-seg.light { background: #93c5fd; }
+  .cv-seg.deep  { background: #7c3aed; }
+  .cv-seg.rem   { background: #0891b2; }
+  .cv-note { font-size: 11px; color: #9ca3af; margin-top: 8px; margin-bottom: 0; text-align: center; }
+</style>

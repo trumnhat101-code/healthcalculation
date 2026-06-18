@@ -1,0 +1,14 @@
+# Cloudflare Pages _redirects
+# Format: /old-path  /new-path  status-code
+
+# www → non-www (backup — chính xử lý qua CF Page Rule / DNS)
+# https://www.yourdomain.com/*  https://yourdomain.com/:splat  301
+
+# Legacy URL aliases (thêm khi cần)
+# /calorie  /calorie-tdee-calculator  301
+# /tdee     /calorie-tdee-calculator  301
+# /bmi      /bmi-calculator           301
+# /macros   /macro-calculator         301
+# /sleep    /sleep-calculator         301
+
+# 404 fallback — CF Pages xử lý tự động bằng 404.html nếu có

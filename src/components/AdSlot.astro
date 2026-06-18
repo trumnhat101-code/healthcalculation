@@ -1,0 +1,50 @@
+---
+/**
+ * AdSlot.astro — placeholder AdSense / future ad unit
+ * Props:
+ *   slot   — ad slot ID (từ AdSense dashboard)
+ *   format — 'auto' | 'rectangle' | 'horizontal' (default: 'auto')
+ *   label  — label cho placeholder khi chưa có ad (default: 'Advertisement')
+ */
+export interface Props {
+  slot?: string;
+  format?: 'auto' | 'rectangle' | 'horizontal';
+  label?: string;
+}
+const { slot = 'SLOT_ID', format = 'auto', label = 'Advertisement' } = Astro.props;
+const PUB = 'ca-pub-XXXX'; // TODO: thay pub ID thật
+
+// Khi có AdSense approval → uncomment <ins> block, xoá .ad-placeholder
+---
+
+<!-- AdSlot: {label} -->
+<div class="ad-placeholder" aria-label="Advertisement">
+  Ad · {label}
+</div>
+
+<!--
+Uncomment khi được AdSense approve:
+<ins class="adsbygoogle"
+  style="display:block"
+  data-ad-client={PUB}
+  data-ad-slot={slot}
+  data-ad-format={format}
+  data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+-->
+
+<style>
+  .ad-placeholder {
+    background: #f4faf6;
+    border: 1px dashed #b9dcc5;
+    border-radius: 10px;
+    min-height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #8fb3a0;
+    font-size: 11px;
+    text-align: center;
+    margin: 18px 0;
+  }
+</style>

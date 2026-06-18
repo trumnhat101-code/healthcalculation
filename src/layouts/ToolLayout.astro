@@ -1,0 +1,250 @@
+---
+/**
+ * ToolLayout.astro — layout dùng chung cho mọi tool page
+ * Props:
+ *   title        — <title> tag (chứa keyword chính)
+ *   description  — meta description (150–160 ký tự)
+ *   canonical    — URL tuyệt đối của trang này
+ *   schemaApp    — JSON-LD WebApplication object (optional)
+ *   schemaFaq    — mảng { q, a } cho FAQPage schema (optional)
+ *   color        — màu accent hex (default: #16a34a xanh lá)
+ */
+export interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  schemaApp?: Record<string, unknown>;
+  schemaFaq?: Array<{ q: string; a: string }>;
+  color?: string;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  schemaApp,
+  schemaFaq,
+  color = '#16a34a',
+} = Astro.props;
+
+// TODO: thay pub ID thật khi có AdSense
+const ADSENSE_PUB = 'ca-pub-XXXX';
+
+const faqSchema = schemaFaq && schemaFaq.length > 0
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: schemaFaq.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    }
+  : null;
+
+// Nav links — cập nhật khi thêm tool
+const nav = [
+  { href: '/calorie-tdee-calculator', label: 'Calorie' },
+  { href: '/bmi-calculator', label: 'BMI' },
+  { href: '/macro-calculator', label: 'Macro' },
+  { href: '/sleep-calculator', label: 'Sleep' },
+  { href: '/', label: 'All Tools' },
+];
+
+const currentPath = new URL(canonical).pathname;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:type" content="website" />
+
+  <!-- JSON-LD: WebApplication -->
+  {schemaApp && (
+    <script type="application/ld+json" set:html={JSON.stringify(schemaApp)} />
+  )}
+  <!-- JSON-LD: FAQPage -->
+  {faqSchema && (
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  )}
+
+  <!-- AdSense — uncomment khi được approve
+  <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_PUB}`} crossorigin="anonymous"></script>
+  -->
+
+  <style define:vars={{ ac: color }}>
+    :root {
+      --ac: var(--ac-override, #16a34a);
+      --bg: #f6faf7;
+      --card: #fff;
+      --bd: #e5e7eb;
+      --tx: #1f2937;
+      --mut: #6b7280;
+      --radius: 12px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--tx);
+      background: var(--bg);
+      line-height: 1.65;
+      font-size: 16px;
+    }
+    a { color: var(--ac); }
+    img { max-width: 100%; height: auto; }
+
+    /* ── Header ── */
+    .site-header {
+      background: #fff;
+      border-bottom: 1px solid var(--bd);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .site-header .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 58px;
+    }
+    .logo {
+      font-weight: 800;
+      color: var(--ac);
+      font-size: 18px;
+      text-decoration: none;
+      letter-spacing: -.3px;
+    }
+    .site-nav { display: flex; gap: 4px; }
+    .site-nav a {
+      color: var(--mut);
+      text-decoration: none;
+      font-size: 13px;
+      padding: 5px 10px;
+      border-radius: 6px;
+      transition: background .15s, color .15s;
+    }
+    .site-nav a:hover,
+    .site-nav a[aria-current="page"] {
+      background: #f0fdf4;
+      color: var(--ac);
+    }
+
+    /* ── Wrap / Layout ── */
+    .wrap { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
+    .page-layout {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 28px;
+      padding: 32px 0 48px;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .page-layout { grid-template-columns: 1fr; }
+      .sidebar { order: 3; }
+    }
+
+    /* ── Typography ── */
+    h1 { font-size: 28px; font-weight: 800; margin-bottom: 6px; line-height: 1.2; }
+    h2 { font-size: 20px; font-weight: 700; margin: 28px 0 10px; }
+    h3 { font-size: 16px; font-weight: 700; margin: 20px 0 6px; }
+    p { margin-bottom: 12px; }
+    .lead { color: var(--mut); font-size: 15px; margin-bottom: 20px; max-width: 680px; }
+
+    /* ── Card ── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--bd);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    /* ── Footer ── */
+    .site-footer {
+      background: #fff;
+      border-top: 1px solid var(--bd);
+      padding: 28px 0;
+      margin-top: 40px;
+    }
+    .site-footer .wrap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--mut);
+    }
+    .site-footer a { color: var(--mut); text-decoration: none; }
+    .site-footer a:hover { color: var(--ac); }
+    .footer-links { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    /* ── Breadcrumb ── */
+    .breadcrumb {
+      font-size: 12px;
+      color: var(--mut);
+      margin-bottom: 10px;
+    }
+    .breadcrumb a { color: var(--mut); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--ac); }
+    .breadcrumb span { margin: 0 5px; }
+
+    /* ── Ad placeholder ── */
+    .ad-placeholder {
+      background: #f4faf6;
+      border: 1px dashed #b9dcc5;
+      border-radius: 10px;
+      min-height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #8fb3a0;
+      font-size: 11px;
+      text-align: center;
+      margin: 18px 0;
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="/">HealthCalcs.com</a>
+    <nav class="site-nav" aria-label="Main navigation">
+      {nav.map(({ href, label }) => (
+        <a href={href} aria-current={currentPath === href ? 'page' : undefined}>{label}</a>
+      ))}
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <slot />
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© {new Date().getFullYear()} HealthCalcs.com — For informational purposes only. Not medical advice.</span>
+    <div class="footer-links">
+      <a href="/about">About</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/disclaimer">Disclaimer</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+---
+/**
+ * RelatedTools.astro — internal links giữa các tool (tăng pageview/phiên)
+ * Props:
+ *   items — mảng { href, label, desc }
+ */
+export interface ToolLink { href: string; label: string; desc: string; }
+export interface Props { items: ToolLink[]; }
+const { items } = Astro.props;
+---
+
+<section class="related-tools" aria-label="Related calculators">
+  <h2>Related Calculators</h2>
+  <div class="rel-grid">
+    {items.map(({ href, label, desc }) => (
+      <a href={href} class="rel-card">
+        <span class="rel-label">{label}</span>
+        <span class="rel-desc">{desc}</span>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .related-tools { margin-top: 36px; }
+  .related-tools h2 { margin-bottom: 14px; }
+  .rel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+  }
+  .rel-card {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-decoration: none;
+    color: #1f2937;
+    transition: box-shadow .15s, border-color .15s;
+  }
+  .rel-card:hover {
+    border-color: #86efac;
+    box-shadow: 0 2px 10px rgba(22,163,74,.12);
+  }
+  .rel-label { font-weight: 700; font-size: 14px; color: #16a34a; }
+  .rel-desc  { font-size: 12px; color: #6b7280; }
+</style>

@@ -1,0 +1,333 @@
+---
+import ToolLayout from '../layouts/ToolLayout.astro';
+import AdSlot from '../components/AdSlot.astro';
+import AffiliateCTA from '../components/AffiliateCTA.astro';
+import Disclaimer from '../components/Disclaimer.astro';
+import Faq from '../components/Faq.astro';
+import RelatedTools from '../components/RelatedTools.astro';
+
+const SITE = 'https://healthcalculation.com';
+
+const faq = [
+  {
+    q: 'What are macros in nutrition?',
+    a: 'Macros (macronutrients) are the three main nutrients your body uses for energy: protein (4 cal/g), carbohydrates (4 cal/g), and fat (9 cal/g). Tracking macros helps you hit body composition goals more precisely than counting calories alone.',
+  },
+  {
+    q: 'How much protein do I need per day?',
+    a: 'For muscle building or fat loss, most research supports 0.7–1.0g of protein per pound of body weight. Sedentary individuals need less: the USDA minimum RDA is 0.36g/lb, but this is for preventing deficiency, not optimizing body composition.',
+  },
+  {
+    q: 'What is the best macro ratio for weight loss?',
+    a: 'For fat loss, high-protein ratios (30–35% protein) help preserve muscle while in a deficit. A common ratio is 35% protein / 35% carbs / 30% fat. Keto diets use ~5% carbs / 70% fat / 25% protein, which works for some but is not necessary.',
+  },
+  {
+    q: 'Should I count net carbs or total carbs?',
+    a: 'For general health, total carbs is the standard. For keto, net carbs (total carbs minus fiber) is used because fiber does not raise blood sugar. This calculator uses total carbs by default.',
+  },
+];
+
+const affiliates = [
+  {
+    href: '#AFFILIATE-TRIFECTA',
+    label: 'Trifecta Nutrition',
+    sub: 'Macro-balanced meal prep · Organic, chef-prepared meals',
+    badge: 'Top Pick',
+  },
+  {
+    href: '#AFFILIATE-GREEN-CHEF',
+    label: 'Green Chef',
+    sub: 'Keto & paleo meal kits · USDA-certified organic',
+  },
+  {
+    href: '#AFFILIATE-TRANSPARENT-LABS',
+    label: 'Transparent Labs',
+    sub: 'High-quality protein supplements · No artificial fillers',
+  },
+];
+
+const related = [
+  { href: '/calorie-tdee-calculator', label: 'Calorie Calculator', desc: 'Find your TDEE first' },
+  { href: '/bmi-calculator',          label: 'BMI Calculator',     desc: 'Check your weight category' },
+  { href: '/sleep-calculator',        label: 'Sleep Calculator',   desc: 'Sleep affects metabolism too' },
+];
+
+const schemaApp = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Macro Calculator',
+  applicationCategory: 'HealthApplication',
+  operatingSystem: 'Web',
+  url: `${SITE}/macro-calculator`,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  description: 'Free macro calculator. Find your daily protein, carbs, and fat targets based on your goal.',
+};
+---
+
+<ToolLayout
+  title="Macro Calculator — Daily Protein, Carbs & Fat Targets (Free)"
+  description="Calculate your daily macro targets — protein, carbohydrates, and fat — based on your weight, activity level, and goal. Free macronutrient calculator."
+  canonical={`${SITE}/macro-calculator`}
+  schemaApp={schemaApp}
+  schemaFaq={faq}
+>
+
+  <div class="page-layout">
+    <div class="main-col">
+
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span>›</span><span>Macro Calculator</span>
+      </nav>
+
+      <h1>Macro Calculator</h1>
+      <p class="lead">
+        Get your personalized <strong>protein, carbohydrate, and fat targets</strong> based on
+        your body stats and goal. Works for weight loss, muscle gain, and maintenance.
+      </p>
+
+      <div class="card">
+        <form id="macroForm" novalidate>
+          <!-- Units -->
+          <div class="field-group" style="margin-bottom:16px">
+            <label class="field-label">Units</label>
+            <div class="seg-group">
+              <label class="seg-opt"><input type="radio" name="units" value="us" checked /><span>US (lbs, ft/in)</span></label>
+              <label class="seg-opt"><input type="radio" name="units" value="metric" /><span>Metric (kg, cm)</span></label>
+            </div>
+          </div>
+          <!-- Sex -->
+          <div class="field-group" style="margin-bottom:16px">
+            <label class="field-label">Biological Sex</label>
+            <div class="seg-group">
+              <label class="seg-opt"><input type="radio" name="sex" value="m" checked /><span>Male</span></label>
+              <label class="seg-opt"><input type="radio" name="sex" value="f" /><span>Female</span></label>
+            </div>
+          </div>
+          <!-- Age / Weight / Height -->
+          <div class="grid-3">
+            <div class="field-group">
+              <label class="field-label" for="mAge">Age</label>
+              <input type="number" id="mAge" name="age" min="15" max="100" placeholder="28" required />
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="mWeight">Weight</label>
+              <input type="number" id="mWeight" name="weight" min="1" placeholder="155" required />
+              <span class="field-unit" id="mWeightUnit">lbs</span>
+            </div>
+            <div class="field-group">
+              <label class="field-label">Height</label>
+              <div class="ft-in" id="mFtIn">
+                <input type="number" id="mFt" name="heightFt" min="3" max="8" placeholder="5" aria-label="Feet" />
+                <span class="field-sep">ft</span>
+                <input type="number" id="mIn" name="heightIn" min="0" max="11" placeholder="7" aria-label="Inches" />
+                <span class="field-sep">in</span>
+              </div>
+              <input type="number" id="mCm" name="heightCm" min="100" max="250" placeholder="170" style="display:none" aria-label="Height cm" />
+            </div>
+          </div>
+          <!-- Activity + Goal + Diet -->
+          <div class="grid-3" style="margin-top:14px">
+            <div class="field-group">
+              <label class="field-label" for="mActivity">Activity Level</label>
+              <select id="mActivity" name="activity">
+                <option value="1.2">Sedentary</option>
+                <option value="1.375">Lightly active</option>
+                <option value="1.55" selected>Moderately active</option>
+                <option value="1.725">Very active</option>
+                <option value="1.9">Extra active</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="mGoal">Goal</label>
+              <select id="mGoal" name="goal">
+                <option value="-500">Lose 1 lb/wk (−500 cal)</option>
+                <option value="-250">Lose 0.5 lb/wk (−250 cal)</option>
+                <option value="0" selected>Maintain weight</option>
+                <option value="250">Gain 0.5 lb/wk (+250 cal)</option>
+                <option value="500">Gain 1 lb/wk (+500 cal)</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="mDiet">Diet Style</label>
+              <select id="mDiet" name="diet">
+                <option value="balanced">Balanced (30/40/30)</option>
+                <option value="highprotein">High Protein (40/30/30)</option>
+                <option value="keto">Keto (5/70/25)</option>
+                <option value="lowfat">Low Fat (25/55/20)</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-calc">Calculate My Macros →</button>
+        </form>
+
+        <div id="macroResults" hidden>
+          <div class="macro-total" id="macroTotal"></div>
+          <div class="macro-bars" id="macroBars"></div>
+          <div class="macro-grid" id="macroGrid"></div>
+          <Disclaimer short={true} />
+        </div>
+      </div>
+
+      <div id="macroAff" hidden>
+        <AffiliateCTA heading="Hit Your Macro Targets Every Day" items={affiliates} />
+      </div>
+
+      <AdSlot label="In-content" />
+
+      <h2>How Macros Are Calculated</h2>
+      <p>
+        First we calculate your <strong>TDEE</strong> (Total Daily Energy Expenditure) using the
+        Mifflin-St Jeor formula, then apply your calorie adjustment (goal). Finally, we split
+        calories into protein, carbs, and fat based on your chosen diet style.
+      </p>
+      <div class="macro-table">
+        <div class="mt-row header"><span>Diet Style</span><span>Protein</span><span>Carbs</span><span>Fat</span></div>
+        <div class="mt-row"><span>Balanced</span><span>30%</span><span>40%</span><span>30%</span></div>
+        <div class="mt-row"><span>High Protein</span><span>40%</span><span>30%</span><span>30%</span></div>
+        <div class="mt-row"><span>Keto</span><span>25%</span><span>5%</span><span>70%</span></div>
+        <div class="mt-row"><span>Low Fat</span><span>25%</span><span>55%</span><span>20%</span></div>
+      </div>
+
+      <Faq items={faq} />
+      <RelatedTools items={related} />
+      <Disclaimer />
+    </div>
+
+    <aside class="sidebar">
+      <AdSlot label="Sidebar" format="rectangle" />
+    </aside>
+  </div>
+
+</ToolLayout>
+
+<script>
+const form    = document.getElementById('macroForm') as HTMLFormElement;
+const results = document.getElementById('macroResults') as HTMLDivElement;
+const affSec  = document.getElementById('macroAff') as HTMLDivElement;
+
+// Unit toggle
+document.querySelectorAll<HTMLInputElement>('input[name="units"]').forEach(r => {
+  r.addEventListener('change', () => {
+    const isUS = r.value === 'us';
+    (document.getElementById('mFtIn') as HTMLElement).style.display   = isUS ? 'flex' : 'none';
+    (document.getElementById('mCm')   as HTMLElement).style.display   = isUS ? 'none' : 'block';
+    (document.getElementById('mWeightUnit') as HTMLElement).textContent = isUS ? 'lbs' : 'kg';
+  });
+});
+
+const dietRatios: Record<string, [number, number, number]> = {
+  balanced:    [0.30, 0.40, 0.30],
+  highprotein: [0.40, 0.30, 0.30],
+  keto:        [0.25, 0.05, 0.70],
+  lowfat:      [0.25, 0.55, 0.20],
+};
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  const fd = new FormData(form);
+  const units    = fd.get('units') as string;
+  const sex      = fd.get('sex') as string;
+  const age      = parseFloat(fd.get('age') as string);
+  const activity = parseFloat(fd.get('activity') as string);
+  const goalAdj  = parseFloat(fd.get('goal') as string);
+  const diet     = fd.get('diet') as string;
+
+  let weightKg: number, heightCm: number;
+  if (units === 'us') {
+    weightKg = parseFloat(fd.get('weight') as string) * 0.453592;
+    const ft = parseFloat(fd.get('heightFt') as string) || 0;
+    const inc = parseFloat(fd.get('heightIn') as string) || 0;
+    heightCm = (ft * 12 + inc) * 2.54;
+  } else {
+    weightKg = parseFloat(fd.get('weight') as string);
+    heightCm = parseFloat(fd.get('heightCm') as string);
+  }
+  if (!age || !weightKg || !heightCm) return;
+
+  const s    = sex === 'm' ? 5 : -161;
+  const bmr  = 10 * weightKg + 6.25 * heightCm - 5 * age + s;
+  const tdee = bmr * activity + goalAdj;
+  const calories = Math.max(tdee, 1200);
+
+  const [pPct, cPct, fPct] = dietRatios[diet] || dietRatios.balanced;
+  const proteinG = Math.round((calories * pPct) / 4);
+  const carbsG   = Math.round((calories * cPct) / 4);
+  const fatG     = Math.round((calories * fPct) / 9);
+
+  const colors = { protein: '#16a34a', carbs: '#0891b2', fat: '#f59e0b' };
+  const totalEl = document.getElementById('macroTotal')!;
+  totalEl.innerHTML = `<span class="total-cal">${Math.round(calories).toLocaleString()}</span><span class="total-label">calories/day</span>`;
+
+  const barsEl = document.getElementById('macroBars')!;
+  barsEl.innerHTML = `
+    <div class="macro-bar-row">
+      <span style="color:${colors.protein}">Protein</span>
+      <div class="bar-track"><div class="bar-fill" style="width:${pPct*100}%;background:${colors.protein}"></div></div>
+      <span>${Math.round(pPct*100)}%</span>
+    </div>
+    <div class="macro-bar-row">
+      <span style="color:${colors.carbs}">Carbs</span>
+      <div class="bar-track"><div class="bar-fill" style="width:${cPct*100}%;background:${colors.carbs}"></div></div>
+      <span>${Math.round(cPct*100)}%</span>
+    </div>
+    <div class="macro-bar-row">
+      <span style="color:${colors.fat}">Fat</span>
+      <div class="bar-track"><div class="bar-fill" style="width:${fPct*100}%;background:${colors.fat}"></div></div>
+      <span>${Math.round(fPct*100)}%</span>
+    </div>`;
+
+  const gridEl = document.getElementById('macroGrid')!;
+  gridEl.innerHTML = `
+    <div class="m-kpi" style="--c:${colors.protein}"><div class="m-v">${proteinG}g</div><div class="m-l">Protein</div><div class="m-cal">${proteinG*4} cal</div></div>
+    <div class="m-kpi" style="--c:${colors.carbs}"><div class="m-v">${carbsG}g</div><div class="m-l">Carbohydrates</div><div class="m-cal">${carbsG*4} cal</div></div>
+    <div class="m-kpi" style="--c:${colors.fat}"><div class="m-v">${fatG}g</div><div class="m-l">Fat</div><div class="m-cal">${fatG*9} cal</div></div>`;
+
+  results.hidden = false;
+  affSec.hidden  = false;
+  results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+});
+</script>
+
+<style>
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  @media (max-width: 620px) { .grid-3 { grid-template-columns: 1fr 1fr; } }
+
+  .field-group { position: relative; }
+  .field-label { display: block; font-size: 12px; font-weight: 700; color: #6b7280; margin-bottom: 5px; text-transform: uppercase; letter-spacing: .4px; }
+  input[type="number"], select { width: 100%; padding: 10px 12px; border: 1.5px solid #e5e7eb; border-radius: 9px; font-size: 15px; outline: none; background: #fff; color: #1f2937; transition: border-color .15s; }
+  input[type="number"]:focus, select:focus { border-color: #16a34a; }
+  .field-unit { position: absolute; right: 12px; bottom: 11px; font-size: 12px; color: #9ca3af; pointer-events: none; }
+  .ft-in { display: flex; align-items: center; gap: 6px; }
+  .ft-in input { flex: 1; }
+  .field-sep { font-size: 13px; color: #9ca3af; }
+  .seg-group { display: flex; gap: 8px; }
+  .seg-opt { flex: 1; }
+  .seg-opt input { display: none; }
+  .seg-opt span { display: block; text-align: center; padding: 8px 12px; border: 1.5px solid #e5e7eb; border-radius: 8px; font-size: 14px; cursor: pointer; color: #374151; transition: all .15s; }
+  .seg-opt input:checked + span { border-color: #16a34a; color: #16a34a; background: #f0fdf4; font-weight: 700; }
+  .btn-calc { width: 100%; margin-top: 18px; padding: 13px; background: #16a34a; color: #fff; font-size: 16px; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; transition: background .15s; }
+  .btn-calc:hover { background: #15803d; }
+
+  /* Results */
+  #macroResults { margin-top: 20px; padding-top: 18px; border-top: 1px solid #e5e7eb; }
+  .macro-total { display: flex; align-items: baseline; gap: 8px; margin-bottom: 16px; }
+  .total-cal { font-size: 40px; font-weight: 900; color: #16a34a; }
+  .total-label { font-size: 14px; color: #6b7280; }
+  .macro-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 13px; font-weight: 600; }
+  .macro-bar-row > span:first-child { width: 56px; }
+  .macro-bar-row > span:last-child  { width: 36px; text-align: right; color: #6b7280; }
+  .bar-track { flex: 1; height: 10px; background: #f1f5f9; border-radius: 5px; overflow: hidden; }
+  .bar-fill  { height: 100%; border-radius: 5px; transition: width .4s ease; }
+  .macro-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 14px; }
+  @media (max-width: 480px) { .macro-grid { grid-template-columns: 1fr; } }
+  .m-kpi { background: #f9fafb; border-radius: 10px; padding: 14px; border-left: 3px solid var(--c); }
+  .m-v   { font-size: 26px; font-weight: 800; color: var(--c); }
+  .m-l   { font-size: 12px; color: #6b7280; margin-top: 1px; }
+  .m-cal { font-size: 11px; color: #9ca3af; margin-top: 2px; }
+
+  .macro-table { border: 1px solid #e5e7eb; border-radius: 10px; overflow: hidden; margin: 12px 0 20px; font-size: 13px; }
+  .mt-row { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; padding: 9px 14px; border-bottom: 1px solid #f1f5f9; }
+  .mt-row.header { background: #f9fafb; font-weight: 700; font-size: 11px; text-transform: uppercase; color: #6b7280; }
+  .mt-row:last-child { border-bottom: none; }
+</style>

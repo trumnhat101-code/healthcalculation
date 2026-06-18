@@ -1,0 +1,177 @@
+---
+import ToolLayout from '../layouts/ToolLayout.astro';
+
+const SITE = 'https://healthcalculation.com';
+
+const tools = [
+  {
+    href: '/calorie-tdee-calculator',
+    title: 'Calorie & TDEE Calculator',
+    desc: 'Find your Total Daily Energy Expenditure using the Mifflin-St Jeor formula.',
+    icon: '🔥',
+    kw: 'Most popular',
+  },
+  {
+    href: '/bmi-calculator',
+    title: 'BMI Calculator',
+    desc: 'Calculate your Body Mass Index and see your weight category instantly.',
+    icon: '⚖️',
+    kw: 'WHO standard',
+  },
+  {
+    href: '/macro-calculator',
+    title: 'Macro Calculator',
+    desc: 'Get your daily protein, carbs, and fat targets for your specific goal.',
+    icon: '🥗',
+    kw: 'For weight loss & muscle gain',
+  },
+  {
+    href: '/sleep-calculator',
+    title: 'Sleep Calculator',
+    desc: 'Find the best bedtimes or wake-up times based on 90-minute sleep cycles.',
+    icon: '🌙',
+    kw: 'Mattress affiliate',
+  },
+];
+
+const siteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'HealthCalcs',
+  url: SITE,
+  description: 'Free health and fitness calculators for US adults.',
+};
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Free Health & Fitness Calculators — Calorie, BMI, Macro, Sleep</title>
+  <meta name="description" content="Free online health calculators: calorie & TDEE, BMI, macros, sleep cycles, and more. Accurate formulas, US units, instant results." />
+  <link rel="canonical" href={SITE} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <script type="application/ld+json" set:html={JSON.stringify(siteSchema)} />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: #1f2937; background: #f6faf7; line-height: 1.65; }
+    a { color: #16a34a; }
+    .wrap { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
+
+    /* Header */
+    .site-header { background: #fff; border-bottom: 1px solid #e5e7eb; }
+    .site-header .wrap { display: flex; align-items: center; justify-content: space-between; height: 58px; }
+    .logo { font-weight: 800; color: #16a34a; font-size: 18px; text-decoration: none; }
+    .site-nav { display: flex; gap: 4px; }
+    .site-nav a { color: #6b7280; text-decoration: none; font-size: 13px; padding: 5px 10px; border-radius: 6px; }
+    .site-nav a:hover { background: #f0fdf4; color: #16a34a; }
+
+    /* Hero */
+    .hero { background: linear-gradient(135deg, #16a34a 0%, #0891b2 100%); color: #fff; padding: 60px 0 52px; text-align: center; }
+    .hero h1 { font-size: 36px; font-weight: 900; margin-bottom: 12px; line-height: 1.15; }
+    .hero p  { font-size: 17px; opacity: .9; max-width: 540px; margin: 0 auto; }
+    @media (max-width: 600px) { .hero h1 { font-size: 26px; } }
+
+    /* Tools grid */
+    .tools-section { padding: 48px 0; }
+    .tools-section h2 { font-size: 22px; font-weight: 800; margin-bottom: 20px; text-align: center; }
+    .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+    .tool-card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 22px 20px;
+      text-decoration: none;
+      color: #1f2937;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: box-shadow .18s, border-color .18s, transform .18s;
+    }
+    .tool-card:hover { box-shadow: 0 6px 24px rgba(22,163,74,.14); border-color: #86efac; transform: translateY(-2px); }
+    .tool-icon { font-size: 28px; }
+    .tool-title { font-size: 16px; font-weight: 700; color: #1f2937; }
+    .tool-desc  { font-size: 13px; color: #6b7280; flex: 1; }
+    .tool-kw    { font-size: 11px; font-weight: 600; color: #16a34a; background: #f0fdf4; padding: 3px 8px; border-radius: 4px; align-self: flex-start; }
+    .tool-arrow { font-size: 18px; color: #16a34a; align-self: flex-end; }
+
+    /* Why section */
+    .why-section { background: #fff; padding: 40px 0; border-top: 1px solid #e5e7eb; }
+    .why-section h2 { font-size: 22px; font-weight: 800; margin-bottom: 20px; text-align: center; }
+    .why-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+    .why-card { text-align: center; padding: 16px; }
+    .why-icon { font-size: 28px; margin-bottom: 8px; }
+    .why-title { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+    .why-desc  { font-size: 13px; color: #6b7280; }
+
+    /* Footer */
+    .site-footer { background: #fff; border-top: 1px solid #e5e7eb; padding: 24px 0; margin-top: 40px; }
+    .site-footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; font-size: 13px; color: #6b7280; }
+    .site-footer a { color: #6b7280; text-decoration: none; }
+    .site-footer a:hover { color: #16a34a; }
+    .footer-links { display: flex; gap: 16px; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="/">HealthCalcs.com</a>
+    <nav class="site-nav">
+      <a href="/calorie-tdee-calculator">Calorie</a>
+      <a href="/bmi-calculator">BMI</a>
+      <a href="/macro-calculator">Macro</a>
+      <a href="/sleep-calculator">Sleep</a>
+      <a href="/about">About</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Free Health & Fitness Calculators</h1>
+    <p>Accurate tools for calories, BMI, macros, sleep — and more. Built on clinically validated formulas.</p>
+  </div>
+</section>
+
+<section class="tools-section">
+  <div class="wrap">
+    <h2>All Calculators</h2>
+    <div class="tools-grid">
+      {tools.map(({ href, title, desc, icon, kw }) => (
+        <a href={href} class="tool-card">
+          <div class="tool-icon">{icon}</div>
+          <div class="tool-title">{title}</div>
+          <div class="tool-desc">{desc}</div>
+          <span class="tool-arrow">→</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="why-section">
+  <div class="wrap">
+    <h2>Why Use HealthCalcs?</h2>
+    <div class="why-grid">
+      <div class="why-card"><div class="why-icon">🔬</div><div class="why-title">Clinically Validated</div><div class="why-desc">Mifflin-St Jeor, WHO BMI standards, AASM sleep guidelines</div></div>
+      <div class="why-card"><div class="why-icon">⚡</div><div class="why-title">Instant Results</div><div class="why-desc">Client-side calculations — no sign-up, no waiting</div></div>
+      <div class="why-card"><div class="why-icon">📱</div><div class="why-title">Mobile-Friendly</div><div class="why-desc">Works perfectly on any device, any screen size</div></div>
+      <div class="why-card"><div class="why-icon">🔒</div><div class="why-title">Privacy First</div><div class="why-desc">No data sent to servers. Everything stays in your browser</div></div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© {new Date().getFullYear()} HealthCalcs.com — Not medical advice.</span>
+    <div class="footer-links">
+      <a href="/about">About</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/disclaimer">Disclaimer</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
