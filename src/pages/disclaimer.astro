@@ -1,0 +1,100 @@
+---
+import ToolLayout from '../layouts/ToolLayout.astro';
+const SITE = 'https://healthcalculation.com';
+---
+
+<ToolLayout
+  title="Medical Disclaimer — HealthCalcs.com"
+  description="Medical disclaimer for HealthCalcs.com. Our calculators provide estimates for informational purposes only and are not a substitute for professional medical advice."
+  canonical={`${SITE}/disclaimer`}
+>
+  <div class="page-layout">
+    <div class="main-col">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span>›</span><span>Medical Disclaimer</span>
+      </nav>
+
+      <h1>Medical Disclaimer</h1>
+      <p class="lead">Please read before using any calculator on this site.</p>
+
+      <div class="card disc-card">
+        <p class="disc-lead">
+          ⚕️ <strong>The information on HealthCalcs.com is for general informational and
+          educational purposes only.</strong> It is not intended as medical advice and does not
+          replace the advice of a qualified healthcare professional.
+        </p>
+      </div>
+
+      <h2>Not a Substitute for Professional Advice</h2>
+      <p>
+        Always seek the advice of your physician, registered dietitian, or other qualified
+        healthcare provider regarding any medical condition, dietary change, or fitness program.
+        Never disregard professional medical advice or delay seeking it because of something you
+        have read or calculated on this website.
+      </p>
+
+      <h2>Calculator Accuracy</h2>
+      <p>
+        Our calculators use clinically validated formulas (Mifflin-St Jeor, WHO BMI, AASM sleep
+        guidelines). However, all results are <strong>population-level estimates</strong> and may
+        not reflect your individual physiology. Factors such as genetics, medications, metabolic
+        conditions, and hormonal status can cause significant variation.
+      </p>
+      <p>
+        A ±10–15% variance from calculated values is normal. Use results as a starting point and
+        adjust based on real-world feedback and professional guidance.
+      </p>
+
+      <h2>Calorie & Nutrition Information</h2>
+      <p>
+        Calorie targets presented are estimates derived from the Mifflin-St Jeor equation.
+        Do not follow calorie targets that fall below 1,200 cal/day (women) or 1,500 cal/day
+        (men) without direct supervision from a licensed healthcare provider.
+      </p>
+
+      <h2>BMI Limitations</h2>
+      <p>
+        BMI (Body Mass Index) is a screening tool only. It does not directly measure body fat
+        and may misclassify muscular individuals. A BMI outside the "healthy" range is not a
+        diagnosis. Consult your doctor for a comprehensive health evaluation.
+      </p>
+
+      <h2>Emergency Situations</h2>
+      <p>
+        If you believe you are experiencing a medical emergency, call 911 (US) or your local
+        emergency services immediately. Do not use this website in place of emergency care.
+      </p>
+
+      <h2>Affiliate Disclaimer</h2>
+      <p>
+        Some pages contain links to third-party products or services. These are affiliate links —
+        we may earn a commission if you purchase through them at no additional cost to you.
+        Editorial content and calculator results are never influenced by affiliate relationships.
+        We only recommend products we believe are genuinely helpful.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions or concerns? Email
+        <a href="mailto:hello@healthcalculation.com">hello@healthcalculation.com</a>.
+      </p>
+    </div>
+
+    <aside class="sidebar">
+      <div class="card" style="font-size:13px;color:#374151">
+        <p style="font-weight:700;margin-bottom:8px">⚕️ Key Points</p>
+        <p>📋 Estimates, not diagnoses</p>
+        <p>👨‍⚕️ Always consult a doctor</p>
+        <p>📊 ±10–15% variance is normal</p>
+        <p style="margin-bottom:0">🚨 Call 911 in emergencies</p>
+      </div>
+    </aside>
+  </div>
+</ToolLayout>
+
+<style>
+  h1 { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+  h2 { font-size: 18px; font-weight: 700; margin: 24px 0 8px; }
+  .disc-card { background: #fffbeb; border-color: #fde68a; }
+  .disc-lead { font-size: 15px; color: #78350f; margin: 0; }
+</style>

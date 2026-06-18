@@ -1,10 +1,8 @@
 ---
 /**
- * AdSlot.astro — placeholder AdSense / future ad unit
- * Props:
- *   slot   — ad slot ID (từ AdSense dashboard)
- *   format — 'auto' | 'rectangle' | 'horizontal' (default: 'auto')
- *   label  — label cho placeholder khi chưa có ad (default: 'Advertisement')
+ * AdSlot.astro — placeholder AdSense unit
+ * Placeholder ẩn cho đến khi được AdSense approve.
+ * Khi approve: uncomment <ins> block bên dưới, xoá dòng comment trên.
  */
 export interface Props {
   slot?: string;
@@ -12,39 +10,15 @@ export interface Props {
   label?: string;
 }
 const { slot = 'SLOT_ID', format = 'auto', label = 'Advertisement' } = Astro.props;
-const PUB = 'ca-pub-XXXX'; // TODO: thay pub ID thật
-
-// Khi có AdSense approval → uncomment <ins> block, xoá .ad-placeholder
 ---
 
-<!-- AdSlot: {label} -->
-<div class="ad-placeholder" aria-label="Advertisement">
-  Ad · {label}
-</div>
-
+<!-- AdSlot: {label} — hidden until AdSense approval -->
 <!--
-Uncomment khi được AdSense approve:
 <ins class="adsbygoogle"
   style="display:block"
-  data-ad-client={PUB}
+  data-ad-client="ca-pub-XXXX"
   data-ad-slot={slot}
   data-ad-format={format}
   data-full-width-responsive="true"></ins>
 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 -->
-
-<style>
-  .ad-placeholder {
-    background: #f4faf6;
-    border: 1px dashed #b9dcc5;
-    border-radius: 10px;
-    min-height: 90px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #8fb3a0;
-    font-size: 11px;
-    text-align: center;
-    margin: 18px 0;
-  }
-</style>

@@ -1,0 +1,96 @@
+---
+import ToolLayout from '../layouts/ToolLayout.astro';
+const SITE = 'https://healthcalculation.com';
+---
+
+<ToolLayout
+  title="Privacy Policy — HealthCalcs.com"
+  description="Privacy policy for HealthCalcs.com. We respect your privacy: no personal data is collected or stored by our calculators."
+  canonical={`${SITE}/privacy`}
+>
+  <div class="page-layout">
+    <div class="main-col">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span>›</span><span>Privacy Policy</span>
+      </nav>
+
+      <h1>Privacy Policy</h1>
+      <p class="lead">Last updated: June 2025</p>
+
+      <div class="card">
+        <h2 style="margin-top:0">The Short Version</h2>
+        <p>
+          <strong>HealthCalcs.com calculators run entirely in your browser.</strong>
+          No health data you enter (age, weight, height, etc.) is ever sent to our servers
+          or stored anywhere. We do not sell or share personal data.
+        </p>
+      </div>
+
+      <h2>What Data We Collect</h2>
+      <p>
+        We collect standard server-side access logs (IP address, page URL, browser user-agent,
+        timestamp) automatically when you visit any page. This data is used solely for diagnosing
+        technical issues and measuring aggregate traffic. It is not tied to individual health
+        inputs and is not sold to third parties.
+      </p>
+
+      <h2>Calculator Inputs</h2>
+      <p>
+        All calculator computations (calories, BMI, macros, sleep cycles) happen locally in your
+        browser using JavaScript. No form data is transmitted to any server. We cannot see what
+        values you enter.
+      </p>
+
+      <h2>Cookies & Analytics</h2>
+      <p>
+        We may use Cloudflare Web Analytics, which is cookie-free and GDPR-compliant by design.
+        It collects only anonymized, aggregated page-view data — no individual user profiling.
+      </p>
+      <p>
+        We do <strong>not</strong> use Google Analytics or any tracking cookies without your
+        explicit consent.
+      </p>
+
+      <h2>Advertising</h2>
+      <p>
+        We plan to use Google AdSense once approved. AdSense may set cookies to serve relevant
+        ads. You can opt out via <a href="https://adssettings.google.com" rel="noopener noreferrer" target="_blank">Google Ad Settings</a>.
+      </p>
+
+      <h2>Affiliate Links</h2>
+      <p>
+        Some pages contain affiliate links marked with <code>rel="sponsored nofollow"</code>.
+        Clicking these links may set cookies on third-party sites. We receive a commission at
+        no additional cost to you.
+      </p>
+
+      <h2>Children's Privacy</h2>
+      <p>
+        Our calculators are intended for adults aged 18 and over. We do not knowingly collect
+        data from children under 13.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions about this policy? Email us at
+        <a href="mailto:hello@healthcalculation.com">hello@healthcalculation.com</a>.
+      </p>
+    </div>
+
+    <aside class="sidebar">
+      <div class="card" style="font-size:13px;color:#374151">
+        <p style="font-weight:700;margin-bottom:8px">🔒 Privacy at a Glance</p>
+        <p>✅ No calculator data stored</p>
+        <p>✅ Cookie-free analytics</p>
+        <p>✅ No data sold</p>
+        <p style="margin-bottom:0">✅ GDPR-friendly design</p>
+      </div>
+    </aside>
+  </div>
+</ToolLayout>
+
+<style>
+  h1 { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+  h2 { font-size: 18px; font-weight: 700; margin: 24px 0 8px; }
+  code { background: #f1f5f9; border-radius: 4px; padding: 1px 5px; font-size: 12px; }
+</style>

@@ -1,13 +1,6 @@
 ---
 /**
  * ToolLayout.astro — layout dùng chung cho mọi tool page
- * Props:
- *   title        — <title> tag (chứa keyword chính)
- *   description  — meta description (150–160 ký tự)
- *   canonical    — URL tuyệt đối của trang này
- *   schemaApp    — JSON-LD WebApplication object (optional)
- *   schemaFaq    — mảng { q, a } cho FAQPage schema (optional)
- *   color        — màu accent hex (default: #16a34a xanh lá)
  */
 export interface Props {
   title: string;
@@ -18,19 +11,9 @@ export interface Props {
   color?: string;
 }
 
-const {
-  title,
-  description,
-  canonical,
-  schemaApp,
-  schemaFaq,
-  color = '#16a34a',
-} = Astro.props;
+const { title, description, canonical, schemaApp, schemaFaq } = Astro.props;
 
-// TODO: thay pub ID thật khi có AdSense
-const ADSENSE_PUB = 'ca-pub-XXXX';
-
-const faqSchema = schemaFaq && schemaFaq.length > 0
+const faqSchema = schemaFaq?.length
   ? {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
@@ -42,16 +25,28 @@ const faqSchema = schemaFaq && schemaFaq.length > 0
     }
   : null;
 
-// Nav links — cập nhật khi thêm tool
 const nav = [
   { href: '/calorie-tdee-calculator', label: 'Calorie' },
-  { href: '/bmi-calculator', label: 'BMI' },
-  { href: '/macro-calculator', label: 'Macro' },
-  { href: '/sleep-calculator', label: 'Sleep' },
-  { href: '/', label: 'All Tools' },
+  { href: '/bmi-calculator',          label: 'BMI' },
+  { href: '/macro-calculator',        label: 'Macro' },
+  { href: '/sleep-calculator',        label: 'Sleep' },
+  { href: '/about',                   label: 'About' },
 ];
 
+const iconMap: Record<string, string> = {
+  '/calorie-tdee-calculator': '🔥',
+  '/bmi-calculator':          '⚖️',
+  '/macro-calculator':        '🥗',
+  '/sleep-calculator':        '🌙',
+  '/about':                   'ℹ️',
+  '/privacy':                 '🔒',
+  '/disclaimer':              '⚕️',
+};
+
 const currentPath = new URL(canonical).pathname;
+const isHome      = currentPath === '/';
+const pageIcon    = iconMap[currentPath] ?? '⚕️';
+const heroTitle   = title.split(' —')[0];
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -61,49 +56,50 @@ const currentPath = new URL(canonical).pathname;
   <title>{title}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canonical} />
-
-  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
   <!-- Open Graph -->
-  <meta property="og:title" content={title} />
+  <meta property="og:title"       content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:url" content={canonical} />
-  <meta property="og:type" content="website" />
+  <meta property="og:url"         content={canonical} />
+  <meta property="og:type"        content="website" />
 
-  <!-- JSON-LD: WebApplication -->
-  {schemaApp && (
-    <script type="application/ld+json" set:html={JSON.stringify(schemaApp)} />
-  )}
-  <!-- JSON-LD: FAQPage -->
-  {faqSchema && (
-    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
-  )}
+  <!-- JSON-LD schemas -->
+  {schemaApp  && <script type="application/ld+json" set:html={JSON.stringify(schemaApp)} />}
+  {faqSchema  && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
 
-  <!-- AdSense — uncomment khi được approve
-  <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_PUB}`} crossorigin="anonymous"></script>
+  <!-- AdSense — uncomment when approved
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXX" crossorigin="anonymous"></script>
   -->
 
-  <style define:vars={{ ac: color }}>
+  <style>
+    /* ── Tokens ── */
     :root {
-      --ac: var(--ac-override, #16a34a);
-      --bg: #f6faf7;
-      --card: #fff;
-      --bd: #e5e7eb;
-      --tx: #1f2937;
-      --mut: #6b7280;
-      --radius: 12px;
+      --ac:      #16a34a;
+      --ac-dark: #15803d;
+      --bg:      #f6faf7;
+      --card:    #ffffff;
+      --bd:      #e5e7eb;
+      --tx:      #1f2937;
+      --mut:     #6b7280;
+      --radius:  14px;
+      --shadow:  0 1px 3px rgba(0,0,0,.06), 0 4px 20px rgba(0,0,0,.05);
     }
+
+    /* ── Reset ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-family: -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
       color: var(--tx);
       background: var(--bg);
       line-height: 1.65;
       font-size: 16px;
     }
-    a { color: var(--ac); }
+    a   { color: var(--ac); }
     img { max-width: 100%; height: auto; }
+
+    /* ── Wrap ── */
+    .wrap { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
 
     /* ── Header ── */
     .site-header {
@@ -112,42 +108,92 @@ const currentPath = new URL(canonical).pathname;
       position: sticky;
       top: 0;
       z-index: 100;
+      box-shadow: 0 1px 0 var(--bd);
     }
-    .site-header .wrap {
+    .hdr-inner {
       display: flex;
       align-items: center;
-      justify-content: space-between;
       height: 58px;
+      gap: 10px;
     }
     .logo {
       font-weight: 800;
       color: var(--ac);
-      font-size: 18px;
+      font-size: 16px;
       text-decoration: none;
       letter-spacing: -.3px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 7px;
     }
-    .site-nav { display: flex; gap: 4px; }
+    .logo-mark {
+      width: 28px; height: 28px;
+      background: var(--ac);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 900; color: #fff;
+    }
+    .site-nav {
+      display: flex;
+      gap: 2px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      flex: 1;
+      justify-content: flex-end;
+    }
+    .site-nav::-webkit-scrollbar { display: none; }
     .site-nav a {
       color: var(--mut);
       text-decoration: none;
       font-size: 13px;
-      padding: 5px 10px;
-      border-radius: 6px;
+      font-weight: 500;
+      padding: 6px 10px;
+      border-radius: 7px;
       transition: background .15s, color .15s;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
-    .site-nav a:hover,
+    .site-nav a:hover             { background: #f0fdf4; color: var(--ac); }
     .site-nav a[aria-current="page"] {
       background: #f0fdf4;
       color: var(--ac);
+      font-weight: 700;
     }
 
-    /* ── Wrap / Layout ── */
-    .wrap { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
+    /* ── Page Hero Strip ── */
+    .page-hero {
+      background: linear-gradient(135deg, #16a34a 0%, #0891b2 100%);
+      padding: 16px 0;
+    }
+    .ph-inner {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .ph-icon   { font-size: 26px; line-height: 1; flex-shrink: 0; }
+    .ph-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(255,255,255,.72);
+      margin-bottom: 3px;
+    }
+    .ph-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    /* ── Page Layout (2-col grid) ── */
     .page-layout {
       display: grid;
       grid-template-columns: 1fr 300px;
       gap: 28px;
-      padding: 32px 0 48px;
+      padding: 28px 0 52px;
       align-items: start;
     }
     @media (max-width: 900px) {
@@ -156,10 +202,10 @@ const currentPath = new URL(canonical).pathname;
     }
 
     /* ── Typography ── */
-    h1 { font-size: 28px; font-weight: 800; margin-bottom: 6px; line-height: 1.2; }
-    h2 { font-size: 20px; font-weight: 700; margin: 28px 0 10px; }
-    h3 { font-size: 16px; font-weight: 700; margin: 20px 0 6px; }
-    p { margin-bottom: 12px; }
+    h1 { font-size: 27px; font-weight: 800; margin-bottom: 6px; line-height: 1.25; }
+    h2 { font-size: 19px; font-weight: 700; margin: 28px 0 10px; }
+    h3 { font-size: 16px; font-weight: 700; margin: 18px 0 6px; }
+    p  { margin-bottom: 12px; }
     .lead { color: var(--mut); font-size: 15px; margin-bottom: 20px; max-width: 680px; }
 
     /* ── Card ── */
@@ -169,79 +215,99 @@ const currentPath = new URL(canonical).pathname;
       border-radius: var(--radius);
       padding: 24px;
       margin-bottom: 20px;
+      box-shadow: var(--shadow);
     }
+
+    /* ── Breadcrumb ── */
+    .breadcrumb {
+      font-size: 12px;
+      color: var(--mut);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+    .breadcrumb a { color: var(--mut); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--ac); text-decoration: underline; }
+    .breadcrumb span { opacity: .5; }
 
     /* ── Footer ── */
     .site-footer {
       background: #fff;
       border-top: 1px solid var(--bd);
       padding: 28px 0;
-      margin-top: 40px;
+      margin-top: 48px;
     }
-    .site-footer .wrap {
+    .ftr-inner {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      gap: 12px;
+      align-items: flex-start;
+      gap: 16px;
       font-size: 13px;
       color: var(--mut);
     }
-    .site-footer a { color: var(--mut); text-decoration: none; }
-    .site-footer a:hover { color: var(--ac); }
-    .footer-links { display: flex; gap: 16px; flex-wrap: wrap; }
-
-    /* ── Breadcrumb ── */
-    .breadcrumb {
-      font-size: 12px;
-      color: var(--mut);
-      margin-bottom: 10px;
-    }
-    .breadcrumb a { color: var(--mut); text-decoration: none; }
-    .breadcrumb a:hover { color: var(--ac); }
-    .breadcrumb span { margin: 0 5px; }
-
-    /* ── Ad placeholder ── */
-    .ad-placeholder {
-      background: #f4faf6;
-      border: 1px dashed #b9dcc5;
-      border-radius: 10px;
-      min-height: 90px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #8fb3a0;
-      font-size: 11px;
-      text-align: center;
-      margin: 18px 0;
-    }
+    .ftr-brand { font-weight: 700; color: var(--ac); margin-bottom: 3px; font-size: 14px; }
+    .footer-links { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+    .footer-links a { color: var(--mut); text-decoration: none; }
+    .footer-links a:hover { color: var(--ac); }
   </style>
 </head>
 <body>
 
+<!-- ── Sticky Header ── -->
 <header class="site-header">
   <div class="wrap">
-    <a class="logo" href="/">HealthCalcs.com</a>
-    <nav class="site-nav" aria-label="Main navigation">
-      {nav.map(({ href, label }) => (
-        <a href={href} aria-current={currentPath === href ? 'page' : undefined}>{label}</a>
-      ))}
-    </nav>
+    <div class="hdr-inner">
+      <a class="logo" href="/">
+        <span class="logo-mark" aria-hidden="true">H</span>
+        HealthCalcs
+      </a>
+      <nav class="site-nav" aria-label="Main navigation">
+        {nav.map(({ href, label }) => (
+          <a href={href} aria-current={currentPath === href ? 'page' : undefined}>{label}</a>
+        ))}
+      </nav>
+    </div>
   </div>
 </header>
 
-<main>
+<!-- ── Page Hero (hidden on homepage) ── -->
+{!isHome && (
+  <div class="page-hero" aria-hidden="true">
+    <div class="wrap">
+      <div class="ph-inner">
+        <span class="ph-icon">{pageIcon}</span>
+        <div>
+          <p class="ph-eyebrow">Free Calculator</p>
+          <p class="ph-title">{heroTitle}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
+<!-- ── Main Content ── -->
+<main id="main-content">
   <div class="wrap">
     <slot />
   </div>
 </main>
 
+<!-- ── Footer ── -->
 <footer class="site-footer">
   <div class="wrap">
-    <span>© {new Date().getFullYear()} HealthCalcs.com — For informational purposes only. Not medical advice.</span>
-    <div class="footer-links">
-      <a href="/about">About</a>
-      <a href="/privacy">Privacy</a>
-      <a href="/disclaimer">Disclaimer</a>
+    <div class="ftr-inner">
+      <div>
+        <p class="ftr-brand">HealthCalcs.com</p>
+        <p>© {new Date().getFullYear()} HealthCalcs.com — For informational purposes only. Not medical advice.</p>
+      </div>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="/about">About</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/disclaimer">Disclaimer</a>
+      </nav>
     </div>
   </div>
 </footer>
