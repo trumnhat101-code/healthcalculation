@@ -1,0 +1,146 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+
+const SITE = 'https://healthcalculation.com';
+const canonical = `${SITE}/guides/how-much-sleep-do-i-need`;
+
+const schemaArticle = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'How Much Sleep Do I Need by Age?',
+  description: 'AASM and NSF sleep recommendations by age group, the science of sleep cycles, signs of sleep deprivation, and how to optimize your sleep schedule.',
+  url: canonical,
+  datePublished: '2025-06-01',
+  dateModified: '2025-06-18',
+  author: { '@type': 'Organization', name: 'HealthCalculation.com' },
+  publisher: { '@type': 'Organization', name: 'HealthCalculation.com', url: SITE },
+};
+
+const schemaFaq = [
+  {
+    q: 'How much sleep do adults need per night?',
+    a: 'The American Academy of Sleep Medicine (AASM) and the Centers for Disease Control (CDC) recommend 7 or more hours of sleep per night for adults aged 18-60. Adults aged 61-64 need 7-9 hours, and those 65 and older need 7-8 hours. The National Sleep Foundation refines this to 7-9 hours for most adults (18-64), with 6 hours as the minimum acceptable threshold for adults under 65.',
+  },
+  {
+    q: 'What happens if you sleep less than 7 hours?',
+    a: 'Consistently sleeping less than 7 hours is associated with impaired cognitive performance (equivalent to 1-2 days of total sleep deprivation at 6 hours/night), increased risk of obesity (24% higher at 5-6 hours vs 7-8 hours), type 2 diabetes, cardiovascular disease, and reduced immune function. Reaction time and decision-making degrade significantly after just one night of 6 hours or less.',
+  },
+  {
+    q: 'What is a sleep cycle and how long does it last?',
+    a: 'A sleep cycle lasts approximately 90 minutes and consists of four stages: N1 (light sleep, 5-10 min), N2 (light sleep, 20-25 min), N3 (deep/slow-wave sleep, 20-40 min), and REM sleep (10-60 min, increasing with each cycle). Adults complete 4-6 cycles per night. Deep sleep (N3) dominates early cycles; REM sleep dominates later cycles and is critical for memory consolidation and emotional processing.',
+  },
+  {
+    q: 'Is it better to wake up at the end of a sleep cycle?',
+    a: 'Yes. Waking at the end of a 90-minute cycle — rather than mid-cycle — results in feeling more alert and refreshed. This is why 7.5 hours (5 cycles) or 9 hours (6 cycles) often feel better than exactly 8 hours for some people. The sleep calculator uses this principle to suggest optimal wake times based on when you plan to fall asleep.',
+  },
+  {
+    q: 'Can you catch up on lost sleep on weekends?',
+    a: 'Partially, but not fully. Research shows that weekend recovery sleep can reduce some metabolic and cognitive deficits from weekday sleep restriction. However, it does not fully restore immune function, and the irregular schedule itself (social jetlag) disrupts circadian rhythms, which has its own negative health effects. Consistent sleep timing 7 days a week is more beneficial than weekend catch-up.',
+  },
+];
+---
+
+<ToolLayout
+  title="How Much Sleep Do I Need by Age? [AASM Guidelines]"
+  description="AASM and NSF sleep recommendations by age, the science of 90-minute sleep cycles, signs of chronic sleep deprivation, and tips to wake up refreshed."
+  canonical={canonical}
+  schemaApp={schemaArticle}
+  schemaFaq={schemaFaq}
+  pageIcon="&#127769;"
+  heroTitle="How Much Sleep Do I Need by Age?"
+>
+
+<article class="guide-article">
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="/">Home</a><span>&#8250;</span><a href="/guides">Guides</a><span>&#8250;</span><span>How Much Sleep Do I Need</span>
+</nav>
+
+<p class="guide-intro">Sleep is the single most powerful recovery tool available — it affects cognition, metabolism, immune function, muscle repair, and emotional regulation. Yet most adults underestimate how much they need and overestimate how much they get. Here is what the science says about sleep requirements across the lifespan.</p>
+
+<h2>Recommended Sleep by Age — AASM Guidelines</h2>
+<p>The <strong>American Academy of Sleep Medicine (AASM)</strong>, whose guidelines are endorsed by the CDC, publishes the following evidence-based recommendations:</p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>Age Group</th><th>Recommended Sleep</th><th>Notes</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Infants (4–12 months)</td><td>12–16 hours</td><td>Including naps</td></tr>
+    <tr><td>Toddlers (1–2 years)</td><td>11–14 hours</td><td>Including naps</td></tr>
+    <tr><td>Preschool (3–5 years)</td><td>10–13 hours</td><td>Including naps</td></tr>
+    <tr><td>School age (6–12 years)</td><td>9–12 hours</td><td>No naps needed</td></tr>
+    <tr><td>Teenagers (13–18 years)</td><td>8–10 hours</td><td>Biological delay in sleep onset</td></tr>
+    <tr><td><strong>Adults (18–60 years)</strong></td><td><strong>7+ hours</strong></td><td><strong>Minimum; 7–9 hrs optimal</strong></td></tr>
+    <tr><td>Adults (61–64 years)</td><td>7–9 hours</td><td>—</td></tr>
+    <tr><td>Older adults (65+)</td><td>7–8 hours</td><td>Sleep architecture changes with age</td></tr>
+  </tbody>
+</table>
+
+<h2>The Science of Sleep Cycles</h2>
+<p>Sleep is not uniform — it progresses through repeating 90-minute cycles, each containing four distinct stages:</p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>Stage</th><th>Duration</th><th>Brain Activity</th><th>Primary Function</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>N1 — Light sleep</td><td>5–10 min</td><td>Theta waves</td><td>Transition to sleep, easily awakened</td></tr>
+    <tr><td>N2 — Light sleep</td><td>20–25 min</td><td>Sleep spindles, K-complexes</td><td>Memory consolidation begins, heart rate slows</td></tr>
+    <tr><td>N3 — Deep sleep</td><td>20–40 min</td><td>Delta waves (slow-wave)</td><td>Physical repair, immune function, growth hormone release</td></tr>
+    <tr><td>REM sleep</td><td>10–60 min</td><td>Similar to waking</td><td>Emotional processing, memory consolidation, dreaming</td></tr>
+  </tbody>
+</table>
+
+<p>Deep sleep (N3) is most abundant in the first half of the night. REM sleep lengthens with each cycle, dominating the final cycles before waking. This is why cutting sleep short by 1–2 hours disproportionately reduces REM sleep.</p>
+
+<h2>Optimal Sleep Durations by Cycle Count</h2>
+<p>Waking mid-cycle causes sleep inertia — grogginess that can last 30–60 minutes. Timing your alarm to a cycle endpoint minimizes this:</p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>Cycles</th><th>Total Sleep Time</th><th>Who It Suits</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>4 cycles</td><td>6 hours</td><td>Minimum — not recommended long-term</td></tr>
+    <tr><td>5 cycles</td><td>7.5 hours</td><td>Ideal for most adults</td></tr>
+    <tr><td>6 cycles</td><td>9 hours</td><td>Athletes, teenagers, recovery from debt</td></tr>
+  </tbody>
+</table>
+
+<p>Add 15 minutes to your target sleep time to account for the time it takes to fall asleep (sleep onset latency). If you want 7.5 hours of sleep and wake at 6:30 am, go to bed at 10:45 pm (6:30 am minus 7.5 hrs minus 15 min).</p>
+
+<h2>Signs of Chronic Sleep Deprivation</h2>
+<p>Many people are chronically sleep-deprived without recognizing it because the body partially adapts to poor sleep. Key warning signs:</p>
+<ul>
+  <li>Falling asleep within 5 minutes of lying down (normal is 10–20 minutes)</li>
+  <li>Needing an alarm clock every day to wake at a normal time</li>
+  <li>Feeling significantly more alert on weekends — indicating accumulated weekday debt</li>
+  <li>Difficulty concentrating, making decisions, or remembering recent events</li>
+  <li>Increased appetite, particularly for high-calorie foods</li>
+  <li>Irritability or mood instability disproportionate to stressors</li>
+</ul>
+
+<h2>5 Evidence-Based Tips for Better Sleep</h2>
+<ul>
+  <li><strong>Keep a consistent schedule</strong> — same bedtime and wake time 7 days a week. Irregular timing disrupts your circadian rhythm more than total sleep time.</li>
+  <li><strong>Cool your bedroom</strong> — core body temperature must drop 1–2°C to initiate sleep. The optimal room temperature is 15–19°C (60–67°F).</li>
+  <li><strong>Avoid screens 60 minutes before bed</strong> — blue light suppresses melatonin secretion by up to 50%, delaying sleep onset by 30–60 minutes.</li>
+  <li><strong>Limit caffeine after 2 pm</strong> — caffeine has a half-life of 5–7 hours. A 3 pm coffee still has 50% of its stimulant effect at 8–10 pm.</li>
+  <li><strong>Use your bed only for sleep</strong> — stimulus control therapy: avoid working, watching TV, or using your phone in bed. This strengthens the mental association between bed and sleep.</li>
+</ul>
+
+<!-- Guide CTA -->
+<div class="guide-cta-box" style="margin-top:32px">
+  <div class="gcta-icon">&#127769;</div>
+  <div class="gcta-body">
+    <div class="gcta-label">Free Tool</div>
+    <a href="/sleep-calculator" class="gcta-title">Sleep Calculator</a>
+    <p class="gcta-desc">Enter your wake time or bedtime to get optimal sleep and wake windows based on 90-minute sleep cycles. Instantly see when to go to bed tonight.</p>
+  </div>
+  <a href="/sleep-calculator" class="gcta-btn">Calculate now &rarr;</a>
+</div>
+
+</article>
+
+</ToolLayout>
