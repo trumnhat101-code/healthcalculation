@@ -136,6 +136,29 @@ const siteSchema = {
     .tool-desc  { font-size: 13px; color: #6b7280; flex: 1; }
     .tool-arrow { font-size: 18px; color: #16a34a; align-self: flex-end; }
 
+    /* Guides section */
+    .guides-section { padding: 48px 0; background: #f0fdf4; border-top: 1px solid #bbf7d0; }
+    .guides-section h2 { font-size: 22px; font-weight: 800; margin-bottom: 8px; text-align: center; }
+    .guides-section .section-sub { text-align: center; color: #6b7280; font-size: 14px; margin-bottom: 24px; }
+    .guides-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; }
+    .guide-card {
+      background: #fff;
+      border: 1px solid #bbf7d0;
+      border-radius: 14px;
+      padding: 22px 20px;
+      text-decoration: none;
+      color: #1f2937;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: box-shadow .18s, border-color .18s, transform .18s;
+    }
+    .guide-card:hover { box-shadow: 0 6px 24px rgba(22,163,74,.14); border-color: #4ade80; transform: translateY(-2px); }
+    .guide-card-icon { font-size: 26px; }
+    .guide-card-title { font-size: 15px; font-weight: 700; color: #1f2937; }
+    .guide-card-desc  { font-size: 13px; color: #6b7280; flex: 1; }
+    .guide-card-cta   { font-size: 13px; font-weight: 600; color: #16a34a; margin-top: 4px; }
+
     /* Why section */
     .why-section { background: #fff; padding: 40px 0; border-top: 1px solid #e5e7eb; }
     .why-section h2 { font-size: 22px; font-weight: 800; margin-bottom: 20px; text-align: center; }
@@ -171,6 +194,7 @@ const siteSchema = {
       <a href="/protein-calculator">Protein</a>
       <a href="/water-intake-calculator">Water</a>
       <a href="/heart-rate-zone-calculator">Heart Rate</a>
+      <a href="/guides">Guides</a>
       <a href="/about">About</a>
     </nav>
   </div>
@@ -199,22 +223,49 @@ const siteSchema = {
   </div>
 </section>
 
+<section class="guides-section">
+  <div class="wrap">
+    <h2>Health &amp; Fitness Guides</h2>
+    <p class="section-sub">Evidence-based articles to help you understand your results</p>
+grid">
+      <a href="/guides/how-much-protein-per-day" class="guide-card">
+        <div class="guide-card-icon">&#129385;</div>
+        <div class="guide-card-title">How Much Protein Do I Need Per Day?</div>
+        <div class="guide-card-desc">ISSN-backed guidelines for muscle building, fat loss, and general health — with per-meal breakdown.</div>
+        <div class="guide-card-cta">Read guide &rarr;</div>
+      </a>
+      <a href="/guides/healthy-bmi-for-women" class="guide-card">
+        <div class="guide-card-icon">&#128202;</div>
+        <div class="guide-card-title">What Is a Healthy BMI for Women?</div>
+        <div class="guide-card-desc">WHO categories, age-group benchmarks, and why BMI alone doesn't tell the full story.</div>
+        <div class="guide-card-cta">Read guide &rarr;</div>
+      </a>
+      <a href="/guides/how-to-calculate-tdee" class="guide-card">
+        <div class="guide-card-icon">&#128293;</div>
+        <div class="guide-card-title">How to Calculate TDEE Accurately</div>
+        <div class="guide-card-desc">Step-by-step walkthrough of the Mifflin-St Jeor equation with activity multipliers and common mistakes.</div>
+        <div class="guide-card-cta">Read guide &rarr;</div>
+      </a>
+    </div>
+  </div>
+</section>
+
 <section class="why-section">
   <div class="wrap">
     <h2>Why Use HealthCalculation?</h2>
     <div class="why-grid">
       <div class="why-card">
-        <div class="why-icon">🔬</div>
+        <div class="why-icon">&#128300;</div>
         <div class="why-title">Clinically Validated</div>
         <div class="why-desc">Mifflin-St Jeor, WHO BMI standards, AASM sleep guidelines</div>
       </div>
       <div class="why-card">
-        <div class="why-icon">⚡</div>
+        <div class="why-icon">&#9889;</div>
         <div class="why-title">Instant Results</div>
         <div class="why-desc">Client-side calculations — no sign-up, no waiting</div>
       </div>
       <div class="why-card">
-        <div class="why-icon">📱</div>
+        <div class="why-icon">&#128241;</div>
         <div class="why-title">Mobile-Friendly</div>
         <div class="why-desc">Works perfectly on any device, any screen size</div>
       </div>
@@ -237,6 +288,3 @@ const siteSchema = {
     </div>
   </div>
 </footer>
-
-</body>
-</html>
