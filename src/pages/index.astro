@@ -57,11 +57,13 @@ const siteSchema = {
     .wrap { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
 
     /* Header */
-    .site-header { background: #fff; border-bottom: 1px solid #e5e7eb; }
-    .site-header .wrap { display: flex; align-items: center; justify-content: space-between; height: 58px; }
-    .logo { font-weight: 800; color: #16a34a; font-size: 18px; text-decoration: none; }
-    .site-nav { display: flex; gap: 4px; }
-    .site-nav a { color: #6b7280; text-decoration: none; font-size: 13px; padding: 5px 10px; border-radius: 6px; }
+    .site-header { background: #fff; border-bottom: 1px solid #e5e7eb; position: sticky; top: 0; z-index: 100; }
+    .site-header .wrap { display: flex; align-items: center; height: 58px; gap: 10px; }
+    .logo { font-weight: 800; color: #16a34a; font-size: 16px; text-decoration: none; flex-shrink: 0; display: flex; align-items: center; gap: 7px; }
+    .logo-mark { width: 28px; height: 28px; background: #16a34a; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; color: #fff; }
+    .site-nav { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; flex: 1; justify-content: flex-end; }
+    .site-nav::-webkit-scrollbar { display: none; }
+    .site-nav a { color: #6b7280; text-decoration: none; font-size: 13px; font-weight: 500; padding: 6px 10px; border-radius: 7px; white-space: nowrap; flex-shrink: 0; transition: background .15s, color .15s; }
     .site-nav a:hover { background: #f0fdf4; color: #16a34a; }
 
     /* Hero */
@@ -114,8 +116,11 @@ const siteSchema = {
 
 <header class="site-header">
   <div class="wrap">
-    <a class="logo" href="/">HealthCalcs.com</a>
-    <nav class="site-nav">
+    <a class="logo" href="/">
+      <span class="logo-mark" aria-hidden="true">H</span>
+      HealthCalcs
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
       <a href="/calorie-tdee-calculator">Calorie</a>
       <a href="/bmi-calculator">BMI</a>
       <a href="/macro-calculator">Macro</a>
