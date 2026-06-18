@@ -326,4 +326,10 @@ document.getElementById('calcBed')!.addEventListener('click', () => {
   .cv-seg.deep  { background: #7c3aed; }
   .cv-seg.rem   { background: #0891b2; }
   .cv-note { font-size: 11px; color: #9ca3af; margin-top: 8px; margin-bottom: 0; text-align: center; }
+  /* iOS: prevent auto-zoom on input focus */
+  @media (max-width: 768px) {
+    input[type="number"], input[type="text"], select {
+      font-size: 16px !important;
+    }
+  }
 </style>

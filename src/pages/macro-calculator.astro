@@ -337,4 +337,10 @@ form.addEventListener('submit', e => {
   .mt-row { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; padding: 10px 14px; border-bottom: 1px solid #e5e7eb; }
   .mt-row:last-child { border-bottom: none; }
   .mt-row.header { background: #f9fafb; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .4px; color: #6b7280; }
+  /* iOS: prevent auto-zoom on input focus */
+  @media (max-width: 768px) {
+    input[type="number"], input[type="text"], select {
+      font-size: 16px !important;
+    }
+  }
 </style>

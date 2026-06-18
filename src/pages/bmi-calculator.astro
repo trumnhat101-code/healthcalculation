@@ -271,4 +271,10 @@ form.addEventListener('submit', e => {
   .formula-box { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px; font-size: 14px; margin-bottom: 12px; }
   .formula-box p { margin-bottom: 6px; }
   .formula-box p:last-child { margin-bottom: 0; }
+  /* iOS: prevent auto-zoom on input focus */
+  @media (max-width: 768px) {
+    input[type="number"], input[type="text"], select {
+      font-size: 16px !important;
+    }
+  }
 </style>

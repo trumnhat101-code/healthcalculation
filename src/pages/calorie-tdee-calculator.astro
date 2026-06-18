@@ -452,4 +452,10 @@ form.addEventListener('submit', (e) => {
     margin: 12px 0 20px;
     line-height: 1.8;
   }
+  /* iOS: prevent auto-zoom on input focus */
+  @media (max-width: 768px) {
+    input[type="number"], input[type="text"], select {
+      font-size: 16px !important;
+    }
+  }
 </style>
