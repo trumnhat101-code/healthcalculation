@@ -1,0 +1,237 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+
+const SITE = 'https://healthcalculation.com';
+
+const schemaArticle = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "What Is a Healthy Waist-to-Hip Ratio?",
+  description: "WHO thresholds for WHR by sex, how to measure correctly, WHR vs BMI, and evidence-based strategies to reduce visceral fat.",
+  author: {
+    "@type": "Organization",
+    name: "HealthCalculation Editorial Team",
+    url: `${SITE}/about`,
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "HealthCalculation",
+    url: SITE,
+  },
+  datePublished: "2026-06-19",
+  dateModified:  "2026-06-19",
+  mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE}/guides/healthy-waist-to-hip-ratio` },
+};
+---
+
+<ToolLayout
+  title="What Is a Healthy Waist-to-Hip Ratio? — WHO Thresholds Explained"
+  description="Learn the healthy WHR ranges for men and women per WHO standards, how visceral fat affects metabolic risk, and evidence-based ways to improve your ratio."
+  canonical={`${SITE}/guides/healthy-waist-to-hip-ratio`}
+  schemaArticle={schemaArticle}
+  heroTitle="What Is a Healthy Waist-to-Hip Ratio?"
+>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a>
+    <span aria-hidden="true">&#8250;</span>
+    <a href="/guides">Guides</a>
+    <span aria-hidden="true">&#8250;</span>
+    <span>Healthy Waist-to-Hip Ratio</span>
+  </nav>
+
+  <article class="guide-article">
+
+    <p class="guide-meta">&#128197; Last reviewed: June 2026 &nbsp;&middot;&nbsp; HealthCalculation Editorial Team</p>
+
+    <p class="guide-intro">
+      Your <strong>Waist-to-Hip Ratio (WHR)</strong> is a simple measurement that reveals how
+      your body distributes fat — and it turns out that <em>where</em> you store fat matters
+      just as much as how much you have. According to <strong>World Health Organization (WHO)</strong>
+      standards, a healthy WHR is below <strong>0.90 for men</strong> and below <strong>0.80
+      for women</strong>. Ratios above these thresholds are independently associated with
+      elevated cardiovascular risk, type 2 diabetes, and metabolic syndrome — regardless of BMI.
+    </p>
+
+    <h2>WHO Risk Thresholds for WHR</h2>
+    <p>
+      The WHO established sex-specific WHR cut-offs based on large observational studies linking
+      abdominal fat distribution to cardiovascular events and metabolic disease. These are the
+      accepted clinical reference values used worldwide:
+    </p>
+
+    <table class="guide-table">
+      <thead>
+        <tr>
+          <th>Risk Category</th>
+          <th>Men</th>
+          <th>Women</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>&#129001; Low risk</td>
+          <td>&lt; 0.90</td>
+          <td>&lt; 0.80</td>
+        </tr>
+        <tr>
+          <td>&#129000; Moderate risk</td>
+          <td>0.90 – 0.95</td>
+          <td>0.80 – 0.85</td>
+        </tr>
+        <tr>
+          <td>&#128997; High risk</td>
+          <td>&gt; 0.95</td>
+          <td>&gt; 0.85</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      These thresholds apply to adults of all ethnicities, although some research suggests
+      Asian populations may have higher metabolic risk at lower absolute WHR values — a topic
+      of ongoing clinical discussion.
+    </p>
+
+    <h2>How to Calculate WHR</h2>
+    <p>
+      The formula is straightforward: divide your waist circumference by your hip circumference.
+      Both must be in the same unit (inches or centimeters).
+    </p>
+
+    <div class="formula-box">
+      <p><strong>WHR = Waist Circumference ÷ Hip Circumference</strong></p>
+      <p style="margin-top:8px;font-size:13px;color:#6b7280">
+        Example: waist 34 in, hips 40 in → 34 ÷ 40 = <strong>0.85</strong> (Low risk for men, High risk for women)
+      </p>
+    </div>
+
+    <p>
+      The same ratio can mean different risk levels for men versus women — so sex is a required
+      input for any WHR assessment.
+    </p>
+
+    <h2>How to Measure Accurately</h2>
+    <p>
+      Measurement technique is critical. Errors of even 1–2 cm can shift a borderline reading
+      into a different risk category.
+    </p>
+
+    <h3>Waist measurement</h3>
+    <p>
+      Stand upright and find the narrowest point of your torso, approximately 1 inch (2.5 cm)
+      above your navel. Breathe out normally — do not suck in or hold your breath. Place a
+      flexible tape measure around your waist at this level, keeping it horizontal and snug
+      against the skin without compressing it.
+    </p>
+
+    <h3>Hip measurement</h3>
+    <p>
+      Stand with feet together. Locate the widest point of your hips and buttocks — typically
+      around the level of the greater trochanter (the bony protrusion on the side of each hip).
+      Wrap the tape measure around this point, keeping it parallel to the floor.
+    </p>
+
+    <h2>Why WHR Matters More Than BMI Alone</h2>
+    <p>
+      BMI (Body Mass Index) measures total body weight relative to height, but it cannot
+      distinguish <em>where</em> fat is located. A person with high muscle mass will show a
+      high BMI without elevated metabolic risk, while a person with a "normal" BMI can carry
+      dangerous levels of visceral fat around the abdomen — a pattern researchers call
+      <strong>"normal weight obesity"</strong> or metabolically obese normal weight (MONW).
+    </p>
+    <p>
+      WHR captures this distinction because it directly reflects fat distribution.
+      <strong>Visceral fat</strong> — the fat stored around internal organs in the abdomen —
+      is metabolically active. It releases inflammatory cytokines and free fatty acids into
+      portal circulation, contributing to insulin resistance, elevated triglycerides,
+      hypertension, and atherosclerosis.
+    </p>
+    <p>
+      A landmark INTERHEART study (2007) examining 27,000 participants across 52 countries
+      found that abdominal obesity measured by WHR was more strongly associated with acute
+      myocardial infarction risk than BMI. Most cardiovascular and endocrine guidelines now
+      recommend measuring both BMI and a waist-based metric (WHR or waist circumference).
+    </p>
+
+    <h2>WHR vs Waist Circumference Alone</h2>
+    <p>
+      Some guidelines use absolute waist circumference thresholds instead of the waist-to-hip
+      ratio. The National Institutes of Health (NIH) defines high cardiovascular risk as a
+      waist circumference above 40 inches (102 cm) in men and above 35 inches (88 cm) in women.
+    </p>
+    <p>
+      Both measures are valid and capture similar information. WHR has the advantage of being
+      normalized for body frame size — a taller person with a larger hip structure will naturally
+      have a larger absolute waist, which WHR accounts for. Waist circumference alone is simpler
+      and correlates well with visceral fat volume measured by imaging. Using both provides
+      the most complete picture.
+    </p>
+
+    <h2>How to Improve Your WHR</h2>
+    <p>
+      Because hip circumference is largely determined by bone structure and gluteal muscle,
+      it changes slowly. The practical path to improving WHR is reducing <strong>waist
+      circumference</strong> by targeting visceral fat. The most effective evidence-based
+      strategies are:
+    </p>
+    <ul>
+      <li>
+        <strong>Aerobic exercise:</strong> Consistent moderate-to-vigorous aerobic activity
+        (150+ minutes per week) preferentially reduces visceral fat relative to subcutaneous fat.
+        A 2011 meta-analysis in Obesity Reviews found aerobic exercise reduced waist circumference
+        by an average of 2.8 cm without calorie restriction.
+      </li>
+      <li>
+        <strong>Calorie deficit:</strong> A deficit of 500 calories/day produces roughly 0.5 kg/week
+        of fat loss, with a meaningful proportion coming from visceral stores. See our
+        <a href="/calorie-deficit-calculator">Calorie Deficit Calculator</a> for personalized targets.
+      </li>
+      <li>
+        <strong>Sleep:</strong> Short sleep duration (&lt;6 hours/night) is independently associated
+        with increased visceral fat accumulation. Cortisol dysregulation from poor sleep drives
+        abdominal fat storage. Prioritizing 7–9 hours is a zero-cost intervention.
+      </li>
+      <li>
+        <strong>Alcohol reduction:</strong> Ethanol metabolism in the liver promotes triglyceride
+        synthesis and preferential visceral fat storage. Reducing alcohol intake has a disproportionate
+        effect on waist circumference compared to total calorie reduction from other sources.
+      </li>
+      <li>
+        <strong>Stress management:</strong> Chronically elevated cortisol directly promotes visceral
+        adipogenesis. Evidence-based interventions include mindfulness-based stress reduction (MBSR),
+        structured relaxation, and regular physical activity.
+      </li>
+    </ul>
+
+    <h2>Key Takeaways</h2>
+    <ul>
+      <li>A healthy WHR is <strong>&lt; 0.90 for men</strong> and <strong>&lt; 0.80 for women</strong> (WHO).</li>
+      <li>WHR reflects fat distribution — abdominal visceral fat — which BMI cannot capture.</li>
+      <li>Normal BMI with high WHR ("normal weight obesity") still carries elevated metabolic risk.</li>
+      <li>Aerobic exercise, a moderate calorie deficit, adequate sleep, and reduced alcohol are the most effective interventions.</li>
+      <li>Use WHR alongside BMI and waist circumference for the most complete risk picture.</li>
+    </ul>
+
+    <!-- Tool CTA -->
+    <div class="guide-cta-box">
+      <div class="gcta-icon">&#9881;</div>
+      <div class="gcta-body">
+        <div class="gcta-label">Free Calculator</div>
+        <a href="/waist-to-hip-ratio-calculator" class="gcta-title">Waist-to-Hip Ratio Calculator</a>
+        <p class="gcta-desc">Enter your waist and hip measurements to get your WHR and WHO risk category instantly — in inches or centimeters.</p>
+      </div>
+      <a href="/waist-to-hip-ratio-calculator" class="gcta-btn">Calculate now &rarr;</a>
+    </div>
+
+    <!-- Related Guides -->
+    <h2>Related Guides</h2>
+    <ul class="related-guides-list">
+      <li><a href="/guides/healthy-body-fat-percentage">What Is a Healthy Body Fat Percentage?</a></li>
+      <li><a href="/guides/healthy-bmi-for-women">What Is a Healthy BMI for Women?</a></li>
+      <li><a href="/guides/how-to-create-a-calorie-deficit">How to Create a Calorie Deficit</a></li>
+    </ul>
+
+  </article>
+
+</ToolLayout>

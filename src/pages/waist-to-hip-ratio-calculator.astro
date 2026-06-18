@@ -1,0 +1,376 @@
+---
+import ToolLayout from '../layouts/ToolLayout.astro';
+import Disclaimer from '../components/Disclaimer.astro';
+import AdSlot from '../components/AdSlot.astro';
+
+const SITE = 'https://healthcalculation.com';
+
+const faq = [
+  {
+    q: 'What is a healthy waist-to-hip ratio?',
+    a: 'According to WHO standards, a healthy WHR is below 0.90 for men and below 0.80 for women. Ratios at or above these thresholds are associated with substantially increased risk of cardiovascular disease, type 2 diabetes, and metabolic syndrome — independent of BMI.',
+  },
+  {
+    q: 'What does WHR measure that BMI does not?',
+    a: 'BMI measures total body weight relative to height but cannot distinguish where fat is stored. WHR specifically identifies central (abdominal) fat distribution, which is metabolically more dangerous than fat stored in the hips and thighs. Two people with identical BMIs can have very different WHRs and very different cardiovascular risk profiles.',
+  },
+  {
+    q: 'How do I measure my waist and hips correctly?',
+    a: 'Waist: measure at the narrowest point of your torso, roughly 1 inch above your navel, after a normal exhale. Do not suck in. Hips: measure at the widest point of your hips and buttocks while standing with feet together. Use a flexible tape measure held parallel to the floor for both measurements.',
+  },
+  {
+    q: 'Is WHR better than BMI for predicting heart disease risk?',
+    a: 'Research suggests WHR is a stronger predictor of cardiovascular events than BMI alone. A 2007 INTERHEART study of 27,000 participants across 52 countries found that abdominal obesity — measured by WHR — had a stronger association with acute myocardial infarction than BMI. Most health authorities now recommend using both measures together.',
+  },
+  {
+    q: 'Can I reduce my waist-to-hip ratio?',
+    a: 'Yes. WHR improves primarily by reducing waist circumference. The most effective strategies are aerobic exercise (at least 150 minutes per week), a calorie deficit targeting visceral fat loss, adequate sleep (poor sleep increases abdominal fat), and reduced alcohol intake. Hip measurement is largely determined by bone structure and is less modifiable.',
+  },
+];
+
+const schemaApp = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "Waist-to-Hip Ratio Calculator",
+  applicationCategory: "HealthApplication",
+  operatingSystem: "Web",
+  url: `${SITE}/waist-to-hip-ratio-calculator`,
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  description: "Free WHR calculator using WHO risk thresholds for men and women.",
+};
+---
+
+<ToolLayout
+  title="Waist-to-Hip Ratio Calculator — WHR Risk Assessment (Free)"
+  description="Calculate your waist-to-hip ratio and check your cardiovascular risk category using WHO standards. Supports inches and centimeters for men and women."
+  canonical={`${SITE}/waist-to-hip-ratio-calculator`}
+  schemaApp={schemaApp}
+  schemaFaq={faq}
+>
+
+  <div class="page-layout">
+    <div class="main-col">
+
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">&#8250;</span>
+        <span>Waist-to-Hip Ratio Calculator</span>
+      </nav>
+
+      <h1>Waist-to-Hip Ratio Calculator</h1>
+      <p class="lead">
+        Calculate your <strong>Waist-to-Hip Ratio (WHR)</strong> and see your cardiovascular
+        risk category using <strong>WHO standards</strong>. WHR measures where your body stores
+        fat — a stronger predictor of metabolic risk than BMI alone.
+      </p>
+
+      <!-- Tool card -->
+      <div class="card" id="calculator">
+        <form id="whrForm" novalidate>
+
+          <!-- Units -->
+          <div class="field-group" style="margin-bottom:18px">
+            <label class="field-label">Units</label>
+            <div class="seg-group" role="radiogroup" aria-label="Unit system">
+              <label class="seg-opt">
+                <input type="radio" name="units" value="in" checked />
+                <span>Inches (in)</span>
+              </label>
+              <label class="seg-opt">
+                <input type="radio" name="units" value="cm" />
+                <span>Centimeters (cm)</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Sex -->
+          <div class="field-group" style="margin-bottom:18px">
+            <label class="field-label">Sex</label>
+            <div class="seg-group" role="radiogroup" aria-label="Sex">
+              <label class="seg-opt">
+                <input type="radio" name="sex" value="m" checked />
+                <span>Male</span>
+              </label>
+              <label class="seg-opt">
+                <input type="radio" name="sex" value="f" />
+                <span>Female</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Waist + Hip -->
+          <div class="grid-3" style="grid-template-columns:1fr 1fr">
+            <div class="field-group">
+              <label class="field-label" for="waist">Waist Circumference</label>
+              <input type="number" id="waist" name="waist" min="20" max="200" step="0.1" placeholder="32" required />
+              <span class="field-unit" id="unitLabel">in</span>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="hip">Hip Circumference</label>
+              <input type="number" id="hip" name="hip" min="20" max="200" step="0.1" placeholder="38" required />
+              <span class="field-unit" id="unitLabel2">in</span>
+            </div>
+          </div>
+
+          <p class="measure-tip">&#128161; Measure waist at narrowest point (above navel); hips at widest point of buttocks.</p>
+
+          <button type="submit" class="btn-calc">Calculate WHR &#8594;</button>
+        </form>
+
+        <!-- Results -->
+        <div id="results" class="results" hidden>
+          <div class="kpi-grid">
+            <div class="kpi main">
+              <div class="kpi-v" id="resWhr">—</div>
+              <div class="kpi-l">Waist-to-Hip Ratio</div>
+            </div>
+            <div class="kpi" id="riskKpi">
+              <div class="kpi-v" id="resRisk">—</div>
+              <div class="kpi-l">Risk Category (WHO)</div>
+            </div>
+          </div>
+
+          <table class="whr-table" id="whrTable">
+            <thead>
+              <tr><th>Risk Category</th><th>Men (WHR)</th><th>Women (WHR)</th></tr>
+            </thead>
+            <tbody>
+              <tr id="rowLow">
+                <td>&#129001; Low risk</td>
+                <td>&lt; 0.90</td>
+                <td>&lt; 0.80</td>
+              </tr>
+              <tr id="rowMod">
+                <td>&#129000; Moderate risk</td>
+                <td>0.90 – 0.95</td>
+                <td>0.80 – 0.85</td>
+              </tr>
+              <tr id="rowHigh">
+                <td>&#128997; High risk</td>
+                <td>&gt; 0.95</td>
+                <td>&gt; 0.85</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <Disclaimer short={true} />
+        </div>
+      </div><!-- /card -->
+
+      <AdSlot label="In-content ad" />
+
+      <h2>What Is Waist-to-Hip Ratio?</h2>
+      <p>
+        Waist-to-Hip Ratio (WHR) is your waist circumference divided by your hip circumference.
+        It measures <strong>central adiposity</strong> — how much fat is stored around your
+        abdomen versus your hips and thighs. Abdominal (visceral) fat is metabolically active
+        and strongly linked to cardiovascular disease, type 2 diabetes, hypertension, and
+        metabolic syndrome.
+      </p>
+      <p>
+        Unlike BMI, WHR is not affected by height or total muscle mass, making it a useful
+        complementary measure for people who are muscular or at the extremes of height.
+        The <strong>World Health Organization (WHO)</strong> established the risk thresholds
+        used in this calculator based on population studies linking WHR to cardiovascular events.
+      </p>
+
+      <h2>WHR Formula</h2>
+      <div class="formula-box">
+        <p><strong>WHR = Waist Circumference &divide; Hip Circumference</strong></p>
+        <p style="margin-top:8px">Both measurements must use the same unit (inches or cm).</p>
+        <p style="margin-top:8px;font-size:13px;color:#6b7280">Example: waist 34 in, hips 40 in → WHR = 34 &divide; 40 = <strong>0.85</strong></p>
+      </div>
+
+      <h2>How to Measure Correctly</h2>
+      <p>
+        Accurate measurements are critical for a meaningful WHR result. Stand upright with
+        feet together and use a flexible tape measure:
+      </p>
+      <ul style="margin:10px 0 0 20px;line-height:1.9">
+        <li><strong>Waist:</strong> Measure at the narrowest point of your torso, approximately
+        1 inch above your belly button. Breathe out normally — do not suck in. The tape should
+        be snug but not compressing the skin.</li>
+        <li><strong>Hips:</strong> Measure at the widest point of your hips and buttocks.
+        Keep the tape parallel to the floor. Measure with feet together.</li>
+      </ul>
+      <Disclaimer />
+
+    </div><!-- /main-col -->
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <AdSlot label="Sidebar ad" format="rectangle" />
+      <div class="card" style="font-size:13px;color:#374151">
+        <p style="font-weight:700;margin-bottom:10px">&#9881; WHO Risk Thresholds</p>
+        <p style="margin-bottom:6px"><strong>Men</strong></p>
+        <p>&#129001; Low: &lt; 0.90</p>
+        <p>&#129000; Moderate: 0.90–0.95</p>
+        <p style="margin-bottom:10px">&#128997; High: &gt; 0.95</p>
+        <p style="margin-bottom:6px"><strong>Women</strong></p>
+        <p>&#129001; Low: &lt; 0.80</p>
+        <p>&#129000; Moderate: 0.80–0.85</p>
+        <p style="margin-bottom:0">&#128997; High: &gt; 0.85</p>
+      </div>
+    </aside>
+  </div>
+
+
+<section class="content-section">
+  <h2>WHR vs BMI — Which Should You Use?</h2>
+  <p>
+    BMI and WHR measure different things and are best used together. BMI reflects total
+    body mass relative to height — it is a good screening tool for general population health
+    but cannot distinguish fat distribution. A person with high muscle mass may show a high
+    BMI despite low body fat, while a sedentary person with normal BMI can have dangerous
+    levels of visceral fat — a pattern sometimes called "normal weight obesity."
+  </p>
+  <p>
+    WHR fills this gap by directly reflecting fat distribution. A 2007 INTERHEART study of
+    27,000 participants across 52 countries found that abdominal obesity measured by WHR
+    was more strongly associated with acute myocardial infarction risk than BMI. Most
+    cardiologists and endocrinologists now recommend measuring both.
+  </p>
+</section>
+
+<section class="content-section">
+  <h2>How to Improve Your WHR</h2>
+  <p>
+    WHR improves by reducing waist circumference — hip size is largely determined by bone
+    structure and is less modifiable. The most effective evidence-based strategies to reduce
+    visceral fat are aerobic exercise (at least 150 minutes of moderate-intensity per week),
+    a moderate calorie deficit targeting 0.5–1 lb of weight loss per week, adequate sleep
+    (short sleep duration is independently associated with increased abdominal fat), reduced
+    alcohol intake (alcohol preferentially promotes visceral fat storage), and stress
+    management (chronically elevated cortisol promotes abdominal fat deposition).
+  </p>
+</section>
+
+<section class="content-section">
+  <h2>Frequently Asked Questions</h2>
+  {faq.map(({ q, a }) => (
+    <details class="faq-item">
+      <summary>{q}</summary>
+      <p set:html={a} />
+    </details>
+  ))}
+</section>
+
+<!-- Guide CTA -->
+<section class="content-section">
+  <div class="guide-cta-box">
+    <div class="gcta-icon">&#128208;</div>
+    <div class="gcta-body">
+      <div class="gcta-label">From Our Guides</div>
+      <a href="/guides/healthy-waist-to-hip-ratio" class="gcta-title">What Is a Healthy Waist-to-Hip Ratio?</a>
+      <p class="gcta-desc">WHO thresholds explained, WHR vs waist circumference vs BMI comparison, how visceral fat drives metabolic risk, and evidence-based ways to improve your ratio.</p>
+    </div>
+    <a href="/guides/healthy-waist-to-hip-ratio" class="gcta-btn">Read guide &rarr;</a>
+  </div>
+</section>
+
+<!-- Related -->
+<section class="content-section">
+  <h2>Related Calculators</h2>
+  <div class="related-grid">
+    <a href="/body-fat-calculator"     class="related-link">&#128198; Body Fat % Calculator</a>
+    <a href="/bmi-calculator"          class="related-link">&#9878; BMI Calculator</a>
+    <a href="/ideal-weight-calculator" class="related-link">&#9878; Ideal Weight</a>
+    <a href="/bmr-calculator"          class="related-link">&#128200; BMR Calculator</a>
+  </div>
+</section>
+
+</ToolLayout>
+
+<script>
+const form    = document.getElementById('whrForm') as HTMLFormElement;
+const results = document.getElementById('results') as HTMLDivElement;
+
+document.querySelectorAll<HTMLInputElement>('input[name="units"]').forEach(r => {
+  r.addEventListener('change', () => {
+    const label = r.value === 'in' ? 'in' : 'cm';
+    (document.getElementById('unitLabel')  as HTMLElement).textContent = label;
+    (document.getElementById('unitLabel2') as HTMLElement).textContent = label;
+  });
+});
+
+// WHO thresholds
+const THRESH = {
+  m: { low: 0.90,  high: 0.95 },
+  f: { low: 0.80,  high: 0.85 },
+};
+
+function getRisk(whr: number, sex: string): { label: string; color: string; row: string } {
+  const t = THRESH[sex as keyof typeof THRESH];
+  if (whr < t.low)  return { label: 'Low Risk',      color: '#16a34a', row: 'rowLow'  };
+  if (whr <= t.high) return { label: 'Moderate Risk', color: '#f59e0b', row: 'rowMod'  };
+  return                    { label: 'High Risk',     color: '#ef4444', row: 'rowHigh' };
+}
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const fd    = new FormData(form);
+  const sex   = fd.get('sex') as string;
+  const waist = parseFloat(fd.get('waist') as string);
+  const hip   = parseFloat(fd.get('hip')   as string);
+
+  if (!waist || !hip || hip === 0) return;
+
+  const whr  = waist / hip;
+  const risk = getRisk(whr, sex);
+
+  (document.getElementById('resWhr')  as HTMLElement).textContent = whr.toFixed(2);
+  (document.getElementById('resRisk') as HTMLElement).textContent = risk.label;
+  (document.getElementById('resRisk') as HTMLElement).style.color = risk.color;
+
+  // Highlight matching row
+  ['rowLow', 'rowMod', 'rowHigh'].forEach(id => {
+    const row = document.getElementById(id) as HTMLTableRowElement;
+    row.style.fontWeight    = id === risk.row ? '700' : '400';
+    row.style.background    = id === risk.row ? '#fefce8' : '';
+    row.style.borderLeft    = id === risk.row ? '3px solid ' + risk.color : '';
+  });
+
+  results.hidden = false;
+  results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+});
+</script>
+
+<style>
+  .measure-tip {
+    font-size: 13px; color: #6b7280; margin: 10px 0 0;
+    background: #f0fdf4; padding: 8px 12px; border-radius: 8px;
+  }
+
+  .seg-group { display: flex; gap: 8px; flex-wrap: wrap; }
+  .seg-opt { flex: 1; min-width: 90px; }
+  .seg-opt span {
+    display: block; text-align: center; padding: 8px 12px;
+    border: 1.5px solid #e5e7eb; border-radius: 8px;
+    font-size: 14px; cursor: pointer; color: #374151;
+    transition: border-color .15s, color .15s, background .15s;
+  }
+  .seg-opt input:checked + span {
+    border-color: #16a34a; color: #16a34a;
+    background: #f0fdf4; font-weight: 700;
+  }
+
+  .btn-calc {
+    width: 100%; margin-top: 18px; padding: 13px;
+    background: #16a34a; color: #fff; font-size: 16px; font-weight: 700;
+    border: none; border-radius: 10px; cursor: pointer;
+  }
+
+  .results { margin-top: 20px; padding-top: 18px; border-top: 1px solid #e5e7eb; }
+  .kpi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+  @media (max-width: 400px) { .kpi-grid { grid-template-columns: 1fr; } }
+  .kpi { background: #f6faf7; border-radius: 10px; padding: 14px 16px; }
+  .kpi.main { background: #e7f7ec; }
+  .kpi-v { font-size: 26px; font-weight: 800; color: #1f2937; margin: 0 0 4px; }
+  .kpi.main .kpi-v { color: #16a34a; }
+  .kpi-l { font-size: 12px; color: #6b7280; }
+
+  .whr-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .whr-table th { background: #f0fdf4; color: #16a34a; font-weight: 700; padding: 8px 12px; text-align: left; border-bottom: 2px solid #bbf7d0; }
+  .whr-table td { padding: 8px 12px; border-bottom: 1px solid #e5e7eb; }
+  .whr-table tr:last-child td { border-bottom: none; }
+</style>
