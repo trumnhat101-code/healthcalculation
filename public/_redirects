@@ -1,7 +1,5 @@
 # Cloudflare Pages _redirects
-
-# www → non-www (301 permanent)
-https://www.healthcalculation.com/*  https://healthcalculation.com/:splat  301
+# Note: www → non-www handled via Cloudflare Bulk Redirect Rule in dashboard
 
 # Short URL aliases
 /calorie     /calorie-tdee-calculator  301
