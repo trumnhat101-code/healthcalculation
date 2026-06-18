@@ -50,6 +50,8 @@ const siteSchema = {
   <link rel="canonical" href={SITE} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <script type="application/ld+json" set:html={JSON.stringify(siteSchema)} />
+  <!-- Cloudflare Web Analytics — replace TOKEN with your beacon token from dash.cloudflare.com > Analytics > Web Analytics -->
+  <!-- <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "REPLACE_WITH_CF_ANALYTICS_TOKEN"}'></script> -->
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: #1f2937; background: #f6faf7; line-height: 1.65; }
