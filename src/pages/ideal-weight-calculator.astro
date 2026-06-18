@@ -246,4 +246,9 @@ iwForm.addEventListener('submit', (e) => {
 // Toggle height inputs on unit change
 document.querySelectorAll<HTMLInputElement>('input[name="unit"]').forEach(r => {
   r.addEventListener('change', () => {
-  
+    const imp = r.value === 'imperial';
+    (document.getElementById('height-imperial') as HTMLElement).style.display = imp ? '' : 'none';
+    (document.getElementById('height-metric')   as HTMLElement).style.display = imp ? 'none' : '';
+  });
+});
+</script>
