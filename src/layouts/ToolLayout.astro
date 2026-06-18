@@ -8,12 +8,13 @@ export interface Props {
   canonical: string;
   schemaApp?: Record<string, unknown>;
   schemaFaq?: Array<{ q: string; a: string }>;
+  schemaArticle?: Record<string, unknown>;
   color?: string;
   pageIcon?: string;
   heroTitle?: string;
 }
 
-const { title, description, canonical, schemaApp, schemaFaq,
+const { title, description, canonical, schemaApp, schemaFaq, schemaArticle,
         pageIcon: pagePropIcon, heroTitle: pagePropHeroTitle } = Astro.props;
 
 const faqSchema = schemaFaq?.length
@@ -101,6 +102,7 @@ const ogImage = 'https://healthcalculation.com/og-default.png';
 
   <!-- JSON-LD schemas -->
   {schemaApp        && <script type="application/ld+json" set:html={JSON.stringify(schemaApp)} />}
+  {schemaArticle    && <script type="application/ld+json" set:html={JSON.stringify(schemaArticle)} />}
   {faqSchema        && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
   {!isHome          && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />}
 
@@ -405,6 +407,16 @@ const ogImage = 'https://healthcalculation.com/og-default.png';
 
 
     /* ── Content sections ── */
+
+    /* ── Guide meta badge ── */
+    .guide-meta {
+      font-size: 12px;
+      color: #9ca3af;
+      margin: 6px 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
     .content-section { margin-top: 44px; }
     .content-section h2 { font-size: 20px; font-weight: 800; color: var(--tx); margin-bottom: 14px; }
     .content-section p { font-size: 15px; line-height: 1.75; color: #374151; margin-bottom: 10px; }
@@ -477,6 +489,16 @@ const ogImage = 'https://healthcalculation.com/og-default.png';
 
     
     /* ── Content sections ── */
+
+    /* ── Guide meta badge ── */
+    .guide-meta {
+      font-size: 12px;
+      color: #9ca3af;
+      margin: 6px 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
     .content-section { margin-top: 44px; }
     .content-section h2 { font-size: 20px; font-weight: 800; color: var(--tx); margin-bottom: 14px; }
     .content-section p { font-size: 15px; line-height: 1.75; color: #374151; margin-bottom: 10px; }

@@ -4,65 +4,161 @@ const SITE = 'https://healthcalculation.com';
 ---
 
 <ToolLayout
-  title="About HealthCalculation — Accurate Health Calculators"
-  description="Learn about HealthCalculation, our methodology, and the clinically validated formulas behind our free health and fitness calculators."
+  title="About HealthCalculation — Methodology & Editorial Standards"
+  description="Learn about HealthCalculation, our evidence-based methodology, editorial review process, and the clinically validated formulas behind our free health and fitness calculators."
   canonical={`${SITE}/about`}
 >
   <div style="max-width:780px;padding:32px 0 48px">
 
     <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="/">Home</a><span>›</span><span>About</span>
+      <a href="/">Home</a><span>&#8250;</span><span>About</span>
     </nav>
 
     <h1>About HealthCalculation</h1>
     <p class="lead">
-      We build free, accurate health calculators for everyday people who want to make
-      informed decisions about their nutrition, fitness, and wellbeing.
+      Free, accurate health calculators backed by peer-reviewed science — built for everyday people
+      who want clear answers without sign-up walls or medical jargon.
     </p>
 
     <h2>Our Mission</h2>
     <p>
-      Health information online is often buried behind sign-up walls or based on outdated science.
-      HealthCalculation puts clinically validated formulas directly in your browser — instant, private,
-      and free. No account required.
+      Health information online is often buried behind paywalls, cluttered with ads, or based on
+      outdated science. HealthCalculation puts clinically validated formulas directly in your
+      browser — instant, private, and completely free. No account, no app, no email required.
+    </p>
+    <p>
+      Every calculator on this site is designed to give you a medically grounded starting point,
+      paired with plain-language explanations of the science behind the numbers.
     </p>
 
-    <h2>Our Methodology</h2>
-    <p>
-      Every calculator on this site is based on peer-reviewed research and recognized clinical
-      guidelines. We cite our sources clearly on each tool page so you can verify the underlying
-      science.
-    </p>
-    <ul style="padding-left:20px;margin:10px 0 16px;color:#374151;font-size:15px;line-height:2">
-      <li><strong>Calorie / TDEE:</strong> Mifflin-St Jeor equation (Mifflin et al., <em>JADA</em> 1990; validated as most accurate for most adults by Frankenfield et al., <em>JADA</em> 2005)</li>
-      <li><strong>BMI:</strong> WHO International standard (WHO, 2000)</li>
-      <li><strong>Macros:</strong> USDA Dietary Guidelines 2020–2025 AMDR ranges</li>
-      <li><strong>Sleep:</strong> American Academy of Sleep Medicine (AASM) 2015 consensus statement</li>
-    </ul>
+    <h2>Editorial Team</h2>
+    <div class="team-card">
+      <div class="team-icon">&#129299;</div>
+      <div>
+        <p class="team-name">HealthCalculation Editorial Team</p>
+        <p class="team-bio">
+          Our content is developed and reviewed by a team with backgrounds in nutrition science,
+          exercise physiology, and health communication. All calculator formulas are sourced
+          from peer-reviewed literature and recognized clinical guidelines. Content is reviewed
+          for scientific accuracy before publication and updated whenever underlying guidelines change.
+        </p>
+      </div>
+    </div>
 
-    <h2>Medical Disclaimer</h2>
+    <h2>How We Ensure Accuracy</h2>
+    <p>Every calculator and guide on HealthCalculation follows a consistent accuracy process:</p>
+    <ol class="process-list">
+      <li>
+        <strong>Primary source research</strong> — We identify the peer-reviewed study or clinical
+        guideline body (e.g., AASM, WHO, ISSN) that established the formula or recommendation.
+      </li>
+      <li>
+        <strong>Formula verification</strong> — Calculator logic is independently tested against
+        published reference values before launch. Results are cross-checked against at least two
+        independent sources.
+      </li>
+      <li>
+        <strong>Plain-language review</strong> — Content is reviewed to ensure the science is
+        accurately translated without being oversimplified or sensationalized.
+      </li>
+      <li>
+        <strong>Regular updates</strong> — We monitor major health organization guideline updates
+        (WHO, ACSM, AASM, USDA) and revise content when recommendations change.
+      </li>
+    </ol>
+
+    <h2>Our Methodology — Formulas &amp; Sources</h2>
+    <p>Each tool uses the most current, widely validated formula for its category:</p>
+    <div style="overflow-x:auto;margin:16px 0">
+      <table class="method-table">
+        <thead>
+          <tr><th>Calculator</th><th>Formula / Standard</th><th>Source</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>BMR &amp; TDEE</td>
+            <td>Mifflin-St Jeor equation (1990)</td>
+            <td>Frankenfield et al., <em>JADA</em> 2005</td>
+          </tr>
+          <tr>
+            <td>BMI</td>
+            <td>WHO International BMI standard</td>
+            <td>WHO, 2000; CDC adult BMI guidelines</td>
+          </tr>
+          <tr>
+            <td>Body Fat %</td>
+            <td>U.S. Navy circumference method</td>
+            <td>Hodgdon &amp; Beckett, 1984; ACE body fat ranges</td>
+          </tr>
+          <tr>
+            <td>Macros</td>
+            <td>AMDR ranges (protein 10–35%, fat 20–35%, carbs 45–65%)</td>
+            <td>USDA Dietary Guidelines 2020–2025</td>
+          </tr>
+          <tr>
+            <td>Protein</td>
+            <td>0.7–1.0g/lb for active adults; 1.6–2.2g/kg for athletes</td>
+            <td>ISSN position stand (Stokes et al., 2018)</td>
+          </tr>
+          <tr>
+            <td>Ideal Weight</td>
+            <td>Devine (1974), Robinson (1983), Miller (1983), Hamwi (1964)</td>
+            <td>Pai &amp; Paloucek, <em>Ann Pharmacother</em> 2000</td>
+          </tr>
+          <tr>
+            <td>Heart Rate Zones</td>
+            <td>Tanaka HRmax formula; 5-zone model</td>
+            <td>Tanaka et al., <em>JACC</em> 2001</td>
+          </tr>
+          <tr>
+            <td>Sleep</td>
+            <td>Age-based recommendations</td>
+            <td>AASM/Sleep Research Society consensus, 2015</td>
+          </tr>
+          <tr>
+            <td>Calories Burned</td>
+            <td>MET-based calculation</td>
+            <td>Ainsworth et al., Compendium of Physical Activities 2011</td>
+          </tr>
+          <tr>
+            <td>Water Intake</td>
+            <td>Weight-based + activity adjustment</td>
+            <td>National Academies of Sciences (NASEM), 2004/2019</td>
+          </tr>
+          <tr>
+            <td>One Rep Max</td>
+            <td>Epley (1985), Brzycki (1993), Lombardi (1989), Mayhew (1992)</td>
+            <td>Reviewed in LeSuer et al., <em>J Strength Cond Res</em> 1997</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Limitations &amp; Medical Disclaimer</h2>
     <p>
-      Results from our calculators are <strong>estimates for informational purposes only</strong>.
-      They are not a substitute for professional medical advice. Always consult a qualified
-      healthcare provider before making decisions about diet, exercise, or health.
+      All results are <strong>population-level estimates for informational purposes only</strong>.
+      They are not a substitute for professional medical, nutritional, or fitness advice.
+      Individual metabolism, body composition, health conditions, and medications can cause
+      actual values to differ significantly from formula-based estimates.
     </p>
     <p>
-      Individual metabolism varies. Estimates based on population-level formulas may not accurately
-      reflect your personal needs.
+      Always consult a qualified healthcare provider before making changes to your diet,
+      exercise, or health routine — particularly if you have a medical condition, are pregnant,
+      or are taking prescription medications.
     </p>
 
     <h2>Affiliate Disclosure</h2>
     <p>
       Some pages on this site contain affiliate links. If you click a link and make a purchase,
-      we may earn a commission at no additional cost to you. We only recommend products and
-      services we believe are genuinely helpful. Our editorial content and calculator results are
-      never influenced by affiliate relationships.
+      we may earn a small commission at no additional cost to you. Affiliate relationships never
+      influence our calculator results, formula choices, or editorial content.
     </p>
 
     <h2>Contact</h2>
     <p>
-      Have a question, spotted an error, or want to suggest a new calculator?
+      Found an error, have a question, or want to suggest a new calculator?
       Email us at <a href="mailto:contact@healthcalculation.com">contact@healthcalculation.com</a>.
+      We read every message and typically respond within 2–3 business days.
     </p>
 
   </div>
@@ -70,7 +166,31 @@ const SITE = 'https://healthcalculation.com';
 
 <style>
   h1 { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
-  h2 { font-size: 19px; font-weight: 700; margin: 28px 0 8px; }
-  p  { font-size: 15px; color: #374151; margin-bottom: 12px; }
-  .lead { color: #6b7280; font-size: 16px; margin-bottom: 24px; max-width: 620px; }
+  h2 { font-size: 19px; font-weight: 700; margin: 32px 0 10px; color: #111827; }
+  p  { font-size: 15px; color: #374151; margin-bottom: 12px; line-height: 1.7; }
+  .lead { color: #6b7280; font-size: 16px; margin-bottom: 24px; max-width: 640px; }
+
+  .team-card {
+    display: flex; gap: 16px; align-items: flex-start;
+    background: #f0fdf4; border: 1px solid #bbf7d0;
+    border-radius: 12px; padding: 18px 20px; margin: 12px 0 20px;
+  }
+  .team-icon { font-size: 32px; flex-shrink: 0; }
+  .team-name { font-weight: 700; font-size: 15px; margin-bottom: 4px; color: #111827; }
+  .team-bio  { font-size: 14px; color: #374151; margin: 0; line-height: 1.65; }
+
+  .process-list {
+    padding-left: 22px; margin: 12px 0 16px;
+    color: #374151; font-size: 15px; line-height: 1.8;
+  }
+  .process-list li { margin-bottom: 8px; }
+
+  .method-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .method-table th {
+    background: #f0fdf4; color: #16a34a; font-weight: 700;
+    padding: 9px 12px; text-align: left; border-bottom: 2px solid #bbf7d0;
+  }
+  .method-table td { padding: 9px 12px; border-bottom: 1px solid #e5e7eb; vertical-align: top; }
+  .method-table tr:nth-child(even) td { background: #f9fafb; }
+  .method-table tr:last-child td { border-bottom: none; }
 </style>
