@@ -3,6 +3,20 @@ const SITE = 'https://healthcalculation.com';
 
 const tools = [
   {
+    href: '/calorie-deficit-calculator',
+    title: 'Calorie Deficit Calculator',
+    desc: 'Find your daily calorie target to lose 0.5, 1, or 2 pounds per week. Enter your goal weight to see a time estimate.',
+    icon: '&#9986;',
+    kw: 'Weight loss · TDEE-based',
+  },
+  {
+    href: '/bmr-calculator',
+    title: 'BMR Calculator',
+    desc: 'Calculate your Basal Metabolic Rate using Mifflin-St Jeor and Harris-Benedict. See your TDEE at every activity level.',
+    icon: '&#128200;',
+    kw: 'Mifflin-St Jeor · Harris-Benedict',
+  },
+  {
     href: '/calorie-tdee-calculator',
     title: 'Calorie & TDEE Calculator',
     desc: 'Find your Total Daily Energy Expenditure using the Mifflin-St Jeor formula.',
@@ -199,6 +213,8 @@ const siteSchema = {
       HealthCalculation
     </a>
     <nav class="site-nav" aria-label="Main navigation">
+      <a href="/bmr-calculator">BMR</a>
+      <a href="/calorie-deficit-calculator">Cal Deficit</a>
       <a href="/calorie-tdee-calculator">Calorie</a>
       <a href="/bmi-calculator">BMI</a>
       <a href="/macro-calculator">Macro</a>

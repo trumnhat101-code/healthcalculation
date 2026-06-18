@@ -29,7 +29,9 @@ const faqSchema = schemaFaq?.length
   : null;
 
 const nav = [
-  { href: '/calorie-tdee-calculator',  label: 'Calorie' },
+  { href: '/bmr-calculator',                label: 'BMR' },
+  { href: '/calorie-deficit-calculator',    label: 'Cal Deficit' },
+  { href: '/calorie-tdee-calculator',       label: 'Calorie' },
   { href: '/bmi-calculator',           label: 'BMI' },
   { href: '/macro-calculator',         label: 'Macro' },
   { href: '/ideal-weight-calculator',  label: 'Ideal Weight' },
@@ -563,8 +565,7 @@ const ogImage = 'https://healthcalculation.com/og-default.png';
     <div>
       <p class="ftr-brand">HealthCalculation.com</p>
       <p>&copy; {new Date().getFullYear()} HealthCalculation.com &mdash; For informational purposes only. Not medical advice.</p>
-    </div>
-    <nav class="ftr-links" aria-label="Footer">
+    </div>    <nav class="ftr-links" aria-label="Footer">
       <a href="/about">About</a>
       <a href="/privacy">Privacy</a>
       <a href="/disclaimer">Disclaimer</a>
