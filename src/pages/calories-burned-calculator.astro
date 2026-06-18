@@ -1,0 +1,348 @@
+---
+import ToolLayout from '../layouts/ToolLayout.astro';
+
+const SITE = 'https://healthcalculation.com';
+const canonical = `${SITE}/calories-burned-calculator`;
+
+const schemaApp = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Calories Burned Calculator',
+  url: canonical,
+  description: 'Calculate how many calories you burn during exercise using MET values from the Compendium of Physical Activities.',
+  applicationCategory: 'HealthApplication',
+  operatingSystem: 'Any',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+};
+
+const schemaFaq = [
+  {
+    q: 'How are calories burned during exercise calculated?',
+    a: 'This calculator uses the MET (Metabolic Equivalent of Task) method: Calories = MET x weight (kg) x time (hours). MET values come from the Compendium of Physical Activities (Ainsworth et al., 2011), the gold standard reference used in exercise science research.',
+  },
+  {
+    q: 'Why does body weight affect calories burned?',
+    a: 'Heavier individuals burn more calories performing the same activity because it takes more energy to move a larger body mass. A 200 lb person running for 30 minutes burns roughly 40% more calories than a 140 lb person doing the same run at the same pace.',
+  },
+  {
+    q: 'How accurate is the MET-based calorie calculation?',
+    a: 'MET calculations estimate gross calorie expenditure (including resting metabolic rate) and are accurate within 10-20% for most activities. Individual factors like fitness level, terrain, and exercise efficiency can affect actual burn. For precise measurement, a metabolic cart or heart rate monitor with chest strap provides better accuracy.',
+  },
+  {
+    q: 'Does exercise intensity matter?',
+    a: 'Yes significantly. Running at 5 mph (MET 8.3) burns about 40% fewer calories per minute than running at 8 mph (MET 13.5). This calculator provides intensity options for most activities so you can match your actual effort level.',
+  },
+  {
+    q: 'What is afterburn (EPOC) and is it included?',
+    a: 'EPOC (Excess Post-exercise Oxygen Consumption) is the extra calories burned after exercise as your body recovers. MET calculations do not include EPOC. High-intensity activities like HIIT can add 6-15% extra calorie burn post-exercise, but this varies widely and is not reliably quantifiable.',
+  },
+];
+---
+
+<ToolLayout
+  title="Calories Burned Calculator — Exercise Calorie Counter by Activity"
+  description="Calculate calories burned during exercise using MET values. Supports 20+ activities including walking, running, cycling, swimming, and HIIT. Instant results by weight and duration."
+  canonical={canonical}
+  schemaApp={schemaApp}
+  schemaFaq={schemaFaq}
+  pageIcon="&#128293;"
+  heroTitle="Calories Burned Calculator"
+>
+
+<div class="tool-card">
+  <h1 class="tool-title">Calories Burned Calculator</h1>
+  <p class="tool-subtitle">Based on MET values from the Compendium of Physical Activities (Ainsworth et al.)</p>
+
+  <form id="cb-form" novalidate>
+
+    <div class="field-group" style="margin-bottom:16px">
+      <span class="field-label">Unit system</span>
+      <div class="seg-group">
+        <label class="seg-opt">
+          <input type="radio" name="cbunit" value="imperial" checked />
+          <span>Imperial (lbs)</span>
+        </label>
+        <label class="seg-opt">
+          <input type="radio" name="cbunit" value="metric" />
+          <span>Metric (kg)</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="field-group">
+        <label class="field-label" for="cb-weight">Body weight</label>
+        <div style="display:flex;gap:8px;align-items:center">
+          <input type="number" id="cb-weight" value="165" min="50" max="700" step="0.5" />
+          <span class="field-unit" id="cb-weight-unit">lbs</span>
+        </div>
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="cb-duration">Duration</label>
+        <div style="display:flex;gap:8px;align-items:center">
+          <input type="number" id="cb-duration" value="30" min="1" max="600" step="1" />
+          <span class="field-unit">min</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label" for="cb-category">Activity category</label>
+      <select id="cb-category">
+        <option value="cardio">Cardio &amp; Running</option>
+        <option value="cycling">Cycling</option>
+        <option value="water">Water Sports</option>
+        <option value="strength">Strength &amp; HIIT</option>
+        <option value="sports">Sports &amp; Recreation</option>
+        <option value="everyday">Everyday Activities</option>
+      </select>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label" for="cb-activity">Activity &amp; intensity</label>
+      <select id="cb-activity"></select>
+    </div>
+
+    <button type="button" id="cb-calc" class="btn-calc">Calculate Calories Burned</button>
+  </form>
+
+  <div id="cb-results" style="display:none">
+    <div class="results-grid">
+      <div class="result-chip result-chip--primary">
+        <span class="rc-label">Calories Burned</span>
+        <span class="rc-val" id="cb-kcal">—</span>
+        <span class="rc-unit">kcal</span>
+      </div>
+      <div class="result-chip">
+        <span class="rc-label">Per Minute</span>
+        <span class="rc-val" id="cb-per-min">—</span>
+        <span class="rc-unit">kcal/min</span>
+      </div>
+      <div class="result-chip">
+        <span class="rc-label">Per Hour Rate</span>
+        <span class="rc-val" id="cb-per-hour">—</span>
+        <span class="rc-unit">kcal/hr</span>
+      </div>
+      <div class="result-chip">
+        <span class="rc-label">MET Value</span>
+        <span class="rc-val" id="cb-met">—</span>
+        <span class="rc-unit">METs</span>
+      </div>
+    </div>
+
+    <div class="food-equiv" id="cb-food">
+      <h3 class="fe-title">&#127822; Food Equivalents</h3>
+      <div class="fe-grid" id="cb-food-grid"></div>
+    </div>
+
+    <p class="result-note">Formula: Calories = MET &times; weight (kg) &times; time (hr). Source: Compendium of Physical Activities.</p>
+  </div>
+</div>
+
+<style is:inline>
+.food-equiv { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 18px 20px; margin-top: 20px; }
+.fe-title { font-size: 14px; font-weight: 700; color: #15803d; margin-bottom: 12px; }
+.fe-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+.fe-item { background: #fff; border: 1px solid #d1fae5; border-radius: 8px; padding: 10px 12px; text-align: center; }
+.fe-food { font-size: 20px; margin-bottom: 4px; }
+.fe-name { font-size: 11px; color: #6b7280; margin-bottom: 2px; }
+.fe-qty  { font-size: 13px; font-weight: 700; color: #15803d; }
+</style>
+
+<script>
+const ACTIVITIES = {
+  cardio: [
+    { label: 'Walking — slow (2.5 mph)',      met: 2.8 },
+    { label: 'Walking — moderate (3.5 mph)',  met: 4.3 },
+    { label: 'Walking — brisk (4.5 mph)',     met: 6.3 },
+    { label: 'Running — light (5 mph)',       met: 8.3 },
+    { label: 'Running — moderate (6 mph)',    met: 10.0 },
+    { label: 'Running — fast (7.5 mph)',      met: 12.5 },
+    { label: 'Running — very fast (9 mph+)', met: 16.0 },
+    { label: 'Jump rope — moderate',         met: 10.0 },
+    { label: 'Jump rope — fast',             met: 12.3 },
+    { label: 'Elliptical — moderate',        met: 5.0  },
+    { label: 'Stair climbing',               met: 8.8  },
+    { label: 'Hiking (hills)',               met: 6.0  },
+  ],
+  cycling: [
+    { label: 'Cycling — leisure (< 10 mph)', met: 4.0 },
+    { label: 'Cycling — light (10-12 mph)',  met: 6.8 },
+    { label: 'Cycling — moderate (12-14 mph)', met: 8.0 },
+    { label: 'Cycling — vigorous (14-16 mph)', met: 10.0 },
+    { label: 'Cycling — very fast (16-19 mph)', met: 12.0 },
+    { label: 'Stationary bike — moderate',   met: 7.0 },
+    { label: 'Stationary bike — vigorous',   met: 10.5 },
+    { label: 'Spinning class',               met: 8.5 },
+  ],
+  water: [
+    { label: 'Swimming — leisurely',         met: 5.8 },
+    { label: 'Swimming — moderate laps',     met: 7.0 },
+    { label: 'Swimming — vigorous laps',     met: 9.8 },
+    { label: 'Water aerobics',               met: 3.5 },
+    { label: 'Kayaking',                     met: 5.0 },
+    { label: 'Rowing machine — moderate',    met: 7.0 },
+    { label: 'Rowing machine — vigorous',    met: 8.5 },
+  ],
+  strength: [
+    { label: 'Weight training — general',    met: 3.5 },
+    { label: 'Weight training — vigorous',   met: 6.0 },
+    { label: 'Circuit training',             met: 8.0 },
+    { label: 'HIIT',                         met: 8.0 },
+    { label: 'CrossFit / functional fitness', met: 9.0 },
+    { label: 'Calisthenics (push-ups etc)',  met: 3.8 },
+    { label: 'Yoga — Hatha',                 met: 2.5 },
+    { label: 'Yoga — Vinyasa / Power',       met: 4.0 },
+    { label: 'Pilates',                      met: 3.0 },
+    { label: 'Stretching',                   met: 2.3 },
+  ],
+  sports: [
+    { label: 'Basketball — game',            met: 6.5 },
+    { label: 'Soccer — game',               met: 7.0 },
+    { label: 'Tennis — singles',             met: 7.3 },
+    { label: 'Tennis — doubles',             met: 5.0 },
+    { label: 'Volleyball',                   met: 4.0 },
+    { label: 'Football (touch / flag)',      met: 8.0 },
+    { label: 'Golf (carrying clubs)',        met: 4.8 },
+    { label: 'Dancing — ballroom',           met: 3.8 },
+    { label: 'Dancing — aerobic / Zumba',   met: 6.5 },
+    { label: 'Martial arts',                 met: 10.3 },
+    { label: 'Rock climbing',               met: 8.0 },
+    { label: 'Skiing — downhill',           met: 6.8 },
+  ],
+  everyday: [
+    { label: 'Sleeping',                     met: 0.95 },
+    { label: 'Sitting (desk work)',          met: 1.5  },
+    { label: 'Standing',                     met: 1.8  },
+    { label: 'House cleaning — light',       met: 2.5  },
+    { label: 'House cleaning — vigorous',    met: 3.5  },
+    { label: 'Gardening',                    met: 3.5  },
+    { label: 'Carrying groceries (upstairs)', met: 7.5 },
+    { label: 'Mowing lawn (push mower)',     met: 4.5  },
+  ],
+};
+
+const FOODS = [
+  { emoji: '&#127822;', name: 'Apple',        kcal: 95  },
+  { emoji: '&#127828;', name: 'Banana',       kcal: 105 },
+  { emoji: '&#127829;', name: 'Cheeseburger', kcal: 303 },
+  { emoji: '&#127829;', name: 'Slice of pizza', kcal: 285 },
+  { emoji: '&#129361;', name: 'Chocolate bar', kcal: 235 },
+  { emoji: '&#127847;', name: 'Donut',        kcal: 253 },
+];
+
+const catSel = document.getElementById('cb-category');
+const actSel = document.getElementById('cb-activity');
+
+function populateActivities() {
+  const cat = catSel.value;
+  actSel.innerHTML = '';
+  ACTIVITIES[cat].forEach((a, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = a.label;
+    actSel.appendChild(opt);
+  });
+}
+
+catSel.addEventListener('change', populateActivities);
+populateActivities();
+
+// Unit toggle
+document.querySelectorAll('input[name="cbunit"]').forEach(r => {
+  r.addEventListener('change', () => {
+    const imp = r.value === 'imperial';
+    document.getElementById('cb-weight-unit').textContent = imp ? 'lbs' : 'kg';
+    const w = parseFloat(document.getElementById('cb-weight').value);
+    if (!isNaN(w)) {
+      document.getElementById('cb-weight').value = imp
+        ? Math.round(w * 2.20462 * 10) / 10
+        : Math.round(w / 2.20462 * 10) / 10;
+    }
+  });
+});
+
+document.getElementById('cb-calc').addEventListener('click', () => {
+  const unit = document.querySelector('input[name="cbunit"]:checked').value;
+  const wRaw = parseFloat(document.getElementById('cb-weight').value);
+  const dur  = parseFloat(document.getElementById('cb-duration').value);
+  const cat  = catSel.value;
+  const idx  = parseInt(actSel.value, 10);
+
+  if (isNaN(wRaw) || isNaN(dur) || wRaw <= 0 || dur <= 0) return;
+
+  const wKg   = unit === 'imperial' ? wRaw / 2.20462 : wRaw;
+  const met   = ACTIVITIES[cat][idx].met;
+  const hours = dur / 60;
+  const kcal  = met * wKg * hours;
+  const perMin  = kcal / dur;
+  const perHour = perMin * 60;
+
+  document.getElementById('cb-kcal').textContent     = Math.round(kcal);
+  document.getElementById('cb-per-min').textContent  = perMin.toFixed(1);
+  document.getElementById('cb-per-hour').textContent = Math.round(perHour);
+  document.getElementById('cb-met').textContent      = met.toFixed(1);
+
+  // Food equivalents
+  const grid = document.getElementById('cb-food-grid');
+  grid.innerHTML = '';
+  FOODS.forEach(f => {
+    const qty = kcal / f.kcal;
+    const div = document.createElement('div');
+    div.className = 'fe-item';
+    div.innerHTML = `<div class="fe-food">${f.emoji}</div><div class="fe-name">${f.name}</div><div class="fe-qty">${qty.toFixed(1)}x</div>`;
+    grid.appendChild(div);
+  });
+
+  document.getElementById('cb-results').style.display = 'block';
+  document.getElementById('cb-results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+});
+</script>
+
+<div class="content-section">
+  <h2>How This Calculator Works</h2>
+  <p>This calculator uses the <strong>MET (Metabolic Equivalent of Task)</strong> method — the same approach used in peer-reviewed exercise science research. The formula is:</p>
+  <div class="formula-box">
+    <strong>Calories Burned = MET &times; Weight (kg) &times; Time (hours)</strong>
+  </div>
+  <p>MET values represent how many times more energy an activity demands compared to sitting quietly (1 MET = ~1 kcal/kg/hr). All MET values in this calculator come from the <strong>Compendium of Physical Activities</strong> (Ainsworth et al., 2011), the gold standard reference used by exercise physiologists worldwide.</p>
+
+  <h2>MET Values by Activity Type</h2>
+  <table class="data-table">
+    <thead><tr><th>Activity</th><th>MET</th><th>Intensity</th></tr></thead>
+    <tbody>
+      <tr><td>Walking (3.5 mph)</td><td>4.3</td><td>Light–Moderate</td></tr>
+      <tr><td>Running (6 mph)</td><td>10.0</td><td>Vigorous</td></tr>
+      <tr><td>Cycling (12–14 mph)</td><td>8.0</td><td>Moderate–Vigorous</td></tr>
+      <tr><td>Swimming (laps, moderate)</td><td>7.0</td><td>Moderate</td></tr>
+      <tr><td>HIIT</td><td>8.0</td><td>Vigorous</td></tr>
+      <tr><td>Weight training</td><td>3.5–6.0</td><td>Light–Vigorous</td></tr>
+      <tr><td>Yoga (Hatha)</td><td>2.5</td><td>Light</td></tr>
+      <tr><td>Soccer</td><td>7.0</td><td>Moderate–Vigorous</td></tr>
+    </tbody>
+  </table>
+
+  <h2>How Many Calories Does Exercise Actually Burn?</h2>
+  <p>A 155 lb (70 kg) person burns approximately:</p>
+  <table class="data-table">
+    <thead><tr><th>Activity</th><th>30 min</th><th>60 min</th></tr></thead>
+    <tbody>
+      <tr><td>Walking (3.5 mph)</td><td>151 kcal</td><td>301 kcal</td></tr>
+      <tr><td>Running (6 mph)</td><td>350 kcal</td><td>700 kcal</td></tr>
+      <tr><td>Cycling (12–14 mph)</td><td>280 kcal</td><td>560 kcal</td></tr>
+      <tr><td>Swimming (moderate)</td><td>245 kcal</td><td>490 kcal</td></tr>
+      <tr><td>HIIT</td><td>280 kcal</td><td>560 kcal</td></tr>
+      <tr><td>Yoga</td><td>88 kcal</td><td>175 kcal</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Tips to Burn More Calories</h2>
+  <ul>
+    <li><strong>Increase intensity gradually.</strong> Moving from walking to brisk walking (3.5 → 4.5 mph) raises calorie burn by ~47% without requiring much extra effort.</li>
+    <li><strong>Add resistance.</strong> Incline walking or carrying a weighted vest significantly increases MET without greater joint impact than running.</li>
+    <li><strong>Combine modalities.</strong> Alternating cardio with resistance training maximizes both calorie burn during exercise (cardio) and resting metabolic rate long-term (muscle mass).</li>
+    <li><strong>Consistency beats intensity.</strong> 45 minutes of walking daily burns more total calories per week than one exhausting 3-hour session for most people.</li>
+  </ul>
+</div>
+
+</ToolLayout>
