@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<!--
+  TEMPLATE TOOL PAGE — Calorie / TDEE Calculator (US)
+  ─ Khuôn dùng cho ngách Health & Fitness. Copy cho mỗi tool, đổi tiêu đề/từ khóa/logic.
+  ─ CẦN THAY ("TODO"): ca-pub-XXXX + ad slot, link affiliate (#AFFILIATE), domain canonical.
+  ─ Triết lý: tool above-the-fold + nội dung hữu ích phía dưới (SEO + chỗ đặt ads).
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calorie Calculator — Daily Calories & TDEE (Mifflin-St Jeor)</title>
+<meta name="description" content="Free calorie calculator. Find your TDEE, BMR and daily calories to lose, maintain or gain weight using the Mifflin-St Jeor formula.">
+<link rel="canonical" href="https://YOURDOMAIN.com/calorie-tdee-calculator"><!-- TODO domain -->
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Calorie / TDEE Calculator","applicationCategory":"HealthApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is TDEE?","acceptedAnswer":{"@type":"Answer","text":"TDEE (Total Daily Energy Expenditure) is the total calories you burn per day, including your resting metabolism (BMR) plus activity. Eating at your TDEE maintains weight."}},
+{"@type":"Question","name":"How many calories to lose weight?","acceptedAnswer":{"@type":"Answer","text":"A deficit of about 500 calories per day below your TDEE leads to roughly 1 pound of weight loss per week. Avoid going extremely low; pair with protein and strength training."}},
+{"@type":"Question","name":"How is BMR calculated?","acceptedAnswer":{"@type":"Answer","text":"This tool uses the Mifflin-St Jeor equation, considered the most accurate for most people: BMR = 10·kg + 6.25·cm − 5·age + s, where s is +5 for men and −161 for women."}}
+]}
+</script>
+<!-- TODO AdSense loader ở <head>:
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXX" crossorigin="anonymous"></script> -->
+
+<style>
+:root{--ac:#16a34a;--bg:#f6faf7;--card:#fff;--bd:#e5e7eb;--tx:#1f2937;--mut:#6b7280}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--tx);background:var(--bg);line-height:1.6}
+header,footer{background:#fff;border-bottom:1px solid var(--bd)}
+.wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:58px}
+.logo{font-weight:800;color:var(--ac);font-size:18px;text-decoration:none}
+nav a{color:var(--mut);text-decoration:none;margin-left:16px;font-size:14px}
+h1{font-size:28px;margin:22px 0 6px}
+.lead{color:var(--mut);margin-bottom:18px;max-width:720px}
+.layout{display:grid;grid-template-columns:1fr 300px;gap:24px;align-items:start}
+@media(max-width:880px){.layout{grid-template-columns:1fr}.side{order:3}}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:20px;margin-bottom:20px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:520px){.grid2{grid-template-columns:1fr}}
+label{display:block;font-size:13px;color:var(--mut);margin-bottom:5px;font-weight:600}
+input,select{width:100%;padding:10px 12px;border:1px solid var(--bd);border-radius:9px;font-size:15px;outline:none}
+input:focus,select:focus{border-color:var(--ac)}
+.seg{display:flex;gap:8px}.seg label{flex:1;border:1px solid var(--bd);border-radius:9px;padding:9px;text-align:center;cursor:pointer;margin:0}
+.seg input{display:none}.seg input:checked+span{color:var(--ac);font-weight:700}
+.btn{background:var(--ac);color:#fff;border:none;border-radius:9px;padding:12px 18px;font-size:15px;font-weight:600;cursor:pointer;width:100%;margin-top:6px}
+.result{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px}
+.kpi{background:var(--bg);border-radius:10px;padding:14px}
+.kpi .v{font-size:24px;font-weight:800}.kpi .l{font-size:12px;color:var(--mut)}
+.kpi.main{background:#e7f7ec}.kpi.main .v{color:var(--ac)}
+.goals{margin-top:14px;border-top:1px solid var(--bd);padding-top:12px}
+.goalrow{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px dashed var(--bd);font-size:15px}
+.goalrow b{color:var(--ac)}
+.cta{display:block;background:linear-gradient(135deg,#16a34a,#0891b2);color:#fff;text-decoration:none;border-radius:12px;padding:16px;text-align:center;font-weight:700}
+.cta small{display:block;font-weight:400;opacity:.92;font-size:12px;margin-top:3px}
+.ad{background:#f4faf6;border:1px dashed #b9dcc5;border-radius:10px;min-height:90px;display:flex;align-items:center;justify-content:center;color:#8fb3a0;font-size:12px;margin:18px 0}
+.ad.box{min-height:250px}
+h2{font-size:20px;margin:26px 0 10px}h3{font-size:16px;margin:16px 0 6px}
+p,li{margin-bottom:8px}.content ul{padding-left:20px}
+.rel{display:flex;flex-wrap:wrap;gap:8px}
+.rel a{background:#e7f7ec;color:var(--ac);text-decoration:none;padding:7px 12px;border-radius:20px;font-size:13px}
+code{background:#e7f7ec;padding:2px 6px;border-radius:5px;font-size:13px}
+footer .wrap{padding:18px 16px;color:var(--mut);font-size:13px}
+.disc{font-size:12px;color:var(--mut);margin-top:6px}
+</style>
+</head>
+<body>
+
+<header><div class="wrap">
+  <a class="logo" href="/">🥗 FitCalc</a>
+  <nav><a href="/calorie-tdee-calculator">Calories</a><a href="/macro-calculator">Macros</a><a href="/bmi-calculator">BMI</a><a href="/ideal-weight-calculator">Ideal Weight</a></nav>
+</div></header>
+
+<main class="wrap">
+  <h1>Calorie Calculator (TDEE)</h1>
+  <p class="lead">Find your daily calories to lose, maintain or gain weight. Uses the Mifflin-St Jeor formula for BMR and your activity level for TDEE.</p>
+
+  <div class="layout">
+    <div>
+      <div class="card">
+        <div class="grid2">
+          <div><label>Sex</label>
+            <div class="seg">
+              <label><input type="radio" name="sex" value="m" checked><span>Male</span></label>
+              <label><input type="radio" name="sex" value="f"><span>Female</span></label>
+            </div>
+          </div>
+          <div><label>Age</label><input id="age" type="number" value="30"></div>
+          <div><label>Weight (lbs)</label><input id="wt" type="number" value="170"></div>
+          <div><label>Height (ft / in)</label>
+            <div class="grid2" style="gap:8px"><input id="hft" type="number" value="5" placeholder="ft"><input id="hin" type="number" value="10" placeholder="in"></div>
+          </div>
+          <div style="grid-column:1/-1"><label>Activity level</label>
+            <select id="act">
+              <option value="1.2">Sedentary (little/no exercise)</option>
+              <option value="1.375">Light (1–3 days/week)</option>
+              <option value="1.55" selected>Moderate (3–5 days/week)</option>
+              <option value="1.725">Active (6–7 days/week)</option>
+              <option value="1.9">Very active (hard training/physical job)</option>
+            </select>
+          </div>
+          <div style="grid-column:1/-1;display:flex;align-items:flex-end"><button class="btn" onclick="calc()">Calculate</button></div>
+        </div>
+
+        <div class="result" style="margin-top:18px">
+          <div class="kpi main"><div class="v" id="rTdee">0</div><div class="l">Maintenance calories (TDEE)</div></div>
+          <div class="kpi"><div class="v" id="rBmr">0</div><div class="l">BMR (resting)</div></div>
+        </div>
+
+        <div class="goals">
+          <div class="goalrow"><span>Mild weight loss (−0.5 lb/wk)</span><b id="gL1">0</b></div>
+          <div class="goalrow"><span>Weight loss (−1 lb/wk)</span><b id="gL2">0</b></div>
+          <div class="goalrow"><span>Maintain weight</span><b id="gM">0</b></div>
+          <div class="goalrow"><span>Mild gain (+0.5 lb/wk)</span><b id="gG1">0</b></div>
+          <div class="goalrow"><span>Weight gain (+1 lb/wk)</span><b id="gG2">0</b></div>
+        </div>
+      </div>
+
+      <!-- AFFILIATE CTA ngay sau kết quả -->
+      <a class="cta" href="#AFFILIATE" rel="sponsored nofollow" target="_blank">
+        Hit your calorie goal with a done-for-you meal plan →
+        <small>Get fresh meals matched to your target (sponsored)</small>
+      </a>
+      <p class="disc">Advertiser disclosure: we may earn a commission from partner links, at no cost to you. Not medical advice.</p>
+
+      <div class="ad">AdSense — in-content responsive</div>
+
+      <div class="content">
+        <h2>How to use this calorie calculator</h2>
+        <p>Enter your sex, age, weight, height and activity level. The tool estimates your <b>BMR</b> (calories at rest) and <b>TDEE</b> (total daily burn), then shows calorie targets for losing, maintaining or gaining weight.</p>
+
+        <h2>BMR &amp; TDEE formula (Mifflin-St Jeor)</h2>
+        <p><code>BMR = 10·kg + 6.25·cm − 5·age + s</code> &nbsp;(s = +5 men, −161 women)</p>
+        <p><code>TDEE = BMR × activity factor</code> (1.2 sedentary … 1.9 very active)</p>
+        <p>A 500-calorie daily deficit ≈ ~1 lb fat loss per week. Keep protein high and add strength training to preserve muscle.</p>
+
+        <div class="ad">AdSense — in-article</div>
+
+        <h2>Frequently asked questions</h2>
+        <h3>Should I eat back exercise calories?</h3>
+        <p>Activity is already included in your TDEE factor, so you usually don't add exercise calories on top.</p>
+        <h3>How low is too low?</h3>
+        <p>Very aggressive deficits are hard to sustain and can cost muscle. A moderate deficit (10–20%) is more sustainable.</p>
+        <h3>Is Mifflin-St Jeor accurate?</h3>
+        <p>It's the most accurate estimate for most people, but it's still an estimate — adjust based on 2–3 weeks of real results.</p>
+
+        <h2>Related calculators</h2>
+        <div class="rel">
+          <a href="/macro-calculator">Macro Calculator</a>
+          <a href="/bmr-calculator">BMR Calculator</a>
+          <a href="/bmi-calculator">BMI Calculator</a>
+          <a href="/protein-calculator">Protein Intake</a>
+          <a href="/body-fat-calculator">Body Fat %</a>
+        </div>
+      </div>
+    </div>
+
+    <aside class="side">
+      <div class="ad box">AdSense — sidebar 300×250</div>
+      <a class="cta" href="#AFFILIATE" rel="sponsored nofollow" target="_blank">Try a weight-loss program<small>Personalized plan + coaching (sponsored)</small></a>
+      <div class="ad box" style="margin-top:18px">AdSense — sticky sidebar</div>
+    </aside>
+  </div>
+</main>
+
+<footer><div class="wrap">© 2026 FitCalc. Educational estimates only — not medical advice. Consult a professional for health decisions.</div></footer>
+
+<script>
+const $=id=>document.getElementById(id);
+const rnd=n=>isFinite(n)?Math.round(n).toLocaleString('en-US'):'0';
+function calc(){
+  const sex=document.querySelector('input[name=sex]:checked').value;
+  const age=+$('age').value||0, lbs=+$('wt').value||0;
+  const ft=+$('hft').value||0, inch=+$('hin').value||0, act=+$('act').value||1.55;
+  const kg=lbs*0.453592, cm=(ft*12+inch)*2.54;
+  if(!age||!kg||!cm){return;}
+  const bmr=10*kg+6.25*cm-5*age+(sex==='m'?5:-161);
+  const tdee=bmr*act;
+  $('rBmr').textContent=rnd(bmr);
+  $('rTdee').textContent=rnd(tdee);
+  $('gL1').textContent=rnd(tdee-250);
+  $('gL2').textContent=rnd(tdee-500);
+  $('gM').textContent=rnd(tdee);
+  $('gG1').textContent=rnd(tdee+250);
+  $('gG2').textContent=rnd(tdee+500);
+}
+calc();
+</script>
+</body>
+</html>
