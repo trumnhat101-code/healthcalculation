@@ -330,6 +330,7 @@ form.addEventListener('submit', (e) => {
     gap: 14px;
   }
   @media (max-width: 560px) { .grid-3 { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .grid-3 { grid-template-columns: 1fr; } }
 
   .field-group { position: relative; }
   .field-label {
@@ -421,6 +422,9 @@ form.addEventListener('submit', (e) => {
     grid-template-columns: 1fr 1fr;
     gap: 12px;
     margin-bottom: 14px;
+  }
+  @media (max-width: 400px) {
+    .kpi-grid { grid-template-columns: 1fr; }
   }
   .kpi {
     background: #f6faf7;
