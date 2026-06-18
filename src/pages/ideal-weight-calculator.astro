@@ -181,7 +181,10 @@ const schemaFaq = [
   .iw-range-kg    { font-size: 16px; color: #6b7280; margin-top: 2px; }
 </style>
 
-<script>
+
+</ToolLayout>
+
+<script is:inline>
 function getHeightInches() {
   const unit = document.querySelector('input[name="unit"]:checked').value;
   if (unit === 'imperial') {
@@ -236,5 +239,3 @@ document.querySelectorAll('input[name="unit"]').forEach(r => {
   });
 });
 </script>
-
-</ToolLayout>
