@@ -3,7 +3,6 @@ import ToolLayout from '../layouts/ToolLayout.astro';
 import AdSlot from '../components/AdSlot.astro';
 import AffiliateCTA from '../components/AffiliateCTA.astro';
 import Disclaimer from '../components/Disclaimer.astro';
-import Faq from '../components/Faq.astro';
 import RelatedTools from '../components/RelatedTools.astro';
 
 const SITE = 'https://healthcalculation.com';
@@ -177,8 +176,6 @@ const schemaApp = {
         </div>
         <p class="cv-note">Each column = 1 full 90-min cycle · 5–6 cycles = 7.5–9 hours</p>
       </div>
-
-      <Faq items={faq} />
       <RelatedTools items={related} />
       <Disclaimer />
     </div>
@@ -194,6 +191,18 @@ const schemaApp = {
       </div>
     </aside>
   </div>
+
+
+<!-- FAQ -->
+<section class="content-section">
+  <h2>Frequently Asked Questions</h2>
+  {faq.map(({ q, a }) => (
+    <details class="faq-item">
+      <summary>{q}</summary>
+      <p set:html={a} />
+    </details>
+  ))}
+</section>
 
 
 <!-- How it works -->

@@ -3,7 +3,6 @@ import ToolLayout from '../layouts/ToolLayout.astro';
 import AdSlot from '../components/AdSlot.astro';
 import AffiliateCTA from '../components/AffiliateCTA.astro';
 import Disclaimer from '../components/Disclaimer.astro';
-import Faq from '../components/Faq.astro';
 import RelatedTools from '../components/RelatedTools.astro';
 
 const SITE = 'https://healthcalculation.com';
@@ -192,8 +191,6 @@ const schemaApp = {
         <div class="mt-row"><span>Keto</span><span>25%</span><span>5%</span><span>70%</span></div>
         <div class="mt-row"><span>Low Fat</span><span>25%</span><span>55%</span><span>20%</span></div>
       </div>
-
-      <Faq items={faq} />
       <RelatedTools items={related} />
       <Disclaimer />
     </div>
@@ -209,6 +206,18 @@ const schemaApp = {
       </div>
     </aside>
   </div>
+
+
+<!-- FAQ -->
+<section class="content-section">
+  <h2>Frequently Asked Questions</h2>
+  {faq.map(({ q, a }) => (
+    <details class="faq-item">
+      <summary>{q}</summary>
+      <p set:html={a} />
+    </details>
+  ))}
+</section>
 
 
 <!-- How it works -->

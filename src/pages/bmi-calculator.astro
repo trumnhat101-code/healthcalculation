@@ -3,7 +3,6 @@ import ToolLayout from '../layouts/ToolLayout.astro';
 import AdSlot from '../components/AdSlot.astro';
 import AffiliateCTA from '../components/AffiliateCTA.astro';
 import Disclaimer from '../components/Disclaimer.astro';
-import Faq from '../components/Faq.astro';
 import RelatedTools from '../components/RelatedTools.astro';
 
 const SITE = 'https://healthcalculation.com';
@@ -158,8 +157,6 @@ const schemaApp = {
         <p><strong>Imperial:</strong> BMI = (weight in lbs × 703) ÷ (height in inches)²</p>
         <p><strong>Metric:</strong> BMI = weight in kg ÷ (height in meters)²</p>
       </div>
-
-      <Faq items={faq} />
       <RelatedTools items={related} />
       <Disclaimer />
     </div>
@@ -175,6 +172,18 @@ const schemaApp = {
       </div>
     </aside>
   </div>
+
+
+<!-- FAQ -->
+<section class="content-section">
+  <h2>Frequently Asked Questions</h2>
+  {faq.map(({ q, a }) => (
+    <details class="faq-item">
+      <summary>{q}</summary>
+      <p set:html={a} />
+    </details>
+  ))}
+</section>
 
 
 <!-- How it works -->
