@@ -284,7 +284,7 @@ function showResults(
   ).join('');
   (document.getElementById('sleepTip') as HTMLElement).textContent = tip;
   sleepResults.hidden = false;
-  affSec.hidden = false;
+  // affSec.hidden = false;  // TODO: re-enable when affiliate links are ready
   sleepResults.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
