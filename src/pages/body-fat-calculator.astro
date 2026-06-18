@@ -1,0 +1,304 @@
+---
+import ToolLayout from '../layouts/ToolLayout.astro';
+
+const SITE = 'https://healthcalculation.com';
+const canonical = `${SITE}/body-fat-calculator`;
+
+const schemaApp = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Body Fat Percentage Calculator',
+  url: canonical,
+  description: 'Estimate your body fat percentage using the U.S. Navy method. Requires only a tape measure — no calipers needed.',
+  applicationCategory: 'HealthApplication',
+  operatingSystem: 'Any',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+};
+
+const schemaFaq = [
+  {
+    q: 'How accurate is the Navy body fat method?',
+    a: 'The U.S. Navy method typically has a margin of error of 3–4% compared to DEXA scans. It is one of the most accurate methods that does not require specialized equipment, making it practical for home use. Measurement consistency (measuring at the same time of day) is key to getting reliable results.',
+  },
+  {
+    q: 'Where exactly should I measure my waist for this calculator?',
+    a: 'For men, measure at the navel (belly button). For women, measure at the narrowest point of the abdomen — usually about an inch above the navel. Keep the tape horizontal and breathe out before measuring.',
+  },
+  {
+    q: 'What is a healthy body fat percentage?',
+    a: 'For men: essential fat is 2–5%, athletes 6–13%, fitness 14–17%, acceptable 18–24%, obese 25%+. For women: essential fat is 10–13%, athletes 14–20%, fitness 21–24%, acceptable 25–31%, obese 32%+. These categories follow the American Council on Exercise (ACE) guidelines.',
+  },
+  {
+    q: 'Why do I need a hip measurement as a woman?',
+    a: 'Women typically carry more fat in the hip and glute area. The Navy formula accounts for this by including hip circumference in the calculation for women, while the male formula only uses neck and waist.',
+  },
+  {
+    q: 'How is body fat percentage different from BMI?',
+    a: 'BMI is a simple ratio of weight to height squared — it cannot distinguish between fat mass and lean mass. Body fat percentage measures the actual fraction of your body that is fat. A muscular person can have a high BMI but a low body fat percentage, while someone with a normal BMI can carry excess fat (called "normal weight obesity").',
+  },
+];
+
+const categories = {
+  male:   [
+    { label: 'Essential Fat', min: 2,  max: 5  },
+    { label: 'Athlete',       min: 6,  max: 13 },
+    { label: 'Fitness',       min: 14, max: 17 },
+    { label: 'Acceptable',    min: 18, max: 24 },
+    { label: 'Obese',         min: 25, max: 100 },
+  ],
+  female: [
+    { label: 'Essential Fat', min: 10, max: 13 },
+    { label: 'Athlete',       min: 14, max: 20 },
+    { label: 'Fitness',       min: 21, max: 24 },
+    { label: 'Acceptable',    min: 25, max: 31 },
+    { label: 'Obese',         min: 32, max: 100 },
+  ],
+};
+---
+
+<ToolLayout
+  title="Body Fat Percentage Calculator — U.S. Navy Method"
+  description="Estimate your body fat % using the U.S. Navy tape measure method. Works for men and women. No calipers needed — instant results."
+  canonical={canonical}
+  schemaApp={schemaApp}
+  schemaFaq={schemaFaq}
+  pageIcon="&#37;"
+  heroTitle="Body Fat % Calculator"
+>
+
+<div class="tool-card">
+  <h1 class="tool-title">Body Fat % Calculator</h1>
+  <p class="tool-subtitle">U.S. Navy Tape Measure Method &mdash; ACE categories</p>
+
+  <form id="bf-form" onsubmit="return false">
+
+    <div class="field-group" style="margin-bottom:16px">
+      <span class="field-label">Sex</span>
+      <div class="seg-group">
+        <label class="seg-opt">
+          <input type="radio" name="bfsex" value="male" checked />
+          <span>Male</span>
+        </label>
+        <label class="seg-opt">
+          <input type="radio" name="bfsex" value="female" />
+          <span>Female</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="field-group" style="margin-bottom:16px">
+      <span class="field-label">Unit system</span>
+      <div class="seg-group">
+        <label class="seg-opt">
+          <input type="radio" name="bfunit" value="imperial" checked />
+          <span>Imperial (in)</span>
+        </label>
+        <label class="seg-opt">
+          <input type="radio" name="bfunit" value="metric" />
+          <span>Metric (cm)</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="field-group">
+        <label class="field-label" for="bf-height">Height</label>
+        <div class="field-group">
+          <input type="number" id="bf-height" value="70" min="48" max="96" step="0.1" />
+          <span class="field-unit" id="bf-height-unit">in</span>
+        </div>
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="bf-neck">Neck (narrowest)</label>
+        <div class="field-group">
+          <input type="number" id="bf-neck" value="15" min="8" max="30" step="0.1" />
+          <span class="field-unit" id="bf-neck-unit">in</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:14px">
+      <div class="field-group">
+        <label class="field-label" for="bf-waist">Waist <span id="bf-waist-hint" style="font-weight:400;font-size:11px">(at navel)</span></label>
+        <div class="field-group">
+          <input type="number" id="bf-waist" value="34" min="20" max="80" step="0.1" />
+          <span class="field-unit" id="bf-waist-unit">in</span>
+        </div>
+      </div>
+      <div class="field-group" id="hip-group">
+        <label class="field-label" for="bf-hip">Hip (widest) &mdash; Women only</label>
+        <div class="field-group">
+          <input type="number" id="bf-hip" value="38" min="20" max="80" step="0.1" />
+          <span class="field-unit" id="bf-hip-unit">in</span>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-calc" type="button" onclick="calcBodyFat()">Calculate Body Fat %</button>
+  </form>
+
+  <div id="bf-results" style="display:none; margin-top:24px">
+    <div class="bf-result-card">
+      <p class="bf-result-label">Your Estimated Body Fat</p>
+      <p class="bf-result-pct" id="bf-pct">—</p>
+      <p class="bf-result-cat" id="bf-cat">—</p>
+    </div>
+
+    <div class="bf-scale" id="bf-scale" style="margin-top:20px">
+      <p style="font-size:13px;font-weight:700;color:var(--mut);margin-bottom:8px;text-transform:uppercase;letter-spacing:.4px">ACE Body Fat Categories</p>
+      <div id="bf-scale-bars"></div>
+    </div>
+    <p style="font-size:12px;color:#9ca3af;margin-top:10px">Estimated using the U.S. Navy tape measure method. Accuracy ~3–4% vs. DEXA. Not a substitute for medical evaluation.</p>
+  </div>
+</div>
+
+<!-- How it works -->
+<section class="content-section">
+  <h2>How the Navy Method Works</h2>
+  <p>The U.S. Navy method uses circumference measurements and height to estimate body density, then converts to body fat percentage using the Siri equation. It requires only a flexible tape measure.</p>
+  <div class="formula-box">
+    Men: %BF = 86.010 &times; log10(waist &minus; neck) &minus; 70.041 &times; log10(height) + 36.76<br><br>
+    Women: %BF = 163.205 &times; log10(waist + hip &minus; neck) &minus; 97.684 &times; log10(height) &minus; 78.387<br><br>
+    (All measurements in inches)
+  </div>
+  <p>For best results, measure in the morning before eating, keep the tape parallel to the floor, and take each measurement twice then average.</p>
+</section>
+
+<!-- FAQ -->
+<section class="content-section">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-list">
+    {schemaFaq.map(({ q, a }) => (
+      <details class="faq-item">
+        <summary>{q}</summary>
+        <div class="faq-body"><p>{a}</p></div>
+      </details>
+    ))}
+  </div>
+</section>
+
+<!-- Related -->
+<section class="content-section">
+  <h2>Related Calculators</h2>
+  <div class="related-grid">
+    <a href="/bmi-calculator" class="related-link">&#9878; BMI Calculator</a>
+    <a href="/ideal-weight-calculator" class="related-link">&#9878; Ideal Weight</a>
+    <a href="/calorie-tdee-calculator" class="related-link">&#128293; Calorie &amp; TDEE</a>
+    <a href="/macro-calculator" class="related-link">&#9881; Macro Calculator</a>
+  </div>
+</section>
+
+<style>
+  .tool-title    { font-size: 22px; font-weight: 800; margin-bottom: 4px; }
+  .tool-subtitle { font-size: 14px; color: var(--mut); margin-bottom: 20px; }
+
+  #hip-group { transition: opacity .2s; }
+
+  .bf-result-card {
+    background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+    border: 2px solid #86efac;
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+  }
+  .bf-result-label { font-size: 13px; font-weight: 700; color: var(--mut); text-transform: uppercase; letter-spacing: .4px; margin-bottom: 6px; }
+  .bf-result-pct   { font-size: 40px; font-weight: 900; color: var(--ac); line-height: 1.1; }
+  .bf-result-cat   { font-size: 16px; font-weight: 700; color: #374151; margin-top: 4px; }
+
+  .cat-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; font-size: 13px; }
+  .cat-bar { flex: 1; height: 8px; border-radius: 4px; background: #e5e7eb; overflow: hidden; }
+  .cat-bar-fill { height: 100%; border-radius: 4px; transition: width .4s; }
+  .cat-label { min-width: 90px; font-weight: 600; color: #374151; }
+  .cat-range { min-width: 60px; color: #9ca3af; }
+  .cat-row.active .cat-label { color: var(--ac); }
+  .cat-row.active .cat-range { color: var(--ac); font-weight: 700; }
+</style>
+
+<script>
+const ACE = {
+  male:   [
+    { label: 'Essential Fat', min: 2,  max: 5,   color: '#60a5fa' },
+    { label: 'Athlete',       min: 6,  max: 13,  color: '#34d399' },
+    { label: 'Fitness',       min: 14, max: 17,  color: '#4ade80' },
+    { label: 'Acceptable',    min: 18, max: 24,  color: '#facc15' },
+    { label: 'Obese',         min: 25, max: 45,  color: '#f87171' },
+  ],
+  female: [
+    { label: 'Essential Fat', min: 10, max: 13,  color: '#60a5fa' },
+    { label: 'Athlete',       min: 14, max: 20,  color: '#34d399' },
+    { label: 'Fitness',       min: 21, max: 24,  color: '#4ade80' },
+    { label: 'Acceptable',    min: 25, max: 31,  color: '#facc15' },
+    { label: 'Obese',         min: 32, max: 50,  color: '#f87171' },
+  ],
+};
+
+function toInches(val, unit) { return unit === 'imperial' ? val : val / 2.54; }
+
+function calcBodyFat() {
+  const sex  = document.querySelector('input[name="bfsex"]:checked').value;
+  const unit = document.querySelector('input[name="bfunit"]:checked').value;
+  const h    = toInches(parseFloat(document.getElementById('bf-height').value)||0, unit);
+  const neck = toInches(parseFloat(document.getElementById('bf-neck').value)||0,   unit);
+  const waist= toInches(parseFloat(document.getElementById('bf-waist').value)||0,  unit);
+  const hip  = toInches(parseFloat(document.getElementById('bf-hip').value)||0,    unit);
+
+  if (!h || !neck || !waist || (sex==='female' && !hip)) return;
+  if (sex === 'male' && waist <= neck) return;
+  if (sex === 'female' && (waist + hip) <= neck) return;
+
+  let pct;
+  if (sex === 'male') {
+    pct = 86.010 * Math.log10(waist - neck) - 70.041 * Math.log10(h) + 36.76;
+  } else {
+    pct = 163.205 * Math.log10(waist + hip - neck) - 97.684 * Math.log10(h) - 78.387;
+  }
+  pct = Math.max(2, Math.min(60, pct));
+
+  const cats = ACE[sex];
+  let catLabel = 'Obese';
+  for (const c of cats) { if (pct >= c.min && pct <= c.max) { catLabel = c.label; break; } }
+
+  document.getElementById('bf-pct').textContent = pct.toFixed(1) + '%';
+  document.getElementById('bf-cat').textContent = catLabel;
+
+  const maxRange = sex === 'male' ? 45 : 50;
+  const bars = cats.map(c => {
+    const active = pct >= c.min && pct <= c.max;
+    const width = ((c.max - c.min) / maxRange * 100).toFixed(1);
+    const fill  = active ? c.color : '#e5e7eb';
+    return '<div class="cat-row' + (active ? ' active' : '') + '">' +
+      '<span class="cat-label">' + c.label + '</span>' +
+      '<div class="cat-bar"><div class="cat-bar-fill" style="width:' + width + '%;background:' + fill + '"></div></div>' +
+      '<span class="cat-range">' + c.min + (c.max < 100 ? '–' + c.max : '+') + '%</span>' +
+      '</div>';
+  }).join('');
+  document.getElementById('bf-scale-bars').innerHTML = bars;
+  document.getElementById('bf-results').style.display = 'block';
+}
+
+// Toggle hip field + units
+function updateUnits() {
+  const unit = document.querySelector('input[name="bfunit"]:checked').value;
+  const lbl  = unit === 'imperial' ? 'in' : 'cm';
+  ['bf-height-unit','bf-neck-unit','bf-waist-unit','bf-hip-unit'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = lbl;
+  });
+  const hEl = document.getElementById('bf-height');
+  if (unit === 'imperial') { hEl.value = '70'; hEl.min='48'; hEl.max='96'; }
+  else                     { hEl.value = '178'; hEl.min='120'; hEl.max='250'; }
+}
+document.querySelectorAll('input[name="bfunit"]').forEach(r => r.addEventListener('change', updateUnits));
+
+function updateSex() {
+  const sex = document.querySelector('input[name="bfsex"]:checked').value;
+  const wHint = document.getElementById('bf-waist-hint');
+  if (wHint) wHint.textContent = sex === 'male' ? '(at navel)' : '(narrowest)';
+  const hip = document.getElementById('hip-group');
+  if (hip) hip.style.opacity = sex === 'female' ? '1' : '0.35';
+}
+document.querySelectorAll('input[name="bfsex"]').forEach(r => r.addEventListener('change', updateSex));
+updateSex();
+</script>
+
+</ToolLayout>

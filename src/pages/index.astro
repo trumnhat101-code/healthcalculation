@@ -6,29 +6,43 @@ const tools = [
     href: '/calorie-tdee-calculator',
     title: 'Calorie & TDEE Calculator',
     desc: 'Find your Total Daily Energy Expenditure using the Mifflin-St Jeor formula.',
-    icon: '🔥',
+    icon: '&#128293;',
     kw: 'Most popular',
   },
   {
     href: '/bmi-calculator',
     title: 'BMI Calculator',
     desc: 'Calculate your Body Mass Index and see your weight category instantly.',
-    icon: '⚖️',
+    icon: '&#9878;',
     kw: 'WHO standard',
   },
   {
     href: '/macro-calculator',
     title: 'Macro Calculator',
     desc: 'Get your daily protein, carbs, and fat targets for your specific goal.',
-    icon: '🥗',
+    icon: '&#129367;',
     kw: 'For weight loss & muscle gain',
   },
   {
     href: '/sleep-calculator',
     title: 'Sleep Calculator',
     desc: 'Find the best bedtimes or wake-up times based on 90-minute sleep cycles.',
-    icon: '🌙',
+    icon: '&#127769;',
     kw: 'Science-backed',
+  },
+  {
+    href: '/ideal-weight-calculator',
+    title: 'Ideal Weight Calculator',
+    desc: 'Find your ideal body weight using four clinically validated formulas.',
+    icon: '&#9878;',
+    kw: 'Devine, Robinson, Miller, Hamwi',
+  },
+  {
+    href: '/body-fat-calculator',
+    title: 'Body Fat % Calculator',
+    desc: 'Estimate your body fat percentage with just a tape measure. No calipers needed.',
+    icon: '&#128198;',
+    kw: 'U.S. Navy method',
   },
 ];
 
@@ -45,8 +59,8 @@ const siteSchema = {
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Free Health & Fitness Calculators — Calorie, BMI, Macro, Sleep</title>
-  <meta name="description" content="Free online health calculators: calorie & TDEE, BMI, macros, sleep cycles, and more. Accurate formulas, US units, instant results." />
+  <title>Free Health &amp; Fitness Calculators &mdash; Calorie, BMI, Body Fat &amp; More</title>
+  <meta name="description" content="Free online health calculators: calorie &amp; TDEE, BMI, macros, ideal weight, body fat percentage, sleep cycles and more. Instant results." />
   <link rel="canonical" href={SITE} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <script type="application/ld+json" set:html={JSON.stringify(siteSchema)} />
@@ -130,6 +144,8 @@ const siteSchema = {
       <a href="/calorie-tdee-calculator">Calorie</a>
       <a href="/bmi-calculator">BMI</a>
       <a href="/macro-calculator">Macro</a>
+      <a href="/ideal-weight-calculator">Ideal Weight</a>
+      <a href="/body-fat-calculator">Body Fat</a>
       <a href="/sleep-calculator">Sleep</a>
       <a href="/about">About</a>
     </nav>
@@ -189,7 +205,7 @@ const siteSchema = {
 
 <footer class="site-footer">
   <div class="wrap">
-    <p>&copy; 2025 HealthCalculation.com — For informational purposes only. Not medical advice.</p>
+        <p>&copy; 2025 HealthCalculation.com &mdash; For informational purposes only. Not medical advice.</p>
     <div class="footer-links">
       <a href="/about">About</a>
       <a href="/privacy">Privacy</a>

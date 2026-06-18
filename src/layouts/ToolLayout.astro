@@ -26,11 +26,13 @@ const faqSchema = schemaFaq?.length
   : null;
 
 const nav = [
-  { href: '/calorie-tdee-calculator', label: 'Calorie' },
-  { href: '/bmi-calculator',          label: 'BMI' },
-  { href: '/macro-calculator',        label: 'Macro' },
-  { href: '/sleep-calculator',        label: 'Sleep' },
-  { href: '/about',                   label: 'About' },
+  { href: '/calorie-tdee-calculator',  label: 'Calorie' },
+  { href: '/bmi-calculator',           label: 'BMI' },
+  { href: '/macro-calculator',         label: 'Macro' },
+  { href: '/ideal-weight-calculator',  label: 'Ideal Weight' },
+  { href: '/body-fat-calculator',      label: 'Body Fat' },
+  { href: '/sleep-calculator',         label: 'Sleep' },
+  { href: '/about',                    label: 'About' },
 ];
 
 const iconMap: Record<string, string> = {
@@ -367,6 +369,100 @@ const heroTitle   = title.split(' —')[0];
     }
     .btn-calc:hover { background: var(--ac-dark); }
 
+
+    /* ── Content sections ── */
+    .content-section { margin-top: 44px; }
+    .content-section h2 { font-size: 20px; font-weight: 800; color: var(--tx); margin-bottom: 14px; }
+    .content-section p { font-size: 15px; line-height: 1.75; color: #374151; margin-bottom: 10px; }
+
+    /* How-it-works formula box */
+    .formula-box {
+      background: #f8fafc; border: 1px solid var(--bd);
+      border-radius: 10px; padding: 14px 16px; margin: 10px 0;
+      font-family: ui-monospace, monospace; font-size: 13px;
+      color: #374151; line-height: 1.6;
+    }
+
+    /* FAQ accordion */
+    .faq-list { display: flex; flex-direction: column; gap: 8px; }
+    .faq-item { border: 1px solid var(--bd); border-radius: 10px; overflow: hidden; }
+    .faq-item summary {
+      padding: 14px 16px; font-size: 15px; font-weight: 600;
+      cursor: pointer; list-style: none;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 10px;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after { content: '+'; font-size: 20px; color: var(--ac); flex-shrink: 0; line-height: 1; }
+    .faq-item[open] summary::after { content: '-'; }
+    .faq-item[open] summary { color: var(--ac); }
+    .faq-body { padding: 0 16px 14px; font-size: 14px; line-height: 1.75; color: #4b5563; }
+
+    /* Related tools */
+    .related-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .related-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 9px 14px; border: 1.5px solid var(--bd);
+      border-radius: 8px; font-size: 13px; font-weight: 600;
+      color: var(--ac); text-decoration: none; transition: all .15s;
+      white-space: nowrap;
+    }
+    .related-link:hover { border-color: var(--ac); background: #f0fdf4; }
+
+    /* Results table */
+    .result-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 14px; }
+    .result-table th { background: #f0fdf4; color: var(--ac); font-weight: 700; padding: 10px 12px; text-align: left; border-bottom: 2px solid var(--bd); }
+    .result-table td { padding: 9px 12px; border-bottom: 1px solid var(--bd); color: #374151; }
+    .result-table tr:last-child td { border-bottom: none; }
+    .result-table tr.highlight td { font-weight: 700; color: var(--ac); background: #f0fdf4; }
+
+    
+    /* ── Content sections ── */
+    .content-section { margin-top: 44px; }
+    .content-section h2 { font-size: 20px; font-weight: 800; color: var(--tx); margin-bottom: 14px; }
+    .content-section p { font-size: 15px; line-height: 1.75; color: #374151; margin-bottom: 10px; }
+
+    /* How-it-works formula box */
+    .formula-box {
+      background: #f8fafc; border: 1px solid var(--bd);
+      border-radius: 10px; padding: 14px 16px; margin: 10px 0;
+      font-family: ui-monospace, monospace; font-size: 13px;
+      color: #374151; line-height: 1.6;
+    }
+
+    /* FAQ accordion */
+    .faq-list { display: flex; flex-direction: column; gap: 8px; }
+    .faq-item { border: 1px solid var(--bd); border-radius: 10px; overflow: hidden; }
+    .faq-item summary {
+      padding: 14px 16px; font-size: 15px; font-weight: 600;
+      cursor: pointer; list-style: none;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 10px;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after { content: '+'; font-size: 20px; color: var(--ac); flex-shrink: 0; line-height: 1; }
+    .faq-item[open] summary::after { content: '-'; }
+    .faq-item[open] summary { color: var(--ac); }
+    .faq-body { padding: 0 16px 14px; font-size: 14px; line-height: 1.75; color: #4b5563; }
+
+    /* Related tools */
+    .related-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .related-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 9px 14px; border: 1.5px solid var(--bd);
+      border-radius: 8px; font-size: 13px; font-weight: 600;
+      color: var(--ac); text-decoration: none; transition: all .15s;
+      white-space: nowrap;
+    }
+    .related-link:hover { border-color: var(--ac); background: #f0fdf4; }
+
+    /* Results table */
+    .result-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 14px; }
+    .result-table th { background: #f0fdf4; color: var(--ac); font-weight: 700; padding: 10px 12px; text-align: left; border-bottom: 2px solid var(--bd); }
+    .result-table td { padding: 9px 12px; border-bottom: 1px solid var(--bd); color: #374151; }
+    .result-table tr:last-child td { border-bottom: none; }
+    .result-table tr.highlight td { font-weight: 700; color: var(--ac); background: #f0fdf4; }
+
     </style>
 </head>
 <body>
@@ -409,15 +505,4 @@ const heroTitle   = title.split(' —')[0];
   <div class="wrap ftr-inner">
     <div>
       <p class="ftr-brand">HealthCalculation.com</p>
-      <p>&copy; {new Date().getFullYear()} HealthCalculation.com &mdash; For informational purposes only. Not medical advice.</p>
-    </div>
-    <nav class="ftr-links" aria-label="Footer navigation">
-      <a href="/about">About</a>
-      <a href="/privacy">Privacy</a>
-      <a href="/disclaimer">Disclaimer</a>
-    </nav>
-  </div>
-</footer>
-
-</body>
-</html>
+      <p>&copy; {new Date().getFullYear()} HealthCalculation.com &mdash; F
