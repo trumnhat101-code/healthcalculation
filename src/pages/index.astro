@@ -65,6 +65,11 @@ const siteSchema = {
     .site-nav::-webkit-scrollbar { display: none; }
     .site-nav a { color: #6b7280; text-decoration: none; font-size: 13px; font-weight: 500; padding: 6px 10px; border-radius: 7px; white-space: nowrap; flex-shrink: 0; transition: background .15s, color .15s; }
     .site-nav a:hover { background: #f0fdf4; color: #16a34a; }
+    @media (max-width: 640px) {
+      .site-header .wrap { height: auto; flex-direction: column; align-items: stretch; padding-top: 10px; padding-bottom: 0; gap: 0; }
+      .logo { padding-bottom: 8px; }
+      .site-nav { justify-content: flex-start; border-top: 1px solid #e5e7eb; padding: 6px 0 8px; margin: 0 -20px; padding-left: 20px; padding-right: 20px; }
+    }
 
     /* Hero */
     .hero { background: linear-gradient(135deg, #16a34a 0%, #0891b2 100%); color: #fff; padding: 60px 0 52px; text-align: center; }
