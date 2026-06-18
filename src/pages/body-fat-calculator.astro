@@ -70,7 +70,7 @@ const categories = {
   <h1 class="tool-title">Body Fat % Calculator</h1>
   <p class="tool-subtitle">U.S. Navy Tape Measure Method &mdash; ACE categories</p>
 
-  <form id="bf-form" onsubmit="return false">
+  <form id="bf-form" novalidate>
 
     <div class="field-group" style="margin-bottom:16px">
       <span class="field-label">Sex</span>
@@ -134,7 +134,7 @@ const categories = {
       </div>
     </div>
 
-    <button class="btn-calc" type="button" onclick="calcBodyFat()">Calculate Body Fat %</button>
+    <button class="btn-calc" type="submit">Calculate Body Fat %</button>
   </form>
 
   <div id="bf-results" style="display:none; margin-top:24px">
@@ -217,8 +217,8 @@ const categories = {
 
 </ToolLayout>
 
-<script is:inline>
-const ACE = {
+<script>
+const ACE: Record<string, {label:string;min:number;max:number;color:string}[]> = {
   male:   [
     { label: 'Essential Fat', min: 2,  max: 5,   color: '#60a5fa' },
     { label: 'Athlete',       min: 6,  max: 13,  color: '#34d399' },
@@ -235,25 +235,30 @@ const ACE = {
   ],
 };
 
-function toInches(val, unit) { return unit === 'imperial' ? val : val / 2.54; }
+function toInches(val: number, unit: string): number {
+  return unit === 'imperial' ? val : val / 2.54;
+}
 
-function calcBodyFat() {
-  const sex  = document.querySelector('input[name="bfsex"]:checked').value;
-  const unit = document.querySelector('input[name="bfunit"]:checked').value;
-  const h    = toInches(parseFloat(document.getElementById('bf-height').value)||0, unit);
-  const neck = toInches(parseFloat(document.getElementById('bf-neck').value)||0,   unit);
-  const waist= toInches(parseFloat(document.getElementById('bf-waist').value)||0,  unit);
-  const hip  = toInches(parseFloat(document.getElementById('bf-hip').value)||0,    unit);
+const bfForm = document.getElementById('bf-form') as HTMLFormElement;
+
+bfForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const sex  = (document.querySelector('input[name="bfsex"]:checked')  as HTMLInputElement).value;
+  const unit = (document.querySelector('input[name="bfunit"]:checked') as HTMLInputElement).value;
+  const h     = toInches(parseFloat((document.getElementById('bf-height') as HTMLInputElement).value)||0, unit);
+  const neck  = toInches(parseFloat((document.getElementById('bf-neck')   as HTMLInputElement).value)||0, unit);
+  const waist = toInches(parseFloat((document.getElementById('bf-waist')  as HTMLInputElement).value)||0, unit);
+  const hip   = toInches(parseFloat((document.getElementById('bf-hip')    as HTMLInputElement).value)||0, unit);
 
   if (!h || !neck || !waist || (sex==='female' && !hip)) return;
-  if (sex === 'male' && waist <= neck) return;
-  if (sex === 'female' && (waist + hip) <= neck) return;
+  if (sex === 'male'   && waist <= neck)           return;
+  if (sex === 'female' && (waist + hip) <= neck)   return;
 
-  let pct;
+  let pct: number;
   if (sex === 'male') {
-    pct = 86.010 * Math.log10(waist - neck) - 70.041 * Math.log10(h) + 36.76;
+    pct = 86.010  * Math.log10(waist - neck)         - 70.041 * Math.log10(h) + 36.76;
   } else {
-    pct = 163.205 * Math.log10(waist + hip - neck) - 97.684 * Math.log10(h) - 78.387;
+    pct = 163.205 * Math.log10(waist + hip - neck)   - 97.684 * Math.log10(h) - 78.387;
   }
   pct = Math.max(2, Math.min(60, pct));
 
@@ -261,45 +266,45 @@ function calcBodyFat() {
   let catLabel = 'Obese';
   for (const c of cats) { if (pct >= c.min && pct <= c.max) { catLabel = c.label; break; } }
 
-  document.getElementById('bf-pct').textContent = pct.toFixed(1) + '%';
-  document.getElementById('bf-cat').textContent = catLabel;
+  (document.getElementById('bf-pct') as HTMLElement).textContent = pct.toFixed(1) + '%';
+  (document.getElementById('bf-cat') as HTMLElement).textContent = catLabel;
 
   const maxRange = sex === 'male' ? 45 : 50;
   const bars = cats.map(c => {
     const active = pct >= c.min && pct <= c.max;
-    const width = ((c.max - c.min) / maxRange * 100).toFixed(1);
-    const fill  = active ? c.color : '#e5e7eb';
-    return '<div class="cat-row' + (active ? ' active' : '') + '">' +
-      '<span class="cat-label">' + c.label + '</span>' +
-      '<div class="cat-bar"><div class="cat-bar-fill" style="width:' + width + '%;background:' + fill + '"></div></div>' +
-      '<span class="cat-range">' + c.min + (c.max < 100 ? '–' + c.max : '+') + '%</span>' +
-      '</div>';
+    const width  = ((c.max - c.min) / maxRange * 100).toFixed(1);
+    const fill   = active ? c.color : '#e5e7eb';
+    return `<div class="cat-row${active ? ' active' : ''}">` +
+      `<span class="cat-label">${c.label}</span>` +
+      `<div class="cat-bar"><div class="cat-bar-fill" style="width:${width}%;background:${fill}"></div></div>` +
+      `<span class="cat-range">${c.min}${c.max < 100 ? '–' + c.max : '+'}%</span></div>`;
   }).join('');
-  document.getElementById('bf-scale-bars').innerHTML = bars;
-  document.getElementById('bf-results').style.display = 'block';
-}
+  (document.getElementById('bf-scale-bars') as HTMLElement).innerHTML = bars;
+  (document.getElementById('bf-results')    as HTMLElement).style.display = 'block';
+});
 
-// Toggle hip field + units
-function updateUnits() {
-  const unit = document.querySelector('input[name="bfunit"]:checked').value;
+// Unit toggle
+function updateUnits(): void {
+  const unit = (document.querySelector('input[name="bfunit"]:checked') as HTMLInputElement).value;
   const lbl  = unit === 'imperial' ? 'in' : 'cm';
   ['bf-height-unit','bf-neck-unit','bf-waist-unit','bf-hip-unit'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.textContent = lbl;
   });
-  const hEl = document.getElementById('bf-height');
-  if (unit === 'imperial') { hEl.value = '70'; hEl.min='48'; hEl.max='96'; }
-  else                     { hEl.value = '178'; hEl.min='120'; hEl.max='250'; }
+  const hEl = document.getElementById('bf-height') as HTMLInputElement;
+  if (unit === 'imperial') { hEl.value = '70';  hEl.min = '48';  hEl.max = '96'; }
+  else                     { hEl.value = '178'; hEl.min = '120'; hEl.max = '250'; }
 }
-document.querySelectorAll('input[name="bfunit"]').forEach(r => r.addEventListener('change', updateUnits));
+document.querySelectorAll<HTMLInputElement>('input[name="bfunit"]').forEach(r => r.addEventListener('change', updateUnits));
 
-function updateSex() {
-  const sex = document.querySelector('input[name="bfsex"]:checked').value;
+// Sex toggle
+function updateSex(): void {
+  const sex   = (document.querySelector('input[name="bfsex"]:checked') as HTMLInputElement).value;
   const wHint = document.getElementById('bf-waist-hint');
   if (wHint) wHint.textContent = sex === 'male' ? '(at navel)' : '(narrowest)';
-  const hip = document.getElementById('hip-group');
-  if (hip) hip.style.opacity = sex === 'female' ? '1' : '0.35';
+  const hipGrp = document.getElementById('hip-group');
+  if (hipGrp) hipGrp.style.opacity = sex === 'female' ? '1' : '0.35';
 }
-document.querySelectorAll('input[name="bfsex"]').forEach(r => r.addEventListener('change', updateSex));
+document.querySelectorAll<HTMLInputElement>('input[name="bfsex"]').forEach(r => r.addEventListener('change', updateSex));
 updateSex();
 </script>

@@ -53,7 +53,7 @@ const schemaFaq = [
   <h1 class="tool-title">Ideal Weight Calculator</h1>
   <p class="tool-subtitle">Based on 4 clinically validated formulas</p>
 
-  <form id="iw-form" onsubmit="return false">
+  <form id="iw-form" novalidate>
 
     <div class="field-group" style="margin-bottom:16px">
       <span class="field-label">Sex</span>
@@ -105,7 +105,7 @@ const schemaFaq = [
       </div>
     </div>
 
-    <button class="btn-calc" type="button" onclick="calcIdealWeight()">Calculate Ideal Weight</button>
+    <button class="btn-calc" type="submit">Calculate Ideal Weight</button>
   </form>
 
   <div id="iw-results" style="display:none; margin-top:24px">
@@ -184,25 +184,28 @@ const schemaFaq = [
 
 </ToolLayout>
 
-<script is:inline>
-function getHeightInches() {
-  const unit = document.querySelector('input[name="unit"]:checked').value;
+<script>
+const iwForm = document.getElementById('iw-form') as HTMLFormElement;
+
+function getHeightInches(): number {
+  const unit = (document.querySelector('input[name="unit"]:checked') as HTMLInputElement).value;
   if (unit === 'imperial') {
-    const ft = parseFloat(document.getElementById('iw-ft').value) || 0;
-    const inches = parseFloat(document.getElementById('iw-in').value) || 0;
+    const ft     = parseFloat((document.getElementById('iw-ft') as HTMLInputElement).value) || 0;
+    const inches = parseFloat((document.getElementById('iw-in') as HTMLInputElement).value) || 0;
     return ft * 12 + inches;
   } else {
-    const cm = parseFloat(document.getElementById('iw-cm').value) || 0;
+    const cm = parseFloat((document.getElementById('iw-cm') as HTMLInputElement).value) || 0;
     return cm / 2.54;
   }
 }
 
-function calcIdealWeight() {
-  const sex = document.querySelector('input[name="sex"]:checked').value;
-  const h = getHeightInches();
+iwForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const sex = (document.querySelector('input[name="sex"]:checked') as HTMLInputElement).value;
+  const h   = getHeightInches();
   if (!h || h < 36 || h > 96) return;
 
-  const over60 = Math.max(0, h - 60);
+  const over60   = Math.max(0, h - 60);
   const formulas = [
     { name: 'Devine (1974)',   kg: sex === 'male' ? 50   + 2.3  * over60 : 45.5 + 2.3  * over60 },
     { name: 'Robinson (1983)', kg: sex === 'male' ? 52   + 1.9  * over60 : 49   + 1.7  * over60 },
@@ -211,31 +214,29 @@ function calcIdealWeight() {
   ];
 
   const weights = formulas.map(f => f.kg);
-  const minKg = Math.min(...weights);
-  const maxKg = Math.max(...weights);
-  const minLbs = minKg * 2.20462;
-  const maxLbs = maxKg * 2.20462;
+  const minKg   = Math.min(...weights);
+  const maxKg   = Math.max(...weights);
 
-  document.getElementById('iw-range-lbs').textContent =
-    Math.round(minLbs) + ' – ' + Math.round(maxLbs) + ' lbs';
-  document.getElementById('iw-range-kg').textContent =
+  (document.getElementById('iw-range-lbs') as HTMLElement).textContent =
+    Math.round(minKg * 2.20462) + ' – ' + Math.round(maxKg * 2.20462) + ' lbs';
+  (document.getElementById('iw-range-kg') as HTMLElement).textContent =
     minKg.toFixed(1) + ' – ' + maxKg.toFixed(1) + ' kg';
 
-  const tbody = document.getElementById('iw-table-body');
+  const tbody = document.getElementById('iw-table-body') as HTMLElement;
   tbody.innerHTML = formulas.map(f => {
     const lbs = (f.kg * 2.20462).toFixed(1);
-    return '<tr><td>' + f.name + '</td><td>' + lbs + ' lbs</td><td>' + f.kg.toFixed(1) + ' kg</td></tr>';
+    return `<tr><td>${f.name}</td><td>${lbs} lbs</td><td>${f.kg.toFixed(1)} kg</td></tr>`;
   }).join('');
 
-  document.getElementById('iw-results').style.display = 'block';
-}
+  (document.getElementById('iw-results') as HTMLElement).style.display = 'block';
+});
 
-// Toggle height inputs
-document.querySelectorAll('input[name="unit"]').forEach(r => {
+// Toggle height inputs on unit change
+document.querySelectorAll<HTMLInputElement>('input[name="unit"]').forEach(r => {
   r.addEventListener('change', () => {
     const imp = r.value === 'imperial';
-    document.getElementById('height-imperial').style.display = imp ? '' : 'none';
-    document.getElementById('height-metric').style.display   = imp ? 'none' : '';
+    (document.getElementById('height-imperial') as HTMLElement).style.display = imp ? '' : 'none';
+    (document.getElementById('height-metric')   as HTMLElement).style.display = imp ? 'none' : '';
   });
 });
 </script>
