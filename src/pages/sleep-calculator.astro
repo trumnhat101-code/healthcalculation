@@ -10,24 +10,24 @@ const SITE = 'https://healthcalculation.com';
 
 const faq = [
   {
-    q: 'How long is one sleep cycle?',
-    a: 'The average sleep cycle lasts about 90 minutes and consists of four stages: NREM stages 1, 2, 3 (deep sleep), and REM sleep. Most adults need 5–6 complete cycles per night (7.5–9 hours) to feel fully rested.',
-  },
-  {
-    q: 'Why do I feel groggy when I sleep 8 hours?',
-    a: 'Waking up in the middle of a deep sleep stage (NREM 3) causes "sleep inertia" — the groggy, disoriented feeling. Timing your alarm to fall at the end of a 90-minute cycle means you wake during light sleep and feel more alert.',
+    q: 'Why is a sleep cycle 90 minutes?',
+    a: 'The 90-minute cycle duration is an average derived from decades of polysomnography research. Individual cycles can range from 70–120 minutes, and early-night cycles tend to have more deep slow-wave sleep while later cycles have more REM. The 90-minute figure is a reliable average for planning wake times.',
   },
   {
     q: 'How many hours of sleep do adults need?',
-    a: 'The CDC and American Academy of Sleep Medicine recommend 7–9 hours per night for adults 18–60. Teens need 8–10 hours. Consistently sleeping fewer than 7 hours is linked to increased risk of obesity, heart disease, and impaired cognitive function.',
+    a: 'The American Academy of Sleep Medicine (AASM) recommends 7–9 hours per night for adults aged 18–64, and 7–8 hours for adults 65 and older. This corresponds to 5–6 complete 90-minute cycles. Consistently sleeping fewer than 7 hours is associated with increased risk of obesity, cardiovascular disease, and impaired cognitive function.',
   },
   {
-    q: 'Does a mattress affect sleep quality?',
-    a: 'Yes. Research shows that a medium-firm mattress significantly reduces back pain and improves sleep quality compared to a worn or unsuitable mattress. Replacing an old mattress can meaningfully improve both sleep duration and subjective sleep quality.',
+    q: 'What happens if I wake up in the middle of a sleep cycle?',
+    a: 'Waking mid-cycle — especially from deep slow-wave sleep — causes "sleep inertia": grogginess, impaired alertness, and reduced cognitive performance that can last 15–60 minutes. This is why you can feel worse after 8 hours of poorly-timed sleep than after 7.5 hours aligned to complete cycles.',
   },
   {
-    q: 'What is the best time to go to bed?',
-    a: 'Working backwards from your required wake-up time in 90-minute intervals (plus 15 minutes to fall asleep) gives your optimal bedtime. For example, to wake at 7:00 AM, aim to fall asleep by 11:45 PM (5 cycles) or 10:15 PM (6 cycles).',
+    q: 'Is it better to sleep 6 hours or 7.5 hours?',
+    a: 'In most cases, 7.5 hours (5 complete cycles) is significantly better than 6 hours (4 cycles). However, if you must choose between 6 hours and a poorly-timed 7 hours that cuts through a cycle, the 6-hour option aligned to cycle completion may leave you feeling more alert.',
+  },
+  {
+    q: 'What time should I go to bed to wake up at 6 AM?',
+    a: 'To wake at 6:00 AM feeling refreshed, your ideal bedtimes are: 8:46 PM (6 cycles / 9h), 10:16 PM (5 cycles / 7.5h), or 11:46 PM (4 cycles / 6h). Enter 6:00 AM in the Wake-up mode above to see all options with their cycle counts.',
   },
 ];
 
@@ -207,32 +207,6 @@ const schemaApp = {
   <p>This calculator adds a 14-minute sleep onset allowance (average time to fall asleep for most adults) and shows wake times aligned to complete cycles so you surface naturally from light sleep &mdash; the easiest point to wake.</p>
 </section>
 
-<!-- FAQ -->
-<section class="content-section">
-  <h2>Frequently Asked Questions</h2>
-  <div class="faq-list">
-    <details class="faq-item">
-      <summary>Why is a sleep cycle 90 minutes?</summary>
-      <div class="faq-body"><p>The 90-minute cycle duration is an average derived from decades of polysomnography research. Individual cycles can range from 70&ndash;120 minutes, and early-night cycles tend to have more deep slow-wave sleep while later cycles have more REM. The 90-minute figure is a reliable average for planning wake times.</p></div>
-    </details>
-    <details class="faq-item">
-      <summary>How many hours of sleep do adults need?</summary>
-      <div class="faq-body"><p>The American Academy of Sleep Medicine (AASM) recommends 7&ndash;9 hours per night for adults aged 18&ndash;64, and 7&ndash;8 hours for adults 65 and older. This corresponds to 5&ndash;6 complete 90-minute cycles. Consistently sleeping fewer than 7 hours is associated with increased risk of obesity, cardiovascular disease, and impaired cognitive function.</p></div>
-    </details>
-    <details class="faq-item">
-      <summary>What happens if I wake up in the middle of a sleep cycle?</summary>
-      <div class="faq-body"><p>Waking mid-cycle &mdash; especially from deep slow-wave sleep &mdash; causes "sleep inertia": grogginess, impaired alertness, and reduced cognitive performance that can last 15&ndash;60 minutes. This is why you can feel worse after 8 hours of poorly-timed sleep than after 7.5 hours aligned to complete cycles.</p></div>
-    </details>
-    <details class="faq-item">
-      <summary>Is it better to sleep 6 hours or 7.5 hours?</summary>
-      <div class="faq-body"><p>In most cases, 7.5 hours (5 complete cycles) is significantly better than 6 hours (4 cycles). However, if you must choose between 6 hours and a poorly-timed 7 hours that cuts through a cycle, the 6-hour option aligned to cycle completion may leave you feeling more alert. Use this calculator to time both options and choose the cycle-aligned one.</p></div>
-    </details>
-    <details class="faq-item">
-      <summary>What time should I go to bed to wake up at 6 AM?</summary>
-      <div class="faq-body"><p>To wake at 6:00 AM feeling refreshed, your ideal bedtimes are: 8:46 PM (6 cycles / 9h), 10:16 PM (5 cycles / 7.5h), or 11:46 PM (4 cycles / 6h). Enter 6:00 AM in the Wake-up mode above to see all options with their cycle counts.</p></div>
-    </details>
-  </div>
-</section>
 
 <!-- Related -->
 <section class="content-section">

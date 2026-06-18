@@ -10,24 +10,24 @@ const SITE = 'https://healthcalculation.com';
 
 const faq = [
   {
-    q: 'What is TDEE?',
-    a: 'TDEE (Total Daily Energy Expenditure) is the total number of calories you burn per day, including your resting metabolism (BMR) plus all physical activity. Eating at your TDEE maintains your current weight.',
+    q: 'What is TDEE and why does it matter?',
+    a: 'Total Daily Energy Expenditure (TDEE) is the total number of calories your body burns in a day, including your resting metabolism, physical activity, and the energy used to digest food. It is the single most important number for managing your weight — eating below it causes weight loss, eating above it causes weight gain.',
   },
   {
-    q: 'How many calories should I eat to lose weight?',
-    a: 'A deficit of about 500 calories per day below your TDEE leads to roughly 1 lb of weight loss per week. Avoid going below 1,200 cal/day (women) or 1,500 cal/day (men) without medical supervision.',
+    q: 'How many calories should I eat to lose 1 pound per week?',
+    a: 'One pound of fat contains approximately 3,500 calories. To lose 1 lb per week, you need a daily deficit of ~500 calories below your TDEE. This calculator shows that number directly as the "Weight Loss" target. Deficits larger than 1,000 kcal/day are not recommended as they risk muscle loss and nutritional deficiencies.',
   },
   {
-    q: 'What formula does this calculator use?',
-    a: 'We use the Mifflin-St Jeor equation, considered the most accurate for most adults: BMR = 10×kg + 6.25×cm − 5×age + s (where s = +5 for men, −161 for women). TDEE = BMR × activity multiplier.',
+    q: 'How accurate is the Mifflin-St Jeor formula?',
+    a: 'Studies show Mifflin-St Jeor predicts BMR within 10% for most people. It outperforms the older Harris-Benedict formula in accuracy. However, no formula accounts for individual metabolic variation, medical conditions, or body composition — treat your result as a starting point and adjust based on real-world results over 2–3 weeks.',
   },
   {
-    q: 'How accurate is a calorie calculator?',
-    a: 'Calorie calculators provide a useful estimate — typically within ±10% of your actual needs. Individual metabolism varies based on genetics, muscle mass, sleep, hormones, and more. Use it as a starting point and adjust based on real-world results.',
+    q: 'Should I eat back the calories I burn exercising?',
+    a: 'Not necessarily. The activity multipliers in TDEE calculations already account for your exercise level. If you selected the correct activity level, your exercise calories are already included. Only eat back exercise calories if you chose a lower activity level or if your workout was unusually intense.',
   },
   {
-    q: 'What is BMR vs TDEE?',
-    a: 'BMR (Basal Metabolic Rate) is the calories your body burns at complete rest just to maintain vital functions. TDEE adds your activity level on top — it\'s the number you should use for weight management planning.',
+    q: 'What is the difference between BMR and TDEE?',
+    a: 'BMR (Basal Metabolic Rate) is the calories your body needs at complete rest — just to keep organs functioning. TDEE includes all activity on top of BMR. For most people, TDEE is 1.4–1.9× their BMR. Eating at BMR is not recommended as it is too restrictive for most people to sustain.',
   },
 ];
 
@@ -270,32 +270,6 @@ const schemaApp = {
   <p>Your Total Daily Energy Expenditure (TDEE) is then used to calculate intake targets for different goals: a <strong>500 kcal deficit</strong> targets ~1 lb/week loss, while a <strong>300 kcal surplus</strong> supports lean muscle gain.</p>
 </section>
 
-<!-- FAQ -->
-<section class="content-section">
-  <h2>Frequently Asked Questions</h2>
-  <div class="faq-list">
-    <details class="faq-item">
-      <summary>What is TDEE and why does it matter?</summary>
-      <div class="faq-body"><p>Total Daily Energy Expenditure (TDEE) is the total number of calories your body burns in a day, including your resting metabolism, physical activity, and the energy used to digest food. It is the single most important number for managing your weight &mdash; eating below it causes weight loss, eating above it causes weight gain.</p></div>
-    </details>
-    <details class="faq-item">
-      <summary>How many calories should I eat to lose 1 pound per week?</summary>
-      <div class="faq-body"><p>One pound of fat contains approximately 3,500 calories. To lose 1 lb per week, you need a daily deficit of ~500 calories below your TDEE. This calculator shows that number directly as the "Weight Loss" target. Deficits larger than 1,000 kcal/day are not recommended as they risk muscle loss and nutritional deficiencies.</p></div>
-    </details>
-    <details class="faq-item">
-      <summary>How accurate is the Mifflin-St Jeor formula?</summary>
-      <div class="faq-body"><p>Studies show Mifflin-St Jeor predicts BMR within 10% for most people. It outperforms the older Harris-Benedict formula in accuracy. However, no formula accounts for individual metabolic variation, medical conditions, or body composition &mdash; treat your result as a starting point and adjust based on real-world results over 2&ndash;3 weeks.</p></div>
-    </details>
-    <details class="faq-item">
-      <summary>Should I eat back the calories I burn exercising?</summary>
-      <div class="faq-body"><p>Not necessarily. The activity multipliers in TDEE calculations already account for your exercise level. If you selected the correct activity level, your exercise calories are already included. Only eat back exercise calories if you chose a lower activity level or if your workout was unusually intense.</p></div>
-    </details>
-    <details class="faq-item">
-      <summary>What is the difference between BMR and TDEE?</summary>
-      <div class="faq-body"><p>BMR (Basal Metabolic Rate) is the calories your body needs at complete rest &mdash; just to keep organs functioning. TDEE includes all activity on top of BMR. For most people, TDEE is 1.4&ndash;1.9&times; their BMR. Eating at BMR is not recommended as it is too restrictive for most people to sustain.</p></div>
-    </details>
-  </div>
-</section>
 
 <!-- Related -->
 <section class="content-section">

@@ -10,20 +10,24 @@ const SITE = 'https://healthcalculation.com';
 
 const faq = [
   {
-    q: 'What is a healthy BMI?',
-    a: 'For adults, a BMI of 18.5–24.9 is considered healthy. Below 18.5 is underweight, 25–29.9 is overweight, and 30 or above is classified as obese. BMI is a screening tool and not a diagnostic measure.',
+    q: 'What is a healthy BMI for adults?',
+    a: 'According to the World Health Organization, a healthy BMI for adults is between 18.5 and 24.9. A BMI below 18.5 is classified as underweight, 25–29.9 as overweight, and 30 or above as obese. These are population-level screening thresholds — they do not diagnose disease on their own.',
   },
   {
-    q: 'Is BMI accurate for athletes and bodybuilders?',
-    a: 'BMI can overestimate body fat in muscular individuals, since muscle weighs more than fat. Athletes often have a higher BMI despite low body fat. In these cases, measures like body fat percentage or waist circumference give better insight.',
+    q: 'Is BMI accurate for athletes and muscular people?',
+    a: 'No. BMI cannot distinguish between fat mass and muscle mass. A heavily muscled athlete may have a BMI in the "overweight" or even "obese" range while carrying very little body fat. For people with above-average muscle mass, body fat percentage is a more meaningful measure.',
   },
   {
-    q: 'Does BMI differ for men and women?',
-    a: 'Standard BMI categories are the same for adult men and women. However, women typically have a higher body fat percentage at the same BMI. Some researchers recommend slightly different thresholds, but clinical guidelines still use 18.5–24.9 as healthy for both.',
+    q: 'Does BMI change with age?',
+    a: 'The standard BMI thresholds apply to adults aged 18–65. For children and teens, BMI is interpreted using age- and sex-specific growth charts (BMI-for-age percentiles). For older adults (over 65), some evidence suggests a slightly higher BMI (22–27) may be associated with better outcomes.',
+  },
+  {
+    q: 'Can I have a normal BMI and still have too much body fat?',
+    a: 'Yes — this is sometimes called "normal weight obesity" or "skinny fat." It occurs when a person has a normal BMI but a high percentage of body fat and low muscle mass. Studies link this pattern to elevated metabolic risk. A body fat percentage measurement gives a more complete picture.',
   },
   {
     q: 'What should I do if my BMI is high?',
-    a: 'A high BMI is a signal to consult your doctor. They may recommend lifestyle changes including a calorie-controlled diet, increased physical activity, and behavioral support. Programs like Noom use psychology-backed coaching to help with sustainable weight loss.',
+    a: 'A high BMI is a signal to consult a healthcare provider — not a diagnosis on its own. Your doctor may assess waist circumference, body fat percentage, blood pressure, and bloodwork to get a complete picture. Lifestyle changes (diet, physical activity) are the primary interventions for overweight and obesity.',
   },
 ];
 
@@ -184,32 +188,6 @@ const schemaApp = {
   <p>The WHO classifies results as: Underweight (&lt;18.5), Normal weight (18.5&ndash;24.9), Overweight (25&ndash;29.9), and Obese (&ge;30). These thresholds are the same globally, though some countries use adjusted cut-offs for Asian populations.</p>
 </section>
 
-<!-- FAQ -->
-<section class="content-section">
-  <h2>Frequently Asked Questions</h2>
-  <div class="faq-list">
-    <details class="faq-item">
-      <summary>What is a healthy BMI for adults?</summary>
-      <div class="faq-body"><p>According to the World Health Organization, a healthy BMI for adults is between 18.5 and 24.9. A BMI below 18.5 is classified as underweight, 25&ndash;29.9 as overweight, and 30 or above as obese. These are population-level screening thresholds &mdash; they do not diagnose disease on their own.</p></div>
-    </details>
-    <details class="faq-item">
-      <summary>Is BMI accurate for athletes and muscular people?</summary>
-      <div class="faq-body"><p>No. BMI cannot distinguish between fat mass and muscle mass. A heavily muscled athlete may have a BMI in the "overweight" or even "obese" range while carrying very little body fat. For people with above-average muscle mass, body fat percentage (see our Body Fat Calculator) is a more meaningful measure.</p></div>
-    </details>
-    <details class="faq-item">
-      <summary>Does BMI change with age?</summary>
-      <div class="faq-body"><p>The standard BMI thresholds apply to adults aged 18&ndash;65. For children and teens, BMI is interpreted using age- and sex-specific growth charts (BMI-for-age percentiles). For older adults (&gt;65), some evidence suggests a slightly higher BMI (22&ndash;27) may be associated with better outcomes, but standard cut-offs are still commonly used.</p></div>
-    </details>
-    <details class="faq-item">
-      <summary>Can I have a normal BMI and still have too much body fat?</summary>
-      <div class="faq-body"><p>Yes &mdash; this is sometimes called "normal weight obesity" or "skinny fat." It occurs when a person has a normal BMI but a high percentage of body fat and low muscle mass. Studies link this pattern to elevated metabolic risk. A body fat percentage measurement gives a more complete picture.</p></div>
-    </details>
-    <details class="faq-item">
-      <summary>What is the difference between BMI and ideal weight?</summary>
-      <div class="faq-body"><p>BMI gives you a category (underweight, normal, overweight, obese) based on your current weight and height. Ideal weight formulas (Devine, Robinson, etc.) give you a target number in lbs or kg. Together they help you understand both where you are and where you might aim to be.</p></div>
-    </details>
-  </div>
-</section>
 
 <!-- Related -->
 <section class="content-section">
