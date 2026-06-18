@@ -1,0 +1,190 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+
+const SITE = 'https://healthcalculation.com';
+const canonical = `${SITE}/guides/healthy-bmi-for-women`;
+
+const schemaArticle = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'What Is a Healthy BMI for Women?',
+  description: 'A science-backed guide to BMI ranges for women by age group, with limitations of BMI, body fat context, and a free BMI calculator.',
+  url: canonical,
+  datePublished: '2025-02-01',
+  dateModified: '2025-06-01',
+  author: { '@type': 'Organization', name: 'HealthCalculation.com' },
+  publisher: { '@type': 'Organization', name: 'HealthCalculation.com', url: SITE },
+};
+
+const schemaFaq = [
+  {
+    q: 'What is a healthy BMI for a woman?',
+    a: 'The World Health Organization defines a healthy BMI as 18.5–24.9 for adults of both sexes. However, research suggests that women may carry more body fat than men at the same BMI, and that the "healthy" body fat range for women (21–33%) corresponds to a BMI of roughly 19–25. For women over 65, a slightly higher BMI (22–27) may be protective against bone loss and frailty.',
+  },
+  {
+    q: 'Is BMI 25 overweight for a woman?',
+    a: 'By the WHO classification, a BMI of 25 is the threshold for "overweight." However, it sits at the very bottom of the overweight range, and a single point of BMI does not meaningfully distinguish health outcomes. Body composition — particularly waist circumference and body fat percentage — is more predictive of cardiometabolic risk than BMI alone.',
+  },
+  {
+    q: 'What BMI is considered underweight for women?',
+    a: 'The WHO classifies a BMI below 18.5 as underweight for adults of both sexes. Being underweight carries health risks including nutrient deficiencies, reduced bone density, hormonal disruption, and increased susceptibility to illness. For women, BMIs below 17.5 may be associated with loss of menstrual function.',
+  },
+  {
+    q: 'Does BMI change with age for women?',
+    a: 'The standard 18.5–24.9 healthy range applies to adults aged 18–65. For women over 65, some evidence suggests a BMI of 22–27 is associated with the best health outcomes — slightly higher than the standard upper limit. This may relate to the protective effects of modest fat reserves against fracture risk and recovery from illness.',
+  },
+];
+---
+
+<ToolLayout
+  title="Healthy BMI for Women — By Age, Body Fat, and What the Research Says"
+  description="What is a healthy BMI for women? Learn the WHO ranges, how BMI differs by age, body fat context, and the limitations of BMI as a health measure."
+  canonical={canonical}
+  schemaFaq={schemaFaq}
+  pageIcon="&#9878;"
+  heroTitle="Healthy BMI for Women"
+>
+
+<article class="guide-article">
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a><span>›</span>
+    <a href="/guides">Guides</a><span>›</span>
+    <span>Healthy BMI for Women</span>
+  </nav>
+
+  <script type="application/ld+json" set:html={JSON.stringify(schemaArticle)} />
+
+  <h1>What Is a Healthy BMI for Women?</h1>
+  <p class="guide-meta">Reviewed June 2025 &middot; Sources: WHO, CDC, National Heart, Lung, and Blood Institute</p>
+
+  <p class="guide-lead">A healthy BMI for women is <strong>18.5–24.9</strong> by the World Health Organization standard. But BMI has real limitations for women specifically — it cannot measure body fat distribution, muscle mass, or age-related changes. This guide covers what the numbers mean, when they matter, and when to look beyond BMI.</p>
+
+  <div class="guide-cta-box">
+    <p>&#9878; <strong>Calculate your BMI now:</strong> <a href="/bmi-calculator">Free BMI Calculator</a> — get your BMI, BMI Prime, healthy weight range, and category in seconds.</p>
+  </div>
+
+  <h2>BMI Categories for Women (WHO Standard)</h2>
+  <p>The WHO classification applies to adult women aged 18–65. The categories and their associated health risk levels are:</p>
+
+  <div class="guide-table-wrap">
+    <table class="guide-table">
+      <thead>
+        <tr><th>BMI Range</th><th>Category</th><th>Health Risk</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Below 18.5</td><td>Underweight</td><td>Moderate (nutrient deficiency, bone loss, hormonal disruption)</td></tr>
+        <tr class="highlight"><td>18.5 – 24.9</td><td>Healthy Weight</td><td>Minimal</td></tr>
+        <tr><td>25.0 – 29.9</td><td>Overweight</td><td>Increased</td></tr>
+        <tr><td>30.0 – 34.9</td><td>Obesity Class I</td><td>High</td></tr>
+        <tr><td>35.0 – 39.9</td><td>Obesity Class II</td><td>Very High</td></tr>
+        <tr><td>40.0 and above</td><td>Obesity Class III</td><td>Extremely High</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Healthy BMI for Women by Age Group</h2>
+  <p>The standard BMI thresholds do not change with age in the WHO system, but research suggests age-specific context matters:</p>
+
+  <div class="guide-table-wrap">
+    <table class="guide-table">
+      <thead>
+        <tr><th>Age Group</th><th>Standard WHO Range</th><th>Research-Supported Context</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>18–25</td><td>18.5–24.9</td><td>Lower end of range (18.5–22) often seen in studies with lowest disease risk</td></tr>
+        <tr class="highlight"><td>26–40</td><td>18.5–24.9</td><td>Mid-range (20–24) associated with optimal metabolic outcomes</td></tr>
+        <tr><td>41–60</td><td>18.5–24.9</td><td>BMI up to 26–27 may not carry significantly increased risk</td></tr>
+        <tr class="highlight"><td>61–75</td><td>18.5–24.9</td><td>BMI 22–27 associated with lower all-cause mortality in several large studies</td></tr>
+        <tr><td>75+</td><td>18.5–24.9</td><td>Higher BMI (24–29) may be protective against frailty and hip fracture</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>BMI vs. Body Fat Percentage in Women</h2>
+  <p>Women naturally carry more body fat than men at the same BMI due to hormonal differences and reproductive physiology. The American Council on Exercise (ACE) body fat categories for women are:</p>
+
+  <div class="guide-table-wrap">
+    <table class="guide-table">
+      <thead>
+        <tr><th>Category</th><th>Body Fat % (Women)</th><th>Typical BMI Correlation</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Essential Fat</td><td>10–13%</td><td>BMI typically below 18</td></tr>
+        <tr class="highlight"><td>Athlete</td><td>14–20%</td><td>BMI 18–22 (may be higher with muscle)</td></tr>
+        <tr><td>Fitness</td><td>21–24%</td><td>BMI 20–24</td></tr>
+        <tr class="highlight"><td>Acceptable</td><td>25–31%</td><td>BMI 22–27</td></tr>
+        <tr><td>Obese</td><td>32%+</td><td>BMI typically above 27–28</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A woman with a BMI of 23 who is sedentary may carry 28–32% body fat (acceptable to borderline obese by ACE), while a female athlete with the same BMI may carry only 18–20%. This is why body fat percentage gives a more complete picture than BMI alone.</p>
+
+  <h2>Waist Circumference: A Better Risk Predictor for Women</h2>
+  <p>The <strong>National Heart, Lung, and Blood Institute (NHLBI)</strong> considers waist circumference a stronger predictor of cardiometabolic risk than BMI for women. Key thresholds:</p>
+  <ul class="guide-list">
+    <li><strong>Below 35 inches (88 cm):</strong> Lower risk of heart disease, type 2 diabetes, and metabolic syndrome</li>
+    <li><strong>At or above 35 inches (88 cm):</strong> Substantially increased risk — regardless of BMI category</li>
+  </ul>
+  <p>A woman with a healthy BMI of 24 but a waist circumference above 35 inches has a higher cardiometabolic risk profile than one with a BMI of 27 and a waist below 35 inches.</p>
+
+  <h2>When BMI Is Not a Reliable Measure for Women</h2>
+  <p>BMI should be interpreted with caution or supplemented with other measures in these situations:</p>
+  <ul class="guide-list">
+    <li><strong>Pregnancy:</strong> BMI naturally rises during pregnancy and is not a meaningful health measure during this period.</li>
+    <li><strong>Post-menopause:</strong> Hormonal shifts cause fat redistribution toward the abdomen, which BMI does not capture. Waist circumference becomes more relevant.</li>
+    <li><strong>Female athletes:</strong> High muscle mass can elevate BMI into the "overweight" range in women who are metabolically healthy.</li>
+    <li><strong>Women of Asian descent:</strong> Research supports lower BMI thresholds — the WHO suggests health risks increase at BMI 23+ for East and Southeast Asian women.</li>
+  </ul>
+
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-list">
+    {schemaFaq.map(({ q, a }) => (
+      <details class="faq-item">
+        <summary>{q}</summary>
+        <div class="faq-body"><p>{a}</p></div>
+      </details>
+    ))}
+  </div>
+
+  <div class="guide-cta-box" style="margin-top:32px">
+    <p>&#9878; Calculate your BMI, BMI Prime, and healthy weight range: <a href="/bmi-calculator"><strong>Free BMI Calculator →</strong></a></p>
+  </div>
+
+  <h2>Related Guides &amp; Calculators</h2>
+  <div class="related-grid">
+    <a href="/body-fat-calculator" class="related-link">&#37; Body Fat % Calculator</a>
+    <a href="/ideal-weight-calculator" class="related-link">&#9878; Ideal Weight</a>
+    <a href="/calorie-tdee-calculator" class="related-link">&#128293; Calorie &amp; TDEE</a>
+    <a href="/macro-calculator" class="related-link">&#9881; Macro Calculator</a>
+  </div>
+
+</article>
+
+<style>
+  .guide-article { max-width: 780px; margin: 0 auto; padding: 0 4px; }
+  .guide-meta    { font-size: 13px; color: var(--mut); margin: -8px 0 20px; }
+  .guide-lead    { font-size: 17px; line-height: 1.7; color: #1f2937; margin-bottom: 24px; border-left: 4px solid var(--ac); padding-left: 16px; }
+
+  .guide-cta-box {
+    background: linear-gradient(135deg,#f0fdf4,#ecfdf5);
+    border: 1px solid #86efac; border-radius: 12px;
+    padding: 16px 20px; margin: 24px 0;
+  }
+  .guide-cta-box p { margin: 0; font-size: 15px; }
+
+  .guide-table-wrap { overflow-x: auto; margin: 16px 0 24px; }
+  .guide-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .guide-table th { background: #f9fafb; padding: 10px 14px; text-align: left; font-weight: 700; border-bottom: 2px solid #e5e7eb; font-size: 12px; text-transform: uppercase; letter-spacing: .4px; color: #6b7280; }
+  .guide-table td { padding: 10px 14px; border-bottom: 1px solid #e5e7eb; }
+  .guide-table tr.highlight td { background: #f0fdf4; }
+  .guide-table tr:last-child td { border-bottom: none; }
+
+  .guide-list { margin: 12px 0 20px 20px; }
+  .guide-list li { margin-bottom: 10px; line-height: 1.65; }
+
+  h2 { font-size: 20px; font-weight: 800; margin: 32px 0 12px; color: #111827; }
+  h1 { font-size: 28px; font-weight: 900; margin-bottom: 8px; line-height: 1.25; }
+</style>
+
+</ToolLayout>

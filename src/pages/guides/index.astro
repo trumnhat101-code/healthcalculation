@@ -1,0 +1,83 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+const SITE = 'https://healthcalculation.com';
+const canonical = `${SITE}/guides`;
+
+const guides = [
+  {
+    href: '/guides/how-much-protein-per-day',
+    icon: '&#129372;',
+    title: 'How Much Protein Do I Need Per Day?',
+    desc: 'Evidence-based protein recommendations for adults — by weight, activity level, and goal. Includes a quick-reference table and top food sources.',
+    tool: 'Protein Calculator',
+    toolHref: '/protein-calculator',
+  },
+  {
+    href: '/guides/healthy-bmi-for-women',
+    icon: '&#9878;',
+    title: 'What Is a Healthy BMI for Women?',
+    desc: 'WHO BMI ranges for women by age group, body fat context, waist circumference thresholds, and when BMI is not a reliable measure.',
+    tool: 'BMI Calculator',
+    toolHref: '/bmi-calculator',
+  },
+  {
+    href: '/guides/how-to-calculate-tdee',
+    icon: '&#128293;',
+    title: 'How to Calculate Your TDEE Accurately',
+    desc: 'Step-by-step guide to TDEE using the Mifflin-St Jeor formula — activity multipliers, calorie targets by goal, and the 4 most common mistakes.',
+    tool: 'Calorie & TDEE Calculator',
+    toolHref: '/calorie-tdee-calculator',
+  },
+];
+---
+
+<ToolLayout
+  title="Health & Fitness Guides — Evidence-Based Articles"
+  description="Science-backed guides on protein intake, BMI, TDEE, and more. Each guide links to a free calculator for personalized results."
+  canonical={canonical}
+  pageIcon="&#128214;"
+  heroTitle="Health & Fitness Guides"
+>
+
+<div style="max-width:780px;margin:0 auto">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a><span>›</span><span>Guides</span>
+  </nav>
+
+  <h1 style="font-size:28px;font-weight:900;margin-bottom:8px">Health &amp; Fitness Guides</h1>
+  <p style="font-size:16px;color:var(--mut);margin-bottom:32px">Evidence-based articles paired with free calculators — so you can understand the science and get your personalized number in one place.</p>
+
+  <div class="guides-list">
+    {guides.map(g => (
+      <a href={g.href} class="guide-card">
+        <span class="gc-icon" set:html={g.icon} />
+        <div class="gc-body">
+          <p class="gc-title">{g.title}</p>
+          <p class="gc-desc">{g.desc}</p>
+          <p class="gc-tool">Free tool: <span>{g.tool}</span></p>
+        </div>
+        <span class="gc-arrow">&#8594;</span>
+      </a>
+    ))}
+  </div>
+</div>
+
+<style>
+  .guides-list { display: flex; flex-direction: column; gap: 16px; }
+  .guide-card {
+    display: flex; align-items: flex-start; gap: 16px;
+    background: #fff; border: 1px solid #e5e7eb; border-radius: 14px;
+    padding: 20px; text-decoration: none; color: #1f2937;
+    transition: box-shadow .15s, border-color .15s;
+  }
+  .guide-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.08); border-color: var(--ac); }
+  .gc-icon  { font-size: 28px; flex-shrink: 0; margin-top: 2px; }
+  .gc-body  { flex: 1; }
+  .gc-title { font-size: 17px; font-weight: 800; margin-bottom: 4px; color: #111827; }
+  .gc-desc  { font-size: 14px; color: #6b7280; line-height: 1.55; margin-bottom: 8px; }
+  .gc-tool  { font-size: 12px; color: var(--mut); }
+  .gc-tool span { color: var(--ac); font-weight: 600; }
+  .gc-arrow { color: var(--ac); font-size: 18px; font-weight: 700; flex-shrink: 0; align-self: center; }
+</style>
+
+</ToolLayout>

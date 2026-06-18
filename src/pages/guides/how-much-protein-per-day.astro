@@ -1,0 +1,211 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+
+const SITE = 'https://healthcalculation.com';
+const canonical = `${SITE}/guides/how-much-protein-per-day`;
+
+const schemaArticle = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'How Much Protein Do I Need Per Day?',
+  description: 'Evidence-based guide to daily protein requirements for adults based on weight, activity level, and goal. Includes recommendations from ISSN and the Academy of Nutrition and Dietetics.',
+  url: canonical,
+  datePublished: '2025-01-15',
+  dateModified: '2025-06-01',
+  author: { '@type': 'Organization', name: 'HealthCalculation.com' },
+  publisher: { '@type': 'Organization', name: 'HealthCalculation.com', url: SITE },
+};
+
+const schemaFaq = [
+  {
+    q: 'How much protein do I need per day to build muscle?',
+    a: 'To build muscle, the International Society of Sports Nutrition (ISSN) recommends 1.6–2.2 g of protein per kg of body weight per day, combined with progressive resistance training. For a 175 lb (80 kg) person, that is 128–176 g/day. Spreading intake across 3–5 meals maximizes muscle protein synthesis.',
+  },
+  {
+    q: 'How much protein per day to lose weight?',
+    a: 'During weight loss, higher protein intake (1.2–1.6 g/kg/day) helps preserve lean muscle mass while in a calorie deficit. For a 165 lb (75 kg) person, that is 90–120 g/day. Higher protein also increases satiety, which naturally reduces overall calorie intake.',
+  },
+  {
+    q: 'Is 100g of protein a day enough?',
+    a: 'For a sedentary adult weighing around 125 kg (275 lbs), 100 g/day meets the basic RDA of 0.8 g/kg. For most moderately active adults (70–90 kg), 100 g/day falls in the 1.1–1.4 g/kg range — adequate for maintenance but on the lower end for muscle building. Use our Protein Calculator for a personalized target.',
+  },
+  {
+    q: 'Can I eat too much protein?',
+    a: 'In healthy adults with normal kidney function, intakes up to 3.5 g/kg/day have not been shown to cause harm. The main practical risk is that very high protein diets can crowd out fiber, fruits, and vegetables. People with pre-existing kidney disease should follow medically supervised limits.',
+  },
+];
+---
+
+<ToolLayout
+  title="How Much Protein Do I Need Per Day? (Science-Backed Guide)"
+  description="Find out exactly how much protein you need daily based on your weight, activity level, and goal. Includes tables for weight loss, muscle gain, and athletes."
+  canonical={canonical}
+  schemaFaq={schemaFaq}
+  pageIcon="&#129372;"
+  heroTitle="How Much Protein Per Day?"
+>
+
+<article class="guide-article">
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a><span>›</span>
+    <a href="/guides">Guides</a><span>›</span>
+    <span>How Much Protein Per Day?</span>
+  </nav>
+
+  <script type="application/ld+json" set:html={JSON.stringify(schemaArticle)} />
+
+  <h1>How Much Protein Do I Need Per Day?</h1>
+  <p class="guide-meta">Reviewed June 2025 &middot; Sources: ISSN, Academy of Nutrition and Dietetics, WHO</p>
+
+  <p class="guide-lead">The short answer: <strong>0.8 g per kg of body weight</strong> is the minimum for sedentary adults, but most active people need 1.2–2.2 g/kg depending on their goal. A 165 lb (75 kg) moderately active adult needs roughly <strong>90–135 g of protein per day</strong>.</p>
+
+  <div class="guide-cta-box">
+    <p>&#129372; <strong>Get your exact number:</strong> use our <a href="/protein-calculator">Protein Calculator</a> — enter your weight, activity level, and goal for a personalized target in grams per day and per meal.</p>
+  </div>
+
+  <h2>The Quick-Reference Table</h2>
+  <p>The table below shows recommended daily protein intake by goal, based on the <strong>International Society of Sports Nutrition (ISSN) 2017 Position Stand</strong> and the <strong>Academy of Nutrition and Dietetics</strong> guidelines.</p>
+
+  <div class="guide-table-wrap">
+    <table class="guide-table">
+      <thead>
+        <tr>
+          <th>Goal</th>
+          <th>g per kg body weight</th>
+          <th>g per lb body weight</th>
+          <th>Example: 165 lbs (75 kg)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Sedentary adult (RDA minimum)</td>
+          <td>0.8 g/kg</td>
+          <td>0.36 g/lb</td>
+          <td>60 g/day</td>
+        </tr>
+        <tr class="highlight">
+          <td>Light activity / maintenance</td>
+          <td>1.0–1.2 g/kg</td>
+          <td>0.45–0.54 g/lb</td>
+          <td>75–90 g/day</td>
+        </tr>
+        <tr>
+          <td>Weight loss (preserving muscle)</td>
+          <td>1.2–1.6 g/kg</td>
+          <td>0.54–0.73 g/lb</td>
+          <td>90–120 g/day</td>
+        </tr>
+        <tr class="highlight">
+          <td>Muscle building (resistance training)</td>
+          <td>1.6–2.2 g/kg</td>
+          <td>0.73–1.0 g/lb</td>
+          <td>120–165 g/day</td>
+        </tr>
+        <tr>
+          <td>Endurance / competitive athletes</td>
+          <td>1.6–2.4 g/kg</td>
+          <td>0.73–1.09 g/lb</td>
+          <td>120–180 g/day</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Why the RDA of 0.8 g/kg Is Too Low for Most People</h2>
+  <p>The 0.8 g/kg Recommended Dietary Allowance (RDA) was designed to prevent protein deficiency in sedentary adults — not to optimize health, performance, or body composition. Research published since the RDA was established consistently shows that higher intakes produce better outcomes for active people:</p>
+  <ul class="guide-list">
+    <li><strong>Muscle retention during weight loss:</strong> Studies show intakes of 1.2–1.6 g/kg preserve significantly more lean mass during a calorie deficit than the RDA.</li>
+    <li><strong>Muscle synthesis:</strong> Resistance-trained individuals require at least 1.6 g/kg to maximize hypertrophy, according to a 2018 meta-analysis in the British Journal of Sports Medicine (Morton et al.).</li>
+    <li><strong>Satiety:</strong> Protein is the most satiating macronutrient. Higher protein diets naturally reduce total calorie intake, supporting weight management.</li>
+    <li><strong>Older adults:</strong> Adults over 65 may need 1.0–1.2 g/kg or more to counter age-related muscle loss (sarcopenia), per the PROT-AGE study group.</li>
+  </ul>
+
+  <h2>How to Distribute Protein Throughout the Day</h2>
+  <p>Total daily protein matters most, but distribution also plays a role. Each meal can only stimulate a maximum muscle protein synthesis response of roughly <strong>20–40 g of protein</strong> — beyond that, the excess is oxidized for energy rather than used for muscle repair.</p>
+  <p>A practical distribution for someone targeting 150 g/day across 4 meals:</p>
+  <div class="formula-box">
+    Breakfast: 35–40 g (e.g., 3 eggs + Greek yogurt + protein shake)<br>
+    Lunch: 35–40 g (e.g., 200g chicken breast + legumes)<br>
+    Dinner: 40–45 g (e.g., 200g salmon + cottage cheese)<br>
+    Snack/Post-workout: 30–35 g (e.g., protein shake + milk)
+  </div>
+
+  <h2>Best High-Protein Foods (With Amounts)</h2>
+  <div class="guide-table-wrap">
+    <table class="guide-table">
+      <thead>
+        <tr><th>Food</th><th>Serving</th><th>Protein</th><th>Calories</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Chicken breast (cooked)</td><td>100 g</td><td>31 g</td><td>165 kcal</td></tr>
+        <tr class="highlight"><td>Greek yogurt (non-fat)</td><td>200 g</td><td>20 g</td><td>130 kcal</td></tr>
+        <tr><td>Eggs (whole)</td><td>2 large</td><td>12 g</td><td>140 kcal</td></tr>
+        <tr class="highlight"><td>Salmon (cooked)</td><td>100 g</td><td>25 g</td><td>208 kcal</td></tr>
+        <tr><td>Cottage cheese (low-fat)</td><td>200 g</td><td>25 g</td><td>180 kcal</td></tr>
+        <tr class="highlight"><td>Whey protein powder</td><td>1 scoop (30 g)</td><td>24 g</td><td>120 kcal</td></tr>
+        <tr><td>Lentils (cooked)</td><td>200 g</td><td>18 g</td><td>230 kcal</td></tr>
+        <tr class="highlight"><td>Tofu (firm)</td><td>150 g</td><td>16 g</td><td>120 kcal</td></tr>
+        <tr><td>Tuna (canned in water)</td><td>100 g</td><td>25 g</td><td>110 kcal</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Protein for Special Populations</h2>
+  <p><strong>Older adults (65+):</strong> The PROT-AGE study group recommends 1.0–1.2 g/kg/day as a minimum to slow sarcopenia, with 1.2–1.5 g/kg for those who are physically active or recovering from illness.</p>
+  <p><strong>Pregnant women:</strong> The Institute of Medicine recommends an additional 25 g/day above normal intake during pregnancy, totaling approximately 1.1 g/kg/day.</p>
+  <p><strong>Plant-based diets:</strong> Plant proteins are generally less bioavailable than animal proteins. Vegans and vegetarians may benefit from targeting the upper range of their goal bracket (e.g., 2.0–2.2 g/kg for muscle building) and combining complementary protein sources.</p>
+
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-list">
+    {schemaFaq.map(({ q, a }) => (
+      <details class="faq-item">
+        <summary>{q}</summary>
+        <div class="faq-body"><p>{a}</p></div>
+      </details>
+    ))}
+  </div>
+
+  <div class="guide-cta-box" style="margin-top:32px">
+    <p>&#129372; Ready to calculate your exact protein target? <a href="/protein-calculator"><strong>Use the Protein Calculator →</strong></a></p>
+  </div>
+
+  <h2>Related Guides &amp; Calculators</h2>
+  <div class="related-grid">
+    <a href="/macro-calculator" class="related-link">&#9881; Macro Calculator</a>
+    <a href="/calorie-tdee-calculator" class="related-link">&#128293; Calorie &amp; TDEE</a>
+    <a href="/water-intake-calculator" class="related-link">&#128167; Water Intake</a>
+    <a href="/body-fat-calculator" class="related-link">&#37; Body Fat %</a>
+  </div>
+
+</article>
+
+<style>
+  .guide-article { max-width: 780px; margin: 0 auto; padding: 0 4px; }
+  .guide-meta    { font-size: 13px; color: var(--mut); margin: -8px 0 20px; }
+  .guide-lead    { font-size: 17px; line-height: 1.7; color: #1f2937; margin-bottom: 24px; border-left: 4px solid var(--ac); padding-left: 16px; }
+
+  .guide-cta-box {
+    background: linear-gradient(135deg,#f0fdf4,#ecfdf5);
+    border: 1px solid #86efac; border-radius: 12px;
+    padding: 16px 20px; margin: 24px 0;
+  }
+  .guide-cta-box p { margin: 0; font-size: 15px; }
+
+  .guide-table-wrap { overflow-x: auto; margin: 16px 0 24px; }
+  .guide-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .guide-table th { background: #f9fafb; padding: 10px 14px; text-align: left; font-weight: 700; border-bottom: 2px solid #e5e7eb; font-size: 12px; text-transform: uppercase; letter-spacing: .4px; color: #6b7280; }
+  .guide-table td { padding: 10px 14px; border-bottom: 1px solid #e5e7eb; }
+  .guide-table tr.highlight td { background: #f0fdf4; }
+  .guide-table tr:last-child td { border-bottom: none; }
+
+  .guide-list { margin: 12px 0 20px 20px; }
+  .guide-list li { margin-bottom: 10px; line-height: 1.65; }
+
+  .formula-box { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px 20px; font-size: 14px; line-height: 2; margin: 12px 0 20px; }
+
+  h2 { font-size: 20px; font-weight: 800; margin: 32px 0 12px; color: #111827; }
+  h1 { font-size: 28px; font-weight: 900; margin-bottom: 8px; line-height: 1.25; }
+</style>
+
+</ToolLayout>
