@@ -1,0 +1,180 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import { ACTIVITIES, type Activity } from '../../data/activities';
+
+const SITE = 'https://healthcalculation.com';
+
+export function getStaticPaths() {
+  return ACTIVITIES.map((a) => ({ params: { activity: a.slug }, props: { a } }));
+}
+
+const { a } = Astro.props as { a: Activity };
+const canonical = `${SITE}/calories-burned/${a.slug}`;
+
+// Build-time calorie table (indexable, không phụ thuộc JS)
+const WEIGHTS = [125, 155, 185, 215, 250]; // lbs
+const DURATIONS = [15, 30, 45, 60];        // minutes
+const kcal = (lbs: number, min: number) =>
+  Math.round(a.met * (lbs / 2.20462) * (min / 60));
+
+const schemaApp = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: `Calories Burned ${a.name} Calculator`,
+  url: canonical,
+  applicationCategory: 'HealthApplication',
+  operatingSystem: 'Any',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  description: `Calculate calories burned ${a.phrase} by body weight and duration using MET values from the Compendium of Physical Activities.`,
+};
+
+// Trang liên quan trong cụm
+const others = ACTIVITIES.filter((x) => x.slug !== a.slug).slice(0, 6);
+---
+
+<ToolLayout
+  title={`Calories Burned ${a.name} — Calculator & Chart by Weight`}
+  description={`How many calories do you burn ${a.phrase}? Calculate by your weight and time, plus a calorie chart. MET-based, sourced from the Compendium of Physical Activities.`}
+  canonical={canonical}
+  schemaApp={schemaApp}
+  schemaFaq={a.faq}
+  pageIcon={a.icon}
+  heroTitle={`Calories Burned ${a.name}`}
+>
+  <div class="page-layout">
+    <div class="main-col">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span aria-hidden="true">›</span>
+        <a href="/calories-burned-calculator">Calories Burned</a><span aria-hidden="true">›</span>
+        <span>{a.name}</span>
+      </nav>
+
+      <h1>Calories Burned {a.name}</h1>
+      <p class="lead">{a.intro}</p>
+
+      <!-- ── Mini calculator ── -->
+      <div class="card" id="calc" data-met={a.met}>
+        <div class="grid-2">
+          <div class="field-group">
+            <label class="field-label" for="cbw">Your weight (lbs)</label>
+            <input type="number" id="cbw" value="165" min="50" max="700" step="1" />
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="cbd">Duration (minutes)</label>
+            <input type="number" id="cbd" value="30" min="1" max="600" step="1" />
+          </div>
+        </div>
+        <button type="button" id="cbgo" class="btn-calc">Calculate Calories Burned →</button>
+
+        <div id="cbout" class="cb-result" hidden>
+          <div class="cb-big"><span id="cbkcal">—</span> <span class="cb-unit">calories burned</span></div>
+          <p class="cb-sub"><span id="cbpm">—</span> kcal/min · <span id="cbph">—</span> kcal/hour · MET {a.met}</p>
+        </div>
+      </div>
+
+      <AdSlot label="In-content ad" />
+
+      <!-- ── Static chart (SEO) ── -->
+      <h2>Calories Burned {a.name} — Chart by Weight &amp; Time</h2>
+      <p>Estimated calories burned {a.phrase} at <strong>{a.met} METs</strong>. Find your weight on the left and your duration across the top.</p>
+      <table class="result-table">
+        <thead>
+          <tr>
+            <th>Body weight</th>
+            {DURATIONS.map((d) => <th>{d} min</th>)}
+          </tr>
+        </thead>
+        <tbody>
+          {WEIGHTS.map((w) => (
+            <tr>
+              <td><strong>{w} lbs</strong></td>
+              {DURATIONS.map((d) => <td>{kcal(w, d)} kcal</td>)}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {a.metRange && <p style="font-size:13px;color:#6b7280;margin-top:8px">Intensity range: {a.metRange}</p>}
+
+      <!-- ── How it's calculated ── -->
+      <h2>How These Numbers Are Calculated</h2>
+      <p>This estimate uses the <strong>MET (Metabolic Equivalent of Task)</strong> method, the standard used in exercise science:</p>
+      <div class="formula-box">
+        Calories = MET × weight (kg) × time (hours)
+      </div>
+      <p>
+        MET values come from the <strong>Compendium of Physical Activities</strong> (Ainsworth et al., 2011).
+        One MET equals the energy you burn sitting quietly (~1 kcal per kg of body weight per hour), so
+        {a.phrase} at {a.met} METs burns about {a.met}× that rate. Actual burn varies with fitness,
+        terrain, and effort by roughly 10–20%.
+      </p>
+
+      <!-- ── FAQ ── -->
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-list">
+        {a.faq.map(({ q, a: ans }) => (
+          <details class="faq-item">
+            <summary>{q}</summary>
+            <div class="faq-body">{ans}</div>
+          </details>
+        ))}
+      </div>
+
+      <!-- ── Cross-links to money pages ── -->
+      <h2>Turn This Into a Weight-Loss Plan</h2>
+      <p>
+        Knowing how many calories you burn is only half the equation. To lose weight, pair this with your
+        daily calorie target:
+      </p>
+      <div class="related-grid">
+        <a href="/calorie-tdee-calculator" class="related-link">🔥 Calorie &amp; TDEE Calculator</a>
+        <a href="/calorie-deficit-calculator" class="related-link">✂️ Calorie Deficit Calculator</a>
+        <a href="/calories-burned-calculator" class="related-link">📋 All Activities Calculator</a>
+      </div>
+
+      <!-- ── Sibling activities ── -->
+      <h2>Calories Burned — Other Activities</h2>
+      <div class="related-grid">
+        {others.map((o) => (
+          <a href={`/calories-burned/${o.slug}`} class="related-link">{o.icon} {o.name}</a>
+        ))}
+      </div>
+    </div><!-- /main-col -->
+
+    <aside class="sidebar">
+      <AdSlot label="Sidebar ad" format="rectangle" />
+      <div class="card" style="font-size:13px;color:#374151">
+        <p style="font-weight:700;margin-bottom:8px">Quick facts</p>
+        <p>Activity: <strong>{a.name}</strong></p>
+        <p>MET value: <strong>{a.met}</strong></p>
+        <p style="margin-bottom:0">A 155 lb person burns ~<strong>{kcal(155, 60)} kcal/hour</strong>.</p>
+      </div>
+    </aside>
+  </div>
+</ToolLayout>
+
+<script>
+  const calc = document.getElementById('calc') as HTMLDivElement;
+  const met = parseFloat(calc?.dataset.met || '0');
+  const w = document.getElementById('cbw') as HTMLInputElement;
+  const d = document.getElementById('cbd') as HTMLInputElement;
+  const out = document.getElementById('cbout') as HTMLDivElement;
+
+  document.getElementById('cbgo')?.addEventListener('click', () => {
+    const lbs = parseFloat(w.value);
+    const min = parseFloat(d.value);
+    if (!lbs || !min || lbs <= 0 || min <= 0) return;
+    const kcal = met * (lbs / 2.20462) * (min / 60);
+    (document.getElementById('cbkcal') as HTMLElement).textContent = String(Math.round(kcal));
+    (document.getElementById('cbpm') as HTMLElement).textContent = (kcal / min).toFixed(1);
+    (document.getElementById('cbph') as HTMLElement).textContent = String(Math.round((kcal / min) * 60));
+    out.hidden = false;
+  });
+</script>
+
+<style>
+  .cb-result { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--bd); }
+  .cb-big { font-size: 34px; font-weight: 800; color: var(--ac); line-height: 1.1; }
+  .cb-big .cb-unit { font-size: 15px; font-weight: 600; color: var(--mut); }
+  .cb-sub { font-size: 13px; color: var(--mut); margin-top: 6px; }
+</style>

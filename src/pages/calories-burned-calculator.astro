@@ -1,5 +1,6 @@
 ---
 import ToolLayout from '../layouts/ToolLayout.astro';
+import { ACTIVITIES } from '../data/activities';
 
 const SITE = 'https://healthcalculation.com';
 const canonical = `${SITE}/calories-burned-calculator`;
@@ -343,6 +344,14 @@ document.getElementById('cb-calc').addEventListener('click', () => {
     <li><strong>Combine modalities.</strong> Alternating cardio with resistance training maximizes both calorie burn during exercise (cardio) and resting metabolic rate long-term (muscle mass).</li>
     <li><strong>Consistency beats intensity.</strong> 45 minutes of walking daily burns more total calories per week than one exhausting 3-hour session for most people.</li>
   </ul>
+
+  <h2>Calories Burned by Specific Activity</h2>
+  <p>Prefer a dedicated page with a calorie chart for one activity? Pick one below:</p>
+  <div class="related-grid">
+    {ACTIVITIES.map((o) => (
+      <a href={`/calories-burned/${o.slug}`} class="related-link">{o.icon} {o.name}</a>
+    ))}
+  </div>
 
   <!-- Guide CTA -->
   <div class="guide-cta-box" style="margin-top:28px">
