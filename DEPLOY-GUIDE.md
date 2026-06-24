@@ -76,12 +76,17 @@ Tạo Page Rule để force www → non-www:
 
 ## TODO checklist sau deploy
 
-- [ ] Thay `ca-pub-XXXX` trong AdSlot.astro khi có AdSense approval
-- [ ] Thay `#AFFILIATE-*` links bằng link affiliate thật
-- [ ] Thay `hello@healthcalculation.com` trong about.astro
-- [ ] Uncomment AdSense script trong ToolLayout.astro
-- [ ] Setup Cloudflare Web Analytics (free, no cookie)
+> **Tất cả monetization/analytics giờ nằm trong MỘT file: `src/config/site.ts`.**
+> Điền ID vào đó là cả site tự bật — không cần sửa từng trang nữa.
+
+- [ ] **`src/config/site.ts`** → điền `ADSENSE_CLIENT` (sau khi được AdSense duyệt) → ads tự bật trên 33 trang
+- [ ] **`src/config/site.ts`** → điền `CF_ANALYTICS_TOKEN` → Cloudflare Web Analytics tự bật (free, no cookie)
+- [ ] **`src/config/site.ts`** → điền các link trong `AFF` (noom, hellofresh, saatva…) → CTA affiliate tự hiện sau kết quả tool; ô nào để trống thì CTA đó tự ẩn
+- [ ] Thay `contact@healthcalculation.com` trong about.astro nếu đổi email
+- [ ] Tạo `public/og-default.png` (1200×630) cho ảnh share social
 - [ ] Kiểm tra PageSpeed Insights ≥ 90 mobile
+
+> Mẹo: chạy `npm run build` rồi mở `dist/` — khi config còn rỗng sẽ không có script ads/analytics nào (an toàn để nộp AdSense review).
 
 ## Thêm tool mới
 

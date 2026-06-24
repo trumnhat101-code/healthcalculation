@@ -3,6 +3,7 @@ import ToolLayout from '../layouts/ToolLayout.astro';
 import AdSlot from '../components/AdSlot.astro';
 import AffiliateCTA from '../components/AffiliateCTA.astro';
 import Disclaimer from '../components/Disclaimer.astro';
+import { AFF } from '../config/site';
 
 const SITE = 'https://healthcalculation.com';
 
@@ -31,19 +32,19 @@ const faq = [
 
 const affiliates = [
   {
-    href: '#AFFILIATE-SAATVA',
+    href: AFF.saatva,
     label: 'Saatva',
     sub: 'Luxury innerspring mattress · Free white-glove delivery',
     badge: 'Best Quality',
   },
   {
-    href: '#AFFILIATE-NECTAR',
+    href: AFF.nectar,
     label: 'Nectar Sleep',
     sub: 'Memory foam mattress · 365-night trial + Forever warranty',
     badge: 'Best Value',
   },
   {
-    href: '#AFFILIATE-HELIX',
+    href: AFF.helix,
     label: 'Helix Sleep',
     sub: 'Personalized mattress · Matched to your sleep style',
   },
@@ -284,7 +285,7 @@ function showResults(
   ).join('');
   (document.getElementById('sleepTip') as HTMLElement).textContent = tip;
   sleepResults.hidden = false;
-  // affSec.hidden = false;  // TODO: re-enable when affiliate links are ready
+  if (affSec) affSec.hidden = false;  // CTA tự ẩn nếu chưa có link affiliate thật (xem src/config/site.ts)
   sleepResults.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 

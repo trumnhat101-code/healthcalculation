@@ -3,6 +3,7 @@ import ToolLayout from '../layouts/ToolLayout.astro';
 import AdSlot from '../components/AdSlot.astro';
 import AffiliateCTA from '../components/AffiliateCTA.astro';
 import Disclaimer from '../components/Disclaimer.astro';
+import { AFF } from '../config/site';
 
 const SITE = 'https://healthcalculation.com';
 
@@ -31,18 +32,18 @@ const faq = [
 
 const affiliates = [
   {
-    href: '#AFFILIATE-TRIFECTA',
+    href: AFF.trifecta,
     label: 'Trifecta Nutrition',
     sub: 'Macro-balanced meal prep · Organic, chef-prepared meals',
     badge: 'Top Pick',
   },
   {
-    href: '#AFFILIATE-GREEN-CHEF',
+    href: AFF.greenChef,
     label: 'Green Chef',
     sub: 'Keto & paleo meal kits · USDA-certified organic',
   },
   {
-    href: '#AFFILIATE-TRANSPARENT-LABS',
+    href: AFF.transparentLabs,
     label: 'Transparent Labs',
     sub: 'High-quality protein supplements · No artificial fillers',
   },
@@ -352,7 +353,7 @@ form.addEventListener('submit', e => {
     <div class="m-kpi" style="--c:${colors.fat}"><div class="m-v">${fatG}g</div><div class="m-l">Fat</div><div class="m-cal">${fatG*9} cal</div></div>`;
 
   results.hidden = false;
-  // affSec.hidden  = false;  // TODO: re-enable when affiliate links are ready
+  if (affSec) affSec.hidden = false;  // CTA tự ẩn nếu chưa có link affiliate thật (xem src/config/site.ts)
   results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 });
 </script>

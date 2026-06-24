@@ -1,28 +1,50 @@
 ---
 /**
- * AdSlot.astro -- placeholder AdSense unit
- * Hidden until AdSense approved.
- * When approved:
- *   1. Uncomment the <ins> block below
- *   2. Replace ca-pub-XXXX with your real publisher ID
- *   3. Replace SLOT_ID with the real ad slot ID
- *   4. Uncomment the AdSense <script> in ToolLayout.astro
+ * AdSlot.astro — AdSense unit.
+ * Tự bật khi ADSENSE_CLIENT được điền trong src/config/site.ts.
+ * Khi chưa bật: render placeholder MỜ chỉ trong `astro dev` để bạn thấy vị trí ad;
+ * khi build production mà chưa bật thì không render gì.
+ *
+ * Sau khi được AdSense duyệt:
+ *   1. Điền ADSENSE_CLIENT trong src/config/site.ts
+ *   2. Tạo từng ad unit trong AdSense → lấy slot id → truyền prop `slot`
  */
+import { ADSENSE_CLIENT, adsenseEnabled } from '../config/site';
+
 export interface Props {
   slot?: string;
   format?: 'auto' | 'rectangle' | 'horizontal';
   label?: string;
 }
-const { slot = 'SLOT_ID', format = 'auto', label = 'Advertisement' } = Astro.props;
+const { slot = '', format = 'auto', label = 'Advertisement' } = Astro.props;
+const showDevPlaceholder = !adsenseEnabled && import.meta.env.DEV;
 ---
 
-<!-- AdSlot: {label} -- hidden until AdSense approval -->
-<!--
-<ins class="adsbygoogle"
-  style="display:block"
-  data-ad-client="ca-pub-XXXX"
-  data-ad-slot={slot}
-  data-ad-format={format}
-  data-full-width-responsive="true"></ins>
-<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
--->
+{adsenseEnabled && (
+  <ins
+    class="adsbygoogle"
+    style="display:block"
+    data-ad-client={ADSENSE_CLIENT}
+    data-ad-slot={slot}
+    data-ad-format={format}
+    data-full-width-responsive="true"
+  ></ins>
+  <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+)}
+
+{showDevPlaceholder && (
+  <div class="ad-placeholder" aria-hidden="true">{label} — ad slot (dev preview)</div>
+)}
+
+<style>
+  .ad-placeholder {
+    border: 1px dashed #cbd5e1;
+    border-radius: 10px;
+    background: repeating-linear-gradient(45deg,#f8fafc,#f8fafc 10px,#f1f5f9 10px,#f1f5f9 20px);
+    color: #94a3b8;
+    font-size: 12px;
+    text-align: center;
+    padding: 22px 12px;
+    margin: 16px 0;
+  }
+</style>

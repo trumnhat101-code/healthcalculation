@@ -14,7 +14,8 @@ export interface Props {
   heading?: string;
 }
 const { items, heading = 'Recommended for You' } = Astro.props;
-const liveItems = items.filter(i => !i.href.startsWith('#AFFILIATE-'));
+// Ẩn item chưa có link thật: rỗng, '#', hoặc placeholder #AFFILIATE-*
+const liveItems = items.filter(i => i.href && !i.href.startsWith('#'));
 const hasLive   = liveItems.length > 0;
 ---
 

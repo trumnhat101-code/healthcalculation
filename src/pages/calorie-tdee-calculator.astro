@@ -3,6 +3,7 @@ import ToolLayout from '../layouts/ToolLayout.astro';
 import AdSlot from '../components/AdSlot.astro';
 import AffiliateCTA from '../components/AffiliateCTA.astro';
 import Disclaimer from '../components/Disclaimer.astro';
+import { AFF } from '../config/site';
 
 const SITE = 'https://healthcalculation.com';
 
@@ -31,18 +32,18 @@ const faq = [
 
 const affiliates = [
   {
-    href: '#AFFILIATE-NOOM',        // TODO: replace with real affiliate link
+    href: AFF.noom,
     label: 'Noom',
     sub: 'Psychology-based weight loss program · Personalized coaching',
     badge: 'Top Pick',
   },
   {
-    href: '#AFFILIATE-HELLOFRESH',
+    href: AFF.hellofresh,
     label: 'HelloFresh',
     sub: 'Pre-portioned meal kits · Easy calorie tracking',
   },
   {
-    href: '#AFFILIATE-FACTOR',
+    href: AFF.factor,
     label: 'Factor Meals',
     sub: 'Ready-to-eat healthy meals · Chef-crafted, dietitian-approved',
   },
@@ -374,7 +375,7 @@ form.addEventListener('submit', (e) => {
   (document.getElementById('resGain1') as HTMLElement).textContent = fmt(tdee + 500);
 
   results.hidden = false;
-  // affSec.hidden  = false;  // TODO: re-enable when affiliate links are ready
+  if (affSec) affSec.hidden = false;  // CTA tự ẩn nếu chưa có link affiliate thật (xem src/config/site.ts)
   results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 });
 </script>
