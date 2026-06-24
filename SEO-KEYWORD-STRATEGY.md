@@ -43,13 +43,16 @@ Facebook lọt top = Google chưa hài lòng). Đây là chỗ domain mới chen
 - SERP yếu, **long-tail vô tận** (mỗi hoạt động = 1 trang), 1 "engine" MET dùng chung.
 - Ý định rõ: người ta muốn **bảng tra calo theo cân nặng** → ta cho đúng thứ đó (build-time table).
 - Đã có sẵn tool `calories-burned-calculator` làm engine.
-- **Đã build session này:** hệ thống động `src/pages/calories-burned/[activity].astro` +
-  `src/data/activities.ts` → 10 trang (mowing-lawn, house-cleaning, jumping-rope, swimming,
-  cycling, walking, running, hiking, rowing-machine, elliptical).
-- **Mở rộng:** chỉ cần thêm object vào `activities.ts` → tự có trang + sitemap. Ứng viên tiếp:
-  `painting`, `shoveling-snow`, `raking-leaves`, `dancing`, `stairs`, `jumping-jacks`,
-  `playing-with-kids`, `sex`, `walking-dog`, `gardening`, `basketball`, `treadmill-incline`.
-  Mục tiêu 30–50 trang activity.
+- **Đã build:** hệ thống động `src/pages/calories-burned/[activity].astro` +
+  `src/data/activities.ts` → **30 trang** (mowing-lawn, house-cleaning, jumping-rope, swimming,
+  cycling, walking, running, hiking, rowing-machine, elliptical, shoveling-snow, raking-leaves,
+  painting, gardening, walking-the-dog, climbing-stairs, jumping-jacks, dancing, basketball,
+  weight-lifting, yoga, pilates, boxing, kayaking, skiing, tennis, golfing, soccer, hiit,
+  rock-climbing). Tất cả interlink + hub-and-spoke từ `calories-burned-calculator`.
+- **Mở rộng tiếp (lên 40–50):** chỉ thêm object vào `activities.ts` → tự có trang + sitemap.
+  Ứng viên: `pickleball`, `ice-skating`, `roller-skating`, `chopping-wood`, `moving-furniture`,
+  `playing-with-kids`, `treadmill-incline`, `assault-bike`, `stationary-bike`, `crossfit`,
+  `martial-arts`, `surfing`, `paddleboarding`, `badminton`, `volleyball`.
 
 ### 🥈 Pattern 2 — "[chỉ số] cho [tuổi/giới/chiều cao]" (programmatic)
 - `ideal weight for [height] [gender]`, `protein for [age] [gender]`, `bmi for women over [age]`,
@@ -67,10 +70,10 @@ Facebook lọt top = Google chưa hài lòng). Đây là chỗ domain mới chen
 
 ## 3. Lộ trình ưu tiên
 
-**Phase 1 (đang làm) — Cụm calories-burned**
-- [x] Hệ thống động + 10 trang đầu.
-- [ ] Mở rộng lên 30–50 hoạt động (thêm vào `activities.ts`).
-- [ ] Mỗi trang: 1 FAQ "is [activity] good exercise" + link chéo tới calorie/deficit calculator.
+**Phase 1 — Cụm calories-burned**
+- [x] Hệ thống động + bảng tra build-time + hub-and-spoke.
+- [x] 30 trang hoạt động, mỗi trang có FAQ + link chéo tới calorie/deficit calculator.
+- [ ] Mở rộng lên 40–50 hoạt động (thêm vào `activities.ts`).
 
 **Phase 2 — Programmatic "[chỉ số] theo tuổi/giới/chiều cao"**
 - [ ] Template động cho ideal-weight theo height×gender (vd 5'0"–6'2" × nam/nữ).
