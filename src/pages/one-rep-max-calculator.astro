@@ -1,5 +1,6 @@
 ---
 import ToolLayout from '../layouts/ToolLayout.astro';
+import { LIFTS } from '../data/lifts';
 
 const SITE = 'https://healthcalculation.com';
 const canonical = `${SITE}/one-rep-max-calculator`;
@@ -240,6 +241,14 @@ document.getElementById('orm-calc')!.addEventListener('click', () => {
 
   <h2>Accuracy and Limitations</h2>
   <p>Formula-based 1RM estimates are most accurate in the 2–10 rep range. Above 10 reps, muscular endurance plays an increasingly large role, making the estimate less reliable. Individual factors like fiber type distribution and lifting efficiency also affect accuracy. Treat your calculated 1RM as a programming tool — not a guaranteed performance number.</p>
+
+  <h2>1RM Calculators by Lift</h2>
+  <p>Want a dedicated page with a percentage chart and standards for a specific lift? Pick one:</p>
+  <div class="related-grid">
+    {LIFTS.map((o) => (
+      <a href={`/strength/${o.slug}`} class="related-link">{o.icon} {o.name}</a>
+    ))}
+  </div>
 </div>
 
 

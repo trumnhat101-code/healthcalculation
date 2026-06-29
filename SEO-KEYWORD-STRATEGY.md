@@ -60,6 +60,23 @@ Facebook lọt top = Google chưa hài lòng). Đây là chỗ domain mới chen
 - Cách làm giống Pattern 1: 1 template động + 1 mảng data (height/age combos) → hàng chục trang.
 - Tận dụng tool sẵn có: ideal-weight, protein, bmi, heart-rate-zone, waist-to-hip-ratio.
 
+### 🥈 Pattern 2b — Cụm STRENGTH/GYM (đã build — thuần fitness, 0 YMYL)
+- Pattern hub-and-spoke giống calories-burned. Hub = `one-rep-max-calculator`.
+- **Đã build:** `src/pages/strength/[lift].astro` + `src/data/lifts.ts` → **10 trang**
+  (bench-press, squat, deadlift, overhead-press, barbell-row, front-squat,
+  incline-bench-press, romanian-deadlift, hip-thrust, power-clean). Mỗi trang: 1RM
+  calculator + percentage chart tĩnh (index được) + FAQ + strength standards + link chéo
+  tới protein/macro/calorie (đẩy về trang có affiliate).
+- Nhắm keyword "bench press calculator", "squat 1rm", "deadlift max"… SERP = site fitness
+  (StrengthLevel, M&S), KHÔNG phải authority y khoa → winnable.
+- **Mở rộng:** thêm lift vào `lifts.ts` (leg-press, lat-pulldown, dumbbell-press, clean-and-jerk…).
+
+> **Nguyên tắc định hướng (quan trọng):** Site cố tình nghiêng về **fitness calculator
+> (non-medical, nhẹ YMYL)** — body-composition, exercise, strength. KHÔNG build tool y khoa
+> (pregnancy/ovulation/due-date/medical-condition) dù brief gốc có liệt kê. Vài trang lệch
+> "rủi ro bệnh" (waist-to-hip, bmi-women, body-fat, heart-rate guide) nên reframe sang khung
+> fitness/giảm cân thay vì y khoa.
+
 ### 🥉 Pattern 3 — Guide trả lời câu hỏi (informational, hỗ trợ E-E-A-T)
 - "how many calories to lose 2 lbs a week", "is mowing the lawn good exercise",
   "how much protein after 60". Có Quora lọt top = cửa dễ.
