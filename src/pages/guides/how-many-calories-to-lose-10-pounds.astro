@@ -1,0 +1,189 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+const SITE = 'https://healthcalculation.com';
+const canonical = `${SITE}/guides/how-many-calories-to-lose-10-pounds`;
+
+const schemaArticle = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "How Many Calories to Lose 10 Pounds (Realistic Timeline)",
+  description: "Exactly how many calories you need to cut to lose 10 pounds, a week-by-week timeline for each deficit size, why the 3,500-calorie rule is only an estimate, and how to do it safely.",
+  url: canonical,
+  datePublished: "2026-07-02",
+  dateModified: "2026-07-02",
+  author: { "@type": "Organization", name: "HealthCalculation" },
+  publisher: { "@type": "Organization", name: "HealthCalculation", url: SITE },
+};
+
+const faq = [
+  {
+    q: "How many calories do I need to cut to lose 10 pounds?",
+    a: "About 35,000 calories total, based on the estimate that one pound of body fat stores roughly 3,500 calories. Spread over time, that means a 500-calorie daily deficit takes about 10 weeks, while a 1,000-calorie daily deficit takes about 5 weeks. This is a planning estimate, not an exact law — real-world loss is faster in the first two weeks (water) and often slows later.",
+  },
+  {
+    q: "How long does it realistically take to lose 10 pounds?",
+    a: "For most people, 5 to 12 weeks is a healthy, realistic range. Losing 1–2 lbs per week is the rate recommended by most health authorities. Faster than that usually means losing water and muscle rather than fat, and it's much harder to sustain.",
+  },
+  {
+    q: "Can I lose 10 pounds in a month?",
+    a: "It's possible but aggressive. Losing 10 lbs in 4 weeks requires roughly a 1,250-calorie daily deficit, which pushes many people below the safe calorie floor (1,200 for women, 1,500 for men). It's more realistic and sustainable to aim for 10 lbs in 6–10 weeks.",
+  },
+  {
+    q: "Why did I lose weight fast at first and then stall?",
+    a: "The first 1–2 weeks of any deficit include a large drop in water weight and glycogen, which looks dramatic on the scale but isn't fat. After that, loss settles to your true fat-loss rate. Plateaus later on usually come from a lower TDEE (a lighter body burns less), calorie creep, or water retention masking fat loss — judge progress by 2-week trends, not daily readings.",
+  },
+  {
+    q: "Do I have to exercise to lose 10 pounds?",
+    a: "No — a calorie deficit drives fat loss whether you create it by eating less, moving more, or both. That said, exercise lets you eat a bit more while staying in a deficit, helps preserve muscle, and improves health. Walking is one of the easiest ways to add to your daily burn.",
+  },
+];
+---
+
+<ToolLayout
+  title="How Many Calories to Lose 10 Pounds (Realistic Timeline)"
+  description="Exactly how many calories to cut to lose 10 pounds, a week-by-week timeline for each deficit size, why the 3,500-calorie rule is only an estimate, and how to do it safely."
+  canonical={canonical}
+  pageIcon="&#127919;"
+  heroTitle="How Many Calories to Lose 10 Pounds"
+  schemaArticle={schemaArticle}
+>
+
+<div style="max-width:780px;margin:0 auto">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a><span>&#8250;</span>
+    <a href="/guides">Guides</a><span>&#8250;</span>
+    <span>How Many Calories to Lose 10 Pounds</span>
+  </nav>
+
+  <h1 style="font-size:28px;font-weight:900;margin-bottom:8px">How Many Calories to Lose 10 Pounds</h1>
+  <p class="guide-meta">&#128197; Last reviewed: July 2026 &nbsp;&middot;&nbsp; HealthCalculation Editorial Team</p>
+  <p style="font-size:16px;color:var(--mut);margin-bottom:28px">
+    Losing 10 pounds comes down to one number: a total calorie deficit of about <strong>35,000 calories</strong>. How fast you get there depends entirely on the size of your daily deficit. Here's the math, a realistic timeline, and how to do it without wrecking your metabolism.
+  </p>
+
+  <h2>The Short Answer</h2>
+  <p>
+    One pound of body fat stores roughly <strong>3,500 calories</strong>. To lose 10 pounds of fat, you therefore need a cumulative deficit of about <strong>10 × 3,500 = 35,000 calories</strong> below what your body burns.
+  </p>
+  <p>
+    You don't cut 35,000 calories at once — you spread it across days as a consistent <strong>daily deficit</strong> below your <a href="/calorie-tdee-calculator">TDEE</a> (Total Daily Energy Expenditure). The bigger the daily deficit, the fewer weeks it takes.
+  </p>
+
+  <h2>Timeline: How Long to Lose 10 Pounds by Deficit Size</h2>
+  <div style="overflow-x:auto;margin:16px 0">
+    <table style="width:100%;border-collapse:collapse;font-size:14px">
+      <thead>
+        <tr style="background:#f0fdf4">
+          <th style="padding:10px 14px;text-align:left;border-bottom:2px solid #bbf7d0;color:#16a34a">Daily deficit</th>
+          <th style="padding:10px 14px;text-align:left;border-bottom:2px solid #bbf7d0;color:#16a34a">Fat loss/week</th>
+          <th style="padding:10px 14px;text-align:left;border-bottom:2px solid #bbf7d0;color:#16a34a">Time to lose 10 lbs</th>
+          <th style="padding:10px 14px;text-align:left;border-bottom:2px solid #bbf7d0;color:#16a34a">Sustainability</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:9px 14px;border-bottom:1px solid #e5e7eb;font-weight:700">250 cal/day</td>
+          <td style="padding:9px 14px;border-bottom:1px solid #e5e7eb">~0.5 lb</td>
+          <td style="padding:9px 14px;border-bottom:1px solid #e5e7eb">~20 weeks</td>
+          <td style="padding:9px 14px;border-bottom:1px solid #e5e7eb;color:#16a34a">Very easy</td>
+        </tr>
+        <tr style="background:#f9fafb">
+          <td style="padding:9px 14px;border-bottom:1px solid #e5e7eb;font-weight:700">500 cal/day</td>
+          <td style="padding:9px 14px;border-bottom:1px solid #e5e7eb">~1 lb</td>
+          <td style="padding:9px 14px;border-bottom:1px solid #e5e7eb">~10 weeks</td>
+          <td style="padding:9px 14px;border-bottom:1px solid #e5e7eb;color:#16a34a">Recommended</td>
+        </tr>
+        <tr>
+          <td style="padding:9px 14px;border-bottom:1px solid #e5e7eb;font-weight:700">750 cal/day</td>
+          <td style="padding:9px 14px;border-bottom:1px solid #e5e7eb">~1.5 lbs</td>
+          <td style="padding:9px 14px;border-bottom:1px solid #e5e7eb">~7 weeks</td>
+          <td style="padding:9px 14px;border-bottom:1px solid #e5e7eb;color:#f59e0b">Moderate effort</td>
+        </tr>
+        <tr style="background:#f9fafb">
+          <td style="padding:9px 14px;font-weight:700">1,000 cal/day</td>
+          <td style="padding:9px 14px">~2 lbs</td>
+          <td style="padding:9px 14px">~5 weeks</td>
+          <td style="padding:9px 14px;color:#ef4444">Hard — upper limit</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:13px;color:#6b7280">
+    A 500-calorie daily deficit (about 1 lb/week) is the sweet spot for most adults — fast enough to stay motivated, gentle enough to preserve muscle and stick with.
+  </p>
+
+  <h2>Why the 3,500-Calorie Rule Isn't Perfect</h2>
+  <p>
+    The "3,500 calories = 1 pound" rule is a useful planning tool, but it's a simplification. Two things happen in the real world:
+  </p>
+  <ul style="margin:10px 0 0 20px;line-height:1.9">
+    <li><strong>You lose faster at first.</strong> The first 1–2 weeks include a big drop in water and glycogen — often 3–5 lbs — that looks like rapid progress but isn't fat.</li>
+    <li><strong>You lose slower later.</strong> As you get lighter, your TDEE falls (a smaller body burns fewer calories), so the same food intake creates a smaller deficit. This is why the last few pounds feel slower than the first.</li>
+  </ul>
+  <p>
+    Bottom line: use 35,000 calories as your target and the timeline above as a guide — then adjust based on your actual 2-week weight trend.
+  </p>
+
+  <h2>How to Actually Lose the 10 Pounds — Step by Step</h2>
+  <ol style="margin:10px 0 0 20px;line-height:2">
+    <li><strong>Find your TDEE</strong> with the <a href="/calorie-tdee-calculator">Calorie &amp; TDEE Calculator</a> — this is your maintenance number.</li>
+    <li><strong>Subtract your deficit</strong> (start with 500/day) to get your daily calorie target, or let the <a href="/calorie-deficit-calculator">Calorie Deficit Calculator</a> do it and show your finish date.</li>
+    <li><strong>Prioritize protein</strong> — 0.7–1 g per pound of body weight protects muscle in a deficit. See <a href="/protein-calculator">how much protein you need</a>.</li>
+    <li><strong>Add movement</strong> to widen the deficit without eating less — even a daily walk helps (see below).</li>
+    <li><strong>Track a 2-week trend</strong> and recalculate your TDEE after the first 10 lbs.</li>
+  </ol>
+
+  <h2>Create Part of the Deficit With Exercise</h2>
+  <p>
+    You can reach your deficit by eating less, moving more, or both. Splitting it — say a 300-calorie food cut plus a 200-calorie walk — is often easier to sustain than a large food cut alone. See how much different activities burn:
+  </p>
+  <div class="related-grid">
+    <a href="/calories-burned/walking" class="related-link">&#128694; Calories Burned Walking</a>
+    <a href="/calories-burned/running" class="related-link">&#127939; Calories Burned Running</a>
+    <a href="/calories-burned-calculator" class="related-link">&#128293; All Activities</a>
+  </div>
+
+  <h2>How to Break a Plateau Before You Hit 10 Pounds</h2>
+  <ul style="margin:10px 0 0 20px;line-height:1.9">
+    <li><strong>Recalculate TDEE</strong> after 10 lbs lost — your target needs to drop as you do.</li>
+    <li><strong>Re-measure portions.</strong> "Calorie creep" is the #1 hidden reason progress stalls; studies show people underreport intake by 20–50%.</li>
+    <li><strong>Add a diet break.</strong> 1–2 weeks at maintenance every 8–12 weeks can ease hunger hormones and reduce metabolic adaptation.</li>
+    <li><strong>Trust the trend.</strong> Water retention can mask fat loss for a week or two — look at 2-week averages, not daily numbers.</li>
+  </ul>
+
+  <h2>Frequently Asked Questions</h2>
+  {faq.map(({ q, a }) => (
+    <details class="faq-item">
+      <summary>{q}</summary>
+      <p set:html={a} />
+    </details>
+  ))}
+
+  <p style="font-size:13px;color:#6b7280;margin-top:24px;font-style:italic">
+    This guide is for general educational purposes and is not medical advice. Do not eat below 1,200 calories/day (women) or 1,500 calories/day (men) without medical supervision. Consult a healthcare provider before starting any weight-loss plan, especially if you have a medical condition.
+  </p>
+
+  <!-- Tool CTA -->
+  <div class="guide-cta-box" style="margin-top:24px">
+    <div class="gcta-icon">&#127919;</div>
+    <div class="gcta-body">
+      <div class="gcta-label">Free Tool</div>
+      <a href="/calorie-deficit-calculator" class="gcta-title">Calorie Deficit Calculator</a>
+      <p class="gcta-desc">Enter your stats and goal weight to see your exact daily calorie target and a realistic date for hitting −10 lbs.</p>
+    </div>
+    <a href="/calorie-deficit-calculator" class="gcta-btn">Get my target &rarr;</a>
+  </div>
+
+  <!-- Related Guides -->
+  <section class="content-section">
+    <h2>Related Guides</h2>
+    <div class="related-grid">
+      <a href="/guides/how-to-create-a-calorie-deficit" class="related-link">&#9986; How to Create a Calorie Deficit</a>
+      <a href="/guides/how-to-calculate-tdee" class="related-link">&#128293; How to Calculate Your TDEE</a>
+      <a href="/guides/how-much-protein-per-day" class="related-link">&#129372; How Much Protein Per Day?</a>
+    </div>
+  </section>
+
+</div>
+
+</ToolLayout>
