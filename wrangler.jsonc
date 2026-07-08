@@ -1,0 +1,13 @@
+{
+  // Cấu hình deploy cho Cloudflare Workers (static assets).
+  // Khai báo tên Worker rõ ràng để `wrangler deploy` biết chính xác Worker nào cần update
+  // → khắc phục lỗi "A Worker named 'healthcalculation' already exists... stopped instead of overwriting it".
+  "name": "healthcalculation",
+  "compatibility_date": "2026-06-01",
+
+  // Astro build tĩnh xuất ra ./dist (HTML + _astro + _headers + _redirects).
+  // Không có _worker.js → đây là Worker chỉ phục vụ static assets.
+  "assets": {
+    "directory": "./dist"
+  }
+}
