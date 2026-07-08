@@ -1,0 +1,179 @@
+---
+import ToolLayout from '../../layouts/ToolLayout.astro';
+const SITE = 'https://healthcalculation.com';
+const canonical = `${SITE}/guides/strength-standards-how-much-should-you-lift`;
+
+const schemaArticle = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "Strength Standards: How Much Should You Be Able to Lift?",
+  description: "Strength standards for the bench press, squat, deadlift, and overhead press by bodyweight — for men and women, from beginner to elite, with a worked example.",
+  url: canonical,
+  datePublished: "2026-07-09",
+  dateModified: "2026-07-09",
+  author: { "@type": "Organization", name: "HealthCalculation" },
+  publisher: { "@type": "Organization", name: "HealthCalculation", url: SITE },
+};
+
+const faq = [
+  {
+    q: "What is a good bench press, squat, and deadlift?",
+    a: "For a male lifter, an intermediate standard is roughly 1× bodyweight bench press, 1.5× bodyweight squat, and 2× bodyweight deadlift. Women's intermediate standards are about 0.75× bodyweight bench, 1.25× squat, and 1.25× deadlift. These are general guidelines — training age, limb lengths, and technique all shift the numbers.",
+  },
+  {
+    q: "How long does it take to reach an intermediate strength level?",
+    a: "With consistent training and adequate protein, most people reach the intermediate level in about 1–2 years. The novice level often comes in the first 3–6 months because beginners make fast 'newbie gains.' Progress slows as you advance, which is normal.",
+  },
+  {
+    q: "Are strength standards different for women?",
+    a: "Yes. Women typically lift about 0.6–0.7× the ratios of men relative to bodyweight, largely due to differences in muscle mass distribution. Relative to their own bodyweight, women are often proportionally stronger in the lower body (squat, deadlift, hip thrust) than the upper body.",
+  },
+  {
+    q: "Do strength standards change with age?",
+    a: "These standards describe healthy adults roughly 20–40 years old. Strength tends to peak in that range and decline gradually after, so older lifters may sit a level lower for the same effort — which is completely normal and still healthy. Consistency matters more than hitting a specific number.",
+  },
+  {
+    q: "How do I find my 1RM to compare against these standards?",
+    a: "You don't need to attempt a true max. Enter a weight and reps you've completed into a 1RM calculator and it will estimate your one-rep max, which you can then divide by your bodyweight to find your ratio and level.",
+  },
+];
+---
+
+<ToolLayout
+  title="Strength Standards: How Much Should You Be Able to Lift?"
+  description="Strength standards for the bench press, squat, deadlift, and overhead press by bodyweight — men and women, beginner to elite, with a worked example and how to find your level."
+  canonical={canonical}
+  pageIcon="&#127947;"
+  heroTitle="Strength Standards by Bodyweight"
+  schemaArticle={schemaArticle}
+>
+
+<div style="max-width:780px;margin:0 auto">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a><span>&#8250;</span>
+    <a href="/guides">Guides</a><span>&#8250;</span>
+    <span>Strength Standards</span>
+  </nav>
+
+  <h1 style="font-size:28px;font-weight:900;margin-bottom:8px">Strength Standards: How Much Should You Be Able to Lift?</h1>
+  <p class="guide-meta">&#128197; Last reviewed: July 2026 &nbsp;&middot;&nbsp; HealthCalculation Editorial Team</p>
+  <p style="font-size:16px;color:var(--mut);margin-bottom:28px">
+    "Is my bench good?" is one of the most common questions in lifting. Strength standards answer it by comparing your one-rep max to your <strong>bodyweight</strong> — the fairest way to compare a 130 lb lifter with a 220 lb lifter. Here are the numbers for the four main barbell lifts.
+  </p>
+
+  <h2>How Strength Standards Work</h2>
+  <p>
+    Standards are expressed as a multiple of your bodyweight. If you weigh 180 lbs and bench 180 lbs, that's a <strong>1× bodyweight</strong> bench press. Lifters are usually grouped into five levels:
+  </p>
+  <ul style="margin:10px 0 0 20px;line-height:1.9">
+    <li><strong>Untrained</strong> — a healthy person with no lifting experience</li>
+    <li><strong>Novice</strong> — a few months of consistent training</li>
+    <li><strong>Intermediate</strong> — 1–2 years of steady progress (where most gym-goers land)</li>
+    <li><strong>Advanced</strong> — several years of dedicated, structured training</li>
+    <li><strong>Elite</strong> — competitive-level strength</li>
+  </ul>
+
+  <h2>Men's Strength Standards (× bodyweight, 1RM)</h2>
+  <div style="overflow-x:auto;margin:16px 0">
+    <table style="width:100%;border-collapse:collapse;font-size:14px">
+      <thead>
+        <tr style="background:#f0fdf4">
+          <th style="padding:10px 12px;text-align:left;border-bottom:2px solid #bbf7d0;color:#16a34a">Level</th>
+          <th style="padding:10px 12px;text-align:left;border-bottom:2px solid #bbf7d0;color:#16a34a">Bench</th>
+          <th style="padding:10px 12px;text-align:left;border-bottom:2px solid #bbf7d0;color:#16a34a">Squat</th>
+          <th style="padding:10px 12px;text-align:left;border-bottom:2px solid #bbf7d0;color:#16a34a">Deadlift</th>
+          <th style="padding:10px 12px;text-align:left;border-bottom:2px solid #bbf7d0;color:#16a34a">Overhead Press</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb;font-weight:700">Untrained</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">0.5×</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">0.75×</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">1.0×</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">0.35×</td></tr>
+        <tr style="background:#f9fafb"><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb;font-weight:700">Novice</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">0.75×</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">1.25×</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">1.5×</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">0.55×</td></tr>
+        <tr><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb;font-weight:700">Intermediate</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">1.0×</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">1.5×</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">2.0×</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">0.8×</td></tr>
+        <tr style="background:#f9fafb"><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb;font-weight:700">Advanced</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">1.5×</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">2.25×</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">2.5×</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">1.05×</td></tr>
+        <tr><td style="padding:9px 12px;font-weight:700">Elite</td><td style="padding:9px 12px">2.0×</td><td style="padding:9px 12px">2.75×</td><td style="padding:9px 12px">3.0×</td><td style="padding:9px 12px">1.3×</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Women's Strength Standards (× bodyweight, 1RM)</h2>
+  <div style="overflow-x:auto;margin:16px 0">
+    <table style="width:100%;border-collapse:collapse;font-size:14px">
+      <thead>
+        <tr style="background:#f0fdf4">
+          <th style="padding:10px 12px;text-align:left;border-bottom:2px solid #bbf7d0;color:#16a34a">Level</th>
+          <th style="padding:10px 12px;text-align:left;border-bottom:2px solid #bbf7d0;color:#16a34a">Bench</th>
+          <th style="padding:10px 12px;text-align:left;border-bottom:2px solid #bbf7d0;color:#16a34a">Squat</th>
+          <th style="padding:10px 12px;text-align:left;border-bottom:2px solid #bbf7d0;color:#16a34a">Deadlift</th>
+          <th style="padding:10px 12px;text-align:left;border-bottom:2px solid #bbf7d0;color:#16a34a">Overhead Press</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb;font-weight:700">Untrained</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">0.35×</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">0.5×</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">0.5×</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">0.2×</td></tr>
+        <tr style="background:#f9fafb"><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb;font-weight:700">Novice</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">0.5×</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">0.75×</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">1.0×</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">0.35×</td></tr>
+        <tr><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb;font-weight:700">Intermediate</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">0.75×</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">1.25×</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">1.25×</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">0.5×</td></tr>
+        <tr style="background:#f9fafb"><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb;font-weight:700">Advanced</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">1.0×</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">1.75×</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">2.0×</td><td style="padding:9px 12px;border-bottom:1px solid #e5e7eb">0.75×</td></tr>
+        <tr><td style="padding:9px 12px;font-weight:700">Elite</td><td style="padding:9px 12px">1.5×</td><td style="padding:9px 12px">2.0×</td><td style="padding:9px 12px">2.5×</td><td style="padding:9px 12px">1.0×</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:13px;color:#6b7280">
+    These are general guidelines for healthy adults, not hard rules. Limb lengths, training history, and technique all shift them. Use them as a rough map of where you stand, not a verdict.
+  </p>
+
+  <h2>Worked Example</h2>
+  <p>
+    A 180 lb man who benches 180 lbs, squats 270 lbs, and deadlifts 360 lbs is at the <strong>intermediate</strong> level across the board (1×, 1.5×, and 2× bodyweight). A 140 lb woman who benches 105 lbs (0.75×) and squats 175 lbs (1.25×) is likewise intermediate.
+  </p>
+
+  <h2>Find Your Level for Each Lift</h2>
+  <p>
+    First estimate your one-rep max for the lift, then divide it by your bodyweight and compare to the tables above. Use the dedicated calculators — each includes a percentage chart:
+  </p>
+  <div class="related-grid">
+    <a href="/strength/bench-press" class="related-link">&#127947; Bench Press</a>
+    <a href="/strength/squat" class="related-link">&#129461; Squat</a>
+    <a href="/strength/deadlift" class="related-link">&#127947; Deadlift</a>
+    <a href="/strength/overhead-press" class="related-link">&#128170; Overhead Press</a>
+    <a href="/one-rep-max-calculator" class="related-link">&#128202; Any Lift (1RM)</a>
+  </div>
+
+  <h2>How to Move Up a Level</h2>
+  <ul style="margin:10px 0 0 20px;line-height:1.9">
+    <li><strong>Progressive overload.</strong> Add a little weight or a rep whenever you can — strength is built by gradually doing more over months.</li>
+    <li><strong>Eat enough protein.</strong> Aim for 0.7–1 g per pound of bodyweight to build and repair muscle. See <a href="/protein-calculator">how much protein you need</a>.</li>
+    <li><strong>Fuel your training.</strong> Building strength is easier at maintenance or a slight surplus — check your <a href="/calorie-tdee-calculator">TDEE</a> and <a href="/macro-calculator">macros</a>.</li>
+    <li><strong>Be consistent and patient.</strong> Intermediate strength takes 1–2 years. Trust the process and log your lifts.</li>
+  </ul>
+
+  <h2>Frequently Asked Questions</h2>
+  {faq.map(({ q, a }) => (
+    <details class="faq-item">
+      <summary>{q}</summary>
+      <p set:html={a} />
+    </details>
+  ))}
+
+  <!-- Tool CTA -->
+  <div class="guide-cta-box" style="margin-top:32px">
+    <div class="gcta-icon">&#127947;</div>
+    <div class="gcta-body">
+      <div class="gcta-label">Free Tool</div>
+      <a href="/one-rep-max-calculator" class="gcta-title">One Rep Max Calculator</a>
+      <p class="gcta-desc">Estimate your 1RM for any lift from a weight and reps, then divide by your bodyweight to find your strength level.</p>
+    </div>
+    <a href="/one-rep-max-calculator" class="gcta-btn">Estimate my 1RM &rarr;</a>
+  </div>
+
+  <!-- Related Guides -->
+  <section class="content-section">
+    <h2>Related Guides</h2>
+    <div class="related-grid">
+      <a href="/guides/how-to-use-one-rep-max" class="related-link">&#127947; How to Use Your One Rep Max</a>
+      <a href="/guides/how-much-protein-per-day" class="related-link">&#129372; How Much Protein Per Day?</a>
+      <a href="/guides/how-to-calculate-macros" class="related-link">&#129367; How to Calculate Your Macros</a>
+    </div>
+  </section>
+
+</div>
+
+</ToolLayout>
