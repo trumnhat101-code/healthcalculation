@@ -121,6 +121,19 @@ const siteSchema = {
   <meta name="description" content="Free online health calculators: calorie &amp; TDEE, BMI, macros, ideal weight, body fat percentage, sleep cycles and more. Instant results." />
   <link rel="canonical" href={SITE} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Open Graph -->
+  <meta property="og:site_name"   content="HealthCalculation" />
+  <meta property="og:title"       content="Free Health & Fitness Calculators — Calorie, BMI, Body Fat & More" />
+  <meta property="og:description" content="Free online health calculators: calorie & TDEE, BMI, macros, ideal weight, body fat percentage, sleep cycles and more. Instant results." />
+  <meta property="og:url"         content={SITE} />
+  <meta property="og:type"        content="website" />
+  <meta property="og:image"       content={`${SITE}/og-default.png`} />
+  <meta name="twitter:card"       content="summary_large_image" />
+  <meta name="twitter:title"      content="Free Health & Fitness Calculators — Calorie, BMI, Body Fat & More" />
+  <meta name="twitter:description" content="Free online health calculators: calorie & TDEE, BMI, macros, ideal weight, body fat percentage, sleep cycles and more. Instant results." />
+  <meta name="twitter:image"      content={`${SITE}/og-default.png`} />
+
   <script type="application/ld+json" set:html={JSON.stringify(siteSchema)} />
 
   <!-- AdSense + Analytics — tự bật khi điền ID trong src/config/site.ts -->
