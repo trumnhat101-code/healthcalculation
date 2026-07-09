@@ -1,5 +1,5 @@
 ---
-import { adsenseEnabled, ADSENSE_CLIENT, CF_ANALYTICS_TOKEN } from '../config/site';
+import { adsenseEnabled, ADSENSE_CLIENT, CF_ANALYTICS_TOKEN, GSC_VERIFICATION } from '../config/site';
 
 const SITE = 'https://healthcalculation.com';
 
@@ -121,6 +121,7 @@ const siteSchema = {
   <meta name="description" content="Free online health calculators: calorie &amp; TDEE, BMI, macros, ideal weight, body fat percentage, sleep cycles and more. Instant results." />
   <link rel="canonical" href={SITE} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  {GSC_VERIFICATION && <meta name="google-site-verification" content={GSC_VERIFICATION} />}
 
   <!-- Open Graph -->
   <meta property="og:site_name"   content="HealthCalculation" />

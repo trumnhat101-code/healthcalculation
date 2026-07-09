@@ -2,7 +2,7 @@
 /**
  * ToolLayout.astro — layout dùng chung cho mọi tool page
  */
-import { adsenseEnabled, ADSENSE_CLIENT, CF_ANALYTICS_TOKEN } from '../config/site';
+import { adsenseEnabled, ADSENSE_CLIENT, CF_ANALYTICS_TOKEN, GSC_VERIFICATION } from '../config/site';
 
 export interface Props {
   title: string;
@@ -14,10 +14,11 @@ export interface Props {
   color?: string;
   pageIcon?: string;
   heroTitle?: string;
+  noindex?: boolean;
 }
 
 const { title, description, canonical, schemaApp, schemaFaq, schemaArticle,
-        pageIcon: pagePropIcon, heroTitle: pagePropHeroTitle } = Astro.props;
+        pageIcon: pagePropIcon, heroTitle: pagePropHeroTitle, noindex = false } = Astro.props;
 
 const faqSchema = schemaFaq?.length
   ? {
@@ -72,12 +73,23 @@ const isHome      = currentPath === '/';
 const pageIcon    = pagePropIcon ?? iconMap[currentPath] ?? '⚕️';
 const heroTitle   = pagePropHeroTitle ?? title.split(' —')[0];
 
+// Cấp trung gian của breadcrumb — khớp với breadcrumb hiển thị trên trang
+const crumbParents: Record<string, { name: string; href: string }> = {
+  '/guides/':          { name: 'Guides',                 href: '/guides' },
+  '/calories-burned/': { name: 'Calories Burned Calculator', href: '/calories-burned-calculator' },
+  '/strength/':        { name: '1RM Calculator',         href: '/one-rep-max-calculator' },
+};
+const crumbParent = Object.entries(crumbParents).find(([prefix]) => currentPath.startsWith(prefix))?.[1];
+
 const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://healthcalculation.com/' },
-    { '@type': 'ListItem', position: 2, name: heroTitle, item: canonical },
+    ...(crumbParent
+      ? [{ '@type': 'ListItem', position: 2, name: crumbParent.name, item: `https://healthcalculation.com${crumbParent.href}` }]
+      : []),
+    { '@type': 'ListItem', position: crumbParent ? 3 : 2, name: heroTitle, item: canonical },
   ],
 };
 const ogImage = 'https://healthcalculation.com/og-default.png';
@@ -89,8 +101,10 @@ const ogImage = 'https://healthcalculation.com/og-default.png';
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{title}</title>
   <meta name="description" content={description} />
+  {noindex && <meta name="robots" content="noindex, follow" />}
   <link rel="canonical" href={canonical} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  {GSC_VERIFICATION && <meta name="google-site-verification" content={GSC_VERIFICATION} />}
 
   <!-- Open Graph -->
   <meta property="og:site_name"   content="HealthCalculation" />

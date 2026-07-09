@@ -20,6 +20,14 @@ export const ADSENSE_CLIENT = '';
 export const adsenseEnabled = /^ca-pub-\d{10,}$/.test(ADSENSE_CLIENT);
 
 // ─────────────────────────────────────────────────────────────────
+//  GOOGLE SEARCH CONSOLE
+//  Verify bằng thẻ meta: GSC > Settings > Ownership verification > HTML tag.
+//  Dán phần content="..." của thẻ (chuỗi ~43 ký tự), KHÔNG dán cả thẻ.
+//  Để '' → không render meta. (Verify bằng DNS thì bỏ qua ô này.)
+// ─────────────────────────────────────────────────────────────────
+export const GSC_VERIFICATION = '';
+
+// ─────────────────────────────────────────────────────────────────
 //  CLOUDFLARE WEB ANALYTICS (free, không cookie)
 //  Lấy token ở dash.cloudflare.com > Analytics > Web Analytics.
 //  Để '' → không nhúng gì.

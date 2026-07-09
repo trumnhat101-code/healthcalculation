@@ -8,6 +8,8 @@
   // Astro build tĩnh xuất ra ./dist (HTML + _astro + _headers + _redirects).
   // Không có _worker.js → đây là Worker chỉ phục vụ static assets.
   "assets": {
-    "directory": "./dist"
+    "directory": "./dist",
+    // Trả về dist/404.html (kèm status 404) cho mọi URL không tồn tại.
+    "not_found_handling": "404-page"
   }
 }

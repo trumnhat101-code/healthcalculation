@@ -1,0 +1,65 @@
+---
+import ToolLayout from '../layouts/ToolLayout.astro';
+
+const SITE = 'https://healthcalculation.com';
+
+const popular = [
+  { href: '/calorie-tdee-calculator',    icon: '🔥', label: 'Calorie & TDEE Calculator' },
+  { href: '/calorie-deficit-calculator', icon: '✂️', label: 'Calorie Deficit Calculator' },
+  { href: '/bmi-calculator',             icon: '⚖️', label: 'BMI Calculator' },
+  { href: '/macro-calculator',           icon: '🥗', label: 'Macro Calculator' },
+  { href: '/body-fat-calculator',        icon: '📊', label: 'Body Fat % Calculator' },
+  { href: '/protein-calculator',         icon: '🍗', label: 'Protein Calculator' },
+  { href: '/calories-burned-calculator', icon: '🏃', label: 'Calories Burned Calculator' },
+  { href: '/one-rep-max-calculator',     icon: '🏋️', label: 'One Rep Max Calculator' },
+];
+---
+
+<ToolLayout
+  title="Page Not Found (404) — HealthCalculation"
+  description="The page you are looking for does not exist. Browse our free health and fitness calculators instead."
+  canonical={`${SITE}/404`}
+  pageIcon="🧭"
+  heroTitle="Page Not Found"
+  noindex
+>
+  <div class="nf-wrap">
+    <p class="nf-code">404</p>
+    <h1>Sorry, that page doesn't exist</h1>
+    <p class="lead">The link may be outdated or mistyped. Try one of our most popular calculators below, or head back to the <a href="/">homepage</a>.</p>
+
+    <div class="nf-grid">
+      {popular.map(({ href, icon, label }) => (
+        <a href={href} class="nf-card">
+          <span class="nf-icon">{icon}</span>
+          <span>{label}</span>
+        </a>
+      ))}
+    </div>
+
+    <p class="nf-more">Looking for something to read? Browse all <a href="/guides">health &amp; fitness guides</a>.</p>
+  </div>
+
+  <style>
+    .nf-wrap { padding: 40px 0 64px; max-width: 720px; }
+    .nf-code {
+      font-size: 64px; font-weight: 900; line-height: 1;
+      color: var(--ac); margin-bottom: 8px; letter-spacing: -2px;
+    }
+    .nf-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 10px; margin: 22px 0;
+    }
+    @media (max-width: 560px) { .nf-grid { grid-template-columns: 1fr; } }
+    .nf-card {
+      display: flex; align-items: center; gap: 10px;
+      padding: 13px 16px; background: var(--card);
+      border: 1px solid var(--bd); border-radius: 10px;
+      font-size: 14px; font-weight: 600; color: var(--tx);
+      text-decoration: none; transition: border-color .15s, box-shadow .15s;
+    }
+    .nf-card:hover { border-color: var(--ac); box-shadow: var(--shadow); }
+    .nf-icon { font-size: 20px; }
+    .nf-more { color: var(--mut); font-size: 14px; }
+  </style>
+</ToolLayout>
