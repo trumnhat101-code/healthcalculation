@@ -92,7 +92,12 @@ const breadcrumbSchema = {
     { '@type': 'ListItem', position: crumbParent ? 3 : 2, name: heroTitle, item: canonical },
   ],
 };
-const ogImage = 'https://healthcalculation.com/og-default.png';
+// Ảnh OG riêng từng trang — generate bởi scripts/generate-og.mjs sau `astro build`
+// (đường dẫn khớp route: /bmi-calculator → /og/bmi-calculator.png).
+// Trang noindex (404) dùng ảnh mặc định vì không được generate.
+const ogImage = noindex
+  ? 'https://healthcalculation.com/og-default.png'
+  : `https://healthcalculation.com/og${currentPath}.png`;
 ---
 <!DOCTYPE html>
 <html lang="en">

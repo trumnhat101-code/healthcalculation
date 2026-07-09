@@ -16,6 +16,10 @@
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
 
+# Ảnh OG (generate mỗi lần build, URL không fingerprint → cache 1 ngày)
+/og/*
+  Cache-Control: public, max-age=86400
+
 # Không cache sitemap/robots (Google cần bản mới nhất)
 /sitemap*.xml
   Cache-Control: public, max-age=3600
